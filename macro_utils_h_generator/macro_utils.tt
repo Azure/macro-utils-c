@@ -9,7 +9,9 @@
 
 /*THIS FILE IS GENERATED*/
 /*DO NOT EDIT BY HAND!!!*/
-/*instead edit macro_utils.tt */
+/*instead edit macro_utils.tt here: http://www.github.com/azure/azure-macro-utils-c.git */
+/*and then propagate the generated file to all the repos*/
+
 <#/*CHANGE BELOW 2 VARIABLES TO GET MORE / LESS */ #>
 <#int nArithmetic=1024;#>
 <#int nMacroParameters=124;/*127 parameters in one macro definition in C99 in chapter 5.2.4.1 Translation limits*/#>
@@ -25,7 +27,7 @@
     #define __FAILURE__ __LINE__
 #endif
 
-/*"pointer or NULL" macro - because when printf-ing arguments NULL is not valid for %p or %s (section 7.1.4 of C11 standard) */
+/*"pointer or NULL" macro - because when printf-ing arguments NULL is not valid for %s (section 7.1.4 of C11 standard) */
 #define P_OR_NULL(p) (((p)!=NULL)?(p):"NULL")
 
 #define TOSTRING_(x) #x
@@ -63,6 +65,13 @@
 <#for(var i=nArithmetic;i>=0;i--)#>
 <#{#>
 #define DIV2_<#=i#> <#=i/2#>
+<#}#>
+
+<#/*the below produces MOD2 for numbers*/#>
+#define MOD2(x) C2(MOD2_,x)
+<#for(var i=nArithmetic;i>=0;i--)#>
+<#{#>
+#define MOD2_<#=i#> <#=i%2#>
 <#}#>
 
 #define THE_NTH_ARG(<#for(var i=1;i<=nMacroParameters;i++)#>

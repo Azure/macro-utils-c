@@ -6,6 +6,9 @@ cmake_minimum_required(VERSION 2.8.11)
 project(azure_macro_utils_c)
 
 set(AZURE_MACRO_UTILS_C_VERSION 1.1.0)
+if(DEFINED MACRO_UTILS_INC_FOLDER)
+    return()
+endif()
 
 #these are the include folders
 #the following "set" statement exports across the project a global variable called MACRO_UTILS_INC_FOLDER that expands to whatever needs to included when using macro_utils

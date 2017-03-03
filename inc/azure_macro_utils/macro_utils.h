@@ -3,7 +3,9 @@
 
 /*THIS FILE IS GENERATED*/
 /*DO NOT EDIT BY HAND!!!*/
-/*instead edit macro_utils.tt */
+/*instead edit macro_utils.tt here: http://www.github.com/azure/azure-macro-utils-c.git */
+/*and then propagate the generated file to all the repos*/
+
 
 #ifndef MACRO_UTILS_H
 #define MACRO_UTILS_H

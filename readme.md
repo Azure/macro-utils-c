@@ -14,6 +14,22 @@ git clone https://github.com/Azure/azure-macro-utils-c.git
 
 In a C source file: `#include "azure_macro_utils/macro_utils.h"`
 
+### Installation
+
+To install the Azure IoT SDKs - macro utils for C on your machine, we recommend you use cmake 3.0.0 or higher.
+
+- Create a "build" directory and run `cmake ..` from that directory to generate the cmake files.
+- Run `cmake --build . --target install` to install on your machine
+
+#### CMake 3.0.0+
+In your project, simply:
+- `find_package(azure_macro_utils_c REQUIRED CONFIG)`
+- `target_link_libraries(<your_target> azure_macro_utils_c)`
+
+#### CMake 2.\*.\*
+In your project, simply:
+- `target_include_directories(<your_target> PUBLIC ${MACRO_UTILS_INC_FOLDER})`
+
 ## Supported compilers
 
 The following compilers are supported: gcc 4.4 (and onwards), Visual Studio 2015 and others.

@@ -18,7 +18,7 @@ namespace macro_utils_h_generator
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+    #line 1 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "14.0.0.0")]
     public partial class macro_utils : macro_utilsBase
     {
@@ -35,22 +35,26 @@ namespace macro_utils_h_generator
 /*DO NOT EDIT BY HAND!!!*/
 /*instead edit macro_utils.tt here: http://www.github.com/azure/azure-macro-utils-c.git */
 /*and then propagate the generated file to all the repos*/
+/* !!! CAUTION!!! This file is copied to multiple places */
+/* in https://github.com/Azure/azure-c-shared-utility.git, */
+/* and all of these copies must be located and replaced. */
+
 
 ");
             
-            #line 15 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 19 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 /*CHANGE BELOW 2 VARIABLES TO GET MORE / LESS */ 
             
             #line default
             #line hidden
             
-            #line 16 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 20 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 int nArithmetic=1024;
             
             #line default
             #line hidden
             
-            #line 17 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 21 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 int nMacroParameters=124;/*127 parameters in one macro definition in C99 in chapter 5.2.4.1 Translation limits*/
             
             #line default
@@ -78,231 +82,231 @@ int nMacroParameters=124;/*127 parameters in one macro definition in C99 in chap
 #define IFCOMMA_2
 ");
             
-            #line 39 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 43 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var i=4;i<=nMacroParameters;i+=2)
             
             #line default
             #line hidden
             
-            #line 40 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 44 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define IFCOMMA_");
             
-            #line 41 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 45 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(" ,\r\n");
             
-            #line 42 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 46 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write("\r\n#define IFCOMMA_NOFIRST(N) C2(IFCOMMA_NOFIRST, N)\r\n#define IFCOMMA_NOFIRST1 \r\n");
             
-            #line 46 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 50 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var i=2;i<=nMacroParameters;i++)
             
             #line default
             #line hidden
             
-            #line 47 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 51 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define IFCOMMA_NOFIRST");
             
-            #line 48 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 52 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(" ,\r\n");
             
-            #line 49 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 53 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write("\r\n#define DEC(x) C2(DEC,x)\r\n");
             
-            #line 52 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 56 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var i=nArithmetic;i>=1;i--)
             
             #line default
             #line hidden
             
-            #line 53 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 57 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define DEC");
             
-            #line 54 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 58 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 54 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 58 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-1));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 55 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 59 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write("\r\n#define INC(x) C2(INC,x)\r\n");
             
-            #line 58 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 62 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var i=nArithmetic;i>=0;i--)
             
             #line default
             #line hidden
             
-            #line 59 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 63 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define INC");
             
-            #line 60 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 64 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 60 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 64 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i+1));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 61 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 65 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write("\r\n#define DIV2(x) C2(DIV2_,x)\r\n\r\n");
             
-            #line 65 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 69 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var i=nArithmetic;i>=0;i--)
             
             #line default
             #line hidden
             
-            #line 66 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 70 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define DIV2_");
             
-            #line 67 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 71 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 67 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 71 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i/2));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 68 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 72 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 70 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 74 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 /*the below produces MOD2 for numbers*/
             
             #line default
             #line hidden
             this.Write("#define MOD2(x) C2(MOD2_,x)\r\n");
             
-            #line 72 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 76 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var i=nArithmetic;i>=0;i--)
             
             #line default
             #line hidden
             
-            #line 73 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 77 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define MOD2_");
             
-            #line 74 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 78 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 74 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 78 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i%2));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 75 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 79 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write("\r\n#define THE_NTH_ARG(");
             
-            #line 77 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 81 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var i=1;i<=nMacroParameters;i++)
             
             #line default
             #line hidden
             
-            #line 78 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 82 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 {
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 78 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 82 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(", ");
             
-            #line 78 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 82 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write(" ... ) P");
             
-            #line 78 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 82 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(nMacroParameters));
             
             #line default
@@ -310,78 +314,78 @@ for(var i=1;i<=nMacroParameters;i++)
             this.Write("\r\n\r\n#define _TRIGGER_PARENTHESIS_(...) ,\r\n\r\n#define LPAREN (\r\n\r\n#ifdef _MSC_VER\r\n" +
                     "#define COUNT_1_OR_MORE_ARG(...) THE_NTH_ARG LPAREN __VA_ARGS__, \\\r\n");
             
-            #line 86 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 90 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var i=nMacroParameters-1;i>=1;i--){
             
             #line default
             #line hidden
             
-            #line 86 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 90 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i.ToString()+((i>1)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 86 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 90 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n#define MORE_THAN_1_ARG(...) THE_NTH_ARG LPAREN __VA_ARGS__, ");
             
-            #line 87 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 91 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var i=nMacroParameters-2;i>=1;i--){
             
             #line default
             #line hidden
             
-            #line 87 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 91 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(1));
             
             #line default
             #line hidden
             this.Write(",");
             
-            #line 87 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 91 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write("0)\r\n#else\r\n#define COUNT_1_OR_MORE_ARG(...) THE_NTH_ARG (__VA_ARGS__, \\\r\n");
             
-            #line 90 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 94 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var i=nMacroParameters-1;i>=1;i--){
             
             #line default
             #line hidden
             
-            #line 90 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 94 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i.ToString()+((i>1)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 90 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 94 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n#define MORE_THAN_1_ARG(...) THE_NTH_ARG(__VA_ARGS__, ");
             
-            #line 91 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 95 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var i=nMacroParameters-2;i>=1;i--){
             
             #line default
             #line hidden
             
-            #line 91 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 95 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(1));
             
             #line default
             #line hidden
             this.Write(",");
             
-            #line 91 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 95 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
@@ -427,74 +431,74 @@ for(var i=nMacroParameters-2;i>=1;i--){
 
 ");
             
-            #line 130 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 134 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var i=nMacroParameters;i>=2;i--)
             
             #line default
             #line hidden
             
-            #line 131 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 135 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define FOR_EACH_1_");
             
-            #line 132 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 136 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("(X, ");
             
-            #line 132 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 136 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var j=1;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 132 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 136 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 132 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 136 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write(") \\\r\nX(P1) \\\r\nFOR_EACH_1_");
             
-            #line 134 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 138 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-1));
             
             #line default
             #line hidden
             this.Write("(X, ");
             
-            #line 134 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 138 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var j=2;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 134 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 138 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 134 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 138 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n\r\n");
             
-            #line 136 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 140 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
@@ -510,74 +514,74 @@ X(P1)
 
 ");
             
-            #line 146 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 150 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var i=nMacroParameters;i>=2;i--)
             
             #line default
             #line hidden
             
-            #line 147 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 151 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define FOR_EACH_1_KEEP_1_");
             
-            #line 148 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 152 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("(X, keep, ");
             
-            #line 148 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 152 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var j=1;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 148 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 152 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+(j<i?", ":"")));
             
             #line default
             #line hidden
             
-            #line 148 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 152 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write(") \\\r\nX(keep, P1) \\\r\nFOR_EACH_1_KEEP_1_");
             
-            #line 150 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 154 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-1));
             
             #line default
             #line hidden
             this.Write("(X, keep, ");
             
-            #line 150 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 154 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var j=2;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 150 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 154 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture((j).ToString()+(j<i?", ":"")));
             
             #line default
             #line hidden
             
-            #line 150 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 154 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n\r\n\r\n");
             
-            #line 153 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 157 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
@@ -594,74 +598,74 @@ X(keep, P1)
 
 ");
             
-            #line 164 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 168 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var i=nMacroParameters;i>=4;i-=2)
             
             #line default
             #line hidden
             
-            #line 165 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 169 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define FOR_EACH_2_KEEP_1_");
             
-            #line 166 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 170 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("(X, keep, ");
             
-            #line 166 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 170 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var j=1;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 166 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 170 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+(j<i?", ":"")));
             
             #line default
             #line hidden
             
-            #line 166 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 170 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write(") \\\r\nX(keep, P1, P2) \\\r\nFOR_EACH_2_KEEP_1_");
             
-            #line 168 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 172 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-2));
             
             #line default
             #line hidden
             this.Write("(X, keep, ");
             
-            #line 168 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 172 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var j=3;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 168 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 172 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture((j).ToString()+(j<i?", ":"")));
             
             #line default
             #line hidden
             
-            #line 168 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 172 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n\r\n\r\n");
             
-            #line 171 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 175 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
@@ -683,74 +687,74 @@ for(var j=3;j<=i;j++){
 
 ");
             
-            #line 187 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 191 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var i=nMacroParameters;i>=4;i-=2)
             
             #line default
             #line hidden
             
-            #line 188 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 192 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define FOR_EACH_2_KEEP_2_");
             
-            #line 189 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 193 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("(X, keep1, keep2, ");
             
-            #line 189 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 193 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var j=1;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 189 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 193 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+(j<i?", ":"")));
             
             #line default
             #line hidden
             
-            #line 189 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 193 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write(") \\\r\nX(keep1, keep2, P1, P2) \\\r\nFOR_EACH_2_KEEP_2_");
             
-            #line 191 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 195 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-2));
             
             #line default
             #line hidden
             this.Write("(X, keep1, keep2, ");
             
-            #line 191 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 195 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var j=3;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 191 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 195 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture((j).ToString()+(j<i?", ":"")));
             
             #line default
             #line hidden
             
-            #line 191 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 195 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n\r\n\r\n");
             
-            #line 194 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 198 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
@@ -777,68 +781,68 @@ X(P1, P2)
 
 ");
             
-            #line 215 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 219 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var i=4;i<=nMacroParameters;i+=2) {
             
             #line default
             #line hidden
             this.Write("#define FOR_EACH_2_");
             
-            #line 216 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 220 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("(X, ");
             
-            #line 216 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 220 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var j=1;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 216 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 220 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 216 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 220 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write(") \\\r\nX(P1, P2) \\\r\nFOR_EACH_2_");
             
-            #line 218 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 222 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-2));
             
             #line default
             #line hidden
             this.Write("(X, ");
             
-            #line 218 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 222 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var j=3;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 218 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 222 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 218 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 222 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n\r\n");
             
-            #line 220 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 224 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
@@ -846,82 +850,82 @@ for(var j=3;j<=i;j++){
             this.Write("\r\n#define FOR_EACH_2_REVERSE_0(...)\r\n\r\n#define FOR_EACH_2_REVERSE_2(X, P1, P2) \\\r" +
                     "\nX(P1, P2)\r\n\r\n");
             
-            #line 227 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 231 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var i=4;i<=nMacroParameters;i+=2) {
             
             #line default
             #line hidden
             this.Write("#define FOR_EACH_2_REVERSE_");
             
-            #line 228 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 232 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("(X, ");
             
-            #line 228 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 232 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var j=1;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 228 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 232 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 228 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 232 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write(") \\\r\nX(P");
             
-            #line 229 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 233 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-1));
             
             #line default
             #line hidden
             this.Write(", P");
             
-            #line 229 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 233 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(") \\\r\nFOR_EACH_2_REVERSE_");
             
-            #line 230 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 234 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-2));
             
             #line default
             #line hidden
             this.Write("(X, ");
             
-            #line 230 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 234 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var j=1;j<=i-2;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 230 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 234 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i-2)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 230 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 234 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n\r\n");
             
-            #line 232 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 236 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
@@ -929,75 +933,75 @@ for(var j=1;j<=i-2;j++){
             this.Write("\r\n#define FOR_EACH_1_COUNTED_0(...)\r\n\r\n#define FOR_EACH_1_COUNTED_1(X, P1) \\\r\n   " +
                     " X(1, P1)\r\n\r\n");
             
-            #line 239 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 243 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var i=2;i<=nMacroParameters;i++) {
             
             #line default
             #line hidden
             this.Write("#define FOR_EACH_1_COUNTED_");
             
-            #line 240 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 244 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("(X, ");
             
-            #line 240 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 244 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var j=1;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 240 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 244 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 240 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 244 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write(") \\\r\nX(");
             
-            #line 241 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 245 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(", P1) \\\r\nFOR_EACH_1_COUNTED_");
             
-            #line 242 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 246 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-1));
             
             #line default
             #line hidden
             this.Write("(X, ");
             
-            #line 242 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 246 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var j=2;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 242 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 246 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 242 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 246 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n\r\n");
             
-            #line 244 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 248 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
@@ -1005,75 +1009,75 @@ for(var j=2;j<=i;j++){
             this.Write("\r\n#define FOR_EACH_2_COUNTED_0(...)\r\n\r\n#define FOR_EACH_2_COUNTED_2(X, P1, P2) \\\r" +
                     "\n    X(2, P1, P2)\r\n\r\n");
             
-            #line 251 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 255 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var i=4;i<=nMacroParameters;i+=2) {
             
             #line default
             #line hidden
             this.Write("#define FOR_EACH_2_COUNTED_");
             
-            #line 252 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 256 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("(X, ");
             
-            #line 252 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 256 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var j=1;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 252 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 256 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 252 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 256 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write(") \\\r\nX(");
             
-            #line 253 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 257 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(", P1, P2) \\\r\nFOR_EACH_2_COUNTED_");
             
-            #line 254 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 258 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-2));
             
             #line default
             #line hidden
             this.Write("(X, ");
             
-            #line 254 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 258 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var j=3;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 254 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 258 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 254 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 258 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n\r\n");
             
-            #line 256 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 260 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
@@ -1103,35 +1107,35 @@ for(var j=3;j<=i;j++){
                     "ndif\r\n\r\n#define EXPAND_ARGS(...) __VA_ARGS__\r\n#define EXPAND_TWICE(...) EXPAND_A" +
                     "RGS(__VA_ARGS__)\r\n\r\n#define DO_0(MACRO, ...) \\\r\nMACRO(0, __VA_ARGS__)\r\n\r\n");
             
-            #line 292 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 296 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var i=1;i<=nArithmetic;i++){
             
             #line default
             #line hidden
             this.Write("#define DO_");
             
-            #line 293 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 297 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("(MACRO, ...) \\\r\nMACRO(");
             
-            #line 294 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 298 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(", __VA_ARGS__) \\\r\nDO_");
             
-            #line 295 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 299 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-1));
             
             #line default
             #line hidden
             this.Write("(MACRO, __VA_ARGS__)\r\n\r\n\r\n");
             
-            #line 298 "d:\repos\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 302 "C:\Users\v-royspr\Documents\IoTDev\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
@@ -1153,8 +1157,8 @@ for(var i=1;i<=nArithmetic;i++){
                     ") const char* C2(enumName, StringStorage)[COUNT_ARG(__VA_ARGS__)] = {FOR_EACH_1(" +
                     "DEFINE_ENUMERATION_CONSTANT_AS_STRING, __VA_ARGS__)}; \\\r\nconst char* C2(enumName" +
                     ",Strings)(enumName value)                   \\\r\n{                                " +
-                    "                                  \\\r\n    if((int)value>=COUNT_ARG(__VA_ARGS__)) " +
-                    "                        \\\r\n    {                                                " +
+                    "                                  \\\r\n    if((int)value<0 || (int)value>=COUNT_AR" +
+                    "G(__VA_ARGS__))         \\\r\n    {                                                " +
                     "              \\\r\n        /*this is an error case*/                              " +
                     "    \\\r\n        return NULL;                                               \\\r\n   " +
                     " }                                                              \\\r\n    else     " +
@@ -1185,12 +1189,26 @@ for(var i=1;i<=nArithmetic;i++){
                     "  return __FAILURE__;                                                     \\\r\n   " +
                     " }                                                                           \\\r\n" +
                     "}                                                                               " +
-                    "\\\r\n\r\n#define ENUM_TO_STRING(enumName, enumValue) C2(enumName, Strings)(enumValue" +
-                    ")\r\n#define STRING_TO_ENUM(stringValue, enumName, addressOfEnumVariable) C2(enumN" +
-                    "ame, _FromString)(stringValue, addressOfEnumVariable)\r\n\r\n#define DEFINE_MICROMOC" +
-                    "K_ENUM_TO_STRING(type, ...) MICROMOCK_ENUM_TO_STRING(type, FOR_EACH_1(DEFINE_ENU" +
-                    "MERATION_CONSTANT_AS_WIDESTRING, __VA_ARGS__));\r\n\r\n#define EMPTY()\r\n#define DELA" +
-                    "Y(id) id EMPTY LPAREN )\r\n\r\n#endif /*MACRO_UTILS_H*/\r\n");
+                    "\\\r\n\r\n#define DEFINE_LOCAL_ENUM(enumName, ...) typedef enum C2(enumName, _TAG) { " +
+                    "FOR_EACH_1(DEFINE_ENUMERATION_CONSTANT, __VA_ARGS__)} enumName; \\\r\nstatic const " +
+                    "char* C2(enumName, StringStorage)[COUNT_ARG(__VA_ARGS__)] = {FOR_EACH_1(DEFINE_E" +
+                    "NUMERATION_CONSTANT_AS_STRING, __VA_ARGS__)}; \\\r\nstatic const char* C2(enumName," +
+                    "Strings)(enumName value)            \\\r\n{                                        " +
+                    "                          \\\r\n    if((int)value<0 || (int)value>=COUNT_ARG(__VA_A" +
+                    "RGS__))         \\\r\n    {                                                        " +
+                    "      \\\r\n        /*this is an error case*/                                  \\\r\n " +
+                    "       return NULL;                                               \\\r\n    }      " +
+                    "                                                        \\\r\n    else             " +
+                    "                                              \\\r\n    {                          " +
+                    "                                    \\\r\n        return C2(enumName, StringStorage" +
+                    ")[value];                 \\\r\n    }                                              " +
+                    "                \\\r\n}\r\n\r\n\r\n#define ENUM_TO_STRING(enumName, enumValue) C2(enumNam" +
+                    "e, Strings)(enumValue)\r\n#define STRING_TO_ENUM(stringValue, enumName, addressOfE" +
+                    "numVariable) C2(enumName, _FromString)(stringValue, addressOfEnumVariable)\r\n\r\n#d" +
+                    "efine DEFINE_MICROMOCK_ENUM_TO_STRING(type, ...) MICROMOCK_ENUM_TO_STRING(type, " +
+                    "FOR_EACH_1(DEFINE_ENUMERATION_CONSTANT_AS_WIDESTRING, __VA_ARGS__));\r\n\r\n#define " +
+                    "EMPTY()\r\n#define MACRO_UTILS_DELAY(id) id EMPTY LPAREN )\r\n\r\n#endif /*MACRO_UTILS" +
+                    "_H*/\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }

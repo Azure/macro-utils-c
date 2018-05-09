@@ -45,6 +45,13 @@
 #define IFCOMMA_<#=i#> ,
 <#}#>
 
+#define IFCOMMALOGIC(N) C2(IFCOMMALOGIC_, N)
+#define IFCOMMALOGIC_0 
+<#for(var i=1;i<=nMacroParameters;i+=1)#>
+<#{#>
+#define IFCOMMALOGIC_<#=i#> ,
+<#}#>
+
 #define IFCOMMA_NOFIRST(N) C2(IFCOMMA_NOFIRST, N)
 #define IFCOMMA_NOFIRST1 
 <#for(var i=2;i<=nMacroParameters;i++)#>

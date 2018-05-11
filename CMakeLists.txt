@@ -57,3 +57,7 @@ if("${CMAKE_VERSION}" VERSION_GREATER 3.0.0)
 else()
     message(STATUS "This version of CMake does not support interface targets. Only the Azure Macro Utils header file will be installed. To use Azure Macro Utils, simply add \"MACRO_UTILS_INC_FOLDER\" to your include directories as specified in the instructions on the GitHub README.")
 endif()
+
+if(${run_int_tests})
+    add_subdirectory(tests) 
+endif()

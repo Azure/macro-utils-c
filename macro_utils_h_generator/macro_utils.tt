@@ -398,4 +398,33 @@ static const char* C2(enumName,Strings)(enumName value)            \
 #define EMPTY()
 #define MACRO_UTILS_DELAY(id) id EMPTY LPAREN )
 
+#define DEFINE_ENUMERATION_CONSTANT_2(enumerationConstant, constantExpression) enumerationConstant = constantExpression,
+
+#define DECLARE_ENUM_STRINGS_2(enumIdentifier, ...) extern const char* C2(enumIdentifier,_ToString)(enumIdentifier enumerationConstant);
+
+#define DEFINE_ENUM_2(enumIdentifier, ... ) typedef enum C2(enumIdentifier, _TAG) {FOR_EACH_2(DEFINE_ENUMERATION_CONSTANT_2, __VA_ARGS__)} enumIdentifier; \
+    DECLARE_ENUM_STRINGS_2(enumIdentifier, __VA_ARGS__)
+
+typedef struct ENUM_VALUE_AND_STRING_TAG
+{
+    int value;
+    const char* valueAsString;
+}ENUM_VALUE_AND_STRING;
+
+#define DEFINE_ENUM_VALUE_AND_STRING(enumerationConstant, constantExpression) {enumerationConstant, TOSTRING(enumerationConstant)},
+#define DEFINE_ENUM_STRINGS_2(enumIdentifier, ... ) static const ENUM_VALUE_AND_STRING C2(enumIdentifier, _ValuesAndStrings)[DIV2(COUNT_ARG(__VA_ARGS__))] ={FOR_EACH_2(DEFINE_ENUM_VALUE_AND_STRING, __VA_ARGS__)}; \
+const char* C2(enumIdentifier,_ToString)(enumIdentifier value)                                                                                                                                                       \
+{                                                                                                                                                                                                                    \
+    for(size_t i=0;i<sizeof(C2(enumIdentifier, _ValuesAndStrings))/sizeof(C2(enumIdentifier, _ValuesAndStrings)[0]);i++)                                                                                             \
+    {                                                                                                                                                                                                                \
+        if(C2(enumIdentifier, _ValuesAndStrings)[i].value == (int)value)                                                                                                                                             \
+        {                                                                                                                                                                                                            \
+            return C2(enumIdentifier, _ValuesAndStrings)[i].valueAsString;                                                                                                                                           \
+        }                                                                                                                                                                                                            \
+    }                                                                                                                                                                                                                \
+    return NULL;                                                                                                                                                                                                     \
+}                                                                                                                                                                                                                    \
+
+#define ENUM_TO_STRING_2(enumIdentifier, value) C2(enumIdentifier,_ToString)(value)
+
 #endif /*MACRO_UTILS_H*/

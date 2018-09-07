@@ -33,6 +33,7 @@
 
 /*"pointer or NULL" macro - because when printf-ing arguments NULL is not valid for %s (section 7.1.4 of C11 standard) */
 #define P_OR_NULL(p) (((p)!=NULL)?(p):"NULL")
+#define WP_OR_NULL(p) (((p)!=NULL)?(p):L"NULL")
 
 #define TOSTRING_(x) #x
 #define TOSTRING(x) TOSTRING_(x)

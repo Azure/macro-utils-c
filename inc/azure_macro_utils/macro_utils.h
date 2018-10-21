@@ -12712,7 +12712,7 @@ const char* C2(enumName,Strings)(enumName value)                   \
     if((int)value<0 || (int)value>=COUNT_ARG(__VA_ARGS__))         \
     {                                                              \
         /*this is an error case*/                                  \
-        return NULL;                                               \
+        return "NULL";                                             \
     }                                                              \
     else                                                           \
     {                                                              \
@@ -12749,7 +12749,7 @@ static const char* C2(enumName,Strings)(enumName value)            \
     if((int)value<0 || (int)value>=COUNT_ARG(__VA_ARGS__))         \
     {                                                              \
         /*this is an error case*/                                  \
-        return NULL;                                               \
+        return "NULL";                                             \
     }                                                              \
     else                                                           \
     {                                                              \
@@ -12790,7 +12790,7 @@ const char* C2(enumIdentifier,_ToString)(enumIdentifier value)                  
             return C2(enumIdentifier, _ValuesAndStrings)[i].valueAsString;                                                                                                                                           \
         }                                                                                                                                                                                                            \
     }                                                                                                                                                                                                                \
-    return NULL;                                                                                                                                                                                                     \
+    return "NULL";                                                                                                                                                                                                   \
 }                                                                                                                                                                                                                    \
 
 #define ENUM_TO_STRING_2(enumIdentifier, value) C2(enumIdentifier,_ToString)(value)

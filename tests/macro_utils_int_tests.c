@@ -23,25 +23,43 @@ int main(void)
     test1 someUnusedVariable;
     (void)someUnusedVariable;
 
-    if (ENUM_TO_STRING_2(TEST3_ENUM, 0) != NULL)
+    const char* TEST2_value_0 = ENUM_TO_STRING_2(TEST3_ENUM, 0);
+    if (TEST2_value_0 == NULL)
     {
-        printf("TEST2_ENUM should not know how to compute value 0\n");
+        (void)printf("TEST2_ENUM should not return NULL\n");
         result++;
+    }
+    else
+    {
+        if (strcmp("NULL", TEST2_value_0) != 0)
+        {
+            (void)printf("ENUM_TO_STRING_2(TEST2_ENUM, 0) should return NULL\n");
+            result++;
+        }
     }
     
     const char* TEST3_value_2 = ENUM_TO_STRING_2(TEST3_ENUM, 2);
     if (TEST3_value_2 == NULL)
     {
-        printf("TEST2_ENUM should know how to compute the string for <<2>>, but it did not\n");
+        (void)printf("TEST3_ENUM should know how to compute the string for <<2>>, but it did not\n");
         result++;
     }
     else
     {
         if (strcmp("test3_a", TEST3_value_2)!=0)
         {
-            printf("ENUM_TO_STRING_2(TEST2_ENUM, 1) computed some wrong value %s while %s was expected", TEST3_value_2, "test3_a" "\n");
+            (void)printf("ENUM_TO_STRING_2(TEST3_ENUM, 1) computed some wrong value %s while %s was expected", TEST3_value_2, "test3_a" "\n");
             result++;
         }
+    }
+
+    if (result == 0)
+    {
+        (void)printf("All tests passed\n");
+    }
+    else
+    {
+        (void)printf("%zu tests failed\n", result);
     }
 
     return result;

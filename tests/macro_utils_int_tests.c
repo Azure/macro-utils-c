@@ -33,7 +33,7 @@ int main(void)
     {
         if (strcmp("NULL", TEST2_value_0) != 0)
         {
-            (void)printf("ENUM_TO_STRING_2(TEST2_ENUM, 0) should return NULL\n");
+            (void)printf("ENUM_TO_STRING_2(TEST2_ENUM, 0) should return \"NULL\"\n");
             result++;
         }
     }
@@ -48,7 +48,7 @@ int main(void)
     {
         if (strcmp("test3_a", TEST3_value_2)!=0)
         {
-            (void)printf("ENUM_TO_STRING_2(TEST3_ENUM, 1) computed some wrong value %s while %s was expected", TEST3_value_2, "test3_a" "\n");
+            (void)printf("ENUM_TO_STRING_2(TEST3_ENUM, 2) computed some wrong value %s while %s was expected", TEST3_value_2, "test3_a" "\n");
             result++;
         }
     }
@@ -59,7 +59,7 @@ int main(void)
     }
     else
     {
-        (void)printf("%zu tests failed\n", result);
+        (void)printf("%d tests failed\n", result);
     }
 
     return result;

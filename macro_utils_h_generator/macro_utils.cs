@@ -18,7 +18,7 @@ namespace macro_utils_h_generator
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+    #line 1 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "15.0.0.0")]
     public partial class macro_utils : macro_utilsBase
     {
@@ -42,19 +42,19 @@ namespace macro_utils_h_generator
 
 ");
             
-            #line 19 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 19 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 /*CHANGE BELOW 2 VARIABLES TO GET MORE / LESS */ 
             
             #line default
             #line hidden
             
-            #line 20 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 20 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 int nArithmetic=1024;
             
             #line default
             #line hidden
             
-            #line 21 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 21 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 int nMacroParameters=124;/*127 parameters in one macro definition in C99 in chapter 5.2.4.1 Translation limits*/
             
             #line default
@@ -84,27 +84,27 @@ int nMacroParameters=124;/*127 parameters in one macro definition in C99 in chap
 #define MU_IFCOMMA_2
 ");
             
-            #line 45 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 45 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var i=4;i<=nMacroParameters;i+=2)
             
             #line default
             #line hidden
             
-            #line 46 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 46 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define MU_IFCOMMA_");
             
-            #line 47 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 47 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(" ,\r\n");
             
-            #line 48 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 48 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
@@ -112,27 +112,27 @@ for(var i=4;i<=nMacroParameters;i+=2)
             this.Write("\r\n#define MU_IFCOMMALOGIC(N) MU_C2(MU_IFCOMMALOGIC_, N)\r\n#define MU_IFCOMMALOGIC_" +
                     "0 \r\n");
             
-            #line 52 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 52 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var i=1;i<=nMacroParameters;i+=1)
             
             #line default
             #line hidden
             
-            #line 53 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 53 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define MU_IFCOMMALOGIC_");
             
-            #line 54 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 54 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(" ,\r\n");
             
-            #line 55 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 55 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
@@ -140,284 +140,284 @@ for(var i=1;i<=nMacroParameters;i+=1)
             this.Write("\r\n#define MU_IFCOMMA_NOFIRST(N) MU_C2(MU_IFCOMMA_NOFIRST, N)\r\n#define MU_IFCOMMA_" +
                     "NOFIRST1 \r\n");
             
-            #line 59 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 59 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var i=2;i<=nMacroParameters;i++)
             
             #line default
             #line hidden
             
-            #line 60 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 60 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define MU_IFCOMMA_NOFIRST");
             
-            #line 61 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 61 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(" ,\r\n");
             
-            #line 62 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 62 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write("\r\n#define MU_DEC(x) MU_C2(MU_DEC,x)\r\n");
             
-            #line 65 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 65 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var i=nArithmetic;i>=1;i--)
             
             #line default
             #line hidden
             
-            #line 66 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 66 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define MU_DEC");
             
-            #line 67 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 67 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 67 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 67 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-1));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 68 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 68 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write("\r\n#define MU_INC(x) MU_C2(MU_INC,x)\r\n");
             
-            #line 71 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 71 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var i=nArithmetic;i>=0;i--)
             
             #line default
             #line hidden
             
-            #line 72 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 72 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define MU_INC");
             
-            #line 73 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 73 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 73 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 73 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i+1));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 74 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 74 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write("\r\n#define MU_DIV2(x) MU_C2(MU_DIV2_,x)\r\n\r\n");
             
-            #line 78 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 78 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var i=nArithmetic;i>=0;i--)
             
             #line default
             #line hidden
             
-            #line 79 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 79 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define MU_DIV2_");
             
-            #line 80 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 80 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 80 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 80 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i/2));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 81 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 81 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 83 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 83 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 /*the below produces MOD2 for numbers*/
             
             #line default
             #line hidden
             this.Write("#define MU_MOD2(x) MU_C2(MU_MOD2_,x)\r\n");
             
-            #line 85 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 85 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var i=nArithmetic;i>=0;i--)
             
             #line default
             #line hidden
             
-            #line 86 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 86 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define MU_MOD2_");
             
-            #line 87 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 87 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 87 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 87 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i%2));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 88 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 88 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write("\r\n#define MU_THE_NTH_ARG(");
             
-            #line 90 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 90 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var i=1;i<=nMacroParameters;i++)
             
             #line default
             #line hidden
             
-            #line 91 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 91 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 {
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 91 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 91 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(", ");
             
-            #line 91 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 91 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write(" ... ) P");
             
-            #line 91 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 91 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(nMacroParameters));
             
             #line default
             #line hidden
-            this.Write("\r\n\r\n#define _MU_TRIGGER_PARENTHESIS_(...) ,\r\n\r\n#define MU_LPAREN (\r\n\r\n#ifdef _MSC" +
-                    "_VER\r\n#define MU_COUNT_1_OR_MORE_ARG(...) MU_THE_NTH_ARG MU_LPAREN __VA_ARGS__, " +
-                    "\\\r\n");
+            this.Write("\r\n\r\n#define MU_TRIGGER_PARENTHESIS(...) ,\r\n\r\n#define MU_LPAREN (\r\n\r\n#ifdef _MSC_V" +
+                    "ER\r\n#define MU_COUNT_1_OR_MORE_ARG(...) MU_THE_NTH_ARG MU_LPAREN __VA_ARGS__, \\\r" +
+                    "\n");
             
-            #line 99 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 99 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var i=nMacroParameters-1;i>=1;i--){
             
             #line default
             #line hidden
             
-            #line 99 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 99 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i.ToString()+((i>1)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 99 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 99 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n#define MU_MORE_THAN_1_ARG(...) MU_THE_NTH_ARG MU_LPAREN __VA_ARGS__, ");
             
-            #line 100 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 100 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var i=nMacroParameters-2;i>=1;i--){
             
             #line default
             #line hidden
             
-            #line 100 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 100 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(1));
             
             #line default
             #line hidden
             this.Write(",");
             
-            #line 100 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 100 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write("0)\r\n#else\r\n#define MU_COUNT_1_OR_MORE_ARG(...) MU_THE_NTH_ARG (__VA_ARGS__, \\\r\n");
             
-            #line 103 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 103 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var i=nMacroParameters-1;i>=1;i--){
             
             #line default
             #line hidden
             
-            #line 103 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 103 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i.ToString()+((i>1)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 103 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 103 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n#define MU_MORE_THAN_1_ARG(...) MU_THE_NTH_ARG(__VA_ARGS__, ");
             
-            #line 104 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 104 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var i=nMacroParameters-2;i>=1;i--){
             
             #line default
             #line hidden
             
-            #line 104 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 104 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(1));
             
             #line default
             #line hidden
             this.Write(",");
             
-            #line 104 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 104 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
@@ -429,7 +429,7 @@ for(var i=nMacroParameters-2;i>=1;i--){
 #define MU_COUNT_ARG_1(...) 0
 #define MU_COUNT_ARG_0(...) MU_C1(MU_COUNT_1_OR_MORE_ARG(__VA_ARGS__))
 
-#define MU_ISEMPTY(...) MU_C5(MU_DISPTACH_EMPTY_, MU_MORE_THAN_1_ARG(_MU_TRIGGER_PARENTHESIS_ __VA_ARGS__ ()), MU_MORE_THAN_1_ARG(__VA_ARGS__), MU_MORE_THAN_1_ARG(__VA_ARGS__ ()), MU_MORE_THAN_1_ARG(_MU_TRIGGER_PARENTHESIS_ __VA_ARGS__))
+#define MU_ISEMPTY(...) MU_C5(MU_DISPTACH_EMPTY_, MU_MORE_THAN_1_ARG(MU_TRIGGER_PARENTHESIS __VA_ARGS__ ()), MU_MORE_THAN_1_ARG(__VA_ARGS__), MU_MORE_THAN_1_ARG(__VA_ARGS__ ()), MU_MORE_THAN_1_ARG(MU_TRIGGER_PARENTHESIS __VA_ARGS__))
 #define MU_DISPTACH_EMPTY_1000 1
 #define MU_DISPTACH_EMPTY_0000 0
 #define MU_DISPTACH_EMPTY_1100 0
@@ -463,74 +463,74 @@ for(var i=nMacroParameters-2;i>=1;i--){
 
 ");
             
-            #line 143 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 143 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var i=nMacroParameters;i>=2;i--)
             
             #line default
             #line hidden
             
-            #line 144 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 144 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define MU_FOR_EACH_1_");
             
-            #line 145 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 145 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("(X, ");
             
-            #line 145 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 145 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var j=1;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 145 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 145 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 145 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 145 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write(") \\\r\nX(P1) \\\r\nMU_FOR_EACH_1_");
             
-            #line 147 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 147 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-1));
             
             #line default
             #line hidden
             this.Write("(X, ");
             
-            #line 147 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 147 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var j=2;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 147 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 147 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 147 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 147 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n\r\n");
             
-            #line 149 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 149 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
@@ -546,74 +546,74 @@ X(P1)
 
 ");
             
-            #line 159 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 159 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var i=nMacroParameters;i>=2;i--)
             
             #line default
             #line hidden
             
-            #line 160 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 160 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define MU_FOR_EACH_1_KEEP_1_");
             
-            #line 161 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 161 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("(X, keep, ");
             
-            #line 161 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 161 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var j=1;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 161 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 161 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+(j<i?", ":"")));
             
             #line default
             #line hidden
             
-            #line 161 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 161 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write(") \\\r\nX(keep, P1) \\\r\nMU_FOR_EACH_1_KEEP_1_");
             
-            #line 163 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 163 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-1));
             
             #line default
             #line hidden
             this.Write("(X, keep, ");
             
-            #line 163 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 163 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var j=2;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 163 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 163 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture((j).ToString()+(j<i?", ":"")));
             
             #line default
             #line hidden
             
-            #line 163 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 163 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n\r\n\r\n");
             
-            #line 166 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 166 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
@@ -630,74 +630,74 @@ X(keep, P1)
 
 ");
             
-            #line 177 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 177 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var i=nMacroParameters;i>=4;i-=2)
             
             #line default
             #line hidden
             
-            #line 178 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 178 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define MU_FOR_EACH_2_KEEP_1_");
             
-            #line 179 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 179 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("(X, keep, ");
             
-            #line 179 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 179 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var j=1;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 179 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 179 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+(j<i?", ":"")));
             
             #line default
             #line hidden
             
-            #line 179 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 179 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write(") \\\r\nX(keep, P1, P2) \\\r\nMU_FOR_EACH_2_KEEP_1_");
             
-            #line 181 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 181 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-2));
             
             #line default
             #line hidden
             this.Write("(X, keep, ");
             
-            #line 181 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 181 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var j=3;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 181 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 181 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture((j).ToString()+(j<i?", ":"")));
             
             #line default
             #line hidden
             
-            #line 181 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 181 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n\r\n\r\n");
             
-            #line 184 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 184 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
@@ -719,74 +719,74 @@ for(var j=3;j<=i;j++){
 
 ");
             
-            #line 200 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 200 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var i=nMacroParameters;i>=4;i-=2)
             
             #line default
             #line hidden
             
-            #line 201 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 201 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define MU_FOR_EACH_2_KEEP_2_");
             
-            #line 202 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 202 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("(X, keep1, keep2, ");
             
-            #line 202 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 202 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var j=1;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 202 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 202 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+(j<i?", ":"")));
             
             #line default
             #line hidden
             
-            #line 202 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 202 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write(") \\\r\nX(keep1, keep2, P1, P2) \\\r\nMU_FOR_EACH_2_KEEP_2_");
             
-            #line 204 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 204 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-2));
             
             #line default
             #line hidden
             this.Write("(X, keep1, keep2, ");
             
-            #line 204 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 204 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var j=3;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 204 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 204 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture((j).ToString()+(j<i?", ":"")));
             
             #line default
             #line hidden
             
-            #line 204 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 204 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n\r\n\r\n");
             
-            #line 207 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 207 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
@@ -813,68 +813,68 @@ X(P1, P2)
 
 ");
             
-            #line 228 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 228 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var i=4;i<=nMacroParameters;i+=2) {
             
             #line default
             #line hidden
             this.Write("#define MU_FOR_EACH_2_");
             
-            #line 229 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 229 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("(X, ");
             
-            #line 229 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 229 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var j=1;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 229 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 229 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 229 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 229 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write(") \\\r\nX(P1, P2) \\\r\nMU_FOR_EACH_2_");
             
-            #line 231 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 231 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-2));
             
             #line default
             #line hidden
             this.Write("(X, ");
             
-            #line 231 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 231 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var j=3;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 231 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 231 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 231 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 231 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n\r\n");
             
-            #line 233 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 233 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
@@ -882,82 +882,82 @@ for(var j=3;j<=i;j++){
             this.Write("\r\n#define MU_FOR_EACH_2_REVERSE_0(...)\r\n\r\n#define MU_FOR_EACH_2_REVERSE_2(X, P1, " +
                     "P2) \\\r\nX(P1, P2)\r\n\r\n");
             
-            #line 240 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 240 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var i=4;i<=nMacroParameters;i+=2) {
             
             #line default
             #line hidden
             this.Write("#define MU_FOR_EACH_2_REVERSE_");
             
-            #line 241 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 241 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("(X, ");
             
-            #line 241 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 241 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var j=1;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 241 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 241 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 241 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 241 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write(") \\\r\nX(P");
             
-            #line 242 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 242 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-1));
             
             #line default
             #line hidden
             this.Write(", P");
             
-            #line 242 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 242 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(") \\\r\nMU_FOR_EACH_2_REVERSE_");
             
-            #line 243 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 243 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-2));
             
             #line default
             #line hidden
             this.Write("(X, ");
             
-            #line 243 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 243 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var j=1;j<=i-2;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 243 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 243 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i-2)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 243 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 243 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n\r\n");
             
-            #line 245 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 245 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
@@ -965,75 +965,75 @@ for(var j=1;j<=i-2;j++){
             this.Write("\r\n#define MU_FOR_EACH_1_COUNTED_0(...)\r\n\r\n#define MU_FOR_EACH_1_COUNTED_1(X, P1) " +
                     "\\\r\n    X(1, P1)\r\n\r\n");
             
-            #line 252 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 252 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var i=2;i<=nMacroParameters;i++) {
             
             #line default
             #line hidden
             this.Write("#define MU_FOR_EACH_1_COUNTED_");
             
-            #line 253 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 253 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("(X, ");
             
-            #line 253 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 253 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var j=1;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 253 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 253 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 253 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 253 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write(") \\\r\nX(");
             
-            #line 254 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 254 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(", P1) \\\r\nMU_FOR_EACH_1_COUNTED_");
             
-            #line 255 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 255 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-1));
             
             #line default
             #line hidden
             this.Write("(X, ");
             
-            #line 255 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 255 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var j=2;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 255 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 255 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 255 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 255 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n\r\n");
             
-            #line 257 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 257 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
@@ -1041,75 +1041,75 @@ for(var j=2;j<=i;j++){
             this.Write("\r\n#define MU_FOR_EACH_2_COUNTED_0(...)\r\n\r\n#define MU_FOR_EACH_2_COUNTED_2(X, P1, " +
                     "P2) \\\r\n    X(2, P1, P2)\r\n\r\n");
             
-            #line 264 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 264 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var i=4;i<=nMacroParameters;i+=2) {
             
             #line default
             #line hidden
             this.Write("#define MU_FOR_EACH_2_COUNTED_");
             
-            #line 265 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 265 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("(X, ");
             
-            #line 265 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 265 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var j=1;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 265 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 265 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 265 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 265 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write(") \\\r\nX(");
             
-            #line 266 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 266 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(", P1, P2) \\\r\nMU_FOR_EACH_2_COUNTED_");
             
-            #line 267 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 267 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-2));
             
             #line default
             #line hidden
             this.Write("(X, ");
             
-            #line 267 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 267 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var j=3;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 267 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 267 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 267 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 267 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n\r\n");
             
-            #line 269 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 269 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
@@ -1142,153 +1142,154 @@ for(var j=3;j<=i;j++){
                     "EXPAND_ARGS(__VA_ARGS__)\r\n\r\n#define MU_DO_0(MACRO, ...) \\\r\nMACRO(0, __VA_ARGS__)" +
                     "\r\n\r\n");
             
-            #line 305 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 305 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 for(var i=1;i<=nArithmetic;i++){
             
             #line default
             #line hidden
             this.Write("#define MU_DO_");
             
-            #line 306 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 306 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("(MACRO, ...) \\\r\nMACRO(");
             
-            #line 307 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 307 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(", __VA_ARGS__) \\\r\nDO_");
             
-            #line 308 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 308 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-1));
             
             #line default
             #line hidden
             this.Write("(MACRO, __VA_ARGS__)\r\n\r\n\r\n");
             
-            #line 311 "D:\Repos\shelf5\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 311 "C:\Code\s1\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default
             #line hidden
             this.Write("\r\n#define MU_DO(TIMES, MACRO, ...) MU_C2(MU_DO_, TIMES)(MACRO, __VA_ARGS__)\r\n\r\n\r\n" +
-                    "/* we need some sort of macro that does:\r\nIF(0, \"true\", \"false\") => \"false\"\r\nIF(" +
-                    "1, \"true\", \"false\") => \"true\"\r\nIF(X, \"true\", \"false\") => \"true\"\r\n*/\r\n\r\n#define M" +
-                    "U_INTERNALIF(x) MU_INTERNALIF##x\r\n#define MU_INTERNALIF0\r\n\r\n#define MU_ISZERO(x)" +
-                    " MU_COUNT_ARG(MU_INTERNALIF(x))\r\n\r\n#define MU_IF(condition, trueBranch, falseBra" +
-                    "nch) MU_C2(MU_IF,MU_ISZERO(condition))(trueBranch, falseBranch)\r\n#define MU_IF0(" +
-                    "trueBranch, falseBranch) falseBranch\r\n#define MU_IF1(trueBranch, falseBranch) tr" +
-                    "ueBranch\r\n\r\n\r\n\r\n#define MU_DEFINE_ENUMERATION_CONSTANT(x) x,\r\n/*MU_DEFINE_ENUM g" +
-                    "oes to header*/\r\n#define MU_DEFINE_ENUM(enumName, ...) typedef enum MU_C2(enumNa" +
-                    "me, _TAG) { MU_FOR_EACH_1(MU_DEFINE_ENUMERATION_CONSTANT, __VA_ARGS__)} enumName" +
-                    "; \\\r\n    extern const char* MU_C2(enumName,Strings)(enumName value); \\\r\n    exte" +
-                    "rn int MU_C2(enumName, _FromString)(const char* enumAsString, enumName* destinat" +
-                    "ion);\r\n\r\n\r\n#define MU_DEFINE_ENUMERATION_CONSTANT_AS_WIDESTRING(x) MU_C2(L, MU_T" +
-                    "OSTRING(x)) , \r\n#define MU_DEFINE_ENUMERATION_CONSTANT_AS_STRING(x) MU_TOSTRING(" +
-                    "x) , \r\n/*MU_DEFINE_ENUM_STRINGS goes to .c*/\r\n#define MU_DEFINE_ENUM_STRINGS(enu" +
-                    "mName, ...) const char* MU_C2(enumName, StringStorage)[MU_COUNT_ARG(__VA_ARGS__)" +
-                    "] = {MU_FOR_EACH_1(MU_DEFINE_ENUMERATION_CONSTANT_AS_STRING, __VA_ARGS__)}; \\\r\nc" +
-                    "onst char* MU_C2(enumName,Strings)(enumName value)                   \\\r\n{       " +
-                    "                                                           \\\r\n    if((int)value<" +
-                    "0 || (int)value>=MU_COUNT_ARG(__VA_ARGS__))         \\\r\n    {                    " +
-                    "                                          \\\r\n        /*this is an error case*/  " +
-                    "                                \\\r\n        return \"NULL\";                       " +
-                    "                      \\\r\n    }                                                  " +
-                    "            \\\r\n    else                                                         " +
-                    "  \\\r\n    {                                                              \\\r\n     " +
-                    "   return MU_C2(enumName, StringStorage)[value];                 \\\r\n    }       " +
-                    "                                                       \\\r\n}                     " +
-                    "                                             \\\r\nint MU_C2(enumName, _FromString)" +
-                    "(const char* enumAsString, enumName* destination)  \\\r\n{                         " +
-                    "                                                      \\\r\n    if(                " +
-                    "                                                         \\\r\n        (enumAsStrin" +
-                    "g==NULL) || (destination==NULL)                             \\\r\n    )            " +
-                    "                                                               \\\r\n    {         " +
-                    "                                                                  \\\r\n        ret" +
-                    "urn MU_FAILURE;                                                     \\\r\n    }    " +
-                    "                                                                       \\\r\n    el" +
-                    "se                                                                        \\\r\n   " +
-                    " {                                                                           \\\r\n" +
-                    "        size_t i;                                                               " +
-                    "\\\r\n        for(i=0;i<MU_COUNT_ARG(__VA_ARGS__);i++)                             " +
-                    "      \\\r\n        {                                                              " +
-                    "         \\\r\n            if(strcmp(enumAsString, MU_C2(enumName, StringStorage)[i" +
-                    "])==0)         \\\r\n            {                                                 " +
-                    "                  \\\r\n                *destination = (enumName)i;                " +
-                    "                     \\\r\n                return 0;                               " +
-                    "                        \\\r\n            }                                        " +
-                    "                           \\\r\n        }                                         " +
-                    "                              \\\r\n        return MU_FAILURE;                     " +
-                    "                                \\\r\n    }                                        " +
-                    "                                   \\\r\n}                                         " +
-                    "                                      \\\r\n\r\n#define MU_DEFINE_LOCAL_ENUM(enumName" +
-                    ", ...) typedef enum MU_C2(enumName, _TAG) { MU_FOR_EACH_1(MU_DEFINE_ENUMERATION_" +
-                    "CONSTANT, __VA_ARGS__)} enumName; \\\r\nstatic const char* MU_C2(enumName, StringSt" +
-                    "orage)[MU_COUNT_ARG(__VA_ARGS__)] = {MU_FOR_EACH_1(MU_DEFINE_ENUMERATION_CONSTAN" +
-                    "T_AS_STRING, __VA_ARGS__)}; \\\r\nstatic const char* MU_C2(enumName,Strings)(enumNa" +
-                    "me value)            \\\r\n{                                                       " +
-                    "           \\\r\n    if((int)value<0 || (int)value>=MU_COUNT_ARG(__VA_ARGS__))     " +
-                    "    \\\r\n    {                                                              \\\r\n   " +
-                    "     /*this is an error case*/                                  \\\r\n        retur" +
-                    "n \"NULL\";                                             \\\r\n    }                  " +
-                    "                                            \\\r\n    else                         " +
-                    "                                  \\\r\n    {                                      " +
-                    "                        \\\r\n        return MU_C2(enumName, StringStorage)[value];" +
-                    "                 \\\r\n    }                                                       " +
-                    "       \\\r\n}\r\n\r\n\r\n#define MU_ENUM_TO_STRING(enumName, enumValue) MU_C2(enumName, " +
-                    "Strings)(enumValue)\r\n#define MU_STRING_TO_ENUM(stringValue, enumName, addressOfE" +
-                    "numVariable) MU_C2(enumName, _FromString)(stringValue, addressOfEnumVariable)\r\n\r" +
-                    "\n#define MU_DEFINE_MICROMOCK_ENUM_TO_STRING(type, ...) MICROMOCK_ENUM_TO_STRING(" +
-                    "type, MU_FOR_EACH_1(MU_DEFINE_ENUMERATION_CONSTANT_AS_WIDESTRING, __VA_ARGS__));" +
-                    "\r\n\r\n#define MU_EMPTY()\r\n#define MACRO_UTILS_DELAY(id) id MU_EMPTY MU_LPAREN )\r\n\r" +
-                    "\n#define MU_DEFINE_ENUMERATION_CONSTANT_2(enumerationConstant, constantExpressio" +
-                    "n) enumerationConstant = constantExpression,\r\n\r\n#define MU_DECLARE_ENUM_STRINGS_" +
-                    "2(enumIdentifier, ...) extern const char* MU_C2(enumIdentifier,_ToString)(enumId" +
-                    "entifier enumerationConstant);\r\n\r\n#define MU_DEFINE_ENUM_2(enumIdentifier, ... )" +
-                    " typedef enum MU_C2(enumIdentifier, _TAG) {MU_FOR_EACH_2(MU_DEFINE_ENUMERATION_C" +
-                    "ONSTANT_2, __VA_ARGS__)} enumIdentifier; \\\r\n    MU_DECLARE_ENUM_STRINGS_2(enumId" +
-                    "entifier, __VA_ARGS__)\r\n\r\ntypedef struct ENUM_VALUE_AND_STRING_TAG\r\n{\r\n    int v" +
-                    "alue;\r\n    const char* valueAsString;\r\n}ENUM_VALUE_AND_STRING;\r\n\r\n#define MU_DEF" +
-                    "INE_ENUM_VALUE_AND_STRING(enumerationConstant, constantExpression) {enumerationC" +
-                    "onstant, MU_TOSTRING(enumerationConstant)},\r\n#define MU_DEFINE_ENUM_STRINGS_2(en" +
-                    "umIdentifier, ... ) static const ENUM_VALUE_AND_STRING MU_C2(enumIdentifier, _Va" +
-                    "luesAndStrings)[MU_DIV2(MU_COUNT_ARG(__VA_ARGS__))] ={MU_FOR_EACH_2(MU_DEFINE_EN" +
-                    "UM_VALUE_AND_STRING, __VA_ARGS__)}; \\\r\nconst char* MU_C2(enumIdentifier,_ToStrin" +
-                    "g)(enumIdentifier value)                                                        " +
-                    "                                                                                " +
-                    "               \\\r\n{                                                             " +
-                    "                                                                                " +
-                    "                                                                       \\\r\n    fo" +
-                    "r(size_t i=0;i<sizeof(MU_C2(enumIdentifier, _ValuesAndStrings))/sizeof(MU_C2(enu" +
-                    "mIdentifier, _ValuesAndStrings)[0]);i++)                                        " +
-                    "                                                     \\\r\n    {                   " +
-                    "                                                                                " +
-                    "                                                                                " +
-                    "                             \\\r\n        if(MU_C2(enumIdentifier, _ValuesAndStrin" +
-                    "gs)[i].value == (int)value)                                                     " +
-                    "                                                                                " +
-                    "        \\\r\n        {                                                            " +
-                    "                                                                                " +
-                    "                                                                \\\r\n            r" +
-                    "eturn MU_C2(enumIdentifier, _ValuesAndStrings)[i].valueAsString;                " +
-                    "                                                                                " +
-                    "                                           \\\r\n        }                         " +
-                    "                                                                                " +
-                    "                                                                                " +
-                    "                   \\\r\n    }                                                     " +
-                    "                                                                                " +
+                    "/* we need some sort of macro that does:\r\nMU_IF(0, \"true\", \"false\") => \"false\"\r\n" +
+                    "MU_IF(1, \"true\", \"false\") => \"true\"\r\nMU_IF(X, \"true\", \"false\") => \"true\"\r\n*/\r\n\r\n" +
+                    "#define MU_INTERNALIF(x) MU_INTERNALIF##x\r\n#define MU_INTERNALIF0\r\n\r\n#define MU_" +
+                    "ISZERO(x) MU_COUNT_ARG(MU_INTERNALIF(x))\r\n\r\n#define MU_IF(condition, trueBranch," +
+                    " falseBranch) MU_C2(MU_IF,MU_ISZERO(condition))(trueBranch, falseBranch)\r\n#defin" +
+                    "e MU_IF0(trueBranch, falseBranch) falseBranch\r\n#define MU_IF1(trueBranch, falseB" +
+                    "ranch) trueBranch\r\n\r\n\r\n\r\n#define MU_DEFINE_ENUMERATION_CONSTANT(x) x,\r\n/*MU_DEFI" +
+                    "NE_ENUM goes to header*/\r\n#define MU_DEFINE_ENUM(enumName, ...) typedef enum MU_" +
+                    "C2(enumName, _TAG) { MU_FOR_EACH_1(MU_DEFINE_ENUMERATION_CONSTANT, __VA_ARGS__)}" +
+                    " enumName; \\\r\n    extern const char* MU_C2(enumName,Strings)(enumName value); \\\r" +
+                    "\n    extern int MU_C2(enumName, _FromString)(const char* enumAsString, enumName*" +
+                    " destination);\r\n\r\n\r\n#define MU_DEFINE_ENUMERATION_CONSTANT_AS_WIDESTRING(x) MU_C" +
+                    "2(L, MU_TOSTRING(x)) , \r\n#define MU_DEFINE_ENUMERATION_CONSTANT_AS_STRING(x) MU_" +
+                    "TOSTRING(x) , \r\n/*MU_DEFINE_ENUM_STRINGS goes to .c*/\r\n#define MU_DEFINE_ENUM_ST" +
+                    "RINGS(enumName, ...) const char* MU_C2(enumName, StringStorage)[MU_COUNT_ARG(__V" +
+                    "A_ARGS__)] = {MU_FOR_EACH_1(MU_DEFINE_ENUMERATION_CONSTANT_AS_STRING, __VA_ARGS_" +
+                    "_)}; \\\r\nconst char* MU_C2(enumName,Strings)(enumName value)                   \\\r" +
+                    "\n{                                                                  \\\r\n    if((i" +
+                    "nt)value<0 || (int)value>=MU_COUNT_ARG(__VA_ARGS__))         \\\r\n    {           " +
+                    "                                                   \\\r\n        /*this is an error" +
+                    " case*/                                  \\\r\n        return \"NULL\";              " +
+                    "                               \\\r\n    }                                         " +
+                    "                     \\\r\n    else                                                " +
+                    "           \\\r\n    {                                                             " +
+                    " \\\r\n        return MU_C2(enumName, StringStorage)[value];                 \\\r\n   " +
+                    " }                                                              \\\r\n}            " +
+                    "                                                      \\\r\nint MU_C2(enumName, _Fr" +
+                    "omString)(const char* enumAsString, enumName* destination)  \\\r\n{                " +
+                    "                                                               \\\r\n    if(       " +
+                    "                                                                  \\\r\n        (en" +
+                    "umAsString==NULL) || (destination==NULL)                             \\\r\n    )   " +
+                    "                                                                        \\\r\n    {" +
                     "                                                                           \\\r\n  " +
-                    "  return \"NULL\";                                                                " +
+                    "      return MU_FAILURE;                                                     \\\r\n" +
+                    "    }                                                                           " +
+                    "\\\r\n    else                                                                     " +
+                    "   \\\r\n    {                                                                     " +
+                    "      \\\r\n        size_t i;                                                      " +
+                    "         \\\r\n        for(i=0;i<MU_COUNT_ARG(__VA_ARGS__);i++)                    " +
+                    "               \\\r\n        {                                                     " +
+                    "                  \\\r\n            if(strcmp(enumAsString, MU_C2(enumName, StringS" +
+                    "torage)[i])==0)         \\\r\n            {                                        " +
+                    "                           \\\r\n                *destination = (enumName)i;       " +
+                    "                              \\\r\n                return 0;                      " +
+                    "                                 \\\r\n            }                               " +
+                    "                                    \\\r\n        }                                " +
+                    "                                       \\\r\n        return MU_FAILURE;            " +
+                    "                                         \\\r\n    }                               " +
+                    "                                            \\\r\n}                                " +
+                    "                                               \\\r\n\r\n#define MU_DEFINE_LOCAL_ENUM" +
+                    "(enumName, ...) typedef enum MU_C2(enumName, _TAG) { MU_FOR_EACH_1(MU_DEFINE_ENU" +
+                    "MERATION_CONSTANT, __VA_ARGS__)} enumName; \\\r\nstatic const char* MU_C2(enumName," +
+                    " StringStorage)[MU_COUNT_ARG(__VA_ARGS__)] = {MU_FOR_EACH_1(MU_DEFINE_ENUMERATIO" +
+                    "N_CONSTANT_AS_STRING, __VA_ARGS__)}; \\\r\nstatic const char* MU_C2(enumName,String" +
+                    "s)(enumName value)            \\\r\n{                                              " +
+                    "                    \\\r\n    if((int)value<0 || (int)value>=MU_COUNT_ARG(__VA_ARGS" +
+                    "__))         \\\r\n    {                                                           " +
+                    "   \\\r\n        /*this is an error case*/                                  \\\r\n    " +
+                    "    return \"NULL\";                                             \\\r\n    }         " +
+                    "                                                     \\\r\n    else                " +
+                    "                                           \\\r\n    {                             " +
+                    "                                 \\\r\n        return MU_C2(enumName, StringStorage" +
+                    ")[value];                 \\\r\n    }                                              " +
+                    "                \\\r\n}\r\n\r\n\r\n#define MU_ENUM_TO_STRING(enumName, enumValue) MU_C2(e" +
+                    "numName, Strings)(enumValue)\r\n#define MU_STRING_TO_ENUM(stringValue, enumName, a" +
+                    "ddressOfEnumVariable) MU_C2(enumName, _FromString)(stringValue, addressOfEnumVar" +
+                    "iable)\r\n\r\n#define MU_DEFINE_MICROMOCK_ENUM_TO_STRING(type, ...) MICROMOCK_ENUM_T" +
+                    "O_STRING(type, MU_FOR_EACH_1(MU_DEFINE_ENUMERATION_CONSTANT_AS_WIDESTRING, __VA_" +
+                    "ARGS__));\r\n\r\n#define MU_EMPTY()\r\n#define MACRO_UTILS_DELAY(id) id MU_EMPTY MU_LP" +
+                    "AREN )\r\n\r\n#define MU_DEFINE_ENUMERATION_CONSTANT_2(enumerationConstant, constant" +
+                    "Expression) enumerationConstant = constantExpression,\r\n\r\n#define MU_DECLARE_ENUM" +
+                    "_STRINGS_2(enumIdentifier, ...) extern const char* MU_C2(enumIdentifier,_ToStrin" +
+                    "g)(enumIdentifier enumerationConstant);\r\n\r\n#define MU_DEFINE_ENUM_2(enumIdentifi" +
+                    "er, ... ) typedef enum MU_C2(enumIdentifier, _TAG) {MU_FOR_EACH_2(MU_DEFINE_ENUM" +
+                    "ERATION_CONSTANT_2, __VA_ARGS__)} enumIdentifier; \\\r\n    MU_DECLARE_ENUM_STRINGS" +
+                    "_2(enumIdentifier, __VA_ARGS__)\r\n\r\ntypedef struct ENUM_VALUE_AND_STRING_TAG\r\n{\r\n" +
+                    "    int value;\r\n    const char* valueAsString;\r\n}ENUM_VALUE_AND_STRING;\r\n\r\n#defi" +
+                    "ne MU_DEFINE_ENUM_VALUE_AND_STRING(enumerationConstant, constantExpression) {enu" +
+                    "merationConstant, MU_TOSTRING(enumerationConstant)},\r\n#define MU_DEFINE_ENUM_STR" +
+                    "INGS_2(enumIdentifier, ... ) static const ENUM_VALUE_AND_STRING MU_C2(enumIdenti" +
+                    "fier, _ValuesAndStrings)[MU_DIV2(MU_COUNT_ARG(__VA_ARGS__))] ={MU_FOR_EACH_2(MU_" +
+                    "DEFINE_ENUM_VALUE_AND_STRING, __VA_ARGS__)}; \\\r\nconst char* MU_C2(enumIdentifier" +
+                    ",_ToString)(enumIdentifier value)                                               " +
                     "                                                                                " +
-                    "                                                   \\\r\n}                         " +
+                    "                        \\\r\n{                                                    " +
                     "                                                                                " +
                     "                                                                                " +
-                    "                           \\\r\n\r\n#define MU_ENUM_TO_STRING_2(enumIdentifier, valu" +
-                    "e) MU_C2(enumIdentifier,_ToString)(value)\r\n\r\n#endif /*MACRO_UTILS_H*/\r\n");
+                    "\\\r\n    for(size_t i=0;i<sizeof(MU_C2(enumIdentifier, _ValuesAndStrings))/sizeof(" +
+                    "MU_C2(enumIdentifier, _ValuesAndStrings)[0]);i++)                               " +
+                    "                                                              \\\r\n    {          " +
+                    "                                                                                " +
+                    "                                                                                " +
+                    "                                      \\\r\n        if(MU_C2(enumIdentifier, _Value" +
+                    "sAndStrings)[i].value == (int)value)                                            " +
+                    "                                                                                " +
+                    "                 \\\r\n        {                                                   " +
+                    "                                                                                " +
+                    "                                                                         \\\r\n    " +
+                    "        return MU_C2(enumIdentifier, _ValuesAndStrings)[i].valueAsString;       " +
+                    "                                                                                " +
+                    "                                                    \\\r\n        }                " +
+                    "                                                                                " +
+                    "                                                                                " +
+                    "                            \\\r\n    }                                            " +
+                    "                                                                                " +
+                    "                                                                                " +
+                    "    \\\r\n    return \"NULL\";                                                       " +
+                    "                                                                                " +
+                    "                                                            \\\r\n}                " +
+                    "                                                                                " +
+                    "                                                                                " +
+                    "                                    \\\r\n\r\n#define MU_ENUM_TO_STRING_2(enumIdentif" +
+                    "ier, value) MU_C2(enumIdentifier,_ToString)(value)\r\n\r\n#endif /*MACRO_UTILS_H*/\r\n" +
+                    "");
             return this.GenerationEnvironment.ToString();
         }
     }

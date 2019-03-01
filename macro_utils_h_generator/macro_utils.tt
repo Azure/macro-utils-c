@@ -90,7 +90,7 @@
 #define MU_THE_NTH_ARG(<#for(var i=1;i<=nMacroParameters;i++)#>
 <#{#>P<#=i#>, <#}#> ... ) P<#=nMacroParameters#>
 
-#define _MU_TRIGGER_PARENTHESIS_(...) ,
+#define MU_TRIGGER_PARENTHESIS(...) ,
 
 #define MU_LPAREN (
 
@@ -108,7 +108,7 @@
 #define MU_COUNT_ARG_1(...) 0
 #define MU_COUNT_ARG_0(...) MU_C1(MU_COUNT_1_OR_MORE_ARG(__VA_ARGS__))
 
-#define MU_ISEMPTY(...) MU_C5(MU_DISPTACH_EMPTY_, MU_MORE_THAN_1_ARG(_MU_TRIGGER_PARENTHESIS_ __VA_ARGS__ ()), MU_MORE_THAN_1_ARG(__VA_ARGS__), MU_MORE_THAN_1_ARG(__VA_ARGS__ ()), MU_MORE_THAN_1_ARG(_MU_TRIGGER_PARENTHESIS_ __VA_ARGS__))
+#define MU_ISEMPTY(...) MU_C5(MU_DISPTACH_EMPTY_, MU_MORE_THAN_1_ARG(MU_TRIGGER_PARENTHESIS __VA_ARGS__ ()), MU_MORE_THAN_1_ARG(__VA_ARGS__), MU_MORE_THAN_1_ARG(__VA_ARGS__ ()), MU_MORE_THAN_1_ARG(MU_TRIGGER_PARENTHESIS __VA_ARGS__))
 #define MU_DISPTACH_EMPTY_1000 1
 #define MU_DISPTACH_EMPTY_0000 0
 #define MU_DISPTACH_EMPTY_1100 0
@@ -314,9 +314,9 @@ DO_<#=i-1#>(MACRO, __VA_ARGS__)
 
 
 /* we need some sort of macro that does:
-IF(0, "true", "false") => "false"
-IF(1, "true", "false") => "true"
-IF(X, "true", "false") => "true"
+MU_IF(0, "true", "false") => "false"
+MU_IF(1, "true", "false") => "true"
+MU_IF(X, "true", "false") => "true"
 */
 
 #define MU_INTERNALIF(x) MU_INTERNALIF##x

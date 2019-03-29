@@ -96,6 +96,6 @@ phases:
     displayName: 'Run ctest'
     inputs:
       filename: ctest
-      arguments: '-C "Debug" -V --output-on-failure'
+      arguments: '-C "Debug" -V --output-on-failure -j $(nproc)'
       workingFolder: build
 

@@ -182,17 +182,8 @@ $RECYCLE.BIN/
 # Visual Studio Temporary files
 *.VC.db
 
-# Windows CE build artifacts
-Build.err
-Build.wrn
-Buildx86retail.dat
-*.dat
-
 # Tools EXE that doesn't end up in a typical build directory
 common/tools/macro_utils_h_generator/macro_utils_h_generator.exe
-
-# hg directories should be ignored
-**/hg/
 
 # VS Code stuff
 **/typings/**
@@ -200,8 +191,5 @@ common/tools/macro_utils_h_generator/macro_utils_h_generator.exe
 # C/C++ extension for VS Code
 .browse.VC.db*
 
-build_all/windows/nuget.exe
-
 /cmake
-/build
 macro_utils_h_generator/macro_utils_h_generator.exe

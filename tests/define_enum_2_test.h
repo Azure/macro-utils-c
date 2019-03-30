@@ -8,3 +8,5 @@
 #define TEST3_ENUM_VALUES test3_a, 2, test3_b, 3
 
 MU_DEFINE_ENUM_2(TEST3_ENUM, TEST3_ENUM_VALUES);
+
+extern int run_define_enum_2_test(void);

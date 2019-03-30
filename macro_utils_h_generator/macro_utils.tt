@@ -329,6 +329,24 @@ MU_IF(X, "true", "false") => "true"
 #define MU_IF1(trueBranch, falseBranch) trueBranch
 
 
+/*the following macro want to eat empty arguments from a list */
+/*examples:                                                   */
+/*MU_EAT_EMPTY_ARGS(, , X) expands to X                       */
+
+#define MU_EAT_EMPTY_ARGS0() 
+#define MU_EAT_EMPTY_ARGS1(x) x
+#define MU_EAT_EMPTY_ARGS2_11(a,b)
+#define MU_EAT_EMPTY_ARGS2_10(a,b) b
+#define MU_EAT_EMPTY_ARGS2_01(a,b) a
+#define MU_EAT_EMPTY_ARGS2_00(a,b) a, b
+#define MU_EAT_EMPTY_ARGS2(a, ...) MU_C3(MU_EAT_EMPTY_ARGS2_, MU_ISEMPTY(a), MU_ISEMPTY(__VA_ARGS__))(a, __VA_ARGS__)
+
+<#for(var i=3;i<=nArithmetic;i++){#>
+#define MU_EAT_EMPTY_ARGS<#=i#>(a, ...) MU_EAT_EMPTY_ARGS<#=(i-1)#>(a, MU_EAT_EMPTY_ARGS<#=(i-1)#>(__VA_ARGS__))
+
+<#}#>
+
+#define MU_EAT_EMPTY_ARGS(...) MU_C2(MU_EAT_EMPTY_ARGS, MU_COUNT_ARG(__VA_ARGS__))(__VA_ARGS__)
 
 #define MU_DEFINE_ENUMERATION_CONSTANT(x) x,
 /*MU_DEFINE_ENUM goes to header*/

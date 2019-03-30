@@ -14,7 +14,7 @@
 *.sln.docstates
 
 # Build results
-
+macro_utils_h_generator/.vs/**
 [Dd]ebug/
 [Rr]elease/
 x64/

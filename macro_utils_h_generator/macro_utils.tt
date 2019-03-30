@@ -305,7 +305,7 @@ MACRO(0, __VA_ARGS__)
 <#for(var i=1;i<=nArithmetic;i++){#>
 #define MU_DO_<#=i#>(MACRO, ...) \
 MACRO(<#=i#>, __VA_ARGS__) \
-DO_<#=i-1#>(MACRO, __VA_ARGS__)
+MU_DO_<#=i-1#>(MACRO, __VA_ARGS__)
 
 
 <#}#>

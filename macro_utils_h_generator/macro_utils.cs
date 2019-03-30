@@ -1197,7 +1197,7 @@ MU_IF(X, ""true"", ""false"") => ""true""
 
 /*the following macro want to eat empty arguments from a list */
 /*examples:                                                   */
-/*MU_EAT_EMPTY_ARGS(, , 3) expands to 3                          */
+/*MU_EAT_EMPTY_ARGS(, , X) expands to X                       */
 
 #define MU_EAT_EMPTY_ARGS0() 
 #define MU_EAT_EMPTY_ARGS1(x) x
@@ -1214,30 +1214,107 @@ for(var i=3;i<=nArithmetic;i++){
             
             #line default
             #line hidden
-            this.Write("#define MU_EAT_EMPTY_ARGS");
+            this.Write("#ifdef _MSC_VER\r\n#define MU_EAT_EMPTY_ARGS");
             
-            #line 345 "D:\repos\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 346 "D:\repos\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
-            this.Write("(a, ...) MU_EAT_EMPTY_ARGS");
-            
-            #line 345 "D:\repos\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture((i-1)));
-            
-            #line default
-            #line hidden
-            this.Write("(a, MU_EAT_EMPTY_ARGS");
-            
-            #line 345 "D:\repos\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture((i-1)));
-            
-            #line default
-            #line hidden
-            this.Write("(__VA_ARGS__))\r\n\r\n");
+            this.Write("_11(a, ...) \r\n#define MU_EAT_EMPTY_ARGS");
             
             #line 347 "D:\repos\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(i));
+            
+            #line default
+            #line hidden
+            this.Write("_10(a, ...) MU_EAT_EMPTY_ARGS");
+            
+            #line 347 "D:\repos\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(i-1));
+            
+            #line default
+            #line hidden
+            this.Write(" MU_LPAREN __VA_ARGS__)\r\n#define MU_EAT_EMPTY_ARGS");
+            
+            #line 348 "D:\repos\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(i));
+            
+            #line default
+            #line hidden
+            this.Write("_01(a, ...) a\r\n#define MU_EAT_EMPTY_ARGS");
+            
+            #line 349 "D:\repos\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(i));
+            
+            #line default
+            #line hidden
+            this.Write("_00(a, ...) a, MU_EAT_EMPTY_ARGS");
+            
+            #line 349 "D:\repos\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(i-1));
+            
+            #line default
+            #line hidden
+            this.Write(" MU_LPAREN __VA_ARGS__)\r\n#else\r\n#define MU_EAT_EMPTY_ARGS");
+            
+            #line 351 "D:\repos\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(i));
+            
+            #line default
+            #line hidden
+            this.Write("_11(a, ...) \r\n#define MU_EAT_EMPTY_ARGS");
+            
+            #line 352 "D:\repos\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(i));
+            
+            #line default
+            #line hidden
+            this.Write("_10(a, ...) MU_EAT_EMPTY_ARGS");
+            
+            #line 352 "D:\repos\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(i-1));
+            
+            #line default
+            #line hidden
+            this.Write(" (__VA_ARGS__)\r\n#define MU_EAT_EMPTY_ARGS");
+            
+            #line 353 "D:\repos\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(i));
+            
+            #line default
+            #line hidden
+            this.Write("_01(a, ...) a\r\n#define MU_EAT_EMPTY_ARGS");
+            
+            #line 354 "D:\repos\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(i));
+            
+            #line default
+            #line hidden
+            this.Write("_00(a, ...) a, MU_EAT_EMPTY_ARGS");
+            
+            #line 354 "D:\repos\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(i-1));
+            
+            #line default
+            #line hidden
+            this.Write(" (__VA_ARGS__)\r\n#endif\r\n\r\n#define MU_EAT_EMPTY_ARGS");
+            
+            #line 357 "D:\repos\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(i));
+            
+            #line default
+            #line hidden
+            this.Write("(a, ...) MU_C3(MU_EAT_EMPTY_ARGS");
+            
+            #line 357 "D:\repos\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(i));
+            
+            #line default
+            #line hidden
+            this.Write("_, MU_ISEMPTY(a), MU_ISEMPTY(__VA_ARGS__))(a, __VA_ARGS__)\r\n\r\n");
+            
+            #line 359 "D:\repos\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
 }
             
             #line default

@@ -33,6 +33,7 @@ MU_EAT_EMPTY_ARGS(EMPTY_MACRO, EMPTY_MACRO )
 /*the below line is expected to stop the compiler if it expands to anything... sort of*/
 MU_EAT_EMPTY_ARGS(EMPTY_MACRO, EMPTY_MACRO, EMPTY_MACRO)
 
+
 /*the below line is expected to stop the compiler if it expands to anything... sort of*/
 MU_EAT_EMPTY_ARGS(EMPTY_MACRO, EMPTY_MACRO, )
 
@@ -160,6 +161,7 @@ int run_mu_eat_empty_args_test(void)
         POOR_MANS_ASSERT_AND_RETURN(1 == (sizeof(testerArray_4) / sizeof(testerArray_4[0])));
         POOR_MANS_ASSERT_AND_RETURN(testerArray_4[0] == 42 + 7);
     }
+
 
     /*see that it eats / doesn't eat from 10 arguments*/
     {

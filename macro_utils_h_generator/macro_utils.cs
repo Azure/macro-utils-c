@@ -1210,7 +1210,7 @@ MU_IF(X, ""true"", ""false"") => ""true""
 ");
             
             #line 344 "D:\repos\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
-for(var i=3;i<=nArithmetic;i++){
+for(var i=3;i<=nMacroParameters;i++){
             
             #line default
             #line hidden

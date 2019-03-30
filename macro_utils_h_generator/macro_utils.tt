@@ -339,7 +339,7 @@ MU_IF(X, "true", "false") => "true"
 #define MU_EAT_EMPTY_ARGS2_10(a,b) b
 #define MU_EAT_EMPTY_ARGS2_01(a,b) a
 #define MU_EAT_EMPTY_ARGS2_00(a,b) a, b
-#define MU_EAT_EMPTY_ARGS2(a, ...) MU_C3(MU_EAT_EMPTY_ARGS2_, MU_ISEMPTY(a), MU_ISEMPTY(__VA_ARGS__))(a, __VA_ARGS__)
+#define MU_EAT_EMPTY_ARGS2(a, b) MU_C3(MU_EAT_EMPTY_ARGS2_, MU_ISEMPTY(a), MU_ISEMPTY(b))(a, b)
 
 <#for(var i=3;i<=nArithmetic;i++){#>
 #ifdef _MSC_VER

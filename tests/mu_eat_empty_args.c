@@ -8,7 +8,7 @@
 #include "mu_eat_empty_args.h"
 
 /*this is both a "does it compile"? and a "does it produce the right values?" test*/
-/*this file wants to test just the MOO_EAT_EMPTY_ARGS feature*/
+/*this file wants to test just the MU_EAT_EMPTY_ARGS feature*/
 
 #define EMPTY_MACRO 
 
@@ -32,7 +32,6 @@ MU_EAT_EMPTY_ARGS(EMPTY_MACRO, EMPTY_MACRO )
 
 /*the below line is expected to stop the compiler if it expands to anything... sort of*/
 MU_EAT_EMPTY_ARGS(EMPTY_MACRO, EMPTY_MACRO, EMPTY_MACRO)
-
 
 /*the below line is expected to stop the compiler if it expands to anything... sort of*/
 MU_EAT_EMPTY_ARGS(EMPTY_MACRO, EMPTY_MACRO, )

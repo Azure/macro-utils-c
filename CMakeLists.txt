@@ -2,13 +2,14 @@
 #Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 cmake_minimum_required(VERSION 2.8.11)
+
+if(TARGET azure_macro_utils_c)
+    return()
+endif()
     
 project(azure_macro_utils_c)
 
 set(AZURE_MACRO_UTILS_C_VERSION 1.1.0)
-if(DEFINED MACRO_UTILS_INC_FOLDER)
-    return()
-endif()
 
 option(run_int_tests "set run_int_tests to ON to run int tests (default is OFF)" OFF)
 

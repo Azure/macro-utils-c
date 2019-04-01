@@ -4,7 +4,7 @@
 #include <stdio.h>
 
 #include "define_enum_2_test.h"
-#include "mu_eat_empty_args.h"
+#include "mu_eat_empty_args_test.h"
 
 int main(void)
 {

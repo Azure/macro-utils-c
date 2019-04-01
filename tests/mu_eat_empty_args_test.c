@@ -5,7 +5,7 @@
 
 #include "azure_macro_utils/macro_utils.h"
 
-#include "mu_eat_empty_args.h"
+#include "mu_eat_empty_args_test.h"
 
 /*this is both a "does it compile"? and a "does it produce the right values?" test*/
 /*this file wants to test just the MU_EAT_EMPTY_ARGS feature*/

@@ -333,32 +333,9 @@ MU_IF(X, "true", "false") => "true"
 /*examples:                                                   */
 /*MU_EAT_EMPTY_ARGS(, , X) expands to X                       */
 
-#define MU_EAT_EMPTY_ARGS0() 
-#define MU_EAT_EMPTY_ARGS1(x) x
-#define MU_EAT_EMPTY_ARGS2_11(a,b)
-#define MU_EAT_EMPTY_ARGS2_10(a,b) b
-#define MU_EAT_EMPTY_ARGS2_01(a,b) a
-#define MU_EAT_EMPTY_ARGS2_00(a,b) a, b
-#define MU_EAT_EMPTY_ARGS2(a, b) MU_C3(MU_EAT_EMPTY_ARGS2_, MU_ISEMPTY(a), MU_ISEMPTY(b))(a, b)
-
-<#for(var i=3;i<=nMacroParameters;i++){#>
-#ifdef _MSC_VER
-#define MU_EAT_EMPTY_ARGS<#=i#>_11(a, ...) 
-#define MU_EAT_EMPTY_ARGS<#=i#>_10(a, ...) MU_EAT_EMPTY_ARGS<#=i-1#> MU_LPAREN __VA_ARGS__)
-#define MU_EAT_EMPTY_ARGS<#=i#>_01(a, ...) a
-#define MU_EAT_EMPTY_ARGS<#=i#>_00(a, ...) a, MU_EAT_EMPTY_ARGS<#=i-1#> MU_LPAREN __VA_ARGS__)
-#else
-#define MU_EAT_EMPTY_ARGS<#=i#>_11(a, ...) 
-#define MU_EAT_EMPTY_ARGS<#=i#>_10(a, ...) MU_EAT_EMPTY_ARGS<#=i-1#> (__VA_ARGS__)
-#define MU_EAT_EMPTY_ARGS<#=i#>_01(a, ...) a
-#define MU_EAT_EMPTY_ARGS<#=i#>_00(a, ...) a, MU_EAT_EMPTY_ARGS<#=i-1#> (__VA_ARGS__)
-#endif
-
-#define MU_EAT_EMPTY_ARGS<#=i#>(a, ...) MU_C3(MU_EAT_EMPTY_ARGS<#=i#>_, MU_ISEMPTY(a), MU_ISEMPTY(__VA_ARGS__))(a, __VA_ARGS__)
-
-<#}#>
-
-#define MU_EAT_EMPTY_ARGS(...) MU_C2(MU_EAT_EMPTY_ARGS, MU_COUNT_ARG(__VA_ARGS__))(__VA_ARGS__)
+#define MU_EXPAND_TO_NOTHING(arg)
+#define MU_EAT_EMPTY_ARG(arg_count, arg) MU_IF(MU_ISEMPTY(arg),,arg) MU_IF(MU_ISEMPTY(arg),MU_EXPAND_TO_NOTHING,MU_IFCOMMALOGIC)(MU_DEC(arg_count))
+#define MU_EAT_EMPTY_ARGS(...) MU_FOR_EACH_1_COUNTED(MU_EAT_EMPTY_ARG, __VA_ARGS__)
 
 #define MU_DEFINE_ENUMERATION_CONSTANT(x) x,
 /*MU_DEFINE_ENUM goes to header*/

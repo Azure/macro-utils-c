@@ -1175,258 +1175,126 @@ for(var i=1;i<=nArithmetic;i++){
             
             #line default
             #line hidden
-            this.Write(@"
-#define MU_DO(TIMES, MACRO, ...) MU_C2(MU_DO_, TIMES)(MACRO, __VA_ARGS__)
-
-
-/* we need some sort of macro that does:
-MU_IF(0, ""true"", ""false"") => ""false""
-MU_IF(1, ""true"", ""false"") => ""true""
-MU_IF(X, ""true"", ""false"") => ""true""
-*/
-
-#define MU_INTERNALIF(x) MU_INTERNALIF##x
-#define MU_INTERNALIF0
-
-#define MU_ISZERO(x) MU_COUNT_ARG(MU_INTERNALIF(x))
-
-#define MU_IF(condition, trueBranch, falseBranch) MU_C2(MU_IF,MU_ISZERO(condition))(trueBranch, falseBranch)
-#define MU_IF0(trueBranch, falseBranch) falseBranch
-#define MU_IF1(trueBranch, falseBranch) trueBranch
-
-
-/*the following macro want to eat empty arguments from a list */
-/*examples:                                                   */
-/*MU_EAT_EMPTY_ARGS(, , X) expands to X                       */
-
-#define MU_EAT_EMPTY_ARGS0() 
-#define MU_EAT_EMPTY_ARGS1(x) x
-#define MU_EAT_EMPTY_ARGS2_11(a,b)
-#define MU_EAT_EMPTY_ARGS2_10(a,b) b
-#define MU_EAT_EMPTY_ARGS2_01(a,b) a
-#define MU_EAT_EMPTY_ARGS2_00(a,b) a, b
-#define MU_EAT_EMPTY_ARGS2(a, b) MU_C3(MU_EAT_EMPTY_ARGS2_, MU_ISEMPTY(a), MU_ISEMPTY(b))(a, b)
-
-");
-            
-            #line 344 "D:\repos\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
-for(var i=3;i<=nMacroParameters;i++){
-            
-            #line default
-            #line hidden
-            this.Write("#ifdef _MSC_VER\r\n#define MU_EAT_EMPTY_ARGS");
-            
-            #line 346 "D:\repos\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(i));
-            
-            #line default
-            #line hidden
-            this.Write("_11(a, ...) \r\n#define MU_EAT_EMPTY_ARGS");
-            
-            #line 347 "D:\repos\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(i));
-            
-            #line default
-            #line hidden
-            this.Write("_10(a, ...) MU_EAT_EMPTY_ARGS");
-            
-            #line 347 "D:\repos\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(i-1));
-            
-            #line default
-            #line hidden
-            this.Write(" MU_LPAREN __VA_ARGS__)\r\n#define MU_EAT_EMPTY_ARGS");
-            
-            #line 348 "D:\repos\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(i));
-            
-            #line default
-            #line hidden
-            this.Write("_01(a, ...) a\r\n#define MU_EAT_EMPTY_ARGS");
-            
-            #line 349 "D:\repos\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(i));
-            
-            #line default
-            #line hidden
-            this.Write("_00(a, ...) a, MU_EAT_EMPTY_ARGS");
-            
-            #line 349 "D:\repos\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(i-1));
-            
-            #line default
-            #line hidden
-            this.Write(" MU_LPAREN __VA_ARGS__)\r\n#else\r\n#define MU_EAT_EMPTY_ARGS");
-            
-            #line 351 "D:\repos\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(i));
-            
-            #line default
-            #line hidden
-            this.Write("_11(a, ...) \r\n#define MU_EAT_EMPTY_ARGS");
-            
-            #line 352 "D:\repos\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(i));
-            
-            #line default
-            #line hidden
-            this.Write("_10(a, ...) MU_EAT_EMPTY_ARGS");
-            
-            #line 352 "D:\repos\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(i-1));
-            
-            #line default
-            #line hidden
-            this.Write(" (__VA_ARGS__)\r\n#define MU_EAT_EMPTY_ARGS");
-            
-            #line 353 "D:\repos\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(i));
-            
-            #line default
-            #line hidden
-            this.Write("_01(a, ...) a\r\n#define MU_EAT_EMPTY_ARGS");
-            
-            #line 354 "D:\repos\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(i));
-            
-            #line default
-            #line hidden
-            this.Write("_00(a, ...) a, MU_EAT_EMPTY_ARGS");
-            
-            #line 354 "D:\repos\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(i-1));
-            
-            #line default
-            #line hidden
-            this.Write(" (__VA_ARGS__)\r\n#endif\r\n\r\n#define MU_EAT_EMPTY_ARGS");
-            
-            #line 357 "D:\repos\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(i));
-            
-            #line default
-            #line hidden
-            this.Write("(a, ...) MU_C3(MU_EAT_EMPTY_ARGS");
-            
-            #line 357 "D:\repos\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(i));
-            
-            #line default
-            #line hidden
-            this.Write("_, MU_ISEMPTY(a), MU_ISEMPTY(__VA_ARGS__))(a, __VA_ARGS__)\r\n\r\n");
-            
-            #line 359 "D:\repos\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
-}
-            
-            #line default
-            #line hidden
-            this.Write("\r\n#define MU_EAT_EMPTY_ARGS(...) MU_C2(MU_EAT_EMPTY_ARGS, MU_COUNT_ARG(__VA_ARGS_" +
-                    "_))(__VA_ARGS__)\r\n\r\n#define MU_DEFINE_ENUMERATION_CONSTANT(x) x,\r\n/*MU_DEFINE_EN" +
-                    "UM goes to header*/\r\n#define MU_DEFINE_ENUM(enumName, ...) typedef enum MU_C2(en" +
-                    "umName, _TAG) { MU_FOR_EACH_1(MU_DEFINE_ENUMERATION_CONSTANT, __VA_ARGS__)} enum" +
-                    "Name; \\\r\n    extern const char* MU_C2(enumName,Strings)(enumName value); \\\r\n    " +
-                    "extern int MU_C2(enumName, _FromString)(const char* enumAsString, enumName* dest" +
-                    "ination);\r\n\r\n\r\n#define MU_DEFINE_ENUMERATION_CONSTANT_AS_WIDESTRING(x) MU_C2(L, " +
-                    "MU_TOSTRING(x)) , \r\n#define MU_DEFINE_ENUMERATION_CONSTANT_AS_STRING(x) MU_TOSTR" +
-                    "ING(x) , \r\n/*MU_DEFINE_ENUM_STRINGS goes to .c*/\r\n#define MU_DEFINE_ENUM_STRINGS" +
-                    "(enumName, ...) const char* MU_C2(enumName, StringStorage)[MU_COUNT_ARG(__VA_ARG" +
-                    "S__)] = {MU_FOR_EACH_1(MU_DEFINE_ENUMERATION_CONSTANT_AS_STRING, __VA_ARGS__)}; " +
-                    "\\\r\nconst char* MU_C2(enumName,Strings)(enumName value)                   \\\r\n{   " +
-                    "                                                               \\\r\n    if((int)va" +
-                    "lue<0 || (int)value>=MU_COUNT_ARG(__VA_ARGS__))         \\\r\n    {                " +
-                    "                                              \\\r\n        /*this is an error case" +
-                    "*/                                  \\\r\n        return \"NULL\";                   " +
-                    "                          \\\r\n    }                                              " +
-                    "                \\\r\n    else                                                     " +
-                    "      \\\r\n    {                                                              \\\r\n " +
-                    "       return MU_C2(enumName, StringStorage)[value];                 \\\r\n    }   " +
-                    "                                                           \\\r\n}                 " +
-                    "                                                 \\\r\nint MU_C2(enumName, _FromStr" +
-                    "ing)(const char* enumAsString, enumName* destination)  \\\r\n{                     " +
-                    "                                                          \\\r\n    if(            " +
-                    "                                                             \\\r\n        (enumAsS" +
-                    "tring==NULL) || (destination==NULL)                             \\\r\n    )        " +
-                    "                                                                   \\\r\n    {     " +
-                    "                                                                      \\\r\n       " +
-                    " return MU_FAILURE;                                                     \\\r\n    }" +
-                    "                                                                           \\\r\n  " +
-                    "  else                                                                        \\\r" +
-                    "\n    {                                                                          " +
-                    " \\\r\n        size_t i;                                                           " +
-                    "    \\\r\n        for(i=0;i<MU_COUNT_ARG(__VA_ARGS__);i++)                         " +
-                    "          \\\r\n        {                                                          " +
-                    "             \\\r\n            if(strcmp(enumAsString, MU_C2(enumName, StringStorag" +
-                    "e)[i])==0)         \\\r\n            {                                             " +
-                    "                      \\\r\n                *destination = (enumName)i;            " +
-                    "                         \\\r\n                return 0;                           " +
-                    "                            \\\r\n            }                                    " +
-                    "                               \\\r\n        }                                     " +
-                    "                                  \\\r\n        return MU_FAILURE;                 " +
-                    "                                    \\\r\n    }                                    " +
-                    "                                       \\\r\n}                                     " +
-                    "                                          \\\r\n\r\n#define MU_DEFINE_LOCAL_ENUM(enum" +
-                    "Name, ...) typedef enum MU_C2(enumName, _TAG) { MU_FOR_EACH_1(MU_DEFINE_ENUMERAT" +
-                    "ION_CONSTANT, __VA_ARGS__)} enumName; \\\r\nstatic const char* MU_C2(enumName, Stri" +
-                    "ngStorage)[MU_COUNT_ARG(__VA_ARGS__)] = {MU_FOR_EACH_1(MU_DEFINE_ENUMERATION_CON" +
-                    "STANT_AS_STRING, __VA_ARGS__)}; \\\r\nstatic const char* MU_C2(enumName,Strings)(en" +
-                    "umName value)            \\\r\n{                                                   " +
-                    "               \\\r\n    if((int)value<0 || (int)value>=MU_COUNT_ARG(__VA_ARGS__)) " +
-                    "        \\\r\n    {                                                              \\\r" +
-                    "\n        /*this is an error case*/                                  \\\r\n        r" +
-                    "eturn \"NULL\";                                             \\\r\n    }              " +
-                    "                                                \\\r\n    else                     " +
-                    "                                      \\\r\n    {                                  " +
-                    "                            \\\r\n        return MU_C2(enumName, StringStorage)[val" +
-                    "ue];                 \\\r\n    }                                                   " +
-                    "           \\\r\n}\r\n\r\n\r\n#define MU_ENUM_TO_STRING(enumName, enumValue) MU_C2(enumNa" +
-                    "me, Strings)(enumValue)\r\n#define MU_STRING_TO_ENUM(stringValue, enumName, addres" +
-                    "sOfEnumVariable) MU_C2(enumName, _FromString)(stringValue, addressOfEnumVariable" +
-                    ")\r\n\r\n#define MU_DEFINE_MICROMOCK_ENUM_TO_STRING(type, ...) MICROMOCK_ENUM_TO_STR" +
-                    "ING(type, MU_FOR_EACH_1(MU_DEFINE_ENUMERATION_CONSTANT_AS_WIDESTRING, __VA_ARGS_" +
-                    "_));\r\n\r\n#define MU_EMPTY()\r\n#define MACRO_UTILS_DELAY(id) id MU_EMPTY MU_LPAREN " +
-                    ")\r\n\r\n#define MU_DEFINE_ENUMERATION_CONSTANT_2(enumerationConstant, constantExpre" +
-                    "ssion) enumerationConstant = constantExpression,\r\n\r\n#define MU_DECLARE_ENUM_STRI" +
-                    "NGS_2(enumIdentifier, ...) extern const char* MU_C2(enumIdentifier,_ToString)(en" +
-                    "umIdentifier enumerationConstant);\r\n\r\n#define MU_DEFINE_ENUM_2(enumIdentifier, ." +
-                    ".. ) typedef enum MU_C2(enumIdentifier, _TAG) {MU_FOR_EACH_2(MU_DEFINE_ENUMERATI" +
-                    "ON_CONSTANT_2, __VA_ARGS__)} enumIdentifier; \\\r\n    MU_DECLARE_ENUM_STRINGS_2(en" +
-                    "umIdentifier, __VA_ARGS__)\r\n\r\ntypedef struct ENUM_VALUE_AND_STRING_TAG\r\n{\r\n    i" +
-                    "nt value;\r\n    const char* valueAsString;\r\n}ENUM_VALUE_AND_STRING;\r\n\r\n#define MU" +
-                    "_DEFINE_ENUM_VALUE_AND_STRING(enumerationConstant, constantExpression) {enumerat" +
-                    "ionConstant, MU_TOSTRING(enumerationConstant)},\r\n#define MU_DEFINE_ENUM_STRINGS_" +
-                    "2(enumIdentifier, ... ) static const ENUM_VALUE_AND_STRING MU_C2(enumIdentifier," +
-                    " _ValuesAndStrings)[MU_DIV2(MU_COUNT_ARG(__VA_ARGS__))] ={MU_FOR_EACH_2(MU_DEFIN" +
-                    "E_ENUM_VALUE_AND_STRING, __VA_ARGS__)}; \\\r\nconst char* MU_C2(enumIdentifier,_ToS" +
-                    "tring)(enumIdentifier value)                                                    " +
+            this.Write("\r\n#define MU_DO(TIMES, MACRO, ...) MU_C2(MU_DO_, TIMES)(MACRO, __VA_ARGS__)\r\n\r\n\r\n" +
+                    "/* we need some sort of macro that does:\r\nMU_IF(0, \"true\", \"false\") => \"false\"\r\n" +
+                    "MU_IF(1, \"true\", \"false\") => \"true\"\r\nMU_IF(X, \"true\", \"false\") => \"true\"\r\n*/\r\n\r\n" +
+                    "#define MU_INTERNALIF(x) MU_INTERNALIF##x\r\n#define MU_INTERNALIF0\r\n\r\n#define MU_" +
+                    "ISZERO(x) MU_COUNT_ARG(MU_INTERNALIF(x))\r\n\r\n#define MU_IF(condition, trueBranch," +
+                    " falseBranch) MU_C2(MU_IF,MU_ISZERO(condition))(trueBranch, falseBranch)\r\n#defin" +
+                    "e MU_IF0(trueBranch, falseBranch) falseBranch\r\n#define MU_IF1(trueBranch, falseB" +
+                    "ranch) trueBranch\r\n\r\n\r\n/*the following macro want to eat empty arguments from a " +
+                    "list */\r\n/*examples:                                                   */\r\n/*MU_" +
+                    "EAT_EMPTY_ARGS(, , X) expands to X                       */\r\n\r\n#define MU_EXPAND" +
+                    "_TO_NOTHING(arg)\n#define MU_EAT_EMPTY_ARG(arg_count, arg) MU_IF(MU_ISEMPTY(arg)," +
+                    ",arg) MU_IF(MU_ISEMPTY(arg),MU_EXPAND_TO_NOTHING,MU_IFCOMMALOGIC)(MU_DEC(arg_cou" +
+                    "nt))\n#define MU_EAT_EMPTY_ARGS(...) MU_FOR_EACH_1_COUNTED(MU_EAT_EMPTY_ARG, __VA" +
+                    "_ARGS__)\r\n\r\n#define MU_DEFINE_ENUMERATION_CONSTANT(x) x,\r\n/*MU_DEFINE_ENUM goes " +
+                    "to header*/\r\n#define MU_DEFINE_ENUM(enumName, ...) typedef enum MU_C2(enumName, " +
+                    "_TAG) { MU_FOR_EACH_1(MU_DEFINE_ENUMERATION_CONSTANT, __VA_ARGS__)} enumName; \\\r" +
+                    "\n    extern const char* MU_C2(enumName,Strings)(enumName value); \\\r\n    extern i" +
+                    "nt MU_C2(enumName, _FromString)(const char* enumAsString, enumName* destination)" +
+                    ";\r\n\r\n\r\n#define MU_DEFINE_ENUMERATION_CONSTANT_AS_WIDESTRING(x) MU_C2(L, MU_TOSTR" +
+                    "ING(x)) , \r\n#define MU_DEFINE_ENUMERATION_CONSTANT_AS_STRING(x) MU_TOSTRING(x) ," +
+                    " \r\n/*MU_DEFINE_ENUM_STRINGS goes to .c*/\r\n#define MU_DEFINE_ENUM_STRINGS(enumNam" +
+                    "e, ...) const char* MU_C2(enumName, StringStorage)[MU_COUNT_ARG(__VA_ARGS__)] = " +
+                    "{MU_FOR_EACH_1(MU_DEFINE_ENUMERATION_CONSTANT_AS_STRING, __VA_ARGS__)}; \\\r\nconst" +
+                    " char* MU_C2(enumName,Strings)(enumName value)                   \\\r\n{           " +
+                    "                                                       \\\r\n    if((int)value<0 ||" +
+                    " (int)value>=MU_COUNT_ARG(__VA_ARGS__))         \\\r\n    {                        " +
+                    "                                      \\\r\n        /*this is an error case*/      " +
+                    "                            \\\r\n        return \"NULL\";                           " +
+                    "                  \\\r\n    }                                                      " +
+                    "        \\\r\n    else                                                           \\\r" +
+                    "\n    {                                                              \\\r\n        r" +
+                    "eturn MU_C2(enumName, StringStorage)[value];                 \\\r\n    }           " +
+                    "                                                   \\\r\n}                         " +
+                    "                                         \\\r\nint MU_C2(enumName, _FromString)(con" +
+                    "st char* enumAsString, enumName* destination)  \\\r\n{                             " +
+                    "                                                  \\\r\n    if(                    " +
+                    "                                                     \\\r\n        (enumAsString==N" +
+                    "ULL) || (destination==NULL)                             \\\r\n    )                " +
+                    "                                                           \\\r\n    {             " +
+                    "                                                              \\\r\n        return " +
+                    "MU_FAILURE;                                                     \\\r\n    }        " +
+                    "                                                                   \\\r\n    else  " +
+                    "                                                                      \\\r\n    {  " +
+                    "                                                                         \\\r\n    " +
+                    "    size_t i;                                                               \\\r\n " +
+                    "       for(i=0;i<MU_COUNT_ARG(__VA_ARGS__);i++)                                 " +
+                    "  \\\r\n        {                                                                  " +
+                    "     \\\r\n            if(strcmp(enumAsString, MU_C2(enumName, StringStorage)[i])==" +
+                    "0)         \\\r\n            {                                                     " +
+                    "              \\\r\n                *destination = (enumName)i;                    " +
+                    "                 \\\r\n                return 0;                                   " +
+                    "                    \\\r\n            }                                            " +
+                    "                       \\\r\n        }                                             " +
+                    "                          \\\r\n        return MU_FAILURE;                         " +
+                    "                            \\\r\n    }                                            " +
+                    "                               \\\r\n}                                             " +
+                    "                                  \\\r\n\r\n#define MU_DEFINE_LOCAL_ENUM(enumName, .." +
+                    ".) typedef enum MU_C2(enumName, _TAG) { MU_FOR_EACH_1(MU_DEFINE_ENUMERATION_CONS" +
+                    "TANT, __VA_ARGS__)} enumName; \\\r\nstatic const char* MU_C2(enumName, StringStorag" +
+                    "e)[MU_COUNT_ARG(__VA_ARGS__)] = {MU_FOR_EACH_1(MU_DEFINE_ENUMERATION_CONSTANT_AS" +
+                    "_STRING, __VA_ARGS__)}; \\\r\nstatic const char* MU_C2(enumName,Strings)(enumName v" +
+                    "alue)            \\\r\n{                                                           " +
+                    "       \\\r\n    if((int)value<0 || (int)value>=MU_COUNT_ARG(__VA_ARGS__))         " +
+                    "\\\r\n    {                                                              \\\r\n       " +
+                    " /*this is an error case*/                                  \\\r\n        return \"N" +
+                    "ULL\";                                             \\\r\n    }                      " +
+                    "                                        \\\r\n    else                             " +
+                    "                              \\\r\n    {                                          " +
+                    "                    \\\r\n        return MU_C2(enumName, StringStorage)[value];    " +
+                    "             \\\r\n    }                                                           " +
+                    "   \\\r\n}\r\n\r\n\r\n#define MU_ENUM_TO_STRING(enumName, enumValue) MU_C2(enumName, Stri" +
+                    "ngs)(enumValue)\r\n#define MU_STRING_TO_ENUM(stringValue, enumName, addressOfEnumV" +
+                    "ariable) MU_C2(enumName, _FromString)(stringValue, addressOfEnumVariable)\r\n\r\n#de" +
+                    "fine MU_DEFINE_MICROMOCK_ENUM_TO_STRING(type, ...) MICROMOCK_ENUM_TO_STRING(type" +
+                    ", MU_FOR_EACH_1(MU_DEFINE_ENUMERATION_CONSTANT_AS_WIDESTRING, __VA_ARGS__));\r\n\r\n" +
+                    "#define MU_EMPTY()\r\n#define MACRO_UTILS_DELAY(id) id MU_EMPTY MU_LPAREN )\r\n\r\n#de" +
+                    "fine MU_DEFINE_ENUMERATION_CONSTANT_2(enumerationConstant, constantExpression) e" +
+                    "numerationConstant = constantExpression,\r\n\r\n#define MU_DECLARE_ENUM_STRINGS_2(en" +
+                    "umIdentifier, ...) extern const char* MU_C2(enumIdentifier,_ToString)(enumIdenti" +
+                    "fier enumerationConstant);\r\n\r\n#define MU_DEFINE_ENUM_2(enumIdentifier, ... ) typ" +
+                    "edef enum MU_C2(enumIdentifier, _TAG) {MU_FOR_EACH_2(MU_DEFINE_ENUMERATION_CONST" +
+                    "ANT_2, __VA_ARGS__)} enumIdentifier; \\\r\n    MU_DECLARE_ENUM_STRINGS_2(enumIdenti" +
+                    "fier, __VA_ARGS__)\r\n\r\ntypedef struct ENUM_VALUE_AND_STRING_TAG\r\n{\r\n    int value" +
+                    ";\r\n    const char* valueAsString;\r\n}ENUM_VALUE_AND_STRING;\r\n\r\n#define MU_DEFINE_" +
+                    "ENUM_VALUE_AND_STRING(enumerationConstant, constantExpression) {enumerationConst" +
+                    "ant, MU_TOSTRING(enumerationConstant)},\r\n#define MU_DEFINE_ENUM_STRINGS_2(enumId" +
+                    "entifier, ... ) static const ENUM_VALUE_AND_STRING MU_C2(enumIdentifier, _Values" +
+                    "AndStrings)[MU_DIV2(MU_COUNT_ARG(__VA_ARGS__))] ={MU_FOR_EACH_2(MU_DEFINE_ENUM_V" +
+                    "ALUE_AND_STRING, __VA_ARGS__)}; \\\r\nconst char* MU_C2(enumIdentifier,_ToString)(e" +
+                    "numIdentifier value)                                                            " +
                     "                                                                                " +
-                    "                   \\\r\n{                                                         " +
+                    "           \\\r\n{                                                                 " +
                     "                                                                                " +
-                    "                                                                           \\\r\n  " +
-                    "  for(size_t i=0;i<sizeof(MU_C2(enumIdentifier, _ValuesAndStrings))/sizeof(MU_C2" +
-                    "(enumIdentifier, _ValuesAndStrings)[0]);i++)                                    " +
-                    "                                                         \\\r\n    {               " +
+                    "                                                                   \\\r\n    for(si" +
+                    "ze_t i=0;i<sizeof(MU_C2(enumIdentifier, _ValuesAndStrings))/sizeof(MU_C2(enumIde" +
+                    "ntifier, _ValuesAndStrings)[0]);i++)                                            " +
+                    "                                                 \\\r\n    {                       " +
                     "                                                                                " +
                     "                                                                                " +
-                    "                                 \\\r\n        if(MU_C2(enumIdentifier, _ValuesAndS" +
-                    "trings)[i].value == (int)value)                                                 " +
+                    "                         \\\r\n        if(MU_C2(enumIdentifier, _ValuesAndStrings)[" +
+                    "i].value == (int)value)                                                         " +
                     "                                                                                " +
-                    "            \\\r\n        {                                                        " +
+                    "    \\\r\n        {                                                                " +
                     "                                                                                " +
-                    "                                                                    \\\r\n         " +
-                    "   return MU_C2(enumIdentifier, _ValuesAndStrings)[i].valueAsString;            " +
+                    "                                                            \\\r\n            retur" +
+                    "n MU_C2(enumIdentifier, _ValuesAndStrings)[i].valueAsString;                    " +
                     "                                                                                " +
-                    "                                               \\\r\n        }                     " +
-                    "                                                                                " +
-                    "                                                                                " +
-                    "                       \\\r\n    }                                                 " +
-                    "                                                                                " +
-                    "                                                                               \\" +
-                    "\r\n    return \"NULL\";                                                            " +
-                    "                                                                                " +
-                    "                                                       \\\r\n}                     " +
+                    "                                       \\\r\n        }                             " +
                     "                                                                                " +
                     "                                                                                " +
-                    "                               \\\r\n\r\n#define MU_ENUM_TO_STRING_2(enumIdentifier, " +
-                    "value) MU_C2(enumIdentifier,_ToString)(value)\r\n\r\n#endif /*MACRO_UTILS_H*/\r\n");
+                    "               \\\r\n    }                                                         " +
+                    "                                                                                " +
+                    "                                                                       \\\r\n    re" +
+                    "turn \"NULL\";                                                                    " +
+                    "                                                                                " +
+                    "                                               \\\r\n}                             " +
+                    "                                                                                " +
+                    "                                                                                " +
+                    "                       \\\r\n\r\n#define MU_ENUM_TO_STRING_2(enumIdentifier, value) M" +
+                    "U_C2(enumIdentifier,_ToString)(value)\r\n\r\n#endif /*MACRO_UTILS_H*/\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }

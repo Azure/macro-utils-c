@@ -12,14 +12,14 @@ int main(void)
     result = run_define_enum_2_test();
     if (result != 0)
     {
-        printf("failures in run_define_enum_2_test\n");
+        (void)printf("failures in run_define_enum_2_test\n");
         return result;
     }
 
     result = run_mu_eat_empty_args_test();
     if (result != 0)
     {
-        printf("failures in run_mu_eat_empty_args_test\n");
+        (void)printf("failures in run_mu_eat_empty_args_test\n");
         return result;
     }
 

@@ -12696,6 +12696,13 @@ MU_IF(X, "true", "false") => "true"
 #define MU_IF1(trueBranch, falseBranch) trueBranch
 
 
+/*the following macro want to eat empty arguments from a list */
+/*examples:                                                   */
+/*MU_EAT_EMPTY_ARGS(, , X) expands to X                       */
+
+#define MU_EXPAND_TO_NOTHING(arg)
+#define MU_EAT_EMPTY_ARG(arg_count, arg) MU_IF(MU_ISEMPTY(arg),,arg) MU_IF(MU_ISEMPTY(arg),MU_EXPAND_TO_NOTHING,MU_IFCOMMALOGIC)(MU_DEC(arg_count))
+#define MU_EAT_EMPTY_ARGS(...) MU_FOR_EACH_1_COUNTED(MU_EAT_EMPTY_ARG, __VA_ARGS__)
 
 #define MU_DEFINE_ENUMERATION_CONSTANT(x) x,
 /*MU_DEFINE_ENUM goes to header*/

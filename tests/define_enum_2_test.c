@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-#include <stdio.h>
+#include "test_helper.h"
 
 #include "azure_macro_utils/macro_utils.h"
 
@@ -24,34 +24,14 @@ int run_define_enum_2_test(void)
     (void)someUnusedVariable;
 
     const char* TEST2_value_0 = MU_ENUM_TO_STRING_2(TEST3_ENUM, 0);
-    if (TEST2_value_0 == NULL)
-    {
-        (void)printf("TEST2_ENUM should not return NULL\n");
-        result++;
-    }
-    else
-    {
-        if (strcmp("NULL", TEST2_value_0) != 0)
-        {
-            (void)printf("MU_ENUM_TO_STRING_2(TEST2_ENUM, 0) should return \"NULL\"\n");
-            result++;
-        }
-    }
+
+    POOR_MANS_ASSERT(TEST2_value_0 != NULL);
+    POOR_MANS_ASSERT(strcmp("NULL", TEST2_value_0) == 0);
+
 
     const char* TEST3_value_2 = MU_ENUM_TO_STRING_2(TEST3_ENUM, 2);
-    if (TEST3_value_2 == NULL)
-    {
-        (void)printf("TEST3_ENUM should know how to compute the string for <<2>>, but it did not\n");
-        result++;
-    }
-    else
-    {
-        if (strcmp("test3_a", TEST3_value_2) != 0)
-        {
-            (void)printf("MU_ENUM_TO_STRING_2(TEST3_ENUM, 2) computed some wrong value %s while %s was expected", TEST3_value_2, "test3_a" "\n");
-            result++;
-        }
-    }
+    POOR_MANS_ASSERT(TEST3_value_2 != NULL);
+    POOR_MANS_ASSERT(strcmp("test3_a", TEST3_value_2) == 0);
 
     return result;
 }

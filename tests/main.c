@@ -12,7 +12,7 @@ int main(void)
 {
     int result;
     result = run_define_enum_2_test();
-    POOR_MANS_ASSERT(result == 1);
+    POOR_MANS_ASSERT(result == 0);
     
     result = run_mu_eat_empty_args_test();
     POOR_MANS_ASSERT(result == 0);

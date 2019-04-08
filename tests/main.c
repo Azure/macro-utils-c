@@ -3,6 +3,8 @@
 
 #include <stdio.h>
 
+#include "test_helper.h"
+
 #include "define_enum_2_test.h"
 #include "mu_eat_empty_args_test.h"
 
@@ -10,18 +12,10 @@ int main(void)
 {
     int result;
     result = run_define_enum_2_test();
-    if (result != 0)
-    {
-        (void)printf("failures in run_define_enum_2_test\n");
-        return result;
-    }
-
+    POOR_MANS_ASSERT(result == 1);
+    
     result = run_mu_eat_empty_args_test();
-    if (result != 0)
-    {
-        (void)printf("failures in run_mu_eat_empty_args_test\n");
-        return result;
-    }
+    POOR_MANS_ASSERT(result == 0);
 
     return 0;
 }

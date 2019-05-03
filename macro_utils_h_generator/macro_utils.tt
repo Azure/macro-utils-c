@@ -23,8 +23,13 @@
 #ifndef MACRO_UTILS_H
 #define MACRO_UTILS_H
 
+#ifdef __cplusplus
+#include <cstring>
+#include <cstddef>
+#else
 #include <string.h>
 #include <stddef.h>
+#endif
 
 #if (defined OPTIMIZE_RETURN_CODES)
     #define MU_FAILURE 1

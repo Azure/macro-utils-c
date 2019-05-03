@@ -17,6 +17,7 @@
 #ifdef __cplusplus
 #include <cstring>
 #include <cstddef>
+extern "C" {
 #else
 #include <string.h>
 #include <stddef.h>
@@ -12774,8 +12775,6 @@ static const char* MU_C2(enumName,Strings)(enumName value)            \
 #define MU_ENUM_TO_STRING(enumName, enumValue) MU_C2(enumName, Strings)(enumValue)
 #define MU_STRING_TO_ENUM(stringValue, enumName, addressOfEnumVariable) MU_C2(enumName, _FromString)(stringValue, addressOfEnumVariable)
 
-#define MU_DEFINE_MICROMOCK_ENUM_TO_STRING(type, ...) MICROMOCK_ENUM_TO_STRING(type, MU_FOR_EACH_1(MU_DEFINE_ENUMERATION_CONSTANT_AS_WIDESTRING, __VA_ARGS__));
-
 #define MU_EMPTY()
 #define MACRO_UTILS_DELAY(id) id MU_EMPTY MU_LPAREN )
 
@@ -12807,5 +12806,9 @@ const char* MU_C2(enumIdentifier,_ToString)(enumIdentifier value)               
 }                                                                                                                                                                                                                    \
 
 #define MU_ENUM_TO_STRING_2(enumIdentifier, value) MU_C2(enumIdentifier,_ToString)(value)
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /*MACRO_UTILS_H*/

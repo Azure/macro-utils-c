@@ -2,11 +2,10 @@ name: $(BuildID)_$(BuildDefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd)$(Re
 resources:
 - repo: self
   clean: true
-phases:
-
-- phase: windowsx86
+jobs:
+- job: windowsx86
   displayName: 'Build Windows x86'
-  queue:
+  pool:
     name: Hosted VS2017
     demands:
     - Cmd
@@ -40,9 +39,9 @@ phases:
       arguments: '-C "RelWithDebInfo" -V --output-on-failure'
       workingFolder: build
 
-- phase: windowsx64
+- job: windowsx64
   displayName: 'Build Windows x64'
-  queue:
+  pool:
     name: Hosted VS2017
     demands:
     - Cmd
@@ -77,9 +76,9 @@ phases:
       workingFolder: build
 
 
-- phase: ubuntu1604
+- job: ubuntu1604
   displayName: 'Build Linux Ubuntu 1604'
-  queue:
+  pool:
     name: Hosted Ubuntu 1604
 
   steps:

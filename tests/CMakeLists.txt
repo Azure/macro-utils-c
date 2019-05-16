@@ -8,6 +8,7 @@ include_directories(${MACRO_UTILS_INC_FOLDER})
 
 set(macro_utils_int_tests_c_files
     define_enum_2_test.c
+    define_struct_test.c
     mu_eat_empty_args_test.c
     main.c
 )
@@ -17,6 +18,7 @@ set(macro_utils_int_tests_h_files
     ${MACRO_UTILS_INC_FOLDER}/azure_macro_utils/macro_utils.h
     mu_eat_empty_args_test.h
     define_enum_2_test.h
+    define_struct_test.h
 )
     
 add_executable(macro_utils_int_tests ${macro_utils_int_tests_c_files} ${macro_utils_int_tests_h_files})

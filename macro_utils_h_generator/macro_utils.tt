@@ -443,7 +443,7 @@ const char* MU_C2(enumIdentifier,_ToString)(enumIdentifier value)               
 #define MU_DEFINE_STRUCT_FIELD(fieldType, fieldName) fieldType fieldName;
 
 /*MU_DEFINE_STRUCT allows creating a struct typedef based on a list of fields*/
-#define MU_DEFINE_STRUCT(structName, ...) typedef struct MU_C2(structName, _TAG) { MU_FOR_EACH_2(MU_DEFINE_STRUCT_FIELD, __VA_ARGS__)} structName; \
+#define MU_DEFINE_STRUCT(structName, ...) typedef struct MU_C2(structName, _TAG) { MU_FOR_EACH_2(MU_DEFINE_STRUCT_FIELD, __VA_ARGS__)} structName;
 
 #ifdef __cplusplus
 }

@@ -6,6 +6,7 @@
 #include "test_helper.h"
 
 #include "define_enum_2_test.h"
+#include "define_struct_test.h"
 #include "mu_eat_empty_args_test.h"
 
 int main(void)
@@ -15,6 +16,9 @@ int main(void)
     POOR_MANS_ASSERT(result == 0);
     
     result = run_mu_eat_empty_args_test();
+    POOR_MANS_ASSERT(result == 0);
+
+    result = run_define_struct_tests();
     POOR_MANS_ASSERT(result == 0);
 
     return 0;

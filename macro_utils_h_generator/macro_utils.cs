@@ -1302,8 +1302,8 @@ for(var i=1;i<=nArithmetic;i++){
                     ", fieldName) fieldType fieldName;\r\n\r\n/*MU_DEFINE_STRUCT allows creating a struct" +
                     " typedef based on a list of fields*/\r\n#define MU_DEFINE_STRUCT(structName, ...) " +
                     "typedef struct MU_C2(structName, _TAG) { MU_FOR_EACH_2(MU_DEFINE_STRUCT_FIELD, _" +
-                    "_VA_ARGS__)} structName; \\\r\n\r\n#ifdef __cplusplus\r\n}\r\n#endif\r\n\r\n#endif /*MACRO_UT" +
-                    "ILS_H*/\r\n");
+                    "_VA_ARGS__)} structName;\r\n\r\n#ifdef __cplusplus\r\n}\r\n#endif\r\n\r\n#endif /*MACRO_UTIL" +
+                    "S_H*/\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }

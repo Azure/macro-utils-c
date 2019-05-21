@@ -180,6 +180,26 @@ X(keep, P1)
 #define MU_FOR_EACH_1_KEEP_1(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_1_KEEP_1_, MU_C2(MU_DEC,MU_C1(MU_COUNT_ARG(__VA_ARGS__)))) ( MACRO_TO_INVOKE, __VA_ARGS__)
 #endif
 
+<#for(var i=nMacroParameters;i>=2;i--)#>
+<#{#>
+#define MU_FOR_EACH_1_KEEP_2_<#=i#>(X, keep1, keep2, <#for(var j=1;j<=i;j++){#>P<#=j.ToString()+(j<i?", ":"")#><#}#>) \
+X(keep1, keep2, P1) \
+MU_FOR_EACH_1_KEEP_2_<#=i-1#>(X, keep1, keep2, <#for(var j=2;j<=i;j++){#>P<#=(j).ToString()+(j<i?", ":"")#><#}#>)
+
+
+<#}#>
+
+#define MU_FOR_EACH_1_KEEP_2_1(X, keep1, keep2, P1) \
+X(keep1, keep2, P1)
+
+#define MU_FOR_EACH_1_KEEP_2_0(...)
+
+#ifdef _MSC_VER
+#define MU_FOR_EACH_1_KEEP_2(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_1_KEEP_2_, MU_C2(MU_DEC,MU_C2(MU_DEC,MU_C1(MU_COUNT_ARG(__VA_ARGS__))))) MU_LPAREN MACRO_TO_INVOKE, __VA_ARGS__)
+#else
+#define MU_FOR_EACH_1_KEEP_2(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_1_KEEP_2_, MU_C2(MU_DEC,MU_C2(MU_DEC,MU_C1(MU_COUNT_ARG(__VA_ARGS__))))) ( MACRO_TO_INVOKE, __VA_ARGS__)
+#endif
+
 <#for(var i=nMacroParameters;i>=4;i-=2)#>
 <#{#>
 #define MU_FOR_EACH_2_KEEP_1_<#=i#>(X, keep, <#for(var j=1;j<=i;j++){#>P<#=j.ToString()+(j<i?", ":"")#><#}#>) \

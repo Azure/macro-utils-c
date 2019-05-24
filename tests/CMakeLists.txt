@@ -11,6 +11,7 @@ set(macro_utils_int_tests_c_files
     define_struct_test.c
     for_each_1_keep_2_test.c
     mu_eat_empty_args_test.c
+    mu_count_array_items_test.c
     main.c
 )
 
@@ -21,6 +22,7 @@ set(macro_utils_int_tests_h_files
     define_enum_2_test.h
     define_struct_test.h
     for_each_1_keep_2_test.h
+    mu_count_array_items_test.h
 )
     
 add_executable(macro_utils_int_tests ${macro_utils_int_tests_c_files} ${macro_utils_int_tests_h_files})

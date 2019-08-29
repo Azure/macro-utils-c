@@ -22653,6 +22653,14 @@ const char* MU_C2(enumIdentifier,_ToString)(enumIdentifier value)               
 // this macro allows counting of elements in an array
 #define MU_COUNT_ARRAY_ITEMS(A) (sizeof(A)/sizeof((A)[0]))
 
+// this macro is a wrapper on top of MU_DEFINE_ENUM, adding an _INVALID value as the first enum value in the enum
+#define MU_DEFINE_ENUM_WITH_INVALID(enumName, ...) \
+    MU_DEFINE_ENUM(enumName, MU_C2(enumName, _INVALID), __VA_ARGS__)
+
+// this macro is a wrapper on top of MU_DEFINE_ENUM, adding an _INVALID value as the first enum value in the enum
+#define MU_DEFINE_ENUM_2_WITH_INVALID(enumName, ...) \
+    MU_DEFINE_ENUM_2(enumName, MU_C2(enumName, _INVALID), 0, __VA_ARGS__)
+
 #ifdef __cplusplus
 }
 #endif

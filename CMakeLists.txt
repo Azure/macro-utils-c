@@ -24,6 +24,11 @@ install(FILES "inc/azure_macro_utils/macro_utils.h" DESTINATION "${CMAKE_INSTALL
 
 if("${CMAKE_VERSION}" VERSION_GREATER 3.0.0)
     add_library(azure_macro_utils_c INTERFACE)
+    target_include_directories(azure_macro_utils_c
+        INTERFACE
+            $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/inc>
+            $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/azure_macro_utils>
+    )
     install(TARGETS azure_macro_utils_c EXPORT azure_macro_utils_cTargets
         INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
     )

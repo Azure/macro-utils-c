@@ -5,7 +5,7 @@
 
 #include "azure_macro_utils/macro_utils.h"
 
-#include "mu_define_enum_with_invalid_test.h"
+#include "mu_define_enum_test.h"
 
 // This lists the values in the enum
 #define TEST4_ENUM_VALUES \
@@ -14,9 +14,9 @@
 
 // This will define an enum that has an INVALID value as first enum value and then it has the enum values
 // mentioned in TEST4_ENUM_VALUES
-MU_DEFINE_ENUM_WITH_INVALID(TEST4_ENUM, TEST4_ENUM_VALUES);
+MU_DEFINE_ENUM(TEST4_ENUM, TEST4_ENUM_VALUES);
 
-int run_mu_define_enum_with_invalid_tests(void)
+int run_mu_define_enum_tests(void)
 {
     int result = 0;
 

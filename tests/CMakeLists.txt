@@ -13,6 +13,7 @@ set(macro_utils_int_tests_c_files
     mu_eat_empty_args_test.c
     mu_count_array_items_test.c
     mu_define_enum_test.c
+    mu_define_local_enum_test.c
     mu_define_enum_2_test.c
     main.c
 )
@@ -26,6 +27,7 @@ set(macro_utils_int_tests_h_files
     for_each_1_keep_2_test.h
     mu_count_array_items_test.h
     mu_define_enum_test.h
+    mu_define_local_enum_test.h
     mu_define_enum_2_test.h
 )
     

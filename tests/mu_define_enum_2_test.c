@@ -38,5 +38,7 @@ int run_mu_define_enum_2_tests(void)
     POOR_MANS_ASSERT(TEST5_test5_b != NULL);
     POOR_MANS_ASSERT(strcmp("test5_b", TEST5_test5_b) == 0);
 
+    POOR_MANS_ASSERT(MU_ENUM_2_VALUE_COUNT(TEST5_ENUM_VALUES) == 3);
+
     return result;
 }

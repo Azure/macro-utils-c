@@ -1343,64 +1343,68 @@ for(var i=1;i<=nArithmetic;i++){
                     "on top of MU_DEFINE_LOCAL_ENUM_WITHOUT_INVALID, adding an _INVALID value as the " +
                     "first enum value in the enum\r\n#define MU_DEFINE_LOCAL_ENUM(enumName, ...) \\\r\n   " +
                     " MU_DEFINE_LOCAL_ENUM_WITHOUT_INVALID(enumName, MU_C2(enumName, _INVALID), __VA_" +
-                    "ARGS__)\r\n\r\n#define MU_ENUM_TO_STRING(enumName, enumValue) MU_C2(enumName, String" +
-                    "s)(enumValue)\r\n#define MU_STRING_TO_ENUM(stringValue, enumName, addressOfEnumVar" +
-                    "iable) MU_C2(enumName, _FromString)(stringValue, addressOfEnumVariable)\r\n\r\n#defi" +
-                    "ne MU_EMPTY()\r\n#define MACRO_UTILS_DELAY(id) id MU_EMPTY MU_LPAREN )\r\n\r\n#define " +
-                    "MU_DEFINE_ENUMERATION_CONSTANT_2(enumerationConstant, constantExpression) enumer" +
-                    "ationConstant = constantExpression,\r\n\r\n#define MU_DECLARE_ENUM_STRINGS_2(enumIde" +
-                    "ntifier, ...) extern const char* MU_C2(enumIdentifier,_ToString)(enumIdentifier " +
-                    "enumerationConstant);\r\n\r\n#define MU_DEFINE_ENUM_2_WITHOUT_INVALID(enumIdentifier" +
-                    ", ... ) typedef enum MU_C2(enumIdentifier, _TAG) {MU_FOR_EACH_2(MU_DEFINE_ENUMER" +
-                    "ATION_CONSTANT_2, __VA_ARGS__)} enumIdentifier; \\\r\n    MU_DECLARE_ENUM_STRINGS_2" +
-                    "(enumIdentifier, __VA_ARGS__)\r\n\r\n// this macro is a wrapper on top of MU_DEFINE_" +
-                    "ENUM, adding an _INVALID value as the first enum value in the enum\r\n#define MU_D" +
-                    "EFINE_ENUM_2(enumName, ...) \\\r\n    MU_DEFINE_ENUM_2_WITHOUT_INVALID(enumName, MU" +
-                    "_C2(enumName, _INVALID), (int)0xDDDDDDDD, __VA_ARGS__)\r\n\r\ntypedef struct ENUM_VA" +
-                    "LUE_AND_STRING_TAG\r\n{\r\n    int value;\r\n    const char* valueAsString;\r\n}ENUM_VAL" +
-                    "UE_AND_STRING;\r\n\r\n#define MU_DEFINE_ENUM_VALUE_AND_STRING(enumerationConstant, c" +
-                    "onstantExpression) {enumerationConstant, MU_TOSTRING(enumerationConstant)},\r\n#de" +
-                    "fine MU_DEFINE_ENUM_STRINGS_2(enumIdentifier, ... ) static const ENUM_VALUE_AND_" +
-                    "STRING MU_C2(enumIdentifier, _ValuesAndStrings)[MU_DIV2(MU_COUNT_ARG(__VA_ARGS__" +
-                    "))] ={MU_FOR_EACH_2(MU_DEFINE_ENUM_VALUE_AND_STRING, __VA_ARGS__)}; \\\r\nconst cha" +
-                    "r* MU_C2(enumIdentifier,_ToString)(enumIdentifier value)                        " +
+                    "ARGS__)\r\n\r\n// this macro returns the number of enum values (taking into account " +
+                    "that an invalid value is generated)\r\n#define MU_ENUM_VALUE_COUNT(...) (MU_COUNT_" +
+                    "ARG(__VA_ARGS__) + 1)\r\n\r\n// this macro returns the number of enum 2 values (taki" +
+                    "ng into account that an invalid value is generated)\r\n#define MU_ENUM_2_VALUE_COU" +
+                    "NT(...) ((MU_COUNT_ARG(__VA_ARGS__) / 2) + 1)\r\n\r\n#define MU_ENUM_TO_STRING(enumN" +
+                    "ame, enumValue) MU_C2(enumName, Strings)(enumValue)\r\n#define MU_STRING_TO_ENUM(s" +
+                    "tringValue, enumName, addressOfEnumVariable) MU_C2(enumName, _FromString)(string" +
+                    "Value, addressOfEnumVariable)\r\n\r\n#define MU_EMPTY()\r\n#define MACRO_UTILS_DELAY(i" +
+                    "d) id MU_EMPTY MU_LPAREN )\r\n\r\n#define MU_DEFINE_ENUMERATION_CONSTANT_2(enumerati" +
+                    "onConstant, constantExpression) enumerationConstant = constantExpression,\r\n\r\n#de" +
+                    "fine MU_DECLARE_ENUM_STRINGS_2(enumIdentifier, ...) extern const char* MU_C2(enu" +
+                    "mIdentifier,_ToString)(enumIdentifier enumerationConstant);\r\n\r\n#define MU_DEFINE" +
+                    "_ENUM_2_WITHOUT_INVALID(enumIdentifier, ... ) typedef enum MU_C2(enumIdentifier," +
+                    " _TAG) {MU_FOR_EACH_2(MU_DEFINE_ENUMERATION_CONSTANT_2, __VA_ARGS__)} enumIdenti" +
+                    "fier; \\\r\n    MU_DECLARE_ENUM_STRINGS_2(enumIdentifier, __VA_ARGS__)\r\n\r\n// this m" +
+                    "acro is a wrapper on top of MU_DEFINE_ENUM, adding an _INVALID value as the firs" +
+                    "t enum value in the enum\r\n#define MU_DEFINE_ENUM_2(enumName, ...) \\\r\n    MU_DEFI" +
+                    "NE_ENUM_2_WITHOUT_INVALID(enumName, MU_C2(enumName, _INVALID), (int)0xDDDDDDDD, " +
+                    "__VA_ARGS__)\r\n\r\ntypedef struct ENUM_VALUE_AND_STRING_TAG\r\n{\r\n    int value;\r\n   " +
+                    " const char* valueAsString;\r\n}ENUM_VALUE_AND_STRING;\r\n\r\n#define MU_DEFINE_ENUM_V" +
+                    "ALUE_AND_STRING(enumerationConstant, constantExpression) {enumerationConstant, M" +
+                    "U_TOSTRING(enumerationConstant)},\r\n#define MU_DEFINE_ENUM_STRINGS_2(enumIdentifi" +
+                    "er, ... ) static const ENUM_VALUE_AND_STRING MU_C2(enumIdentifier, _ValuesAndStr" +
+                    "ings)[MU_DIV2(MU_COUNT_ARG(__VA_ARGS__))] ={MU_FOR_EACH_2(MU_DEFINE_ENUM_VALUE_A" +
+                    "ND_STRING, __VA_ARGS__)}; \\\r\nconst char* MU_C2(enumIdentifier,_ToString)(enumIde" +
+                    "ntifier value)                                                                  " +
                     "                                                                                " +
-                    "                                               \\\r\n{                             " +
+                    "     \\\r\n{                                                                       " +
                     "                                                                                " +
-                    "                                                                                " +
-                    "                       \\\r\n    for(size_t i=0;i<sizeof(MU_C2(enumIdentifier, _Val" +
-                    "uesAndStrings))/sizeof(MU_C2(enumIdentifier, _ValuesAndStrings)[0]);i++)        " +
-                    "                                                                                " +
-                    "     \\\r\n    {                                                                   " +
-                    "                                                                                " +
-                    "                                                             \\\r\n        if(MU_C2" +
-                    "(enumIdentifier, _ValuesAndStrings)[i].value == (int)value)                     " +
-                    "                                                                                " +
-                    "                                        \\\r\n        {                            " +
-                    "                                                                                " +
-                    "                                                                                " +
-                    "                \\\r\n            return MU_C2(enumIdentifier, _ValuesAndStrings)[i" +
-                    "].valueAsString;                                                                " +
-                    "                                                                           \\\r\n  " +
-                    "      }                                                                         " +
-                    "                                                                                " +
-                    "                                                   \\\r\n    }                     " +
+                    "                                                             \\\r\n    for(size_t i" +
+                    "=0;i<sizeof(MU_C2(enumIdentifier, _ValuesAndStrings))/sizeof(MU_C2(enumIdentifie" +
+                    "r, _ValuesAndStrings)[0]);i++)                                                  " +
+                    "                                           \\\r\n    {                             " +
                     "                                                                                " +
                     "                                                                                " +
-                    "                           \\\r\n    return \"NULL\";                                " +
+                    "                   \\\r\n        if(MU_C2(enumIdentifier, _ValuesAndStrings)[i].val" +
+                    "ue == (int)value)                                                               " +
+                    "                                                                              \\\r" +
+                    "\n        {                                                                      " +
+                    "                                                                                " +
+                    "                                                      \\\r\n            return MU_C" +
+                    "2(enumIdentifier, _ValuesAndStrings)[i].valueAsString;                          " +
+                    "                                                                                " +
+                    "                                 \\\r\n        }                                   " +
                     "                                                                                " +
                     "                                                                                " +
-                    "   \\\r\n}                                                                         " +
+                    "         \\\r\n    }                                                               " +
                     "                                                                                " +
-                    "                                                           \\\r\n\r\n#define MU_ENUM_" +
-                    "TO_STRING_2(enumIdentifier, value) MU_C2(enumIdentifier,_ToString)(value)\r\n\r\n#de" +
-                    "fine MU_DEFINE_STRUCT_FIELD(fieldType, fieldName) fieldType fieldName;\r\n\r\n/*MU_D" +
-                    "EFINE_STRUCT allows creating a struct typedef based on a list of fields*/\r\n#defi" +
-                    "ne MU_DEFINE_STRUCT(structName, ...) typedef struct MU_C2(structName, _TAG) { MU" +
-                    "_FOR_EACH_2(MU_DEFINE_STRUCT_FIELD, __VA_ARGS__)} structName;\r\n\r\n// this macro a" +
-                    "llows counting of elements in an array\r\n#define MU_COUNT_ARRAY_ITEMS(A) (sizeof(" +
-                    "A)/sizeof((A)[0]))\r\n\r\n#ifdef __cplusplus\r\n}\r\n#endif\r\n\r\n#endif /*MACRO_UTILS_H*/\r" +
-                    "\n");
+                    "                                                                 \\\r\n    return \"" +
+                    "NULL\";                                                                          " +
+                    "                                                                                " +
+                    "                                         \\\r\n}                                   " +
+                    "                                                                                " +
+                    "                                                                                " +
+                    "                 \\\r\n\r\n#define MU_ENUM_TO_STRING_2(enumIdentifier, value) MU_C2(e" +
+                    "numIdentifier,_ToString)(value)\r\n\r\n#define MU_DEFINE_STRUCT_FIELD(fieldType, fie" +
+                    "ldName) fieldType fieldName;\r\n\r\n/*MU_DEFINE_STRUCT allows creating a struct type" +
+                    "def based on a list of fields*/\r\n#define MU_DEFINE_STRUCT(structName, ...) typed" +
+                    "ef struct MU_C2(structName, _TAG) { MU_FOR_EACH_2(MU_DEFINE_STRUCT_FIELD, __VA_A" +
+                    "RGS__)} structName;\r\n\r\n// this macro allows counting of elements in an array\r\n#d" +
+                    "efine MU_COUNT_ARRAY_ITEMS(A) (sizeof(A)/sizeof((A)[0]))\r\n\r\n#ifdef __cplusplus\r\n" +
+                    "}\r\n#endif\r\n\r\n#endif /*MACRO_UTILS_H*/\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }

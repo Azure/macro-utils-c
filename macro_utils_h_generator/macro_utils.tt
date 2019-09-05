@@ -444,7 +444,7 @@ static const char* MU_C2(enumName,Strings)(enumName value)         \
 
 #define MU_DEFINE_ENUMERATION_CONSTANT_2(enumerationConstant, constantExpression) enumerationConstant = constantExpression,
 
-#define MU_DECLARE_ENUM_STRINGS_2(enumIdentifier, ...) extern const char* MU_C2(enumIdentifier,_ToString)(enumIdentifier enumerationConstant);
+#define MU_DECLARE_ENUM_STRINGS_2(enumIdentifier, ...) extern const char* MU_C3(MU_, enumIdentifier,_ToString)(enumIdentifier enumerationConstant);
 
 #define MU_DEFINE_ENUM_2_WITHOUT_INVALID(enumIdentifier, ... ) typedef enum MU_C2(enumIdentifier, _TAG) {MU_FOR_EACH_2(MU_DEFINE_ENUMERATION_CONSTANT_2, __VA_ARGS__)} enumIdentifier; \
     MU_DECLARE_ENUM_STRINGS_2(enumIdentifier, __VA_ARGS__)
@@ -461,7 +461,7 @@ typedef struct ENUM_VALUE_AND_STRING_TAG
 
 #define MU_DEFINE_ENUM_VALUE_AND_STRING(enumerationConstant, constantExpression) {enumerationConstant, MU_TOSTRING(enumerationConstant)},
 #define MU_DEFINE_ENUM_STRINGS_2(enumIdentifier, ... ) static const ENUM_VALUE_AND_STRING MU_C2(enumIdentifier, _ValuesAndStrings)[MU_DIV2(MU_COUNT_ARG(__VA_ARGS__))] ={MU_FOR_EACH_2(MU_DEFINE_ENUM_VALUE_AND_STRING, __VA_ARGS__)}; \
-const char* MU_C2(enumIdentifier,_ToString)(enumIdentifier value)                                                                                                                                                       \
+const char* MU_C3(MU_, enumIdentifier,_ToString)(enumIdentifier value)                                                                                                                                                       \
 {                                                                                                                                                                                                                    \
     for(size_t i=0;i<sizeof(MU_C2(enumIdentifier, _ValuesAndStrings))/sizeof(MU_C2(enumIdentifier, _ValuesAndStrings)[0]);i++)                                                                                             \
     {                                                                                                                                                                                                                \
@@ -473,7 +473,7 @@ const char* MU_C2(enumIdentifier,_ToString)(enumIdentifier value)               
     return "NULL";                                                                                                                                                                                                   \
 }                                                                                                                                                                                                                    \
 
-#define MU_ENUM_TO_STRING_2(enumIdentifier, value) MU_C2(enumIdentifier,_ToString)(value)
+#define MU_ENUM_TO_STRING_2(enumIdentifier, value) MU_C3(MU_, enumIdentifier,_ToString)(value)
 
 #define MU_DEFINE_STRUCT_FIELD(fieldType, fieldName) fieldType fieldName;
 

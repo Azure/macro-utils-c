@@ -1,6 +1,9 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+#ifndef DEFINE_STRUCT_TEST_H
+#define DEFINE_STRUCT_TEST_H
+
 #include "azure_macro_utils/macro_utils.h"
 
 /*this construct defines a struct with 1 field*/
@@ -28,3 +31,5 @@ MU_DEFINE_STRUCT(TEST_STRUCT_WITH_2_FIELDS, TEST_STRUCT_WITH_2_FIELDS_FIELDS);
 MU_DEFINE_STRUCT(TEST_NESTED_STRUCT, TEST_NESTED_STRUCT_FIELDS);
 
 int run_define_struct_tests(void);
+
+#endif // DEFINE_STRUCT_TEST_H

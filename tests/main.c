@@ -5,16 +5,19 @@
 
 #include "test_helper.h"
 
-#include "define_enum_2_test.h"
+#include "mu_define_enum_2_without_invalid_test.h"
 #include "define_struct_test.h"
 #include "for_each_1_keep_2_test.h"
 #include "mu_eat_empty_args_test.h"
 #include "mu_count_array_items_test.h"
+#include "mu_define_enum_test.h"
+#include "mu_define_local_enum_test.h"
+#include "mu_define_enum_2_test.h"
 
 int main(void)
 {
     int result;
-    result = run_define_enum_2_test();
+    result = run_mu_define_enum_2_without_invalid_test();
     POOR_MANS_ASSERT(result == 0);
     
     result = run_mu_eat_empty_args_test();
@@ -27,6 +30,15 @@ int main(void)
     POOR_MANS_ASSERT(result == 0);
 
     result = run_mu_count_array_items_tests();
+    POOR_MANS_ASSERT(result == 0);
+
+    result = run_mu_define_enum_tests();
+    POOR_MANS_ASSERT(result == 0);
+
+    result = run_mu_define_local_enum_tests();
+    POOR_MANS_ASSERT(result == 0);
+
+    result = run_mu_define_enum_2_tests();
     POOR_MANS_ASSERT(result == 0);
 
     return 0;

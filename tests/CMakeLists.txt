@@ -21,6 +21,7 @@ set(macro_utils_int_tests_c_files
 set(macro_utils_int_tests_h_files
     test_helper.h
     ${MACRO_UTILS_INC_FOLDER}/azure_macro_utils/macro_utils.h
+    ${MACRO_UTILS_INC_FOLDER}/azure_macro_utils/macro_utils_generated.h
     mu_eat_empty_args_test.h
     mu_define_enum_2_without_invalid_test.h
     define_struct_test.h

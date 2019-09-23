@@ -20,7 +20,12 @@ set(MACRO_UTILS_INC_FOLDER ${CMAKE_CURRENT_LIST_DIR}/inc CACHE INTERNAL "this is
 include(CTest)
 include(GNUInstallDirs)
 
-install(FILES "inc/azure_macro_utils/macro_utils.h" DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/azure_macro_utils")
+set(macro_utils_files
+    inc/azure_macro_utils/macro_utils.h
+    inc/azure_macro_utils/macro_utils_generated.h
+)
+
+install(FILES ${macro_utils_files} DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/azure_macro_utils")
 
 if("${CMAKE_VERSION}" VERSION_GREATER 3.0.0)
     add_library(azure_macro_utils_c INTERFACE)

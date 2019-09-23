@@ -41,19 +41,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="macro_utils.cs">
+    <Compile Include="macro_utils_generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>macro_utils.tt</DependentUpon>
+      <DependentUpon>macro_utils_generated.tt</DependentUpon>
     </Compile>
     <Compile Include="program.cs" />
     <Compile Include="properties\assemblyinfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="macro_utils.tt">
+    <None Include="macro_utils_generated.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>macro_utils.cs</LastGenOutput>
+      <LastGenOutput>macro_utils_generated.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>

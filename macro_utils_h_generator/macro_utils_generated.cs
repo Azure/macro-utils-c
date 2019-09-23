@@ -18,9 +18,9 @@ namespace macro_utils_h_generator
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+    #line 1 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public partial class macro_utils : macro_utilsBase
+    public partial class macro_utils_generated : macro_utils_generatedBase
     {
 #line hidden
         /// <summary>
@@ -33,79 +33,51 @@ namespace macro_utils_h_generator
 
 /*THIS FILE IS GENERATED*/
 /*DO NOT EDIT BY HAND!!!*/
-/*instead edit macro_utils.tt here: http://www.github.com/azure/azure-macro-utils-c.git */
+/*instead edit macro_utils_generated.tt here: http://www.github.com/azure/azure-macro-utils-c.git */
 
 ");
             
-            #line 14 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 14 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 /*CHANGE BELOW 2 VARIABLES TO GET MORE / LESS */ 
             
             #line default
             #line hidden
             
-            #line 15 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 15 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 int nArithmetic=2048;
             
             #line default
             #line hidden
             
-            #line 16 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 16 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 int nMacroParameters=124;/*127 parameters in one macro definition in C99 in chapter 5.2.4.1 Translation limits*/
             
             #line default
             #line hidden
-            this.Write(@"
-#ifndef MACRO_UTILS_H
-#define MACRO_UTILS_H
-
-#ifdef __cplusplus
-#include <cstring>
-#include <cstddef>
-extern ""C"" {
-#else
-#include <string.h>
-#include <stddef.h>
-#endif
-
-#if (defined OPTIMIZE_RETURN_CODES)
-    #define MU_FAILURE 1
-#else
-    #define MU_FAILURE __LINE__
-#endif
-
-/*""pointer or NULL"" macro - because when printf-ing arguments NULL is not valid for %s (section 7.1.4 of C11 standard) */
-#define MU_P_OR_NULL(p) (((p)!=NULL)?(p):""NULL"")
-#define MU_WP_OR_NULL(p) (((p)!=NULL)?(p):L""NULL"")
-
-#define MU_TOSTRING_(x) #x
-#define MU_TOSTRING(x) MU_TOSTRING_(x)
-
-#define MU_IFCOMMA(N) MU_C2(MU_IFCOMMA_, N)
-#define MU_IFCOMMA_0
-#define MU_IFCOMMA_2
-");
+            this.Write("\r\n#ifndef MACRO_UTILS_GENERATED_H\r\n#define MACRO_UTILS_GENERATED_H\r\n\r\n#define MU_" +
+                    "IFCOMMA(N) MU_C2(MU_IFCOMMA_, N)\r\n#define MU_IFCOMMA_0\r\n#define MU_IFCOMMA_2\r\n");
             
-            #line 46 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 24 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=4;i<=nMacroParameters;i+=2)
             
             #line default
             #line hidden
             
-            #line 47 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 25 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define MU_IFCOMMA_");
             
-            #line 48 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 26 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(" ,\r\n");
             
-            #line 49 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 27 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
@@ -113,27 +85,27 @@ for(var i=4;i<=nMacroParameters;i+=2)
             this.Write("\r\n#define MU_IFCOMMALOGIC(N) MU_C2(MU_IFCOMMALOGIC_, N)\r\n#define MU_IFCOMMALOGIC_" +
                     "0 \r\n");
             
-            #line 53 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 31 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=1;i<=nMacroParameters;i+=1)
             
             #line default
             #line hidden
             
-            #line 54 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 32 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define MU_IFCOMMALOGIC_");
             
-            #line 55 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 33 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(" ,\r\n");
             
-            #line 56 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 34 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
@@ -141,284 +113,283 @@ for(var i=1;i<=nMacroParameters;i+=1)
             this.Write("\r\n#define MU_IFCOMMA_NOFIRST(N) MU_C2(MU_IFCOMMA_NOFIRST, N)\r\n#define MU_IFCOMMA_" +
                     "NOFIRST1 \r\n");
             
-            #line 60 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 38 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=2;i<=nMacroParameters;i++)
             
             #line default
             #line hidden
             
-            #line 61 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 39 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define MU_IFCOMMA_NOFIRST");
             
-            #line 62 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 40 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(" ,\r\n");
             
-            #line 63 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 41 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write("\r\n#define MU_DEC(x) MU_C2(MU_DEC,x)\r\n");
             
-            #line 66 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 44 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=nArithmetic;i>=1;i--)
             
             #line default
             #line hidden
             
-            #line 67 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 45 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define MU_DEC");
             
-            #line 68 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 46 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 68 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 46 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-1));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 69 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 47 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write("\r\n#define MU_INC(x) MU_C2(MU_INC,x)\r\n");
             
-            #line 72 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 50 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=nArithmetic;i>=0;i--)
             
             #line default
             #line hidden
             
-            #line 73 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 51 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define MU_INC");
             
-            #line 74 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 52 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 74 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 52 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i+1));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 75 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 53 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write("\r\n#define MU_DIV2(x) MU_C2(MU_DIV2_,x)\r\n\r\n");
             
-            #line 79 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 57 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=nArithmetic;i>=0;i--)
             
             #line default
             #line hidden
             
-            #line 80 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 58 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define MU_DIV2_");
             
-            #line 81 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 59 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 81 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 59 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i/2));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 82 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 60 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 84 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 62 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 /*the below produces MOD2 for numbers*/
             
             #line default
             #line hidden
             this.Write("#define MU_MOD2(x) MU_C2(MU_MOD2_,x)\r\n");
             
-            #line 86 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 64 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=nArithmetic;i>=0;i--)
             
             #line default
             #line hidden
             
-            #line 87 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 65 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define MU_MOD2_");
             
-            #line 88 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 66 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 88 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 66 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i%2));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 89 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 67 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write("\r\n#define MU_THE_NTH_ARG(");
             
-            #line 91 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 69 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=1;i<=nMacroParameters;i++)
             
             #line default
             #line hidden
             
-            #line 92 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 70 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 {
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 92 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 70 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(", ");
             
-            #line 92 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 70 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(" ... ) P");
             
-            #line 92 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 70 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(nMacroParameters));
             
             #line default
             #line hidden
-            this.Write("\r\n\r\n#define MU_TRIGGER_PARENTHESIS(...) ,\r\n\r\n#define MU_LPAREN (\r\n\r\n#ifdef _MSC_V" +
-                    "ER\r\n#define MU_COUNT_1_OR_MORE_ARG(...) MU_THE_NTH_ARG MU_LPAREN __VA_ARGS__, \\\r" +
-                    "\n");
+            this.Write("\r\n\r\n#ifdef _MSC_VER\r\n#define MU_COUNT_1_OR_MORE_ARG(...) MU_THE_NTH_ARG MU_LPAREN" +
+                    " __VA_ARGS__, \\\r\n");
             
-            #line 100 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 74 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=nMacroParameters-1;i>=1;i--){
             
             #line default
             #line hidden
             
-            #line 100 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 74 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i.ToString()+((i>1)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 100 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 74 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n#define MU_MORE_THAN_1_ARG(...) MU_THE_NTH_ARG MU_LPAREN __VA_ARGS__, ");
             
-            #line 101 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 75 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=nMacroParameters-2;i>=1;i--){
             
             #line default
             #line hidden
             
-            #line 101 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 75 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(1));
             
             #line default
             #line hidden
             this.Write(",");
             
-            #line 101 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 75 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write("0)\r\n#else\r\n#define MU_COUNT_1_OR_MORE_ARG(...) MU_THE_NTH_ARG (__VA_ARGS__, \\\r\n");
             
-            #line 104 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 78 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=nMacroParameters-1;i>=1;i--){
             
             #line default
             #line hidden
             
-            #line 104 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 78 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i.ToString()+((i>1)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 104 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 78 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n#define MU_MORE_THAN_1_ARG(...) MU_THE_NTH_ARG(__VA_ARGS__, ");
             
-            #line 105 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 79 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=nMacroParameters-2;i>=1;i--){
             
             #line default
             #line hidden
             
-            #line 105 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 79 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(1));
             
             #line default
             #line hidden
             this.Write(",");
             
-            #line 105 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 79 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
@@ -430,108 +401,85 @@ for(var i=nMacroParameters-2;i>=1;i--){
 #define MU_COUNT_ARG_1(...) 0
 #define MU_COUNT_ARG_0(...) MU_C1(MU_COUNT_1_OR_MORE_ARG(__VA_ARGS__))
 
-#define MU_ISEMPTY(...) MU_C5(MU_DISPTACH_EMPTY_, MU_MORE_THAN_1_ARG(MU_TRIGGER_PARENTHESIS __VA_ARGS__ ()), MU_MORE_THAN_1_ARG(__VA_ARGS__), MU_MORE_THAN_1_ARG(__VA_ARGS__ ()), MU_MORE_THAN_1_ARG(MU_TRIGGER_PARENTHESIS __VA_ARGS__))
-#define MU_DISPTACH_EMPTY_1000 1
-#define MU_DISPTACH_EMPTY_0000 0
-#define MU_DISPTACH_EMPTY_1100 0
-#define MU_DISPTACH_EMPTY_1111 0
-#define MU_DISPTACH_EMPTY_1001 0
-#define MU_DISPTACH_EMPTY_1010 0
-
-
-#define MU_C2_(x,y) x##y
-
-#define MU_C2(x,y) MU_C2_(x,y)
-
-#define MU_C3(x,y,z) MU_C2(x, MU_C2(y,z))
-
-#define MU_C4(x,y,z, u) MU_C2(MU_C2(x,y), MU_C2(z,u))
-
-#define MU_C5(x,y,z,u, v) MU_C2(MU_C4(x,y, z, u), v)
-
-#define MU_C1_(x) x
-
-#define MU_C1(x) MU_C1_(x)
-
-#define MU_C2STRING(x,y) x y
-
-#define MU_C3STRING(x,y,z) x y z
-
-#define MU_C4STRING(x,y,z,u) x y z u
-
-#define MU_C5STRING(x,y,z,u,v) x y z u v
+#define MU_ISEMPTY(...) MU_C5(MU_DISPATCH_EMPTY_, MU_MORE_THAN_1_ARG(MU_TRIGGER_PARENTHESIS __VA_ARGS__ ()), MU_MORE_THAN_1_ARG(__VA_ARGS__), MU_MORE_THAN_1_ARG(__VA_ARGS__ ()), MU_MORE_THAN_1_ARG(MU_TRIGGER_PARENTHESIS __VA_ARGS__))
+#define MU_DISPATCH_EMPTY_1000 1
+#define MU_DISPATCH_EMPTY_0000 0
+#define MU_DISPATCH_EMPTY_1100 0
+#define MU_DISPATCH_EMPTY_1111 0
+#define MU_DISPATCH_EMPTY_1001 0
+#define MU_DISPATCH_EMPTY_1010 0
 
 
 ");
             
-            #line 144 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 95 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=nMacroParameters;i>=2;i--)
             
             #line default
             #line hidden
             
-            #line 145 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 96 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define MU_FOR_EACH_1_");
             
-            #line 146 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 97 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("(X, ");
             
-            #line 146 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 97 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=1;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 146 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 97 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 146 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 97 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(") \\\r\nX(P1) \\\r\nMU_FOR_EACH_1_");
             
-            #line 148 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 99 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-1));
             
             #line default
             #line hidden
             this.Write("(X, ");
             
-            #line 148 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 99 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=2;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 148 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 99 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 148 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 99 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n\r\n");
             
-            #line 150 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 101 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
@@ -547,74 +495,74 @@ X(P1)
 
 ");
             
-            #line 160 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 111 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=nMacroParameters;i>=2;i--)
             
             #line default
             #line hidden
             
-            #line 161 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 112 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define MU_FOR_EACH_1_KEEP_1_");
             
-            #line 162 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 113 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("(X, keep, ");
             
-            #line 162 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 113 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=1;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 162 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 113 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+(j<i?", ":"")));
             
             #line default
             #line hidden
             
-            #line 162 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 113 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(") \\\r\nX(keep, P1) \\\r\nMU_FOR_EACH_1_KEEP_1_");
             
-            #line 164 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 115 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-1));
             
             #line default
             #line hidden
             this.Write("(X, keep, ");
             
-            #line 164 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 115 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=2;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 164 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 115 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture((j).ToString()+(j<i?", ":"")));
             
             #line default
             #line hidden
             
-            #line 164 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 115 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n\r\n\r\n");
             
-            #line 167 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 118 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
@@ -631,74 +579,74 @@ X(keep, P1)
 
 ");
             
-            #line 178 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 129 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=nMacroParameters;i>=2;i--)
             
             #line default
             #line hidden
             
-            #line 179 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 130 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define MU_FOR_EACH_1_KEEP_2_");
             
-            #line 180 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 131 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("(X, keep1, keep2, ");
             
-            #line 180 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 131 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=1;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 180 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 131 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+(j<i?", ":"")));
             
             #line default
             #line hidden
             
-            #line 180 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 131 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(") \\\r\nX(keep1, keep2, P1) \\\r\nMU_FOR_EACH_1_KEEP_2_");
             
-            #line 182 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 133 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-1));
             
             #line default
             #line hidden
             this.Write("(X, keep1, keep2, ");
             
-            #line 182 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 133 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=2;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 182 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 133 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture((j).ToString()+(j<i?", ":"")));
             
             #line default
             #line hidden
             
-            #line 182 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 133 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n\r\n\r\n");
             
-            #line 185 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 136 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
@@ -717,74 +665,74 @@ X(keep1, keep2, P1)
 
 ");
             
-            #line 198 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 149 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=nMacroParameters;i>=4;i-=2)
             
             #line default
             #line hidden
             
-            #line 199 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 150 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define MU_FOR_EACH_2_KEEP_1_");
             
-            #line 200 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 151 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("(X, keep, ");
             
-            #line 200 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 151 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=1;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 200 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 151 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+(j<i?", ":"")));
             
             #line default
             #line hidden
             
-            #line 200 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 151 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(") \\\r\nX(keep, P1, P2) \\\r\nMU_FOR_EACH_2_KEEP_1_");
             
-            #line 202 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 153 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-2));
             
             #line default
             #line hidden
             this.Write("(X, keep, ");
             
-            #line 202 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 153 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=3;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 202 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 153 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture((j).ToString()+(j<i?", ":"")));
             
             #line default
             #line hidden
             
-            #line 202 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 153 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n\r\n\r\n");
             
-            #line 205 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 156 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
@@ -806,74 +754,74 @@ for(var j=3;j<=i;j++){
 
 ");
             
-            #line 221 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 172 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=nMacroParameters;i>=4;i-=2)
             
             #line default
             #line hidden
             
-            #line 222 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 173 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define MU_FOR_EACH_2_KEEP_2_");
             
-            #line 223 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 174 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("(X, keep1, keep2, ");
             
-            #line 223 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 174 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=1;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 223 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 174 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+(j<i?", ":"")));
             
             #line default
             #line hidden
             
-            #line 223 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 174 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(") \\\r\nX(keep1, keep2, P1, P2) \\\r\nMU_FOR_EACH_2_KEEP_2_");
             
-            #line 225 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 176 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-2));
             
             #line default
             #line hidden
             this.Write("(X, keep1, keep2, ");
             
-            #line 225 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 176 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=3;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 225 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 176 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture((j).ToString()+(j<i?", ":"")));
             
             #line default
             #line hidden
             
-            #line 225 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 176 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n\r\n\r\n");
             
-            #line 228 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 179 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
@@ -900,68 +848,68 @@ X(P1, P2)
 
 ");
             
-            #line 249 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 200 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=4;i<=nMacroParameters;i+=2) {
             
             #line default
             #line hidden
             this.Write("#define MU_FOR_EACH_2_");
             
-            #line 250 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 201 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("(X, ");
             
-            #line 250 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 201 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=1;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 250 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 201 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 250 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 201 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(") \\\r\nX(P1, P2) \\\r\nMU_FOR_EACH_2_");
             
-            #line 252 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 203 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-2));
             
             #line default
             #line hidden
             this.Write("(X, ");
             
-            #line 252 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 203 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=3;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 252 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 203 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 252 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 203 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n\r\n");
             
-            #line 254 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 205 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
@@ -969,82 +917,82 @@ for(var j=3;j<=i;j++){
             this.Write("\r\n#define MU_FOR_EACH_2_REVERSE_0(...)\r\n\r\n#define MU_FOR_EACH_2_REVERSE_2(X, P1, " +
                     "P2) \\\r\nX(P1, P2)\r\n\r\n");
             
-            #line 261 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 212 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=4;i<=nMacroParameters;i+=2) {
             
             #line default
             #line hidden
             this.Write("#define MU_FOR_EACH_2_REVERSE_");
             
-            #line 262 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 213 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("(X, ");
             
-            #line 262 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 213 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=1;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 262 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 213 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 262 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 213 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(") \\\r\nX(P");
             
-            #line 263 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 214 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-1));
             
             #line default
             #line hidden
             this.Write(", P");
             
-            #line 263 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 214 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(") \\\r\nMU_FOR_EACH_2_REVERSE_");
             
-            #line 264 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 215 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-2));
             
             #line default
             #line hidden
             this.Write("(X, ");
             
-            #line 264 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 215 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=1;j<=i-2;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 264 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 215 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i-2)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 264 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 215 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n\r\n");
             
-            #line 266 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 217 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
@@ -1052,75 +1000,75 @@ for(var j=1;j<=i-2;j++){
             this.Write("\r\n#define MU_FOR_EACH_1_COUNTED_0(...)\r\n\r\n#define MU_FOR_EACH_1_COUNTED_1(X, P1) " +
                     "\\\r\n    X(1, P1)\r\n\r\n");
             
-            #line 273 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 224 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=2;i<=nMacroParameters;i++) {
             
             #line default
             #line hidden
             this.Write("#define MU_FOR_EACH_1_COUNTED_");
             
-            #line 274 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 225 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("(X, ");
             
-            #line 274 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 225 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=1;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 274 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 225 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 274 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 225 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(") \\\r\nX(");
             
-            #line 275 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 226 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(", P1) \\\r\nMU_FOR_EACH_1_COUNTED_");
             
-            #line 276 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 227 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-1));
             
             #line default
             #line hidden
             this.Write("(X, ");
             
-            #line 276 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 227 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=2;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 276 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 227 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 276 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 227 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n\r\n");
             
-            #line 278 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 229 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
@@ -1128,75 +1076,75 @@ for(var j=2;j<=i;j++){
             this.Write("\r\n#define MU_FOR_EACH_2_COUNTED_0(...)\r\n\r\n#define MU_FOR_EACH_2_COUNTED_2(X, P1, " +
                     "P2) \\\r\n    X(2, P1, P2)\r\n\r\n");
             
-            #line 285 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 236 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=4;i<=nMacroParameters;i+=2) {
             
             #line default
             #line hidden
             this.Write("#define MU_FOR_EACH_2_COUNTED_");
             
-            #line 286 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 237 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("(X, ");
             
-            #line 286 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 237 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=1;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 286 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 237 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 286 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 237 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(") \\\r\nX(");
             
-            #line 287 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 238 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(", P1, P2) \\\r\nMU_FOR_EACH_2_COUNTED_");
             
-            #line 288 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 239 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-2));
             
             #line default
             #line hidden
             this.Write("(X, ");
             
-            #line 288 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 239 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=3;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 288 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 239 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 288 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 239 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n\r\n");
             
-            #line 290 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 241 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
@@ -1229,182 +1177,41 @@ for(var j=3;j<=i;j++){
                     "EXPAND_ARGS(__VA_ARGS__)\r\n\r\n#define MU_DO_0(MACRO, ...) \\\r\nMACRO(0, __VA_ARGS__)" +
                     "\r\n\r\n");
             
-            #line 326 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 277 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=1;i<=nArithmetic;i++){
             
             #line default
             #line hidden
             this.Write("#define MU_DO_");
             
-            #line 327 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 278 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("(MACRO, ...) \\\r\nMACRO(");
             
-            #line 328 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 279 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(", __VA_ARGS__) \\\r\nMU_DO_");
             
-            #line 329 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 280 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-1));
             
             #line default
             #line hidden
             this.Write("(MACRO, __VA_ARGS__)\r\n\r\n\r\n");
             
-            #line 332 "G:\repos\azure-umqtt-c\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils.tt"
+            #line 283 "G:\w\Azure-MessagingStore\deps\azure-macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
-            this.Write("\r\n#define MU_DO(TIMES, MACRO, ...) MU_C2(MU_DO_, TIMES)(MACRO, __VA_ARGS__)\r\n\r\n\r\n" +
-                    "/* we need some sort of macro that does:\r\nMU_IF(0, \"true\", \"false\") => \"false\"\r\n" +
-                    "MU_IF(1, \"true\", \"false\") => \"true\"\r\nMU_IF(X, \"true\", \"false\") => \"true\"\r\n*/\r\n\r\n" +
-                    "#define MU_INTERNALIF(x) MU_INTERNALIF##x\r\n#define MU_INTERNALIF0\r\n\r\n#define MU_" +
-                    "ISZERO(x) MU_COUNT_ARG(MU_INTERNALIF(x))\r\n\r\n#define MU_IF(condition, trueBranch," +
-                    " falseBranch) MU_C2(MU_IF,MU_ISZERO(condition))(trueBranch, falseBranch)\r\n#defin" +
-                    "e MU_IF0(trueBranch, falseBranch) falseBranch\r\n#define MU_IF1(trueBranch, falseB" +
-                    "ranch) trueBranch\r\n\r\n\r\n/*the following macro want to eat empty arguments from a " +
-                    "list */\r\n/*examples:                                                   */\r\n/*MU_" +
-                    "EAT_EMPTY_ARGS(, , X) expands to X                       */\r\n\r\n#define MU_EXPAND" +
-                    "_TO_NOTHING(arg)\r\n#define MU_EAT_EMPTY_ARG(arg_count, arg) MU_IF(MU_ISEMPTY(arg)" +
-                    ",,arg) MU_IF(MU_ISEMPTY(arg),MU_EXPAND_TO_NOTHING,MU_IFCOMMALOGIC)(MU_DEC(arg_co" +
-                    "unt))\r\n#define MU_EAT_EMPTY_ARGS(...) MU_FOR_EACH_1_COUNTED(MU_EAT_EMPTY_ARG, __" +
-                    "VA_ARGS__)\r\n\r\n#define MU_DEFINE_ENUMERATION_CONSTANT(x) x,\r\n/*MU_DEFINE_ENUM_WIT" +
-                    "HOUT_INVALID goes to header*/\r\n#define MU_DEFINE_ENUM_WITHOUT_INVALID(enumName, " +
-                    "...) typedef enum MU_C2(enumName, _TAG) { MU_FOR_EACH_1(MU_DEFINE_ENUMERATION_CO" +
-                    "NSTANT, __VA_ARGS__)} enumName; \\\r\n    extern const char* MU_C2(enumName,Strings" +
-                    ")(enumName value); \\\r\n    extern int MU_C2(enumName, _FromString)(const char* en" +
-                    "umAsString, enumName* destination);\r\n\r\n// this macro is a wrapper on top of MU_D" +
-                    "EFINE_ENUM_WITHOUT_INVALID, adding an _INVALID value as the first enum value in " +
-                    "the enum\r\n#define MU_DEFINE_ENUM(enumName, ...) \\\r\n    MU_DEFINE_ENUM_WITHOUT_IN" +
-                    "VALID(enumName, MU_C2(enumName, _INVALID), __VA_ARGS__)\r\n\r\n#define MU_DEFINE_ENU" +
-                    "MERATION_CONSTANT_AS_WIDESTRING(x) MU_C2(L, MU_TOSTRING(x)) , \r\n#define MU_DEFIN" +
-                    "E_ENUMERATION_CONSTANT_AS_STRING(x) MU_TOSTRING(x) , \r\n/*MU_DEFINE_ENUM_STRINGS_" +
-                    "WITHOUT_INVALID goes to .c*/\r\n#define MU_DEFINE_ENUM_STRINGS_WITHOUT_INVALID(enu" +
-                    "mName, ...) const char* MU_C2(enumName, StringStorage)[MU_COUNT_ARG(__VA_ARGS__)" +
-                    "] = {MU_FOR_EACH_1(MU_DEFINE_ENUMERATION_CONSTANT_AS_STRING, __VA_ARGS__)}; \\\r\nc" +
-                    "onst char* MU_C2(enumName,Strings)(enumName value)                \\\r\n{          " +
-                    "                                                        \\\r\n    if((int)value<0 |" +
-                    "| (int)value>=MU_COUNT_ARG(__VA_ARGS__))      \\\r\n    {                          " +
-                    "                                    \\\r\n        /*this is an error case*/        " +
-                    "                          \\\r\n        return \"NULL\";                             " +
-                    "                \\\r\n    }                                                        " +
-                    "      \\\r\n    else                                                           \\\r\n " +
-                    "   {                                                              \\\r\n        ret" +
-                    "urn MU_C2(enumName, StringStorage)[value];              \\\r\n    }                " +
-                    "                                              \\\r\n}                              " +
-                    "                                    \\\r\nint MU_C2(enumName, _FromString)(const ch" +
-                    "ar* enumAsString, enumName* destination)  \\\r\n{                                  " +
-                    "                                             \\\r\n    if(                         " +
-                    "                                                \\\r\n        (enumAsString==NULL) " +
-                    "|| (destination==NULL)                             \\\r\n    )                     " +
-                    "                                                      \\\r\n    {                  " +
-                    "                                                         \\\r\n        return MU_FA" +
-                    "ILURE;                                                      \\\r\n    }            " +
-                    "                                                               \\\r\n    else      " +
-                    "                                                                  \\\r\n    {      " +
-                    "                                                                     \\\r\n        " +
-                    "size_t i;                                                               \\\r\n     " +
-                    "   for(i=0;i<MU_COUNT_ARG(__VA_ARGS__);i++)                                \\\r\n  " +
-                    "      {                                                                       \\\r" +
-                    "\n            if(strcmp(enumAsString, MU_C2(enumName, StringStorage)[i])==0)     " +
-                    " \\\r\n            {                                                               " +
-                    "    \\\r\n                *destination = (enumName)i;                              " +
-                    "       \\\r\n                return 0;                                             " +
-                    "          \\\r\n            }                                                      " +
-                    "             \\\r\n        }                                                       " +
-                    "                \\\r\n        return MU_FAILURE;                                   " +
-                    "                   \\\r\n    }                                                     " +
-                    "                      \\\r\n}                                                      " +
-                    "                         \\\r\n\r\n// this macro is a wrapper on top of MU_DEFINE_ENU" +
-                    "M_STRINGS_WITHOUT_INVALID, adding an _INVALID value as the first enum value in t" +
-                    "he enum\r\n#define MU_DEFINE_ENUM_STRINGS(enumName, ...) \\\r\n    MU_DEFINE_ENUM_STR" +
-                    "INGS_WITHOUT_INVALID(enumName, MU_C2(enumName, _INVALID), __VA_ARGS__)\r\n\r\n#defin" +
-                    "e MU_DEFINE_LOCAL_ENUM_WITHOUT_INVALID(enumName, ...) typedef enum MU_C2(enumNam" +
-                    "e, _TAG) { MU_FOR_EACH_1(MU_DEFINE_ENUMERATION_CONSTANT, __VA_ARGS__)} enumName;" +
-                    " \\\r\nstatic const char* MU_C2(enumName, StringStorage)[MU_COUNT_ARG(__VA_ARGS__)]" +
-                    " = {MU_FOR_EACH_1(MU_DEFINE_ENUMERATION_CONSTANT_AS_STRING, __VA_ARGS__)}; \\\r\nst" +
-                    "atic const char* MU_C2(enumName,Strings)(enumName value)         \\\r\n{           " +
-                    "                                                       \\\r\n    if((int)value<0 ||" +
-                    " (int)value>=MU_COUNT_ARG(__VA_ARGS__))      \\\r\n    {                           " +
-                    "                                   \\\r\n        /*this is an error case*/         " +
-                    "                         \\\r\n        return \"NULL\";                              " +
-                    "               \\\r\n    }                                                         " +
-                    "     \\\r\n    else                                                           \\\r\n  " +
-                    "  {                                                              \\\r\n        retu" +
-                    "rn MU_C2(enumName, StringStorage)[value];              \\\r\n    }                 " +
-                    "                                             \\\r\n}\r\n\r\n// this macro is a wrapper " +
-                    "on top of MU_DEFINE_LOCAL_ENUM_WITHOUT_INVALID, adding an _INVALID value as the " +
-                    "first enum value in the enum\r\n#define MU_DEFINE_LOCAL_ENUM(enumName, ...) \\\r\n   " +
-                    " MU_DEFINE_LOCAL_ENUM_WITHOUT_INVALID(enumName, MU_C2(enumName, _INVALID), __VA_" +
-                    "ARGS__)\r\n\r\n// this macro returns the number of enum values (taking into account " +
-                    "that an invalid value is generated)\r\n#define MU_ENUM_VALUE_COUNT(...) (MU_COUNT_" +
-                    "ARG(__VA_ARGS__) + 1)\r\n\r\n// this macro returns the number of enum 2 values (taki" +
-                    "ng into account that an invalid value is generated)\r\n#define MU_ENUM_2_VALUE_COU" +
-                    "NT(...) ((MU_COUNT_ARG(__VA_ARGS__) / 2) + 1)\r\n\r\n#define MU_ENUM_TO_STRING(enumN" +
-                    "ame, enumValue) MU_C2(enumName, Strings)(enumValue)\r\n#define MU_STRING_TO_ENUM(s" +
-                    "tringValue, enumName, addressOfEnumVariable) MU_C2(enumName, _FromString)(string" +
-                    "Value, addressOfEnumVariable)\r\n\r\n#define MU_EMPTY()\r\n#define MACRO_UTILS_DELAY(i" +
-                    "d) id MU_EMPTY MU_LPAREN )\r\n\r\n#define MU_DEFINE_ENUMERATION_CONSTANT_2(enumerati" +
-                    "onConstant, constantExpression) enumerationConstant = constantExpression,\r\n\r\n#de" +
-                    "fine MU_DECLARE_ENUM_STRINGS_2(enumIdentifier, ...) extern const char* MU_C3(MU_" +
-                    ", enumIdentifier,_ToString)(enumIdentifier enumerationConstant);\r\n\r\n#define MU_D" +
-                    "EFINE_ENUM_2_WITHOUT_INVALID(enumIdentifier, ... ) typedef enum MU_C2(enumIdenti" +
-                    "fier, _TAG) {MU_FOR_EACH_2(MU_DEFINE_ENUMERATION_CONSTANT_2, __VA_ARGS__)} enumI" +
-                    "dentifier; \\\r\n    MU_DECLARE_ENUM_STRINGS_2(enumIdentifier, __VA_ARGS__)\r\n\r\n// t" +
-                    "his macro is a wrapper on top of MU_DEFINE_ENUM, adding an _INVALID value as the" +
-                    " first enum value in the enum\r\n#define MU_DEFINE_ENUM_2(enumName, ...) \\\r\n    MU" +
-                    "_DEFINE_ENUM_2_WITHOUT_INVALID(enumName, MU_C2(enumName, _INVALID), (int)0xDDDDD" +
-                    "DDD, __VA_ARGS__)\r\n\r\ntypedef struct ENUM_VALUE_AND_STRING_TAG\r\n{\r\n    int value;" +
-                    "\r\n    const char* valueAsString;\r\n}ENUM_VALUE_AND_STRING;\r\n\r\n#define MU_DEFINE_E" +
-                    "NUM_VALUE_AND_STRING(enumerationConstant, constantExpression) {enumerationConsta" +
-                    "nt, MU_TOSTRING(enumerationConstant)},\r\n#define MU_DEFINE_ENUM_STRINGS_2(enumIde" +
-                    "ntifier, ... ) static const ENUM_VALUE_AND_STRING MU_C2(enumIdentifier, _ValuesA" +
-                    "ndStrings)[MU_DIV2(MU_COUNT_ARG(__VA_ARGS__))] ={MU_FOR_EACH_2(MU_DEFINE_ENUM_VA" +
-                    "LUE_AND_STRING, __VA_ARGS__)}; \\\r\nconst char* MU_C3(MU_, enumIdentifier,_ToStrin" +
-                    "g)(enumIdentifier value)                                                        " +
-                    "                                                                                " +
-                    "               \\\r\n{                                                             " +
-                    "                                                                                " +
-                    "                                                                       \\\r\n    fo" +
-                    "r(size_t i=0;i<sizeof(MU_C2(enumIdentifier, _ValuesAndStrings))/sizeof(MU_C2(enu" +
-                    "mIdentifier, _ValuesAndStrings)[0]);i++)                                        " +
-                    "                                                     \\\r\n    {                   " +
-                    "                                                                                " +
-                    "                                                                                " +
-                    "                             \\\r\n        if(MU_C2(enumIdentifier, _ValuesAndStrin" +
-                    "gs)[i].value == (int)value)                                                     " +
-                    "                                                                                " +
-                    "        \\\r\n        {                                                            " +
-                    "                                                                                " +
-                    "                                                                \\\r\n            r" +
-                    "eturn MU_C2(enumIdentifier, _ValuesAndStrings)[i].valueAsString;                " +
-                    "                                                                                " +
-                    "                                           \\\r\n        }                         " +
-                    "                                                                                " +
-                    "                                                                                " +
-                    "                   \\\r\n    }                                                     " +
-                    "                                                                                " +
-                    "                                                                           \\\r\n  " +
-                    "  return \"NULL\";                                                                " +
-                    "                                                                                " +
-                    "                                                   \\\r\n}                         " +
-                    "                                                                                " +
-                    "                                                                                " +
-                    "                           \\\r\n\r\n#define MU_ENUM_TO_STRING_2(enumIdentifier, valu" +
-                    "e) MU_C3(MU_, enumIdentifier,_ToString)(value)\r\n\r\n#define MU_DEFINE_STRUCT_FIELD" +
-                    "(fieldType, fieldName) fieldType fieldName;\r\n\r\n/*MU_DEFINE_STRUCT allows creatin" +
-                    "g a struct typedef based on a list of fields*/\r\n#define MU_DEFINE_STRUCT(structN" +
-                    "ame, ...) typedef struct MU_C2(structName, _TAG) { MU_FOR_EACH_2(MU_DEFINE_STRUC" +
-                    "T_FIELD, __VA_ARGS__)} structName;\r\n\r\n// this macro allows counting of elements " +
-                    "in an array\r\n#define MU_COUNT_ARRAY_ITEMS(A) (sizeof(A)/sizeof((A)[0]))\r\n\r\n#ifde" +
-                    "f __cplusplus\r\n}\r\n#endif\r\n\r\n#endif /*MACRO_UTILS_H*/\r\n");
+            this.Write("\r\n#define MU_DO(TIMES, MACRO, ...) MU_C2(MU_DO_, TIMES)(MACRO, __VA_ARGS__)\r\n\r\n#e" +
+                    "ndif /*MACRO_UTILS_GENERATED_H*/\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }
@@ -1416,7 +1223,7 @@ for(var i=1;i<=nArithmetic;i++){
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public class macro_utilsBase
+    public class macro_utils_generatedBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

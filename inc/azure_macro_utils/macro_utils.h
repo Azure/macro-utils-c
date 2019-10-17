@@ -195,6 +195,12 @@ const char* MU_C3(MU_, enumIdentifier,_ToString)(enumIdentifier value)          
 
 #define MU_ENUM_TO_STRING_2(enumIdentifier, value) MU_C3(MU_, enumIdentifier,_ToString)(value)
 
+#define MU_PRI_ENUM "s%s (%d)"
+
+#define MU_ENUM_VALUE(enumIdentifier, value) "", MU_ENUM_TO_STRING(enumIdentifier, (value)), (int)(value)
+
+#define MU_ENUM_VALUE_2(enumIdentifier, value) "", MU_ENUM_TO_STRING_2(enumIdentifier, (value)), (int)(value)
+
 #define MU_DEFINE_STRUCT_FIELD(fieldType, fieldName) fieldType fieldName;
 
 /*MU_DEFINE_STRUCT allows creating a struct typedef based on a list of fields*/

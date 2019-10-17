@@ -15,6 +15,7 @@ set(macro_utils_int_tests_c_files
     mu_define_enum_test.c
     mu_define_local_enum_test.c
     mu_define_enum_2_test.c
+    mu_pri_enum_test.c
     main.c
 )
 
@@ -30,6 +31,7 @@ set(macro_utils_int_tests_h_files
     mu_define_enum_test.h
     mu_define_local_enum_test.h
     mu_define_enum_2_test.h
+    mu_pri_enum_test.h
 )
     
 add_executable(macro_utils_int_tests ${macro_utils_int_tests_c_files} ${macro_utils_int_tests_h_files})

@@ -195,6 +195,13 @@ const char* MU_C3(MU_, enumIdentifier,_ToString)(enumIdentifier value)          
 
 #define MU_ENUM_TO_STRING_2(enumIdentifier, value) MU_C3(MU_, enumIdentifier,_ToString)(value)
 
+/*PRI_MU_ENUM and MU_ENUM_VALUE/MU_ENUM_VALUE_2 work together as printf format specifier/argument. e.g: printf("enumValue was=%" PRI_MU_ENUM "\n", MU_ENUM_TO_STRING(enumIdentifier, enumValue));*/
+#define PRI_MU_ENUM "s%s (%d)"
+
+#define MU_ENUM_VALUE(enumIdentifier, value) "", MU_ENUM_TO_STRING(enumIdentifier, (value)), (int)(value)
+
+#define MU_ENUM_VALUE_2(enumIdentifier, value) "", MU_ENUM_TO_STRING_2(enumIdentifier, (value)), (int)(value)
+
 #define MU_DEFINE_STRUCT_FIELD(fieldType, fieldName) fieldType fieldName;
 
 /*MU_DEFINE_STRUCT allows creating a struct typedef based on a list of fields*/

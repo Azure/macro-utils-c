@@ -22,9 +22,9 @@ MU_DEFINE_ENUM_STRINGS(TEST_PRI_ENUM, TEST_PRI_ENUM_VALUES);
 static int verifyMU_ENUM_VALUE_A(const char* empty, const char* valueAsString, int valueAsInt)
 {
     POOR_MANS_ASSERT(empty != NULL);
-    POOR_MANS_ASSERT(memcmp(empty, "", sizeof("")==0));
+    POOR_MANS_ASSERT(memcmp(empty, "", sizeof("")) == 0);
     POOR_MANS_ASSERT(valueAsString != NULL);
-    POOR_MANS_ASSERT(memcmp(empty, "A", sizeof("A") == 0));
+    POOR_MANS_ASSERT(memcmp(valueAsString, "A", sizeof("A")) == 0);
     POOR_MANS_ASSERT(valueAsInt == A);
     return 0;
 }
@@ -32,9 +32,9 @@ static int verifyMU_ENUM_VALUE_A(const char* empty, const char* valueAsString, i
 static int verifyMU_ENUM_VALUE_BC(const char* empty, const char* valueAsString, int valueAsInt)
 {
     POOR_MANS_ASSERT(empty != NULL);
-    POOR_MANS_ASSERT(memcmp(empty, "", sizeof("") == 0));
+    POOR_MANS_ASSERT(memcmp(empty, "", sizeof("")) == 0);
     POOR_MANS_ASSERT(valueAsString != NULL);
-    POOR_MANS_ASSERT(memcmp(valueAsString, "BC", sizeof("BC") == 0));
+    POOR_MANS_ASSERT(memcmp(valueAsString, "BC", sizeof("BC")) == 0);
     POOR_MANS_ASSERT(valueAsInt == BC);
     return 0;
 }
@@ -42,9 +42,9 @@ static int verifyMU_ENUM_VALUE_BC(const char* empty, const char* valueAsString, 
 static int verifyMU_ENUM_VALUE_BC_plus_1(const char* empty, const char* valueAsString, int valueAsInt)
 {
     POOR_MANS_ASSERT(empty != NULL);
-    POOR_MANS_ASSERT(memcmp(empty, "", sizeof("") == 0));
+    POOR_MANS_ASSERT(memcmp(empty, "", sizeof("")) == 0);
     POOR_MANS_ASSERT(valueAsString != NULL);
-    POOR_MANS_ASSERT(memcmp(valueAsString, "NULL", sizeof("NULL") == 0));
+    POOR_MANS_ASSERT(memcmp(valueAsString, "NULL", sizeof("NULL")) == 0);
     POOR_MANS_ASSERT(valueAsInt == (int)BC + 1);
     return 0;
 }
@@ -59,9 +59,9 @@ MU_DEFINE_ENUM_STRINGS_2(TEST_PRI_ENUM_2, TEST_PRI_ENUM_2_VALUES);
 static int verifyMU_ENUM_VALUE_X2(const char* empty, const char* valueAsString, int valueAsInt)
 {
     POOR_MANS_ASSERT(empty != NULL);
-    POOR_MANS_ASSERT(memcmp(empty, "", sizeof("") == 0));
+    POOR_MANS_ASSERT(memcmp(empty, "", sizeof("")) == 0);
     POOR_MANS_ASSERT(valueAsString != NULL);
-    POOR_MANS_ASSERT(memcmp(valueAsString, "X2", sizeof("X2") == 0));
+    POOR_MANS_ASSERT(memcmp(valueAsString, "X2", sizeof("X2")) == 0);
     POOR_MANS_ASSERT(valueAsInt == X2);
     return 0;
 }
@@ -69,9 +69,9 @@ static int verifyMU_ENUM_VALUE_X2(const char* empty, const char* valueAsString, 
 static int verifyMU_ENUM_VALUE_ZY2(const char* empty, const char* valueAsString, int valueAsInt)
 {
     POOR_MANS_ASSERT(empty != NULL);
-    POOR_MANS_ASSERT(memcmp(empty, "", sizeof("") == 0));
+    POOR_MANS_ASSERT(memcmp(empty, "", sizeof("")) == 0);
     POOR_MANS_ASSERT(valueAsString != NULL);
-    POOR_MANS_ASSERT(memcmp(valueAsString, "ZY2", sizeof("ZY2") == 0));
+    POOR_MANS_ASSERT(memcmp(valueAsString, "ZY2", sizeof("ZY2")) == 0);
     POOR_MANS_ASSERT(valueAsInt == ZY2);
     return 0;
 }
@@ -79,9 +79,9 @@ static int verifyMU_ENUM_VALUE_ZY2(const char* empty, const char* valueAsString,
 static int verifyMU_ENUM_VALUE_1(const char* empty, const char* valueAsString, int valueAsInt)
 {
     POOR_MANS_ASSERT(empty != NULL);
-    POOR_MANS_ASSERT(memcmp(empty, "", sizeof("") == 0));
+    POOR_MANS_ASSERT(memcmp(empty, "", sizeof("")) == 0);
     POOR_MANS_ASSERT(valueAsString != NULL);
-    POOR_MANS_ASSERT(memcmp(valueAsString, "NULL", sizeof("NULL") == 0));
+    POOR_MANS_ASSERT(memcmp(valueAsString, "NULL", sizeof("NULL")) == 0);
     POOR_MANS_ASSERT(valueAsInt == 1);
     return 0;
 }
@@ -89,9 +89,9 @@ static int verifyMU_ENUM_VALUE_1(const char* empty, const char* valueAsString, i
 static int verifyMU_ENUM_VALUE_3(const char* empty, const char* valueAsString, int valueAsInt)
 {
     POOR_MANS_ASSERT(empty != NULL);
-    POOR_MANS_ASSERT(memcmp(empty, "", sizeof("") == 0));
+    POOR_MANS_ASSERT(memcmp(empty, "", sizeof("")) == 0);
     POOR_MANS_ASSERT(valueAsString != NULL);
-    POOR_MANS_ASSERT(memcmp(valueAsString, "NULL", sizeof("NULL") == 0));
+    POOR_MANS_ASSERT(memcmp(valueAsString, "NULL", sizeof("NULL")) == 0);
     POOR_MANS_ASSERT(valueAsInt == 3);
     return 0;
 }
@@ -99,9 +99,9 @@ static int verifyMU_ENUM_VALUE_3(const char* empty, const char* valueAsString, i
 static int verifyMU_ENUM_VALUE_7(const char* empty, const char* valueAsString, int valueAsInt)
 {
     POOR_MANS_ASSERT(empty != NULL);
-    POOR_MANS_ASSERT(memcmp(empty, "", sizeof("") == 0));
+    POOR_MANS_ASSERT(memcmp(empty, "", sizeof("")) == 0);
     POOR_MANS_ASSERT(valueAsString != NULL);
-    POOR_MANS_ASSERT(memcmp(valueAsString, "NULL", sizeof("NULL") == 0));
+    POOR_MANS_ASSERT(memcmp(valueAsString, "NULL", sizeof("NULL")) == 0);
     POOR_MANS_ASSERT(valueAsInt == 7);
     return 0;
 }

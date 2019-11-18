@@ -27,7 +27,7 @@ int run_mu_define_enum_2_without_invalid_test(void)
     const char* TEST2_value_0 = MU_ENUM_TO_STRING_2(TEST3_ENUM, 0);
 
     POOR_MANS_ASSERT(TEST2_value_0 != NULL);
-    POOR_MANS_ASSERT(strcmp("NULL", TEST2_value_0) == 0);
+    POOR_MANS_ASSERT(strcmp("UNKNOWN", TEST2_value_0) == 0);
 
 
     const char* TEST3_value_2 = MU_ENUM_TO_STRING_2(TEST3_ENUM, 2);

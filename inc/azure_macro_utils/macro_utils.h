@@ -97,7 +97,7 @@ const char* MU_C2(enumName,Strings)(enumName value)                \
     if((int)value<0 || (int)value>=MU_COUNT_ARG(__VA_ARGS__))      \
     {                                                              \
         /*this is an error case*/                                  \
-        return "NULL";                                             \
+        return "UNKNOWN";                                          \
     }                                                              \
     else                                                           \
     {                                                              \
@@ -138,7 +138,7 @@ static const char* MU_C2(enumName,Strings)(enumName value)         \
     if((int)value<0 || (int)value>=MU_COUNT_ARG(__VA_ARGS__))      \
     {                                                              \
         /*this is an error case*/                                  \
-        return "NULL";                                             \
+        return "UNKNOWN";                                          \
     }                                                              \
     else                                                           \
     {                                                              \
@@ -190,7 +190,7 @@ const char* MU_C3(MU_, enumIdentifier,_ToString)(enumIdentifier value)          
             return MU_C2(enumIdentifier, _ValuesAndStrings)[i].valueAsString;                                                                                                                                           \
         }                                                                                                                                                                                                            \
     }                                                                                                                                                                                                                \
-    return "NULL";                                                                                                                                                                                                   \
+    return "UNKNOWN";                                                                                                                                                                                                \
 }                                                                                                                                                                                                                    \
 
 #define MU_ENUM_TO_STRING_2(enumIdentifier, value) MU_C3(MU_, enumIdentifier,_ToString)(value)

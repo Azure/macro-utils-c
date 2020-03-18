@@ -26,6 +26,13 @@ MU_DEFINE_ENUM(TEST_CONVERT_TO_ENUM, TEST_CONVERT_TO_ENUM_VALUES);
     test_from_a, test_to_a,
     test_from_c, test_to_b);*/
 
+// Also the following code should not compile because it uses a from value that is not part of the enum :
+/*MU_DEFINE_CONVERT_ENUM(TEST_CONVERT_FROM_ENUM, TEST_CONVERT_TO_ENUM,
+    test_from_a, test_to_a,
+    test_from_b, test_to_a,
+    42, test_to_a,
+    test_from_c, test_to_b);*/
+
 MU_DEFINE_CONVERT_ENUM(TEST_CONVERT_FROM_ENUM, TEST_CONVERT_TO_ENUM,
     test_from_a, test_to_a,
     test_from_b, test_to_b,

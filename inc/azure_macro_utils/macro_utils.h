@@ -78,9 +78,13 @@ MU_IF(X, "true", "false") => "true"
 #define MU_EAT_EMPTY_ARG(arg_count, arg) MU_IF(MU_ISEMPTY(arg),,arg) MU_IF(MU_ISEMPTY(arg),MU_EXPAND_TO_NOTHING,MU_IFCOMMALOGIC)(MU_DEC(arg_count))
 #define MU_EAT_EMPTY_ARGS(...) MU_FOR_EACH_1_COUNTED(MU_EAT_EMPTY_ARG, __VA_ARGS__)
 
+#define MU_TYPEDEF_EACH_ENUM_VALUE(enum_value) \
+    typedef int MU_C2(enum_value_typedef_, enum_value);
+
 #define MU_DEFINE_ENUMERATION_CONSTANT(x) x,
 /*MU_DEFINE_ENUM_WITHOUT_INVALID goes to header*/
 #define MU_DEFINE_ENUM_WITHOUT_INVALID(enumName, ...) typedef enum MU_C2(enumName, _TAG) { MU_FOR_EACH_1(MU_DEFINE_ENUMERATION_CONSTANT, __VA_ARGS__) MU_C2(enumName, _VALUE_COUNT) = MU_COUNT_ARG(__VA_ARGS__)} enumName; \
+    MU_FOR_EACH_1(MU_TYPEDEF_EACH_ENUM_VALUE, __VA_ARGS__) \
     extern const char* MU_C2(enumName,Strings)(enumName value); \
     extern int MU_C2(enumName, _FromString)(const char* enumAsString, enumName* destination);
 
@@ -235,6 +239,12 @@ const char* MU_C3(MU_, enumIdentifier,_ToString)(enumIdentifier value)          
 #define CONSTRUCT_FROM_FAKE_ENUM(from_value, to_value) \
     MU_C3(fake_from_, from_value, _C0FB3709_EDE8_4288_8F70_FDDB5D8D7A51),
 
+// This macro creates a typedef for a from enum value
+// Its type is the enum value of the original enum in order to make sure that only valid
+// enum values are used in from
+#define MU_TYPEDEF_FROM_ENUM_VALUE(from_value, to_value) \
+    typedef MU_C2(enum_value_typedef_, from_value) MU_C2(enum_value_typedef_convert_from_, from_value);
+
 // This macro adds validation of the fact that the from values count in the list match the count of values in the
 // (as opposed to the macro MU_DEFINE_CONVERT_ENUM_WITHOUT_VALIDATION)
 // from enum type. It does that by having a special fake enum where all the "from" values are enumerated
@@ -247,6 +257,7 @@ const char* MU_C3(MU_, enumIdentifier,_ToString)(enumIdentifier value)          
         MU_FOR_EACH_2(CONSTRUCT_FROM_FAKE_ENUM, __VA_ARGS__) \
         MU_C3(fake_, ENUM_TYPE_FROM, _C0FB3709_EDE8_4288_8F70_FDDB5D8D7A51_count) \
     } MU_C3(fake_, ENUM_TYPE_FROM, _C0FB3709_EDE8_4288_8F70_FDDB5D8D7A51); \
+    MU_FOR_EACH_2(MU_TYPEDEF_FROM_ENUM_VALUE, __VA_ARGS__) \
     /* "Compare" the count of the from enum values with the count of the values in "ENUM_TYPE_FROM" */ \
     typedef struct MU_C3(fake_, ENUM_TYPE_FROM, _C0FB3709_EDE8_4288_8F70_FDDB5D8D7A51_struct_TAG) \
     { \

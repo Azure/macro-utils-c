@@ -80,7 +80,7 @@ MU_IF(X, "true", "false") => "true"
 
 #define MU_DEFINE_ENUMERATION_CONSTANT(x) x,
 /*MU_DEFINE_ENUM_WITHOUT_INVALID goes to header*/
-#define MU_DEFINE_ENUM_WITHOUT_INVALID(enumName, ...) typedef enum MU_C2(enumName, _TAG) { MU_FOR_EACH_1(MU_DEFINE_ENUMERATION_CONSTANT, __VA_ARGS__)} enumName; \
+#define MU_DEFINE_ENUM_WITHOUT_INVALID(enumName, ...) typedef enum MU_C2(enumName, _TAG) { MU_FOR_EACH_1(MU_DEFINE_ENUMERATION_CONSTANT, __VA_ARGS__) MU_C2(enumName, _VALUE_COUNT) = MU_COUNT_ARG(__VA_ARGS__)} enumName; \
     extern const char* MU_C2(enumName,Strings)(enumName value); \
     extern int MU_C2(enumName, _FromString)(const char* enumAsString, enumName* destination);
 
@@ -201,6 +201,61 @@ const char* MU_C3(MU_, enumIdentifier,_ToString)(enumIdentifier value)          
 #define MU_ENUM_VALUE(enumIdentifier, value) "", MU_ENUM_TO_STRING(enumIdentifier, (value)), (int)(value)
 
 #define MU_ENUM_VALUE_2(enumIdentifier, value) "", MU_ENUM_TO_STRING_2(enumIdentifier, (value)), (int)(value)
+
+#define CONVERT_ENUM_VALUE(from, to) \
+    case (from): \
+        *enum_value_to = (to); \
+        return 0; \
+
+// This macro declares an enum conversion function that translates a value from one enum to another
+#define MU_DECLARE_CONVERT_ENUM(ENUM_TYPE_FROM, ENUM_TYPE_TO) \
+    int MU_C4(convert_enum_, ENUM_TYPE_FROM, _, ENUM_TYPE_TO)(ENUM_TYPE_FROM enum_value_from, ENUM_TYPE_TO* enum_value_to);
+
+// This macro defines an enum conversion function that translates a value from one enum to another
+// It is implemented as a switch statement. This allows for catching multiple from values being in the list also
+#define MU_DEFINE_CONVERT_ENUM_WITHOUT_INVALID(ENUM_TYPE_FROM, ENUM_TYPE_TO, ...) \
+    int MU_C4(convert_enum_, ENUM_TYPE_FROM, _, ENUM_TYPE_TO)(ENUM_TYPE_FROM enum_value_from, ENUM_TYPE_TO* enum_value_to) \
+    { \
+        switch (enum_value_from) \
+        { \
+            default: \
+                break; \
+            MU_FOR_EACH_2(CONVERT_ENUM_VALUE, __VA_ARGS__) \
+        } \
+        return MU_FAILURE; \
+    }
+
+// This macro simply adds the conversion of the "well known" by now _INVALID enum value
+#define MU_DEFINE_CONVERT_ENUM(ENUM_TYPE_FROM, ENUM_TYPE_TO, ...) \
+    MU_DEFINE_CONVERT_ENUM_WITHOUT_INVALID(ENUM_TYPE_FROM, ENUM_TYPE_TO, MU_C2(ENUM_TYPE_FROM, _INVALID), MU_C2(ENUM_TYPE_TO, _INVALID), __VA_ARGS__)
+
+#define CONSTRUCT_FROM_FAKE_ENUM(from_value, to_value) \
+    MU_C3(fake_from_, from_value, _C0FB3709_EDE8_4288_8F70_FDDB5D8D7A51),
+
+#define CONSTRUCT_TO_FAKE_ENUM(from_value, to_value) \
+    MU_C3(fake_to_, to_value, _C0FB3709_EDE8_4288_8F70_FDDB5D8D7A51),
+
+// This macro adds validation of the fact that the from values count in the list match the count of values in the
+// from enum type. It does that by having a special fake enum where all the "from" values are enumerated
+// The count check is done by having a zero sized array in a struct if the counts do not match
+#define MU_DEFINE_CONVERT_ENUM_WITH_VALIDATION(ENUM_TYPE_FROM, ENUM_TYPE_TO, ...) \
+    /* Have an enum which has all the "from" values */ \
+    /* This enum will have a count */ \
+    typedef enum MU_C3(fake_, ENUM_TYPE_FROM, _C0FB3709_EDE8_4288_8F70_FDDB5D8D7A51_TAG) \
+    { \
+        MU_FOR_EACH_2(CONSTRUCT_FROM_FAKE_ENUM, __VA_ARGS__) \
+        MU_C3(fake_, ENUM_TYPE_FROM, _C0FB3709_EDE8_4288_8F70_FDDB5D8D7A51_count) \
+    } MU_C3(fake_, ENUM_TYPE_FROM, _C0FB3709_EDE8_4288_8F70_FDDB5D8D7A51); \
+    /* "Compare" the count of the from enum values with the count of the values in "ENUM_TYPE_FROM" */ \
+    typedef struct MU_C3(fake_, ENUM_TYPE_FROM, _C0FB3709_EDE8_4288_8F70_FDDB5D8D7A51_struct_TAG) \
+    { \
+        int MU_C3(fake_, ENUM_TYPE_FROM, _C0FB3709_EDE8_4288_8F70_FDDB5D8D7A51_count_test_array)[((MU_C3(fake_, ENUM_TYPE_FROM, _C0FB3709_EDE8_4288_8F70_FDDB5D8D7A51_count) + 1) == MU_C2(ENUM_TYPE_FROM, _VALUE_COUNT)) ? 1 : 0]; \
+        int dummy; \
+    } MU_C3(fake_, ENUM_TYPE_FROM, _C0FB3709_EDE8_4288_8F70_FDDB5D8D7A51_struct); \
+    MU_DEFINE_CONVERT_ENUM(ENUM_TYPE_FROM, ENUM_TYPE_TO, __VA_ARGS__)
+
+#define MU_CONVERT_ENUM(ENUM_TYPE_FROM, ENUM_TYPE_TO) \
+    MU_C4(convert_enum_, ENUM_TYPE_FROM, _, ENUM_TYPE_TO)
 
 #define MU_DEFINE_STRUCT_FIELD(fieldType, fieldName) fieldType fieldName;
 

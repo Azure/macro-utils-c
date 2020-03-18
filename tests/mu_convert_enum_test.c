@@ -21,12 +21,12 @@
 MU_DEFINE_ENUM(TEST_CONVERT_FROM_ENUM, TEST_CONVERT_FROM_ENUM_VALUES);
 MU_DEFINE_ENUM(TEST_CONVERT_TO_ENUM, TEST_CONVERT_TO_ENUM_VALUES);
 
-/* The following code should not compile :
-MU_DEFINE_CONVERT_ENUM(TEST_CONVERT_FROM_ENUM, TEST_CONVERT_TO_ENUM,
+// The following code should not compile because there is a missing test_from_b in the from values :
+/*MU_DEFINE_CONVERT_ENUM(TEST_CONVERT_FROM_ENUM, TEST_CONVERT_TO_ENUM,
     test_from_a, test_to_a,
     test_from_c, test_to_b);*/
 
-MU_DEFINE_CONVERT_ENUM_WITH_VALIDATION(TEST_CONVERT_FROM_ENUM, TEST_CONVERT_TO_ENUM,
+MU_DEFINE_CONVERT_ENUM(TEST_CONVERT_FROM_ENUM, TEST_CONVERT_TO_ENUM,
     test_from_a, test_to_a,
     test_from_b, test_to_b,
     test_from_c, test_to_b);
@@ -49,6 +49,9 @@ int run_mu_convert_enum_tests(void)
     convert_result = MU_CONVERT_ENUM(TEST_CONVERT_FROM_ENUM, TEST_CONVERT_TO_ENUM)(test_from_c, &result_value);
     POOR_MANS_ASSERT(convert_result == 0);
     POOR_MANS_ASSERT(result_value == test_to_b);
+
+    convert_result = MU_CONVERT_ENUM(TEST_CONVERT_FROM_ENUM, TEST_CONVERT_TO_ENUM)(424242, &result_value);
+    POOR_MANS_ASSERT(convert_result != 0);
 
     return result;
 }

@@ -207,14 +207,17 @@ const char* MU_C3(MU_, enumIdentifier,_ToString)(enumIdentifier value)          
         *enum_value_to = (to); \
         return 0; \
 
+#define MU_CONVERT_ENUM(ENUM_TYPE_FROM, ENUM_TYPE_TO) \
+    MU_C4(convert_enum_, ENUM_TYPE_FROM, _, ENUM_TYPE_TO)
+
 // This macro declares an enum conversion function that translates a value from one enum to another
 #define MU_DECLARE_CONVERT_ENUM(ENUM_TYPE_FROM, ENUM_TYPE_TO) \
-    int MU_C4(convert_enum_, ENUM_TYPE_FROM, _, ENUM_TYPE_TO)(ENUM_TYPE_FROM enum_value_from, ENUM_TYPE_TO* enum_value_to);
+    int MU_CONVERT_ENUM(ENUM_TYPE_FROM, ENUM_TYPE_TO)(ENUM_TYPE_FROM enum_value_from, ENUM_TYPE_TO* enum_value_to);
 
 // This macro defines an enum conversion function that translates a value from one enum to another
 // It is implemented as a switch statement. This allows for catching multiple from values being in the list also
 #define MU_DEFINE_CONVERT_ENUM_WITHOUT_INVALID(ENUM_TYPE_FROM, ENUM_TYPE_TO, ...) \
-    int MU_C4(convert_enum_, ENUM_TYPE_FROM, _, ENUM_TYPE_TO)(ENUM_TYPE_FROM enum_value_from, ENUM_TYPE_TO* enum_value_to) \
+    int MU_CONVERT_ENUM(ENUM_TYPE_FROM, ENUM_TYPE_TO)(ENUM_TYPE_FROM enum_value_from, ENUM_TYPE_TO* enum_value_to) \
     { \
         switch (enum_value_from) \
         { \
@@ -226,19 +229,17 @@ const char* MU_C3(MU_, enumIdentifier,_ToString)(enumIdentifier value)          
     }
 
 // This macro simply adds the conversion of the "well known" by now _INVALID enum value
-#define MU_DEFINE_CONVERT_ENUM(ENUM_TYPE_FROM, ENUM_TYPE_TO, ...) \
+#define MU_DEFINE_CONVERT_ENUM_WITHOUT_VALIDATION(ENUM_TYPE_FROM, ENUM_TYPE_TO, ...) \
     MU_DEFINE_CONVERT_ENUM_WITHOUT_INVALID(ENUM_TYPE_FROM, ENUM_TYPE_TO, MU_C2(ENUM_TYPE_FROM, _INVALID), MU_C2(ENUM_TYPE_TO, _INVALID), __VA_ARGS__)
 
 #define CONSTRUCT_FROM_FAKE_ENUM(from_value, to_value) \
     MU_C3(fake_from_, from_value, _C0FB3709_EDE8_4288_8F70_FDDB5D8D7A51),
 
-#define CONSTRUCT_TO_FAKE_ENUM(from_value, to_value) \
-    MU_C3(fake_to_, to_value, _C0FB3709_EDE8_4288_8F70_FDDB5D8D7A51),
-
 // This macro adds validation of the fact that the from values count in the list match the count of values in the
+// (as opposed to the macro MU_DEFINE_CONVERT_ENUM_WITHOUT_VALIDATION)
 // from enum type. It does that by having a special fake enum where all the "from" values are enumerated
 // The count check is done by having a zero sized array in a struct if the counts do not match
-#define MU_DEFINE_CONVERT_ENUM_WITH_VALIDATION(ENUM_TYPE_FROM, ENUM_TYPE_TO, ...) \
+#define MU_DEFINE_CONVERT_ENUM(ENUM_TYPE_FROM, ENUM_TYPE_TO, ...) \
     /* Have an enum which has all the "from" values */ \
     /* This enum will have a count */ \
     typedef enum MU_C3(fake_, ENUM_TYPE_FROM, _C0FB3709_EDE8_4288_8F70_FDDB5D8D7A51_TAG) \
@@ -252,10 +253,7 @@ const char* MU_C3(MU_, enumIdentifier,_ToString)(enumIdentifier value)          
         int MU_C3(fake_, ENUM_TYPE_FROM, _C0FB3709_EDE8_4288_8F70_FDDB5D8D7A51_count_test_array)[((MU_C3(fake_, ENUM_TYPE_FROM, _C0FB3709_EDE8_4288_8F70_FDDB5D8D7A51_count) + 1) == MU_C2(ENUM_TYPE_FROM, _VALUE_COUNT)) ? 1 : 0]; \
         int dummy; \
     } MU_C3(fake_, ENUM_TYPE_FROM, _C0FB3709_EDE8_4288_8F70_FDDB5D8D7A51_struct); \
-    MU_DEFINE_CONVERT_ENUM(ENUM_TYPE_FROM, ENUM_TYPE_TO, __VA_ARGS__)
-
-#define MU_CONVERT_ENUM(ENUM_TYPE_FROM, ENUM_TYPE_TO) \
-    MU_C4(convert_enum_, ENUM_TYPE_FROM, _, ENUM_TYPE_TO)
+    MU_DEFINE_CONVERT_ENUM_WITHOUT_VALIDATION(ENUM_TYPE_FROM, ENUM_TYPE_TO, __VA_ARGS__)
 
 #define MU_DEFINE_STRUCT_FIELD(fieldType, fieldName) fieldType fieldName;
 

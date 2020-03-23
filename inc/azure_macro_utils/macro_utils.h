@@ -240,12 +240,6 @@ const char* MU_C3(MU_, enumIdentifier,_ToString)(enumIdentifier value)          
 #define CONSTRUCT_FIELD_FROM_FAKE_ENUM(from_value, to_value) \
     int MU_C3(fake_from_, from_value, _C0FB3709_EDE8_4288_8F70_FDDB5D8D7A51)[(MU_C2(enum_value_typedef_, from_value) == MU_C2(enum_value_typedef_, from_value)) ? 1 : 0];
 
-// This macro creates a typedef for a from enum value
-// Its type is the enum value of the original enum in order to make sure that only valid
-// enum values are used in from
-#define MU_TYPEDEF_FROM_ENUM_VALUE(from_value, to_value) \
-    MU_C2(enum_value_typedef_convert_from_, from_value);
-
 // This macro adds validation of the fact that the from values count in the list match the count of values in the
 // (as opposed to the macro MU_DEFINE_CONVERT_ENUM_WITHOUT_VALIDATION)
 // from enum type. It does that by having a special fake enum where all the "from" values are enumerated
@@ -263,7 +257,6 @@ const char* MU_C3(MU_, enumIdentifier,_ToString)(enumIdentifier value)          
         MU_FOR_EACH_2(CONSTRUCT_FROM_FAKE_ENUM, __VA_ARGS__) \
         MU_C3(fake_, ENUM_TYPE_FROM, _C0FB3709_EDE8_4288_8F70_FDDB5D8D7A51_count) \
     } MU_C3(fake_, ENUM_TYPE_FROM, _C0FB3709_EDE8_4288_8F70_FDDB5D8D7A51); \
-    MU_FOR_EACH_2(MU_TYPEDEF_FROM_ENUM_VALUE, __VA_ARGS__) \
     /* "Compare" the count of the from enum values with the count of the values in "ENUM_TYPE_FROM" */ \
     typedef struct MU_C3(fake_, ENUM_TYPE_FROM, _C0FB3709_EDE8_4288_8F70_FDDB5D8D7A51_struct_TAG) \
     { \

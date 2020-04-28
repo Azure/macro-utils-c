@@ -273,6 +273,12 @@ const char* MU_C3(MU_, enumIdentifier,_ToString)(enumIdentifier value)          
 // this macro allows counting of elements in an array
 #define MU_COUNT_ARRAY_ITEMS(A) (sizeof(A)/sizeof((A)[0]))
 
+#ifdef _MSC_VER
+#define MU_SUPPRESS_WARNING(warn_no) __pragma(warning(suppress:warn_no))
+#else
+#define MU_SUPPRESS_WARNING(warn_no)
+#endif
+
 #ifdef __cplusplus
 }
 #endif

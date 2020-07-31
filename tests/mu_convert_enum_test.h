@@ -4,8 +4,6 @@
 #ifndef MU_CONVERT_ENUM_TEST_H
 #define MU_CONVERT_ENUM_TEST_H
 
-#include "azure_macro_utils/macro_utils.h"
-
 int run_mu_convert_enum_tests(void);
 
 #endif // MU_CONVERT_ENUM_TEST_H

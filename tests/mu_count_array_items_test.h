@@ -4,8 +4,6 @@
 #ifndef MU_COUNT_ARRAY_ITEMS_TEST_H
 #define MU_COUNT_ARRAY_ITEMS_TEST_H
 
-#include "azure_macro_utils/macro_utils.h"
-
 int run_mu_count_array_items_tests(void);
 
 #endif /* MU_COUNT_ARRAY_ITEMS_TEST_H */

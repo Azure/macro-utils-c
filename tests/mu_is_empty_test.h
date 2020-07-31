@@ -1,9 +1,9 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-#ifndef FOR_EACH_1_KEEP_2_TEST_H
-#define FOR_EACH_1_KEEP_2_TEST_H
+#ifndef MU_IS_EMPTY_TEST_H
+#define MU_IS_EMPTY_TEST_H
 
-int run_for_each_1_keep_2_tests(void);
+int run_mu_is_empty_tests(void);
 
-#endif // FOR_EACH_1_KEEP_2_TEST_H
+#endif // MU_IS_EMPTY_TEST_H

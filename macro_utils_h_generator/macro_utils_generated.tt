@@ -72,24 +72,39 @@
 #ifdef _MSC_VER
 #define MU_COUNT_1_OR_MORE_ARG(...) MU_THE_NTH_ARG MU_LPAREN __VA_ARGS__, \
 <#for(var i=nMacroParameters-1;i>=1;i--){#><#=i.ToString()+((i>1)?", ":"")#><#}#>)
-#define MU_MORE_THAN_1_ARG(...) MU_THE_NTH_ARG MU_LPAREN __VA_ARGS__, <#for(var i=nMacroParameters-2;i>=1;i--){#><#=1#>,<#}#>0)
+#define MU_HAS_COMMA(...) MU_THE_NTH_ARG MU_LPAREN __VA_ARGS__, <#for(var i=nMacroParameters-2;i>=1;i--){#><#=1#>,<#}#>0)
 #else
 #define MU_COUNT_1_OR_MORE_ARG(...) MU_THE_NTH_ARG (__VA_ARGS__, \
 <#for(var i=nMacroParameters-1;i>=1;i--){#><#=i.ToString()+((i>1)?", ":"")#><#}#>)
-#define MU_MORE_THAN_1_ARG(...) MU_THE_NTH_ARG(__VA_ARGS__, <#for(var i=nMacroParameters-2;i>=1;i--){#><#=1#>,<#}#> 0)
+#define MU_HAS_COMMA(...) MU_THE_NTH_ARG(__VA_ARGS__, <#for(var i=nMacroParameters-2;i>=1;i--){#><#=1#>,<#}#> 0)
 #endif
 
 #define MU_COUNT_ARG(...) MU_C2(MU_COUNT_ARG_, MU_ISEMPTY(__VA_ARGS__))(__VA_ARGS__)
 #define MU_COUNT_ARG_1(...) 0
 #define MU_COUNT_ARG_0(...) MU_C1(MU_COUNT_1_OR_MORE_ARG(__VA_ARGS__))
 
-#define MU_ISEMPTY(...) MU_C5(MU_DISPATCH_EMPTY_, MU_MORE_THAN_1_ARG(MU_TRIGGER_PARENTHESIS __VA_ARGS__ ()), MU_MORE_THAN_1_ARG(__VA_ARGS__), MU_MORE_THAN_1_ARG(__VA_ARGS__ ()), MU_MORE_THAN_1_ARG(MU_TRIGGER_PARENTHESIS __VA_ARGS__))
-#define MU_DISPATCH_EMPTY_1000 1
-#define MU_DISPATCH_EMPTY_0000 0
-#define MU_DISPATCH_EMPTY_1100 0
-#define MU_DISPATCH_EMPTY_1111 0
+
+#define MU_ISEMPTY(...) MU_C5(MU_DISPATCH_EMPTY_, MU_HAS_COMMA(__VA_ARGS__), MU_HAS_COMMA(MU_TRIGGER_PARENTHESIS __VA_ARGS__ ()), MU_HAS_COMMA(__VA_ARGS__ ()), MU_HAS_COMMA(MU_TRIGGER_PARENTHESIS __VA_ARGS__))
+
+/*in the below cases __VA_ARGS__ already has a comma in its expansion, so it is not empty*/
+#define MU_DISPATCH_EMPTY_1000 0 /*not empty because MU_HAS_COMMA says there's a comma somewhere*/
 #define MU_DISPATCH_EMPTY_1001 0
 #define MU_DISPATCH_EMPTY_1010 0
+#define MU_DISPATCH_EMPTY_1011 0
+#define MU_DISPATCH_EMPTY_1100 0
+#define MU_DISPATCH_EMPTY_1101 0
+#define MU_DISPATCH_EMPTY_1110 0
+#define MU_DISPATCH_EMPTY_1111 0
+
+/*note: not all cases are possible from the table below. Or have not been discovered yet*/
+#define MU_DISPATCH_EMPTY_0100 1 /*empty because MU_TRIGGER_PARENTHESIS expanded to , (2 empty tokens) and __VA_ARGS__() did not have a comma and MU_TRIGGER_PARENTHESIS __VA_ARGS__ did not have a comma either*/
+#define MU_DISPATCH_EMPTY_0101 0 
+#define MU_DISPATCH_EMPTY_0110 0
+#define MU_DISPATCH_EMPTY_0111 0
+#define MU_DISPATCH_EMPTY_0000 0
+#define MU_DISPATCH_EMPTY_0001 0
+#define MU_DISPATCH_EMPTY_0010 0
+#define MU_DISPATCH_EMPTY_0011 0
 
 
 <#for(var i=nMacroParameters;i>=2;i--)#>

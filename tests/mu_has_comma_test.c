@@ -5,7 +5,7 @@
 
 #include "azure_macro_utils/macro_utils.h"
 
-#include "mu_more_than_1_arg_test.h"
+#include "mu_has_comma_test.h"
 
 #define EMPTY
 
@@ -13,29 +13,32 @@
 
 #define M2(...) __VA_ARGS__
 
-int run_mu_more_than_1_arg_tests(void)
+#define M3 ,
+
+int run_mu_has_comma_tests(void)
 {
-    POOR_MANS_ASSERT(MU_MORE_THAN_1_ARG() == 0);
-    POOR_MANS_ASSERT(MU_MORE_THAN_1_ARG(EMPTY) == 0);
-    POOR_MANS_ASSERT(MU_MORE_THAN_1_ARG(M1()) == 0);
-    POOR_MANS_ASSERT(MU_MORE_THAN_1_ARG(M1) == 0);
-    POOR_MANS_ASSERT(MU_MORE_THAN_1_ARG(M2) == 0);
-    POOR_MANS_ASSERT(MU_MORE_THAN_1_ARG(M2()) == 0);
-    POOR_MANS_ASSERT(MU_MORE_THAN_1_ARG(M2(A)) == 0);
-    POOR_MANS_ASSERT(MU_MORE_THAN_1_ARG(M2(A, B)) == 1);
+    POOR_MANS_ASSERT(MU_HAS_COMMA() == 0);
+    POOR_MANS_ASSERT(MU_HAS_COMMA(EMPTY) == 0);
+    POOR_MANS_ASSERT(MU_HAS_COMMA(M1()) == 0);
+    POOR_MANS_ASSERT(MU_HAS_COMMA(M1) == 0);
+    POOR_MANS_ASSERT(MU_HAS_COMMA(M2) == 0);
+    POOR_MANS_ASSERT(MU_HAS_COMMA(M2()) == 0);
+    POOR_MANS_ASSERT(MU_HAS_COMMA(M2(A)) == 0);
+    POOR_MANS_ASSERT(MU_HAS_COMMA(M2(A, B)) == 1);
 
-    POOR_MANS_ASSERT(MU_MORE_THAN_1_ARG(EMPTY, EMPTY) == 1);
+    POOR_MANS_ASSERT(MU_HAS_COMMA(EMPTY, EMPTY) == 1);
 
-    POOR_MANS_ASSERT(MU_MORE_THAN_1_ARG(A) == 0);
-    POOR_MANS_ASSERT(MU_MORE_THAN_1_ARG(A B) == 0);
+    POOR_MANS_ASSERT(MU_HAS_COMMA(A) == 0);
+    POOR_MANS_ASSERT(MU_HAS_COMMA(A B) == 0);
 
-    POOR_MANS_ASSERT(MU_MORE_THAN_1_ARG( , ) == 1);
-    POOR_MANS_ASSERT(MU_MORE_THAN_1_ARG(A, ) == 1);
-    POOR_MANS_ASSERT(MU_MORE_THAN_1_ARG(, A) == 1);
-    POOR_MANS_ASSERT(MU_MORE_THAN_1_ARG(A, B) == 1);
+    POOR_MANS_ASSERT(MU_HAS_COMMA( , ) == 1);
+    POOR_MANS_ASSERT(MU_HAS_COMMA(M3) == 1);
+    POOR_MANS_ASSERT(MU_HAS_COMMA(A, ) == 1);
+    POOR_MANS_ASSERT(MU_HAS_COMMA(, A) == 1);
+    POOR_MANS_ASSERT(MU_HAS_COMMA(A, B) == 1);
 
-    POOR_MANS_ASSERT(MU_MORE_THAN_1_ARG(0, 0) == 1);
-    POOR_MANS_ASSERT(MU_MORE_THAN_1_ARG(/*123 zeros*/
+    POOR_MANS_ASSERT(MU_HAS_COMMA(0, 0) == 1);
+    POOR_MANS_ASSERT(MU_HAS_COMMA(/*123 zeros*/
         0,
         0,
         0,

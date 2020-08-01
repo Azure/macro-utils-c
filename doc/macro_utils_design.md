@@ -63,41 +63,41 @@ Here we see how the macro does not produce 0, and that is precisely why the macr
 
 Next question is : how to produce 0 as a count result? Not easy or immediately stright forward. More macros are needed for that.
 
-### MU_MORE_THAN_1_ARG(...)
+### MU_HAS_COMMA(...)
 
-`MU_MORE_THAN_1_ARG` expands to 0 when the number of its arguments is 0 or 1. If the number of arguments is greater or equal tot 2 then it expands to 0. Here' some examples
+`MU_HAS_COMMA` expands to 0 when the number of its arguments is 0 or 1. If the number of arguments is greater or equal to 2 then it expands to 0. Here' some examples
 
-MU_MORE_THAN_1_ARG() => 0
+MU_HAS_COMMA() => 0
 
-MU_MORE_THAN_1_ARG(A) => 0
+MU_HAS_COMMA(A) => 0
 
-MU_MORE_THAN_1_ARG(A, B) => 1
+MU_HAS_COMMA(A, B) => 1
 
-MU_MORE_THAN_1_ARG("1", '2', 3) => 1
+MU_HAS_COMMA("1", '2', 3) => 1
 
-Here's how this works. Behind the scenes, `MU_MORE_THAN_1_ARG` will call `MU_THE_NTH_ARG`(<<here are `MU_MORE_THAN_1_ARG`'s arguments>>, 1, 1, 0)
+Here's how this works. Behind the scenes, `MU_HAS_COMMA` will call `MU_THE_NTH_ARG`(<<here are `MU_HAS_COMMA`'s arguments>>, 1, 1, 0)
 
-MU_MORE_THAN_1_ARG() => MU_THE_NTH_ARG( , 1, 1, 0) => 0
-                                                ^
-                                                |----- this is 4th argument. Note how the first argument is empty because __VA_ARGS__ expands to an empty token.
+MU_HAS_COMMA() => MU_THE_NTH_ARG( , 1, 1, 0) => 0
+                                          ^
+                                          |----- this is 4th argument. Note how the first argument is empty because __VA_ARGS__ expands to an empty token.
 
-MU_MORE_THAN_1_ARG(A) => MU_THE_NTH_ARG( A, 1, 1, 0) => 0
-                                                  ^
-                                                  |----- this is 4th argument.
+MU_HAS_COMMA(A) => MU_THE_NTH_ARG( A, 1, 1, 0) => 0
+                                            ^
+                                            |----- this is 4th argument.
                                     
-MU_MORE_THAN_1_ARG(A, B) => MU_THE_NTH_ARG( A, B, 1, 1, 0) => 1
-                                                     ^
-                                                     |----- this is 4th argument.
+MU_HAS_COMMA(A, B) => MU_THE_NTH_ARG( A, B, 1, 1, 0) => 1
+                                               ^
+                                               |----- this is 4th argument.
 
-MU_MORE_THAN_1_ARG("1", '2', 3) => MU_THE_NTH_ARG( "1", '2', 3, 1, 1, 0) => 1
-                                                                ^
-                                                                |----- this is 4th argument.
+MU_HAS_COMMA("1", '2', 3) => MU_THE_NTH_ARG( "1", '2', 3, 1, 1, 0) => 1
+                                                          ^
+                                                          |----- this is 4th argument.
 
 When called with more than 3 arguments, the macro does not produce 0 or 1, as in the case below:
 
-MU_MORE_THAN_1_ARG(X, Y, Z, T) => MU_THE_NTH_ARG( X, Y, Z, T, 1, 1, 0) => T
-                                                           ^
-                                                           |----- this is 4th argument.
+MU_HAS_COMMA(X, Y, Z, T) => MU_THE_NTH_ARG( X, Y, Z, T, 1, 1, 0) => T
+                                                     ^
+                                                     |----- this is 4th argument.
 
 
 ### MU_ISEMPTY(...)
@@ -116,9 +116,9 @@ or if M is
 #define M(...) EMPTY
 ```
 
-An empty preprocessor token still counts as a token, and `MU_MORE_THAN_1_ARG(EMPTY)` still expands to "0" so `MU_MORE_THAN_1_ARG` cannot be used straightforward for determining if a token is empty or not. In all the cases where `MU_MORE_THAN_1_ARG` returns 1 obviously `MU_ISEMPTY` needs to return 0.
+An empty preprocessor token still counts as a token, and `MU_HAS_COMMA(EMPTY)` still expands to "0" so `MU_HAS_COMMA` cannot be used straightforward for determining if a token is empty or not. In all the cases where `MU_HAS_COMMA` returns 1 obviously `MU_ISEMPTY` needs to return 0.
 
-Enter MU_TRIGGER_PARENTHESIS(...). This is a macro that expands to `,` . This expansion, when passed to MU_MORE_THAN_1_ARG produces "1".
+Enter MU_TRIGGER_PARENTHESIS(...). This is a macro that expands to `,` . This expansion, when passed to MU_HAS_COMMA produces "1".
 
 The following constructs
 
@@ -127,21 +127,32 @@ The following constructs
 will expand to:
 
 if __VA_ARGS__ is an empty token
-    a) `MU_TRIGGER_PARENTHESIS __VA_ARGS__ ()` => `MU_TRIGGER_PARENTHESIS ()` => `,` (2 tokens). Passed to MU_COUNT_MORE_THAN_1_ARG => 1
-    b) `MU_TRIGGER_PARENTHESIS __VA_ARGS__ ()` => `MU_TRIGGER_PARENTHESIS WHATEVER()` => , . Passed to MU_COUNT_MORE_THAN_1_ARG => unknown number.
+    a) `MU_TRIGGER_PARENTHESIS __VA_ARGS__ ()` => `MU_TRIGGER_PARENTHESIS ()` => `,` (2 tokens, both empty). Passed to MU_COUNT_MORE_THAN_1_ARG => 1
+    b) other reason why `MU_TRIGGER_PARENTHESIS __VA_ARGS__ ()` could expand to have a comma is because either
+        1) `__VA_ARGS__ ()` expanded to have a comma or
+        2) `MU_TRIGGER_PARENTHESIS __VA_ARGS__` expanded to have a comma. 
+    In both cases "1" and "2" the macro is not empty. (these are not the droids we're looking for).
 
-But based on `MU_MORE_THAN_1_ARG(__VA_ARGS__) and MU_TRIGGER_PARENTHESIS __VA_ARGS__ () the following table can be build
+The combination of `MU_HAS_COMMA` + `MU_HAS_COMMA(MU_TRIGGER_PARENTHESIS __VA_ARGS__ ())` + `MU_HAS_COMMA(__VA_ARGS__ ())` + `MU_HAS_COMMA(MU_TRIGGER_PARENTHESIS __VA_ARGS__)` are all set in a dispath table from which the final result of `MU_ISEMPTY` is deduced.
 
-| MU_MORE_THAN_1_ARG(__VA_ARGS__) | MU_MORE_THAN_1_ARG(MU_TRIGGER_PARENTHESIS __VA_ARGS__ ()) | MU_ISEMPTY
-|---------------------------------|-----------------------------------------------------------|-------------
-|             1                   |  any(previous column already says there's more)           |      0
-|             0                   |                              1                            |      0
-|             0                   |                              0                            |      maybe 1
+Here are some examples of how this works:
+                   `MU_HAS_COMMA`               `MU_HAS_COMMA(MU_TRIGGER_PARENTHESIS __VA_ARGS__ ())`           `MU_HAS_COMMA(__VA_ARGS__ ())`         `MU_HAS_COMMA(MU_TRIGGER_PARENTHESIS __VA_ARGS__)`
 
+MU_ISEMPTY() = >        0                       `MU_HAS_COMMA((MU_TRIGGER_PARENTHESIS())`                       `MU_HAS_COMMA(())`                     `MU_HAS_COMMA(MU_TRIGGER_PARENTHESIS)`
+                        0                       `MU_HAS_COMMA(,)                                                0                                       0
+                        0                       1                                                               0                                       0
 
+MU_ISEMPTY(A)=>         0                       `MU_HAS_COMMA(MU_TRIGGER_PARENTHESIS A ())`                     `MU_HAS_COMMA(A())`                     `MU_HAS_COMMA(MU_TRIGGER_PARENTHESIS A)`
+                        0                       0                                                               0                                        0
 
+#define M6() , /*note here, only M6 followed by () expands to ",", otherwise M6 stays as it is
+MU_ISEMPTY(M6)=>        0                       `MU_HAS_COMMA(MU_TRIGGER_PARENTHESIS M6 ())`                    `MU_HAS_COMMA(M6())`                    `MU_HAS_COMMA(MU_TRIGGER_PARENTHESIS M6)`
+                        0                       `MU_HAS_COMMA(MU_TRIGGER_PARENTHESIS ,    )`                    `MU_HAS_COMMA(,)`                       `MU_HAS_COMMA(MU_TRIGGER_PARENTHESIS M6)`
+                        0                       1                                                               1                                       0
 
-
+MU_ISEMPTY(() Z)=>      0                       `MU_HAS_COMMA(MU_TRIGGER_PARENTHESIS () Z)`                     `MU_HAS_COMMA(() Z())`                  `MU_HAS_COMMA(MU_TRIGGER_PARENTHESIS () Z)`
+                        0                       `MU_HAS_COMMA( , Z )`                                           `MU_HAS_COMMA(() Z())`                  `MU_HAS_COMMA(, Z)`
+                        0                       1                                                               0                                       1
 
 
 

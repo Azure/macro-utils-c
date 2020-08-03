@@ -4,8 +4,6 @@
 #ifndef MU_DEFINE_ENUM_2_WITH_INVALID_TEST_H
 #define MU_DEFINE_ENUM_2_WITH_INVALID_TEST_H
 
-#include "azure_macro_utils/macro_utils.h"
-
 int run_mu_define_enum_2_tests(void);
 
 #endif // MU_DEFINE_ENUM_2_WITH_INVALID_TEST_H

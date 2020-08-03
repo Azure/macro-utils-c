@@ -4,8 +4,6 @@
 #ifndef MU_PRI_ENUM_TEST_H
 #define MU_PRI_ENUM_TEST_H
 
-#include "azure_macro_utils/macro_utils.h"
-
 int run_mu_pri_enum_tests(void);
 
 #endif // MU_PRI_ENUM_TEST_H

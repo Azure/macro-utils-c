@@ -11,6 +11,7 @@ set(macro_utils_int_tests_c_files
     for_each_1_keep_2_test.c
     main.c
     mu_convert_enum_test.c
+    mu_count_arg_test.c
     mu_count_array_items_test.c
     mu_count_1_or_more_arg_test.c
     mu_define_enum_2_test.c
@@ -20,7 +21,7 @@ set(macro_utils_int_tests_c_files
     mu_eat_empty_args_test.c
     mu_is_empty_test.c
     mu_has_comma_test.c
-    mu_pri_enum_test.c
+    #mu_pri_enum_test.c
     mu_the_nth_arg_test.c
 )
 
@@ -28,6 +29,7 @@ set(macro_utils_int_tests_h_files
     define_struct_test.h
     for_each_1_keep_2_test.h
     mu_convert_enum_test.h
+    mu_count_arg_test.h
     mu_count_array_items_test.h
     mu_count_1_or_more_arg_test.h
     mu_define_enum_2_test.h

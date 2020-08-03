@@ -127,7 +127,7 @@ The following constructs
 will expand to:
 
 if __VA_ARGS__ is an empty token
-    a) `MU_TRIGGER_PARENTHESIS __VA_ARGS__ ()` => `MU_TRIGGER_PARENTHESIS ()` => `,` (2 tokens, both empty). Passed to MU_COUNT_MORE_THAN_1_ARG => 1
+    a) `MU_TRIGGER_PARENTHESIS __VA_ARGS__ ()` => `MU_TRIGGER_PARENTHESIS ()` => `,` (2 tokens, both empty). Passed to MU_HAS_COMMA => 1
     b) other reason why `MU_TRIGGER_PARENTHESIS __VA_ARGS__ ()` could expand to have a comma is because either
         1) `__VA_ARGS__ ()` expanded to have a comma or
         2) `MU_TRIGGER_PARENTHESIS __VA_ARGS__` expanded to have a comma. 
@@ -156,15 +156,42 @@ MU_ISEMPTY(() Z)=>      0                       `MU_HAS_COMMA(MU_TRIGGER_PARENTH
 
 
 
+Here is how the "dispatch table" looks like for the `MU_ISEMPTY` macro:
+
+`#define MU_ISEMPTY(...) MU_C5(MU_DISPATCH_EMPTY_, MU_HAS_COMMA(__VA_ARGS__), MU_HAS_COMMA(MU_TRIGGER_PARENTHESIS __VA_ARGS__ ()), MU_HAS_COMMA(__VA_ARGS__ ()), MU_HAS_COMMA(MU_TRIGGER_PARENTHESIS __VA_ARGS__))`
+
+MU_C5 just pastes together its 5 arguments resulting in one of the below definitions:
+
+#define MU_DISPATCH_EMPTY_1000 0 /*not empty because MU_HAS_COMMA says there's a comma somewhere*/
+#define MU_DISPATCH_EMPTY_1001 0
+#define MU_DISPATCH_EMPTY_1010 0
+#define MU_DISPATCH_EMPTY_1011 0
+#define MU_DISPATCH_EMPTY_1100 0
+#define MU_DISPATCH_EMPTY_1101 0
+#define MU_DISPATCH_EMPTY_1110 0
+#define MU_DISPATCH_EMPTY_1111 0
+
+#define MU_DISPATCH_EMPTY_0100 1 /*empty because MU_TRIGGER_PARENTHESIS expanded to , (2 empty tokens) and __VA_ARGS__() did not have a comma and MU_TRIGGER_PARENTHESIS __VA_ARGS__ did not have a comma either*/
+#define MU_DISPATCH_EMPTY_0101 0 
+#define MU_DISPATCH_EMPTY_0110 0
+#define MU_DISPATCH_EMPTY_0111 0
+#define MU_DISPATCH_EMPTY_0000 0
+#define MU_DISPATCH_EMPTY_0001 0
+#define MU_DISPATCH_EMPTY_0010 0
+#define MU_DISPATCH_EMPTY_0011 0
 
 
 
+### MU_COUNT_ARG (...)
+`MU_COUNT_ARG(...)` returns the number of arguments (including 0!) that are passed as arguments. Again, this should rather been seen as "number of commas -1" in the context of the preprocessor.
 
+Here's how it works. `MU_COUNT_ARG` will build sort of an "if" statement like below:
 
+`#define MU_COUNT_ARG(...) MU_C2(MU_COUNT_ARG_, MU_ISEMPTY(__VA_ARGS__))(__VA_ARGS__)`
 
-
-
-
+It is based on `MU_ISEMPTY`: 
+    a) if `MU_ISEMPTY` expands to "1" then `MU_COUNT_ARG` will expand to `MU_COUNT_ARG_1(__VA_ARGS__)`. `MU_COUNT_ARG_1` always expands to 0.
+    b) if `MU_ISEMPTY` expands to "0" then `MU_COUNT_ARG` will expand to `MU_COUNT_ARG_0(__VA_ARGS__)`. `MU_COUNT_ARG_0(__VA_ARGS__)` further expands to `MU_COUNT_1_OR_MORE_ARG(__VA_ARGS__)` which will return the number of arguments.
 
 
 

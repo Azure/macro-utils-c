@@ -144,7 +144,7 @@ int run_mu_count_1_or_more_arg_tests(void)
         120,
         121,
         122,
-        123) == 123); 
+        123) == 123);
 
     return 0;
 }

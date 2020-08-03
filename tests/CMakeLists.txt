@@ -21,7 +21,7 @@ set(macro_utils_int_tests_c_files
     mu_eat_empty_args_test.c
     mu_is_empty_test.c
     mu_has_comma_test.c
-    #mu_pri_enum_test.c
+    mu_pri_enum_test.c
     mu_the_nth_arg_test.c
 )
 

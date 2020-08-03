@@ -3,7 +3,7 @@ macro utils design
 
 Macro utils is a set of C useful macros.
 
-This document explains how it was build and what every macro does. IN supporting understand rather than code accuracy, some macros will be chopped to deal with a reasonable number of arguments rather than their implementation that usually supports above 120 arguments.
+This document explains how it was build and what every macro does. In supporting understandability rather than code accuracy, some macros will be chopped to deal with a reasonable number of arguments rather than their implementation that usually supports above 120 arguments.
 
 ### MU_THE_NTH_ARG(...)
 
@@ -61,11 +61,11 @@ MU_COUNT_1_OR_MORE_ARG() => MU_THE_NTH_ARG( , 3, 2, 1) => 1
                                                 
 Here we see how the macro does not produce 0, and that is precisely why the macro is called MU_COUNT_**1**_OR_MORE_ARG. 
 
-Next question is : how to produce 0 as a count result? Not easy or immediately stright forward. More macros are needed for that.
+Next question is : how to produce 0 as a count result? Not easy or immediately straight forward. More macros are needed for that.
 
 ### MU_HAS_COMMA(...)
 
-`MU_HAS_COMMA` expands to 0 when the number of its arguments is 0 or 1. If the number of arguments is greater or equal to 2 then it expands to 0. Here' some examples
+`MU_HAS_COMMA` expands to 0 when the number of its arguments is 0 or 1. If the number of arguments is greater or equal to 2 then it expands to 0. Here are some examples:
 
 MU_HAS_COMMA() => 0
 
@@ -192,76 +192,3 @@ Here's how it works. `MU_COUNT_ARG` will build sort of an "if" statement like be
 It is based on `MU_ISEMPTY`: 
     a) if `MU_ISEMPTY` expands to "1" then `MU_COUNT_ARG` will expand to `MU_COUNT_ARG_1(__VA_ARGS__)`. `MU_COUNT_ARG_1` always expands to 0.
     b) if `MU_ISEMPTY` expands to "0" then `MU_COUNT_ARG` will expand to `MU_COUNT_ARG_0(__VA_ARGS__)`. `MU_COUNT_ARG_0(__VA_ARGS__)` further expands to `MU_COUNT_1_OR_MORE_ARG(__VA_ARGS__)` which will return the number of arguments.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

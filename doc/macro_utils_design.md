@@ -183,7 +183,7 @@ MU_C5 just pastes together its 5 arguments resulting in one of the below definit
 
 
 ### MU_COUNT_ARG (...)
-`MU_COUNT_ARG(...)` returns the number of arguments (including 0!) that are passed as arguments. Again, this should rather been seen as "number of commas -1" in the context of the preprocessor.
+`MU_COUNT_ARG(...)` returns the number of arguments (including 0!) that are passed as arguments.
 
 Here's how it works. `MU_COUNT_ARG` will build sort of an "if" statement like below:
 

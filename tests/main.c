@@ -17,6 +17,7 @@
 #include "mu_define_local_enum_test.h"
 #include "mu_eat_empty_args_test.h"
 #include "mu_is_empty_test.h"
+#include "mu_for_each_1_test.h"
 #include "mu_has_comma_test.h"
 #include "mu_pri_enum_test.h"
 #include "mu_the_nth_arg_test.h"
@@ -70,6 +71,9 @@ int main(void)
     POOR_MANS_ASSERT(result == 0);
     
     result = run_mu_pri_enum_tests();
+    POOR_MANS_ASSERT(result == 0);
+
+    result = run_mu_for_each_1_tests();
     POOR_MANS_ASSERT(result == 0);
 
     return 0;

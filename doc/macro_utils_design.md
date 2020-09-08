@@ -65,7 +65,7 @@ Next question is : how to produce 0 as a count result? Not easy or immediately s
 
 ### MU_HAS_COMMA(...)
 
-`MU_HAS_COMMA` expands to 0 when the number of its arguments is 0 or 1. If the number of arguments is greater or equal to 2 then it expands to 0. Here are some examples:
+`MU_HAS_COMMA` expands to 0 when the number of its arguments is 0 or 1. If the number of arguments is greater or equal to 2 then it expands to 1. Here are some examples:
 
 MU_HAS_COMMA() => 0
 
@@ -192,3 +192,23 @@ Here's how it works. `MU_COUNT_ARG` will build sort of an "if" statement like be
 It is based on `MU_ISEMPTY`: 
     a) if `MU_ISEMPTY` expands to "1" then `MU_COUNT_ARG` will expand to `MU_COUNT_ARG_1(__VA_ARGS__)`. `MU_COUNT_ARG_1` always expands to 0.
     b) if `MU_ISEMPTY` expands to "0" then `MU_COUNT_ARG` will expand to `MU_COUNT_ARG_0(__VA_ARGS__)`. `MU_COUNT_ARG_0(__VA_ARGS__)` further expands to `MU_COUNT_1_OR_MORE_ARG(__VA_ARGS__)` which will return the number of arguments.
+
+### MU_FOR_EACH_1(MACRO_TO_INVOKE, ...)
+`MU_FOR_EACH_1` calls `MACRO_TO_INVOKE` for each of its arguments. 
+
+Example:
+```c
+#define TWICE(X, X) X##X
+MU_FOR_EACH_1(TWICE, A, B, C) => AA BB CC
+```
+
+`MU_FOR_EACH_1` uses generated underlying macros. This is how this works:
+`MU_FOR_EACH_1` expands to MU_C2(MU_FOR_EACH_1_,MU_C1(MU_COUNT_ARG(__VA_ARGS__))). It first counts its arguments, and then call the generated macro. Example:
+
+`MU_FOR_EACH_1(M, A, 2, "B")` will count the number of arguments with `MU_COUNT_ARG` and find that it has 3 arguments. Then `MU_FOR_EACH_1` will expand to `MU_FOR_EACH_1_3(M, A, 2, "B")`. 
+
+`MU_FOR_EACH_1_3(M, A, 2, "B")` is a generated macro that expands to `M(A)` followed by `MU_FOR_EACH_1_2(M, 2, "B")`. 
+
+`MU_FOR_EACH_1_2(M, 2, "B")` is a generated macro that expands to `M(2)` followed by `MU_FOR_EACH_1_1(M, "B")`. 
+
+`MU_FOR_EACH_1_1(M, "B")` is a generated macro that expands to `M("B")` followed by nothing `M` has been invoked for all of its arguments.

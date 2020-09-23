@@ -192,3 +192,30 @@ Here's how it works. `MU_COUNT_ARG` will build sort of an "if" statement like be
 It is based on `MU_ISEMPTY`: 
     a) if `MU_ISEMPTY` expands to "1" then `MU_COUNT_ARG` will expand to `MU_COUNT_ARG_1(__VA_ARGS__)`. `MU_COUNT_ARG_1` always expands to 0.
     b) if `MU_ISEMPTY` expands to "0" then `MU_COUNT_ARG` will expand to `MU_COUNT_ARG_0(__VA_ARGS__)`. `MU_COUNT_ARG_0(__VA_ARGS__)` further expands to `MU_COUNT_1_OR_MORE_ARG(__VA_ARGS__)` which will return the number of arguments.
+
+
+
+### MU_EXPAND/MU_NOEXPAND
+`MU_EXPAND/MU_NOEXPAND` is a pair a macro such as `MU_EXPAND(MU_NOEXPAND(x))` expands to `x`. All other arguments to `MU_EXPAND` (except `MU_NOEXPAND`) are invalid. MU_NOEXPAND itself is a simple token, so it doesn't expand by itself to anything that is, `MU_NOEXPAND(x)` expands to `MU_NOEXPAND(x)`. This is intended, and likely will cause a compilation error.
+
+Here's why MU_EXPAND/MU_NOEXPAND are useful. In the context of macros (such as `MU_IF`) that expand to one thing or the other, when one of the "things" contains a comma, the whole macro is invalid. For example:
+
+```c
+#define TRUEB 1,2,3 /*notice commas*/
+#define FALSEB 4
+
+MU_IF(1, TRUEB, FALSEB)
+```
+
+In the code above the intention is to have MU_IF expand to 1,2,3. Well - since 1,2,3 contains commas, the macro is invalid as written. The solution is to capture the true branch / false branch in `MU_NOEXPAND` and provide `MU_NOEXPAND` later to `MU_EXPAND`, like below:
+
+`MU_EXPAND(MU_IF(1, MU_NOEXPAND(TRUEB), MU_NOEXPAND(FALSEB)))`. The macro will expand to `MU_EXPAND(MU_NOEXPAND(1,2,3))` which will then expand to 1,2,3.
+
+### MU_FOR_EACH_1_PASTE
+```c
+MU_FOR_EACH_1_PASTE(PASTE, ...)
+```
+
+`MU_FOR_EACH_1_PASTE` is a macro that expands to `PASTE` concatenated to every variadic argument. Here's an example:
+
+`MU_FOR_EACH_1_PASTE(1, 1,2,3)` => 11 12 13

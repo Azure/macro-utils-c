@@ -1,0 +1,39 @@
+// Copyright (c) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+/*file containing all sort of tests that usually originate in upstream projects, brought here for dissemination*/
+
+#include "test_helper.h"
+
+#include "azure_macro_utils/macro_utils.h"
+
+#include "mu_various_test.h"
+
+#define TRUEB 1,2,3 /*clearly something that contains a COMMA - even more than 1*/
+#define FALSEB 4 /*clearly something that does NOT contains a comma*/
+
+/*the below commented text SHOULD expand to 1,2,3 or to 4 depending on the condition*/
+/*but error C4002: too many arguments for function-like macro invocation 'MU_IF0'*/
+/*static int a[] = { MU_IF(0, TRUEB, FALSEB) };*/
+
+/*MU_EXPAND, MU_NOEXPAND to the rescue!*/
+/*static int a[] = { MU_EXPAND(MU_IF(0, MU_NOEXPAND(TRUEB), MU_NOEXPAND(FALSEB))) };*/
+
+/*MU_EXPAND/MU_NOEXPAND pair*/
+static int a_TRUEBRANCH[] = { MU_EXPAND(MU_IF(1, MU_NOEXPAND(TRUEB), MU_NOEXPAND(FALSEB))) };
+static int a_FALSEBRANCH[] = { MU_EXPAND(MU_IF(0, MU_NOEXPAND(TRUEB), MU_NOEXPAND(FALSEB))) };
+
+int run_mu_various_tests(void)
+{
+    POOR_MANS_ASSERT(sizeof(a_TRUEBRANCH) / sizeof(a_TRUEBRANCH[0]) == 3);
+    POOR_MANS_ASSERT(a_TRUEBRANCH[0] == 1);
+    POOR_MANS_ASSERT(a_TRUEBRANCH[1] == 2);
+    POOR_MANS_ASSERT(a_TRUEBRANCH[2] == 3);
+
+    POOR_MANS_ASSERT(sizeof(a_FALSEBRANCH) / sizeof(a_FALSEBRANCH[0]) == 1);
+    POOR_MANS_ASSERT(a_FALSEBRANCH[0] == 4);
+
+    POOR_MANS_ASSERT(MU_ISEMPTY(MU_EXPAND(MU_NOEXPAND()))==1);
+
+    return 0;
+}

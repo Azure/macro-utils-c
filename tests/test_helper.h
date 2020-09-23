@@ -15,7 +15,9 @@
 #define POOR_MANS_ASSERT(condition)                                                                                                     \
 do                                                                                                                                      \
 {                                                                                                                                       \
+    MU_SUPPRESS_WARNING(4127) /* warning C4127: conditional expression is constant*/                                                    \
     if (!(condition))                                                                                                                   \
+    MU_UNSUPPRESS_WARNING(4127) /* warning C4127: conditional expression is constant*/                                                  \
     {                                                                                                                                   \
         printf("condition \"" #condition "\" in " __FILE__ ":" TEST_HELPER_TO_STRING(__LINE__) " was UNEXPECTEDLY FALSE\n");            \
         return __LINE__;                                                                                                                \

@@ -28,6 +28,7 @@ set(macro_utils_int_tests_c_files
     mu_has_comma_test.c
     mu_pri_enum_test.c
     mu_the_nth_arg_test.c
+    mu_various_test.c
 )
 
 set(macro_utils_int_tests_h_files
@@ -46,6 +47,7 @@ set(macro_utils_int_tests_h_files
     mu_has_comma_test.h
     mu_pri_enum_test.h
     mu_the_nth_arg_test.h
+    mu_various_test.h
     
     test_helper.h
     ${MACRO_UTILS_INC_FOLDER}/azure_macro_utils/macro_utils.h

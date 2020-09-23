@@ -274,10 +274,30 @@ const char* MU_C3(MU_, enumIdentifier,_ToString)(enumIdentifier value)          
 #define MU_COUNT_ARRAY_ITEMS(A) (sizeof(A)/sizeof((A)[0]))
 
 #ifdef _MSC_VER
-#define MU_SUPPRESS_WARNING(warn_no) __pragma(warning(suppress:warn_no))
+#define MU_SUPPRESS_WARNING(warn_no)    \
+__pragma(warning(push))                 \
+__pragma(warning(disable: warn_no))
 #else
 #define MU_SUPPRESS_WARNING(warn_no)
 #endif
+
+/*note: warn_no is not used, but helps in code to have it written down*/
+#ifdef _MSC_VER
+#define MU_UNSUPPRESS_WARNING(warn_no) \
+__pragma(warning(pop))
+#else
+#define MU_SUPPRESS_WARNING(warn_no)
+#endif
+
+/*MU_EXPAND and MU_NOEXPAND are macros that work in pairs. Here's a typical usage of MU_IF: MU_IF(SOMETHING, TRUEBRANCH(), FALSEBRANCH())*/
+/*if FALSEBRANCH() or TRUEBRANCH() expand to something containing a comma, then MU_IF is unhappy because MU_IF expects exactly 3 token.*/
+/*the idea is to hide/grab TRUEBRANCH(), FALSEBRANCH(), stick in MU_NOEXPAND. By the way, MU_NOEXPAND is just a token, not even a macro*/
+/*so MU_IF actually expands to MU_NOEXPAND(whaveverTRUEBRANCH/FALSEBRANCHexpandedto). to remove MU_NOEXPAND , MU_EXPAND shall be used*/
+/*MU_EXPAND actually concatenates with its argument: MU_EXPAND(x)=> MU_EXPAND_x. it so happens that there*/
+/*is a macro called MU_EXPAND_MU_NOEXPAND(...) that expands to __VA_ARGS__, thus stealing TRUE/FALSE branch from under MU_IF*/
+
+#define MU_EXPAND_MU_NOEXPAND(...) __VA_ARGS__
+#define MU_EXPAND(x) MU_C2(MU_EXPAND_,x)
 
 #ifdef __cplusplus
 }

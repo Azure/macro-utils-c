@@ -18,6 +18,9 @@
 #ifndef MACRO_UTILS_GENERATED_H
 #define MACRO_UTILS_GENERATED_H
 
+#define MU_C2INTERNAL_(x,y) x##y
+#define MU_C2INTERNAL(x,y) MU_C2INTERNAL_(x,y)
+
 #define MU_IFCOMMA(N) MU_C2(MU_IFCOMMA_, N)
 #define MU_IFCOMMA_0
 #define MU_IFCOMMA_2
@@ -128,12 +131,12 @@ X(P1)
 <#for(var i=nMacroParameters;i>=2;i--)#>
 <#{#>
 #define MU_FOR_EACH_1_PASTE_<#=i#>(PASTE, <#for(var j=1;j<=i;j++){#>P<#=j.ToString()+((j<i)?", ":"")#><#}#>) \
-PASTE##P1 \
+MU_C2INTERNAL(PASTE,P1) \
 MU_FOR_EACH_1_PASTE_<#=i-1#>(PASTE, <#for(var j=2;j<=i;j++){#>P<#=j.ToString()+((j<i)?", ":"")#><#}#>)
 
 <#}#>
 #define MU_FOR_EACH_1_PASTE_1(PASTE, P1) \
-PASTE##P1
+MU_C2INTERNAL(PASTE,P1)
 
 #if defined(_MSC_VER) && defined(_MSVC_TRADITIONAL) && _MSVC_TRADITIONAL
 #define MU_FOR_EACH_1_PASTE(PASTE, ...) MU_C2(MU_FOR_EACH_1_PASTE_,MU_C1(MU_COUNT_ARG(__VA_ARGS__))) MU_LPAREN PASTE, __VA_ARGS__)

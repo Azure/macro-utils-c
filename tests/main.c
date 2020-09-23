@@ -76,6 +76,9 @@ int main(void)
     result = run_mu_expand_no_expand_tests();
     POOR_MANS_ASSERT(result == 0);
 
+    result = run_mu_for_each_1_paste_test();
+    POOR_MANS_ASSERT(result == 0);
+    
     return 0;
 }
 

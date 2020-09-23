@@ -21,6 +21,8 @@
 #include "mu_pri_enum_test.h"
 #include "mu_the_nth_arg_test.h"
 #include "mu_expand_no_expand_test.h"
+#include "mu_for_each_1_paste_test.h"
+#include "mu_for_each_1_keep_1_paste_test.h"
 
 int main(void)
 {
@@ -77,6 +79,9 @@ int main(void)
     POOR_MANS_ASSERT(result == 0);
 
     result = run_mu_for_each_1_paste_test();
+    POOR_MANS_ASSERT(result == 0);
+
+    result = run_mu_for_each_1_keep_1_paste_test();
     POOR_MANS_ASSERT(result == 0);
     
     return 0;

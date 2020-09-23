@@ -123,6 +123,25 @@ X(P1)
 #define MU_FOR_EACH_1(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_1_,MU_C1(MU_COUNT_ARG(__VA_ARGS__))) ( MACRO_TO_INVOKE, __VA_ARGS__)
 #endif
 
+
+
+<#for(var i=nMacroParameters;i>=2;i--)#>
+<#{#>
+#define MU_FOR_EACH_1_PASTE_<#=i#>(PASTE, <#for(var j=1;j<=i;j++){#>P<#=j.ToString()+((j<i)?", ":"")#><#}#>) \
+PASTE##P1 \
+MU_FOR_EACH_1_PASTE_<#=i-1#>(PASTE, <#for(var j=2;j<=i;j++){#>P<#=j.ToString()+((j<i)?", ":"")#><#}#>)
+
+<#}#>
+#define MU_FOR_EACH_1_PASTE_1(PASTE, P1) \
+PASTE##P1
+
+#if defined(_MSC_VER) && defined(_MSVC_TRADITIONAL) && _MSVC_TRADITIONAL
+#define MU_FOR_EACH_1_PASTE(PASTE, ...) MU_C2(MU_FOR_EACH_1_PASTE_,MU_C1(MU_COUNT_ARG(__VA_ARGS__))) MU_LPAREN PASTE, __VA_ARGS__)
+#else
+#define MU_FOR_EACH_1_PASTE(PASTE, ...) MU_C2(MU_FOR_EACH_1_PASTE_,MU_C1(MU_COUNT_ARG(__VA_ARGS__))) ( PASTE, __VA_ARGS__)
+#endif
+
+
 <#for(var i=nMacroParameters;i>=2;i--)#>
 <#{#>
 #define MU_FOR_EACH_1_KEEP_1_<#=i#>(X, keep, <#for(var j=1;j<=i;j++){#>P<#=j.ToString()+(j<i?", ":"")#><#}#>) \

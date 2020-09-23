@@ -20,7 +20,7 @@
 #include "mu_has_comma_test.h"
 #include "mu_pri_enum_test.h"
 #include "mu_the_nth_arg_test.h"
-#include "mu_various_test.h"
+#include "mu_expand_no_expand_test.h"
 
 int main(void)
 {
@@ -73,7 +73,7 @@ int main(void)
     result = run_mu_pri_enum_tests();
     POOR_MANS_ASSERT(result == 0);
 
-    result = run_mu_various_tests();
+    result = run_mu_expand_no_expand_tests();
     POOR_MANS_ASSERT(result == 0);
 
     return 0;

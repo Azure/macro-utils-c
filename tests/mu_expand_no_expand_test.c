@@ -7,7 +7,7 @@
 
 #include "azure_macro_utils/macro_utils.h"
 
-#include "mu_various_test.h"
+#include "mu_expand_no_expand_test.h"
 
 #define TRUEB 1,2,3 /*clearly something that contains a COMMA - even more than 1*/
 #define FALSEB 4 /*clearly something that does NOT contains a comma*/
@@ -23,7 +23,7 @@
 static int a_TRUEBRANCH[] = { MU_EXPAND(MU_IF(1, MU_NOEXPAND(TRUEB), MU_NOEXPAND(FALSEB))) };
 static int a_FALSEBRANCH[] = { MU_EXPAND(MU_IF(0, MU_NOEXPAND(TRUEB), MU_NOEXPAND(FALSEB))) };
 
-int run_mu_various_tests(void)
+int run_mu_expand_no_expand_tests(void)
 {
     POOR_MANS_ASSERT(sizeof(a_TRUEBRANCH) / sizeof(a_TRUEBRANCH[0]) == 3);
     POOR_MANS_ASSERT(a_TRUEBRANCH[0] == 1);

@@ -296,8 +296,11 @@ __pragma(warning(pop))
 /*MU_EXPAND actually concatenates with its argument: MU_EXPAND(x)=> MU_EXPAND_x. it so happens that there*/
 /*is a macro called MU_EXPAND_MU_NOEXPAND(...) that expands to __VA_ARGS__, thus stealing TRUE/FALSE branch from under MU_IF*/
 
+#define MU_C2_MU_EXPAND_(x,y) x##y
+#define MU_C2_MU_EXPAND(x,y) MU_C2_MU_EXPAND_(x,y)
+
 #define MU_EXPAND_MU_NOEXPAND(...) __VA_ARGS__
-#define MU_EXPAND(x) MU_C2INTERNAL(MU_EXPAND_,x)
+#define MU_EXPAND(x) MU_C2_MU_EXPAND(MU_EXPAND_,x)
 
 #ifdef __cplusplus
 }

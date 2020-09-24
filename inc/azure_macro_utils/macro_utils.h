@@ -33,8 +33,18 @@ extern "C" {
 #define MU_LPAREN (
 
 #define MU_C2_(x,y) x##y
-
 #define MU_C2(x,y) MU_C2_(x,y)
+
+/*the following macros (MU_C2A. MU_C2B, MU_C2C) exist only to have a different name than MU_C2 but provide the same functionality*/
+/*this is needed to avoid recursion of macro expansions in certain cases*/
+#define MU_PASTEA_(x,y) x##y
+#define MU_C2A(x,y) MU_PASTEA_(x,y)
+
+#define MU_PASTEB_(x,y) x##y
+#define MU_C2B(x,y) MU_PASTEB_(x,y)
+
+#define MU_PASTEC_(x,y) x##y
+#define MU_C2C(x,y) MU_PASTEC_(x,y)
 
 #define MU_C3(x,y,z) MU_C2(x, MU_C2(y,z))
 

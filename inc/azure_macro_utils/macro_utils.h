@@ -295,7 +295,7 @@ __pragma(warning(disable: warn_no))
 
 /*note: warn_no is not used, but helps in code to have it written down*/
 #ifdef _MSC_VER
-#define MU_UNSUPPRESS_WARNING(warn_no) \
+#define MU_UNSUPPRESS_WARNING(warn_no)  \
 __pragma(warning(pop))
 #else
 #define MU_UNSUPPRESS_WARNING(warn_no)

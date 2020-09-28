@@ -298,7 +298,7 @@ __pragma(warning(disable: warn_no))
 #define MU_UNSUPPRESS_WARNING(warn_no) \
 __pragma(warning(pop))
 #else
-#define MU_SUPPRESS_WARNING(warn_no)
+#define MU_UNSUPPRESS_WARNING(warn_no)
 #endif
 
 /*MU_EXPAND and MU_NOEXPAND are macros that work in pairs. Here's a typical usage of MU_IF: MU_IF(SOMETHING, TRUEBRANCH(), FALSEBRANCH())*/

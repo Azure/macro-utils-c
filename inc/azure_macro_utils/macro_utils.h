@@ -30,8 +30,6 @@ extern "C" {
 
 #define MU_TRIGGER_PARENTHESIS(...) ,
 
-#define MU_LPAREN (
-
 #define MU_C2_(x,y) x##y
 #define MU_C2(x,y) MU_C2_(x,y)
 
@@ -172,7 +170,6 @@ static const char* MU_C2(enumName,Strings)(enumName value)         \
 #define MU_STRING_TO_ENUM(stringValue, enumName, addressOfEnumVariable) MU_C2(enumName, _FromString)(stringValue, addressOfEnumVariable)
 
 #define MU_EMPTY()
-#define MACRO_UTILS_DELAY(id) id MU_EMPTY MU_LPAREN )
 
 #define MU_DEFINE_ENUMERATION_CONSTANT_2(enumerationConstant, constantExpression) enumerationConstant = constantExpression,
 

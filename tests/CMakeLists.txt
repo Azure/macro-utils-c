@@ -6,6 +6,11 @@
 
 include_directories(${MACRO_UTILS_INC_FOLDER})
 
+if(WIN32)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /Zc:preprocessor")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /Zc:preprocessor")
+endif(WIN32)
+
 set(macro_utils_int_tests_c_files
     define_struct_test.c
     for_each_1_keep_2_test.c
@@ -23,6 +28,8 @@ set(macro_utils_int_tests_c_files
     mu_has_comma_test.c
     mu_pri_enum_test.c
     mu_the_nth_arg_test.c
+    mu_expand_no_expand_test.c
+    mu_for_each_1_paste_test.c
 )
 
 set(macro_utils_int_tests_h_files
@@ -41,7 +48,9 @@ set(macro_utils_int_tests_h_files
     mu_has_comma_test.h
     mu_pri_enum_test.h
     mu_the_nth_arg_test.h
-    
+    mu_expand_no_expand_test.h
+    mu_for_each_1_paste_test.h
+
     test_helper.h
     ${MACRO_UTILS_INC_FOLDER}/azure_macro_utils/macro_utils.h
     ${MACRO_UTILS_INC_FOLDER}/azure_macro_utils/macro_utils_generated.h

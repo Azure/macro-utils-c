@@ -30,11 +30,23 @@ extern "C" {
 
 #define MU_TRIGGER_PARENTHESIS(...) ,
 
+#if defined(_MSC_VER) && defined(_MSVC_TRADITIONAL) && _MSVC_TRADITIONAL
 #define MU_LPAREN (
+#endif
 
 #define MU_C2_(x,y) x##y
-
 #define MU_C2(x,y) MU_C2_(x,y)
+
+/*the following macros (MU_C2A. MU_C2B, MU_C2C) exist only to have a different name than MU_C2 but provide the same functionality*/
+/*this is needed to avoid recursion of macro expansions in certain cases*/
+#define MU_PASTEA_(x,y) x##y
+#define MU_C2A(x,y) MU_PASTEA_(x,y)
+
+#define MU_PASTEB_(x,y) x##y
+#define MU_C2B(x,y) MU_PASTEB_(x,y)
+
+#define MU_PASTEC_(x,y) x##y
+#define MU_C2C(x,y) MU_PASTEC_(x,y)
 
 #define MU_C3(x,y,z) MU_C2(x, MU_C2(y,z))
 
@@ -274,10 +286,33 @@ const char* MU_C3(MU_, enumIdentifier,_ToString)(enumIdentifier value)          
 #define MU_COUNT_ARRAY_ITEMS(A) (sizeof(A)/sizeof((A)[0]))
 
 #ifdef _MSC_VER
-#define MU_SUPPRESS_WARNING(warn_no) __pragma(warning(suppress:warn_no))
+#define MU_SUPPRESS_WARNING(warn_no)    \
+__pragma(warning(push))                 \
+__pragma(warning(disable: warn_no))
 #else
 #define MU_SUPPRESS_WARNING(warn_no)
 #endif
+
+/*note: warn_no is not used, but helps in code to have it written down*/
+#ifdef _MSC_VER
+#define MU_UNSUPPRESS_WARNING(warn_no)  \
+__pragma(warning(pop))
+#else
+#define MU_UNSUPPRESS_WARNING(warn_no)
+#endif
+
+/*MU_EXPAND and MU_NOEXPAND are macros that work in pairs. Here's a typical usage of MU_IF: MU_IF(SOMETHING, TRUEBRANCH(), FALSEBRANCH())*/
+/*if FALSEBRANCH() or TRUEBRANCH() expand to something containing a comma, then MU_IF is unhappy because MU_IF expects exactly 3 token.*/
+/*the idea is to hide/grab TRUEBRANCH(), FALSEBRANCH(), stick in MU_NOEXPAND. By the way, MU_NOEXPAND is just a token, not even a macro*/
+/*so MU_IF actually expands to MU_NOEXPAND(whaveverTRUEBRANCH/FALSEBRANCHexpandedto). to remove MU_NOEXPAND , MU_EXPAND shall be used*/
+/*MU_EXPAND actually concatenates with its argument: MU_EXPAND(x)=> MU_EXPAND_x. it so happens that there*/
+/*is a macro called MU_EXPAND_MU_NOEXPAND(...) that expands to __VA_ARGS__, thus stealing TRUE/FALSE branch from under MU_IF*/
+
+#define MU_C2_MU_EXPAND_(x,y) x##y
+#define MU_C2_MU_EXPAND(x,y) MU_C2_MU_EXPAND_(x,y)
+
+#define MU_EXPAND_MU_NOEXPAND(...) __VA_ARGS__
+#define MU_EXPAND(x) MU_C2_MU_EXPAND(MU_EXPAND_,x)
 
 #ifdef __cplusplus
 }

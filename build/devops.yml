@@ -6,7 +6,7 @@ jobs:
 - job: windowsx86
   displayName: 'Build Windows x86'
   pool:
-    name: Hosted VS2017
+    name: Hosted Windows 2019 with VS2019
     demands:
     - Cmd
     - msbuild
@@ -16,13 +16,13 @@ jobs:
   - task: BatchScript@1
     displayName: 'Setup VS vars'
     inputs:
-      filename: '"C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\VsDevCmd.bat"'
+      filename: '"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\Tools\VsDevCmd.bat"'
       modifyEnvironment: true
 
   - task: CMake@1
     displayName: CMake
     inputs:
-      cmakeArgs: '.. -Drun_int_tests:bool=ON -G "Visual Studio 15 2017"'
+      cmakeArgs: '.. -Drun_int_tests:bool=ON -G "Visual Studio 16 2019" -A Win32'
 
   - task: VSBuild@1
     displayName: 'Build solution build\*.sln (RelWithDebInfo)'
@@ -42,7 +42,7 @@ jobs:
 - job: windowsx64
   displayName: 'Build Windows x64'
   pool:
-    name: Hosted VS2017
+    name: Hosted Windows 2019 with VS2019
     demands:
     - Cmd
     - msbuild
@@ -52,13 +52,13 @@ jobs:
   - task: BatchScript@1
     displayName: 'Setup VS vars'
     inputs:
-      filename: '"C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\VsDevCmd.bat"'
+      filename: '"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\Tools\VsDevCmd.bat"'
       modifyEnvironment: true
 
   - task: CMake@1
     displayName: CMake
     inputs:
-      cmakeArgs: '.. -Drun_int_tests:bool=ON -G "Visual Studio 15 2017 Win64"'
+      cmakeArgs: '.. -Drun_int_tests:bool=ON -G "Visual Studio 16 2019" -A x64'
 
   - task: VSBuild@1
     displayName: 'Build solution build\*.sln (Debug)'

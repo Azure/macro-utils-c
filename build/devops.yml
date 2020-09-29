@@ -42,7 +42,7 @@ jobs:
 - job: windowsx64
   displayName: 'Build Windows x64'
   pool:
-    name: Hosted Windows 2019 with VS2019
+    name: Azure-MessagingStore
     demands:
     - Cmd
     - msbuild

@@ -35,9 +35,7 @@ set(run_unittests OFF)
 set(run_traceability OFF)
 
 if ((NOT TARGET azure_c_build_tools) AND (EXISTS ${CMAKE_CURRENT_LIST_DIR}/deps/azure-c-build-tools/CMakeLists.txt))
-    MESSAGE(STATUS "going in deps/azure-c-build-tools")
     add_subdirectory(deps/azure-c-build-tools)
-    MESSAGE(STATUS "caloling set_default_build_options")
     set_default_build_options()
 endif() 
 

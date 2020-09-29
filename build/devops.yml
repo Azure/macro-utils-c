@@ -14,6 +14,24 @@ jobs:
 
   steps:
   - task: BatchScript@1
+    displayName: 'Git submodule update'
+    inputs:
+      filename: 'C:\Program Files\Git\bin\git.exe'
+      arguments: 'submodule update --init --force'
+
+  - task: BatchScript@1
+    displayName: 'Git submodule clean'
+    inputs:
+      filename: 'C:\Program Files\Git\bin\git.exe'
+      arguments: 'submodule foreach --recursive "git clean -xdff"'
+
+  - task: BatchScript@1
+    displayName: 'Git clean'
+    inputs:
+      filename: 'C:\Program Files\Git\bin\git.exe'
+      arguments: 'clean -xdff'
+      
+  - task: BatchScript@1
     displayName: 'Setup VS vars'
     inputs:
       filename: '"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\Tools\VsDevCmd.bat"'

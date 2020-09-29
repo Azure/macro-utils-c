@@ -35,7 +35,9 @@ set(run_unittests OFF)
 set(run_traceability OFF)
 
 if ((NOT TARGET azure_c_build_tools) AND (EXISTS ${CMAKE_CURRENT_LIST_DIR}/deps/azure-c-build-tools/CMakeLists.txt))
+    MESSAGE(STATUS "going in deps/azure-c-build-tools")
     add_subdirectory(deps/azure-c-build-tools)
+    MESSAGE(STATUS "caloling set_default_build_options")
     set_default_build_options()
 endif() 
 
@@ -44,7 +46,6 @@ set(run_int_tests ${original_run_int_tests})
 set(run_perf_tests ${original_run_perf_tests})
 set(run_unittests ${original_run_unittests})
 set(run_traceability ${original_run_traceability})
-
 
 #these are the include folders
 #the following "set" statement exports across the project a global variable called MACRO_UTILS_INC_FOLDER that expands to whatever needs to included when using macro_utils

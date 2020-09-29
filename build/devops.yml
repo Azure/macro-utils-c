@@ -46,6 +46,7 @@ jobs:
     displayName: 'Build solution build\*.sln (RelWithDebInfo)'
     inputs:
       solution: 'build\*.sln'
+      msbuildArgs: '/t:restore /t:build' 
       configuration: RelWithDebInfo
       clean: true
       maximumCpuCount: true
@@ -82,6 +83,7 @@ jobs:
     displayName: 'Build solution build\*.sln (Debug)'
     inputs:
       solution: 'build\*.sln'
+      msbuildArgs: '/t:restore /t:build' 
       configuration: Debug
       clean: true
       maximumCpuCount: true

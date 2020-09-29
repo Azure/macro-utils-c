@@ -23,6 +23,10 @@
 #include "mu_expand_no_expand_test.h"
 #include "mu_for_each_1_paste_test.h"
 
+#if defined(_MSVC_TRADITIONAL) && _MSVC_TRADITIONAL
+#error macro_utils requires /Zc:preprocessor
+#endif
+
 int main(void)
 {
     int result;

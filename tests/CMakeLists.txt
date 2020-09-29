@@ -6,11 +6,6 @@
 
 include_directories(${MACRO_UTILS_INC_FOLDER})
 
-if(WIN32)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /Zc:preprocessor")
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /Zc:preprocessor")
-endif(WIN32)
-
 set(macro_utils_int_tests_c_files
     define_struct_test.c
     for_each_1_keep_2_test.c

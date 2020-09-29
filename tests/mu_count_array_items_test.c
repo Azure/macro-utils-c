@@ -7,8 +7,8 @@
 
 #include "mu_count_array_items_test.h"
 
-static const int test_array_1_item[1];
-static const int test_array_3_items[3];
+static const int test_array_1_item[1] = { 0 };
+static const int test_array_3_items[3] = { 0 };
 static const double test_array_4_items[] = { 0x42, 0x43, 0x44, 0x45 };
 
 int run_mu_count_array_items_tests(void)

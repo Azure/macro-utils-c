@@ -30,7 +30,7 @@ extern "C" {
 
 #define MU_TRIGGER_PARENTHESIS(...) ,
 
-#if defined(_MSC_VER) && defined(_MSVC_TRADITIONAL) && _MSVC_TRADITIONAL
+#if defined(_MSC_VER) && (_MSC_VER<1920)
 #define MU_LPAREN (
 #endif
 

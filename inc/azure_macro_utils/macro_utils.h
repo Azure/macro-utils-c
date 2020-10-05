@@ -30,7 +30,7 @@ extern "C" {
 
 #define MU_TRIGGER_PARENTHESIS(...) ,
 
-#if defined(_MSC_VER) && defined(_MSVC_TRADITIONAL) && _MSVC_TRADITIONAL
+#if defined(_MSC_VER) && (_MSC_VER<1920)
 #define MU_LPAREN (
 #endif
 
@@ -286,18 +286,17 @@ const char* MU_C3(MU_, enumIdentifier,_ToString)(enumIdentifier value)          
 #define MU_COUNT_ARRAY_ITEMS(A) (sizeof(A)/sizeof((A)[0]))
 
 #ifdef _MSC_VER
+
 #define MU_SUPPRESS_WARNING(warn_no)    \
 __pragma(warning(push))                 \
 __pragma(warning(disable: warn_no))
-#else
-#define MU_SUPPRESS_WARNING(warn_no)
-#endif
 
 /*note: warn_no is not used, but helps in code to have it written down*/
-#ifdef _MSC_VER
 #define MU_UNSUPPRESS_WARNING(warn_no)  \
 __pragma(warning(pop))
+
 #else
+#define MU_SUPPRESS_WARNING(warn_no)
 #define MU_UNSUPPRESS_WARNING(warn_no)
 #endif
 
@@ -308,11 +307,21 @@ __pragma(warning(pop))
 /*MU_EXPAND actually concatenates with its argument: MU_EXPAND(x)=> MU_EXPAND_x. it so happens that there*/
 /*is a macro called MU_EXPAND_MU_NOEXPAND(...) that expands to __VA_ARGS__, thus stealing TRUE/FALSE branch from under MU_IF*/
 
+/*according to https://docs.microsoft.com/en-us/cpp/preprocessor/predefined-macros?view=vs-2019 this is where VS 2019 starts (1920)*/
+/*this is needed because there is NO /experimental:preprocessor or /Zc:preprocessor for VS 2017, it only exists for C++ compiler... apparently*/
+/*and there's an absolute need to compile with 2017 (read: vcredist 2019 not being available in the environment where the resulting compiled code is run)*/
+#if _MSC_VER < 1920
+/*for anything < VS 2019*/
+#define MU_NOEXPAND(...) __VA_ARGS__
+#define MU_EXPAND(...) __VA_ARGS__
+#else
 #define MU_C2_MU_EXPAND_(x,y) x##y
 #define MU_C2_MU_EXPAND(x,y) MU_C2_MU_EXPAND_(x,y)
-
 #define MU_EXPAND_MU_NOEXPAND(...) __VA_ARGS__
 #define MU_EXPAND(x) MU_C2_MU_EXPAND(MU_EXPAND_,x)
+#endif
+
+
 
 #ifdef __cplusplus
 }

@@ -322,6 +322,25 @@ __pragma(warning(pop))
 #endif
 
 
+/*the below 2 macros do the same thing: they take a construct in the form of ORIGINAL_NAME(ARG1, ARG2,...) and expand to 
+* SUBST_NAME(ARG1, ARG2,...), so effectively it substitutes one token with another. Here's some example:
+* MU_SUBSTITUTE(PAIR(7,3), SUM) will apply "SUM" to (7,3) => SUM(7,3). This requires PAIR to be accompanied by the below define:
+* #define MU_IS_SUBST_PAIR
+* 
+* L1, L2... are needed because of C preprocessor's expansion rules (a macro expansion cannot re-expand the same name). So user be aware!
+* ORIGINAL_NAME cannot be a macro name introduced by #define ORIGINAL_NAME
+*/
+
+#define MU_REMOVE_MACRO_NAME(ORIG_MACRO) MU_C2(MU_IS_SUBST_,ORIG_MACRO)
+
+#define MU_SUBSTITUTE_CALL_L1(SUBST_MACRO_NAME, ARGUMENT) SUBST_MACRO_NAME ARGUMENT
+#define MU_SUBSTITUTE_L1(ORIG_MACRO, SUBST_MACRO_NAME) MU_SUBSTITUTE_CALL_L1(SUBST_MACRO_NAME, MU_REMOVE_MACRO_NAME(ORIG_MACRO))
+
+#define MU_SUBSTITUTE_CALL_L2(SUBST_MACRO_NAME, ARGUMENT) SUBST_MACRO_NAME ARGUMENT
+#define MU_SUBSTITUTE_L2(ORIG_MACRO, SUBST_MACRO_NAME) MU_SUBSTITUTE_CALL_L2(SUBST_MACRO_NAME, MU_REMOVE_MACRO_NAME(ORIG_MACRO))
+
+#define MU_SUBSTITUTE_CALL_L3(SUBST_MACRO_NAME, ARGUMENT) SUBST_MACRO_NAME ARGUMENT
+#define MU_SUBSTITUTE_L3(ORIG_MACRO, SUBST_MACRO_NAME) MU_SUBSTITUTE_CALL_L3(SUBST_MACRO_NAME, MU_REMOVE_MACRO_NAME(ORIG_MACRO))
 
 #ifdef __cplusplus
 }

@@ -9069,6 +9069,8 @@ MU_FOR_EACH_1_1(X, P2)
 #define MU_FOR_EACH_1_1(X, P1) \
 X(P1)
 
+#define MU_FOR_EACH_1_0(X, P1)
+
 #if defined(_MSC_VER) && (_MSC_VER < 1920 )
 #define MU_FOR_EACH_1(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_1_,MU_C1(MU_COUNT_ARG(__VA_ARGS__))) MU_LPAREN MACRO_TO_INVOKE, __VA_ARGS__)
 #else

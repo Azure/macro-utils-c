@@ -322,16 +322,17 @@ __pragma(warning(pop))
 #endif
 
 
-/*the below 2 macros do the same thing: they take an ORIG_MACRO (original macro) in the form of ORIGINAL_NAME(here be some arguments, maybe) and expand to 
-* SUBST_NAME(here be the same arguments as ORIGINAL_NAME had), so effectively it substitutes one macro call with another. Here's some example:
-* MU_SUBSTITUTE(SUM, DIFF, SUM(7,3)) instead of doing something with SUM(7,3) will expand to DIFF(7,3). In order for this to work, the user needs to mark "SUM" as a replacebable macro by
+/*the below 2 macros do the same thing: they take a construct in the form of ORIGINAL_NAME(ARG1, ARG2,...) and expand to 
+* SUBST_NAME(ARG1, ARG2,...), so effectively it substitutes one token with another. Here's some example:
+* MU_SUBSTITUTE(SUM(7,3), DIF) instead of doing something with SUM(7,3) will expand to DIFF(7,3). In order for this to work, the user needs to mark "SUM" as a replacebable macro by
 * introducing the below define:
 * #define MU_IS_SUBST_SUM
 * 
 * L1, L2... are needed because of C preprocessor's expansion rules (a macro expansion cannot re-expand the same name). So user be aware!
+* ORIGINAL_NAME must not be defined a macro before or errors will occur
 */
 
-#define MU_REMOVE_MACRO_NAME(ORIG_MACRO) MU_IS_SUBST_##ORIG_MACRO
+#define MU_REMOVE_MACRO_NAME(ORIG_MACRO) MU_C2(MU_IS_SUBST_,ORIG_MACRO)
 
 #define MU_SUBSTITUTE_CALL_L1(SUBST_MACRO_NAME, ARGUMENT) SUBST_MACRO_NAME ARGUMENT
 #define MU_SUBSTITUTE_L1(ORIG_MACRO, SUBST_MACRO_NAME) MU_SUBSTITUTE_CALL_L1(SUBST_MACRO_NAME, MU_REMOVE_MACRO_NAME(ORIG_MACRO))
@@ -339,6 +340,8 @@ __pragma(warning(pop))
 #define MU_SUBSTITUTE_CALL_L2(SUBST_MACRO_NAME, ARGUMENT) SUBST_MACRO_NAME ARGUMENT
 #define MU_SUBSTITUTE_L2(ORIG_MACRO, SUBST_MACRO_NAME) MU_SUBSTITUTE_CALL_L2(SUBST_MACRO_NAME, MU_REMOVE_MACRO_NAME(ORIG_MACRO))
 
+#define MU_SUBSTITUTE_CALL_L3(SUBST_MACRO_NAME, ARGUMENT) SUBST_MACRO_NAME ARGUMENT
+#define MU_SUBSTITUTE_L3(ORIG_MACRO, SUBST_MACRO_NAME) MU_SUBSTITUTE_CALL_L3(SUBST_MACRO_NAME, MU_REMOVE_MACRO_NAME(ORIG_MACRO))
 
 #ifdef __cplusplus
 }

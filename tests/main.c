@@ -22,6 +22,7 @@
 #include "mu_the_nth_arg_test.h"
 #include "mu_expand_no_expand_test.h"
 #include "mu_for_each_1_paste_test.h"
+#include "mu_substitute_test.h"
 
 
 int main(void)

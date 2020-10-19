@@ -324,12 +324,11 @@ __pragma(warning(pop))
 
 /*the below 2 macros do the same thing: they take a construct in the form of ORIGINAL_NAME(ARG1, ARG2,...) and expand to 
 * SUBST_NAME(ARG1, ARG2,...), so effectively it substitutes one token with another. Here's some example:
-* MU_SUBSTITUTE(SUM(7,3), DIF) instead of doing something with SUM(7,3) will expand to DIFF(7,3). In order for this to work, the user needs to mark "SUM" as a replacebable macro by
-* introducing the below define:
-* #define MU_IS_SUBST_SUM
+* MU_SUBSTITUTE(PAIR(7,3), SUM) will apply "SUM" to (7,3) => SUM(7,3). This requires PAIR to be accompanied by the below define:
+* #define MU_IS_SUBST_PAIR
 * 
 * L1, L2... are needed because of C preprocessor's expansion rules (a macro expansion cannot re-expand the same name). So user be aware!
-* ORIGINAL_NAME must not be defined a macro before or errors will occur
+* ORIGINAL_NAME cannot be a macro name introduced by #define ORIGINAL_NAME
 */
 
 #define MU_REMOVE_MACRO_NAME(ORIG_MACRO) MU_C2(MU_IS_SUBST_,ORIG_MACRO)

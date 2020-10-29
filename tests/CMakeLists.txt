@@ -47,8 +47,8 @@ set(macro_utils_int_tests_h_files
     mu_for_each_1_paste_test.h
 
     test_helper.h
-    ${MACRO_UTILS_INC_FOLDER}/azure_macro_utils/macro_utils.h
-    ${MACRO_UTILS_INC_FOLDER}/azure_macro_utils/macro_utils_generated.h
+    ${MACRO_UTILS_INC_FOLDER}/macro_utils/macro_utils.h
+    ${MACRO_UTILS_INC_FOLDER}/macro_utils/macro_utils_generated.h
 )
     
 add_executable(macro_utils_int_tests ${macro_utils_int_tests_c_files} ${macro_utils_int_tests_h_files})

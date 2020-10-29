@@ -4,7 +4,7 @@
 #include <string.h>
 #include "test_helper.h"
 
-#include "azure_macro_utils/macro_utils.h"
+#include "macro_utils/macro_utils.h"
 
 /*this is bringing in the enum called TEST3_ENUM and main will call the "stringify" of this enum*/
 #include "mu_define_enum_2_without_invalid_test.h"

@@ -4,7 +4,7 @@
 #ifndef MU_DEFINE_ENUM_2_WITHOUT_INVALID_TEST_H
 #define MU_DEFINE_ENUM_2_WITHOUT_INVALID_TEST_H
 
-#include "azure_macro_utils/macro_utils.h"
+#include "macro_utils/macro_utils.h"
 
 /*this construct defines an enum called "enum AB_TAG", makes a typedef called "AB" for it, and sticks a=3 and b = 3 in it*/
 /*also declares a function that can be called to get a->"a"*/

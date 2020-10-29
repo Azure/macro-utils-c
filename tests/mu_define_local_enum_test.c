@@ -4,7 +4,7 @@
 #include <string.h>
 #include "test_helper.h"
 
-#include "azure_macro_utils/macro_utils.h"
+#include "macro_utils/macro_utils.h"
 
 #include "mu_define_local_enum_test.h"
 

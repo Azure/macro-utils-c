@@ -4,7 +4,7 @@
 #ifndef DEFINE_STRUCT_TEST_H
 #define DEFINE_STRUCT_TEST_H
 
-#include "azure_macro_utils/macro_utils.h"
+#include "macro_utils/macro_utils.h"
 
 /*this construct defines a struct with 1 field*/
 

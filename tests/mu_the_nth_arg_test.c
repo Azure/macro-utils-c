@@ -3,7 +3,7 @@
 
 #include "test_helper.h"
 
-#include "azure_macro_utils/macro_utils.h"
+#include "macro_utils/macro_utils.h"
 
 #include "mu_the_nth_arg_test.h"
 

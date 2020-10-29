@@ -9,7 +9,7 @@
 
 /*THIS FILE IS GENERATED*/
 /*DO NOT EDIT BY HAND!!!*/
-/*instead edit macro_utils_generated.tt here: http://www.github.com/azure/azure-macro-utils-c.git */
+/*instead edit macro_utils_generated.tt here: http://www.github.com/azure/macro-utils-c.git */
 
 <#/*CHANGE BELOW 2 VARIABLES TO GET MORE / LESS */ #>
 <#int nArithmetic=2048;#>

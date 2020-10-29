@@ -280,11 +280,7 @@ const char* MU_C3(MU_, enumIdentifier,_ToString)(enumIdentifier value)          
 #define MU_DEFINE_STRUCT_FIELD(fieldType, fieldName) fieldType fieldName;
 
 /*MU_DEFINE_STRUCT allows creating a struct typedef based on a list of fields*/
-#if defined(_MSC_VER) && (_MSC_VER<1920) /*VS 2019 starts at 2910*/
 #define MU_DEFINE_STRUCT(structName, ...) typedef struct MU_C2(structName, _TAG) { MU_FOR_EACH_2(MU_DEFINE_STRUCT_FIELD, __VA_ARGS__)} structName;
-#else /*VS2019*/
-#define MU_DEFINE_STRUCT(structName, ...) typedef struct MU_C2(structName, _TAG) { MU_FOR_EACH_2(MU_DEFINE_STRUCT_FIELD, ##__VA_ARGS__)} structName;
-#endif
 
 // this macro allows counting of elements in an array
 #define MU_COUNT_ARRAY_ITEMS(A) (sizeof(A)/sizeof((A)[0]))

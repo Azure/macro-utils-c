@@ -3,7 +3,7 @@
 
 /*THIS FILE IS GENERATED*/
 /*DO NOT EDIT BY HAND!!!*/
-/*instead edit macro_utils_generated.tt here: http://www.github.com/azure/azure-macro-utils-c.git */
+/*instead edit macro_utils_generated.tt here: http://www.github.com/azure/macro-utils-c.git */
 
 
 #ifndef MACRO_UTILS_GENERATED_H

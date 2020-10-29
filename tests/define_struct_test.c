@@ -3,7 +3,7 @@
 
 #include "test_helper.h"
 
-#include "azure_macro_utils/macro_utils.h"
+#include "macro_utils/macro_utils.h"
 
 /*this is bringing in the test structs*/
 #include "define_struct_test.h"

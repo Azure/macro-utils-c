@@ -3,20 +3,20 @@
 
 cmake_minimum_required(VERSION 2.8.11)
 
-# canon way of azure-macro-utils-c from another repo is below. It assumes the using repo has placed azure-macro-utils-c in "deps"
+# canon way of macro-utils-c from another repo is below. It assumes the using repo has placed macro-utils-c in "deps"
 
-#if ((NOT TARGET azure_macro_utils_c) AND (EXISTS ${CMAKE_CURRENT_LIST_DIR}/deps/azure-macro-utils-c/CMakeLists.txt))
-#    add_subdirectory(deps/azure-macro-utils-c)
+#if ((NOT TARGET macro_utils_c) AND (EXISTS ${CMAKE_CURRENT_LIST_DIR}/deps/macro-utils-c/CMakeLists.txt))
+#    add_subdirectory(deps/macro-utils-c)
 #    include_directories(${MACRO_UTILS_INC_FOLDER})
 #endif() 
 
-if(TARGET azure_macro_utils_c)
+if(TARGET macro_utils_c)
     return()
 endif()
     
-project(azure_macro_utils_c)
+project(macro_utils_c)
 
-set(AZURE_MACRO_UTILS_C_VERSION 1.1.0)
+set(MACRO_UTILS_C_VERSION 1.1.0)
 
 option(run_int_tests "set run_int_tests to ON to run int tests (default is OFF)" OFF)
 
@@ -53,20 +53,20 @@ include(CTest)
 include(GNUInstallDirs)
 
 set(macro_utils_files
-    inc/azure_macro_utils/macro_utils.h
-    inc/azure_macro_utils/macro_utils_generated.h
+    inc/macro_utils/macro_utils.h
+    inc/macro_utils/macro_utils_generated.h
 )
 
-install(FILES ${macro_utils_files} DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/azure_macro_utils")
+install(FILES ${macro_utils_files} DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/macro_utils")
 
 if("${CMAKE_VERSION}" VERSION_GREATER 3.0.0)
-    add_library(azure_macro_utils_c INTERFACE)
-    target_include_directories(azure_macro_utils_c
+    add_library(macro_utils_c INTERFACE)
+    target_include_directories(macro_utils_c
         INTERFACE
             $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/inc>
             $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
     )
-    install(TARGETS azure_macro_utils_c EXPORT azure_macro_utils_cTargets
+    install(TARGETS macro_utils_c EXPORT macro_utils_cTargets
         INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
     )
 
@@ -77,7 +77,7 @@ if("${CMAKE_VERSION}" VERSION_GREATER 3.0.0)
 
     write_basic_package_version_file(
         "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${PROJECT_NAME}ConfigVersion.cmake"
-        VERSION ${AZURE_MACRO_UTILS_C_VERSION}
+        VERSION ${MACRO_UTILS_C_VERSION}
         COMPATIBILITY SameMajorVersion
     )
 
@@ -86,7 +86,7 @@ if("${CMAKE_VERSION}" VERSION_GREATER 3.0.0)
         COPYONLY
     )
 
-    install(EXPORT azure_macro_utils_cTargets
+    install(EXPORT macro_utils_cTargets
         FILE
             "${PROJECT_NAME}Targets.cmake"
         DESTINATION

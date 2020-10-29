@@ -5,7 +5,7 @@
 
 #include "test_helper.h"
 
-#include "azure_macro_utils/macro_utils.h"
+#include "macro_utils/macro_utils.h"
 
 #include "mu_for_each_1_paste_test.h"
 

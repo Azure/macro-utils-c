@@ -3,7 +3,7 @@
 
 #include "test_helper.h"
 
-#include "azure_macro_utils/macro_utils.h"
+#include "macro_utils/macro_utils.h"
 
 #include "mu_the_nth_arg_test.h"
 
@@ -19,13 +19,13 @@ int run_mu_the_nth_arg_tests(void)
 {
     /*pass in 124 arguments*/
     POOR_MANS_ASSERT(MU_THE_NTH_ARG(
-        1,
+        1,
         2,
         3,
         4,
         5,
         6,
-        7,
+        7,
         8,
         9,
         10,

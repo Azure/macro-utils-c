@@ -209,6 +209,12 @@ const char* MU_C3(MU_, enumIdentifier,_ToString)(enumIdentifier value)          
 
 #define MU_ENUM_TO_STRING_2(enumIdentifier, value) MU_C3(MU_, enumIdentifier,_ToString)(value)
 
+/*PRI_BOOL is the format specifier that prints a bool/_Bool*/
+#define PRI_BOOL "s (%d)"
+
+/*MU_BOOL_VALUE is the counterpart of PRI_BOOL*/
+#define MU_BOOL_VALUE(v) ((const char*[]){"false", "true"})[!!v], (v)
+
 /*PRI_MU_ENUM and MU_ENUM_VALUE/MU_ENUM_VALUE_2 work together as printf format specifier/argument. e.g: printf("enumValue was=%" PRI_MU_ENUM "\n", MU_ENUM_TO_STRING(enumIdentifier, enumValue));*/
 #define PRI_MU_ENUM "s%s (%d)"
 

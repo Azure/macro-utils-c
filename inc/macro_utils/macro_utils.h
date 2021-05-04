@@ -9,10 +9,12 @@
 #ifdef __cplusplus
 #include <cstring>
 #include <cstddef>
+#include <ctime>
 extern "C" {
 #else
 #include <string.h>
 #include <stddef.h>
+#include <time.h>
 #endif
 
 #if (defined OPTIMIZE_RETURN_CODES)

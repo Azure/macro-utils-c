@@ -23,6 +23,7 @@ set(macro_utils_int_tests_c_files
     mu_has_comma_test.c
     mu_pri_bool_test.c
     mu_pri_enum_test.c
+    mu_pri_time_t_test.c
     mu_the_nth_arg_test.c
     mu_expand_no_expand_test.c
     mu_for_each_1_paste_test.c
@@ -44,6 +45,7 @@ set(macro_utils_int_tests_h_files
     mu_has_comma_test.h
     mu_pri_bool_test.h
     mu_pri_enum_test.h
+    mu_pri_time_t_test.h
     mu_the_nth_arg_test.h
     mu_expand_no_expand_test.h
     mu_for_each_1_paste_test.h

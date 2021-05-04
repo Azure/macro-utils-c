@@ -9,10 +9,12 @@
 #ifdef __cplusplus
 #include <cstring>
 #include <cstddef>
+#include <ctime>
 extern "C" {
 #else
 #include <string.h>
 #include <stddef.h>
+#include <time.h>
 #endif
 
 #if (defined OPTIMIZE_RETURN_CODES)
@@ -216,6 +218,12 @@ const char* MU_C3(MU_, enumIdentifier,_ToString)(enumIdentifier value)          
 #define MU_FALSE_STRING "false"
 #define MU_TRUE_STRING "true"
 #define MU_BOOL_VALUE(v) MU_FALSE_STRING "\0" MU_TRUE_STRING + ((!!(v))*sizeof(MU_FALSE_STRING)), (v)
+
+/*PRI_TIME_T is to be used with a time_t variable - it produces strings such as "Tue May  4 14:42:17 2021". As per 7.27.3.1 The asctime function of C11 it seems that limiting the output to 24 characters should be safe.*/
+#define PRI_TIME_T ".24s"
+
+/*TIME_T_VALUE is the counterpar of PRI_TIME_T in a printf/LogError instruction*/
+#define TIME_T_VALUE(t) ctime(&t)
 
 /*PRI_MU_ENUM and MU_ENUM_VALUE/MU_ENUM_VALUE_2 work together as printf format specifier/argument. e.g: printf("enumValue was=%" PRI_MU_ENUM "\n", MU_ENUM_TO_STRING(enumIdentifier, enumValue));*/
 #define PRI_MU_ENUM "s%s (%d)"

@@ -23,6 +23,7 @@
 #include "mu_expand_no_expand_test.h"
 #include "mu_for_each_1_paste_test.h"
 #include "mu_pri_bool_test.h"
+#include "mu_pri_time_t_test.h"
 
 
 int main(void)
@@ -83,6 +84,9 @@ int main(void)
     POOR_MANS_ASSERT(result == 0);
     
     result = run_mu_pri_bool_tests();
+    POOR_MANS_ASSERT(result == 0);
+
+    result = run_mu_pri_time_t_tests();
     POOR_MANS_ASSERT(result == 0);
 
     return 0;

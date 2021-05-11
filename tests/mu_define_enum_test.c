@@ -72,7 +72,7 @@ int run_mu_define_enum_tests(void)
 
     const char* TEST5_unknown = MU_ENUM_TO_STRING(TEST5_ENUM, 41);
     POOR_MANS_ASSERT(TEST5_unknown != NULL);
-    POOR_MANS_ASSERT(strcmp("NULL", TEST5_unknown) == 0);
+    POOR_MANS_ASSERT(strcmp("UNKNOWN", TEST5_unknown) == 0);
 
     const char* TEST6_test6_a = MU_ENUM_TO_STRING(TEST6_ENUM, test6_a);
     POOR_MANS_ASSERT(TEST6_test6_a != NULL);

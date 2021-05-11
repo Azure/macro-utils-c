@@ -168,6 +168,7 @@ static const char* MU_C2(enumName,Strings)(enumName value)         \
 
 // this macro returns the number of enum values (taking into account that an invalid value is generated)
 #define MU_ENUM_VALUE_COUNT(...) (MU_COUNT_ARG(__VA_ARGS__) + 1)
+#define MU_ENUM_VALUE_COUNT_WITHOUT_INVALID(...) (MU_COUNT_ARG(__VA_ARGS__))
 
 // this macro returns the number of enum 2 values (taking into account that an invalid value is generated)
 #define MU_ENUM_2_VALUE_COUNT(...) ((MU_COUNT_ARG(__VA_ARGS__) / 2) + 1)

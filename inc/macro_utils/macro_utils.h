@@ -97,8 +97,7 @@ MU_IF(X, "true", "false") => "true"
 /*MU_DEFINE_ENUM_WITHOUT_INVALID goes to header*/
 #define MU_DEFINE_ENUM_WITHOUT_INVALID(enumName, ...) typedef enum MU_C2(enumName, _TAG) { MU_FOR_EACH_1(MU_DEFINE_ENUMERATION_CONSTANT, __VA_ARGS__)} enumName; \
     typedef enum MU_C3(enum_value_metadata_, enumName, _TAG) { MU_FOR_EACH_1(MU_DEFINE_METADATA_ENUMERATION_VALUE, __VA_ARGS__) MU_C3(enum_value_metadata_, enumName, _VALUE_COUNT) = MU_COUNT_ARG(__VA_ARGS__)} MU_C2(enum_value_metadata_, enumName); \
-    extern const char* MU_C2(enumName,Strings)(enumName value); \
-    extern int MU_C2(enumName, _FromString)(const char* enumAsString, enumName* destination);
+    MU_DECLARE_ENUM_TO_STRING(enumName, __VA_ARGS__) \
 
 // this macro is a wrapper on top of MU_DEFINE_ENUM_WITHOUT_INVALID, adding an _INVALID value as the first enum value in the enum
 #define MU_DEFINE_ENUM(enumName, ...) \
@@ -168,13 +167,6 @@ MU_IF(X, "true", "false") => "true"
 #define MU_DEFINE_ENUMERATION_CONSTANT_2(enumerationConstant, constantExpression) enumerationConstant = constantExpression,
 
 #define MU_DECLARE_ENUM_STRINGS_2(enumIdentifier, ...) extern const char* MU_C3(MU_, enumIdentifier,_ToString)(enumIdentifier enumerationConstant);
-
-#define MU_DEFINE_ENUM_2_WITHOUT_INVALID(enumIdentifier, ... ) typedef enum MU_C2(enumIdentifier, _TAG) {MU_FOR_EACH_2(MU_DEFINE_ENUMERATION_CONSTANT_2, __VA_ARGS__)} enumIdentifier; \
-    MU_DECLARE_ENUM_STRINGS_2(enumIdentifier, __VA_ARGS__)
-
-// this macro is a wrapper on top of MU_DEFINE_ENUM, adding an _INVALID value as the first enum value in the enum
-#define MU_DEFINE_ENUM_2(enumName, ...) \
-    MU_DEFINE_ENUM_2_WITHOUT_INVALID(enumName, MU_C2(enumName, _INVALID), (int)0xDDDDDDDD, __VA_ARGS__)
 
 typedef struct ENUM_VALUE_AND_STRING_TAG
 {

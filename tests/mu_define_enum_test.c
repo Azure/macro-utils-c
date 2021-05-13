@@ -50,6 +50,15 @@ MU_DEFINE_ENUM_STRINGS(TEST6_ENUM, TEST6_ENUM_VALUES);
 MU_DEFINE_ENUM_WITHOUT_INVALID(TEST7_ENUM, TEST7_ENUM_VALUES);
 MU_DEFINE_ENUM_STRINGS_WITHOUT_INVALID(TEST7_ENUM, TEST7_ENUM_VALUES);
 
+// An enum where 0 is explictly set as second value
+#define TEST8_ENUM_VALUES \
+    test8_a = -1, \
+    test8_b = 5, \
+    test8_c = 0
+
+MU_DEFINE_ENUM_WITHOUT_INVALID(TEST8_ENUM, TEST8_ENUM_VALUES);
+MU_DEFINE_ENUM_STRINGS_WITHOUT_INVALID(TEST8_ENUM, TEST8_ENUM_VALUES);
+
 int run_mu_define_enum_tests(void)
 {
     int result = 0;
@@ -122,6 +131,20 @@ int run_mu_define_enum_tests(void)
     const char* TEST7_test7_b = MU_ENUM_TO_STRING(TEST7_ENUM, 42);
     POOR_MANS_ASSERT(TEST7_test7_b != NULL);
     POOR_MANS_ASSERT(strcmp("test7_b = 42", TEST7_test7_b) == 0);
+
+    POOR_MANS_ASSERT(MU_ENUM_VALUE_COUNT_WITHOUT_INVALID(TEST8_ENUM_VALUES) == 3);
+
+    const char* TEST8_test8_a = MU_ENUM_TO_STRING(TEST8_ENUM, -1);
+    POOR_MANS_ASSERT(TEST8_test8_a != NULL);
+    POOR_MANS_ASSERT(strcmp("test8_a = -1", TEST8_test8_a) == 0);
+
+    const char* TEST8_test8_b = MU_ENUM_TO_STRING(TEST8_ENUM, 5);
+    POOR_MANS_ASSERT(TEST8_test8_b != NULL);
+    POOR_MANS_ASSERT(strcmp("test8_b = 5", TEST8_test8_b) == 0);
+
+    const char* TEST8_test8_c = MU_ENUM_TO_STRING(TEST8_ENUM, 0);
+    POOR_MANS_ASSERT(TEST8_test8_c != NULL);
+    POOR_MANS_ASSERT(strcmp("test8_c = 0", TEST8_test8_c) == 0);
 
     return result;
 }

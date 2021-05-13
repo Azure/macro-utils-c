@@ -110,18 +110,15 @@ MU_IF(X, "true", "false") => "true"
     { \
         if ((MU_C2(my_, enumValue)) == 0) \
         { \
-            printf("%s is 0\r\n", MU_TOSTRING(MU_C2(my_, enumValue))); \
             /* it is zero, either because not filled in or because it was explicit zero */ \
             /* if it has an equal it cannot be implicit */ \
-            if (MU_C2(enum_value_has_equal_, argCount) == MU_ENUM_VALUE_CONTAINS_EQUAL_YES) \
+            if (has_equal) \
             { \
                 /* explicit zero */ \
-                printf("%s is explicit 0\r\n", MU_TOSTRING(MU_C2(my_, enumValue))); \
                 current_enum_value = 0; \
             } \
             else \
             { \
-                printf("%s is implicit\r\n", MU_TOSTRING(MU_C2(my_, enumValue))); \
                 current_enum_value = previous_enum_value + 1; \
             } \
         } \
@@ -150,35 +147,62 @@ typedef enum MU_ENUM_VALUE_CONTAINS_EQUAL_TAG
     MU_ENUM_VALUE_CONTAINS_EQUAL_NO
 } MU_ENUM_VALUE_CONTAINS_EQUAL;
 
+// variable definition indicating if an enum value label contains or not equal
 #define MU_INTERNAL_DEFINE_ENUM_HAS_EQ_VAR(argCount, enumValue) \
     static MU_ENUM_VALUE_CONTAINS_EQUAL MU_C2(enum_value_has_equal_, argCount) = MU_ENUM_VALUE_CONTAINS_EQUAL_UNKNOWN; \
 
+// determine whether an enum value label has an equal or not
 #define MU_INTERNAL_COMPUTE_ENUM_HAS_EQ(argCount, enumValue) \
-    if (MU_C2(enum_value_has_equal_, argCount) == MU_ENUM_VALUE_CONTAINS_EQUAL_UNKNOWN) \
+    switch (MU_C2(enum_value_has_equal_, argCount)) \
     { \
-        if (strchr(MU_TOSTRING(MU_C2(my_, enumValue)), '=') != NULL) \
-        { \
-            MU_C2(enum_value_has_equal_, argCount) = MU_ENUM_VALUE_CONTAINS_EQUAL_YES; \
-        } \
-        else \
-        { \
-            MU_C2(enum_value_has_equal_, argCount) = MU_ENUM_VALUE_CONTAINS_EQUAL_NO; \
-        } \
+        default: \
+        case MU_ENUM_VALUE_CONTAINS_EQUAL_UNKNOWN: \
+            if (strchr(MU_TOSTRING(MU_C2(my_, enumValue)), '=') != NULL) \
+            { \
+                MU_C2(enum_value_has_equal_, argCount) = MU_ENUM_VALUE_CONTAINS_EQUAL_YES; \
+                has_equal = 1; \
+            } \
+            else \
+            { \
+                MU_C2(enum_value_has_equal_, argCount) = MU_ENUM_VALUE_CONTAINS_EQUAL_NO; \
+                has_equal = 0; \
+            } \
+            break; \
+        case MU_ENUM_VALUE_CONTAINS_EQUAL_YES: \
+            has_equal = 1; \
+            break; \
+        case MU_ENUM_VALUE_CONTAINS_EQUAL_NO: \
+            has_equal = 0; \
+            break; \
     } \
-    static MU_ENUM_VALUE_CONTAINS_EQUAL MU_C3(enum_value_hasEqual, argCount) = MU_ENUM_VALUE_CONTAINS_EQUAL_UNKNOWN; \
+
+// This is the bulk of the _ToString for an enum
+// The algorithm is:
+// - Go through each enum value
+//   - Determine if it contains an equal by searching '=' in the enum value string
+//     This value is cached. Threading is not taken into account, if a dirty read happens and an unknown value is obtained
+//     the code will simply take the worse case and take a performance hit in recomputing whether an equal is in the string
+//   - Determine the actual value of the enum value that we need to compare against:
+//     - Have a fake variable that is either initialized because there is an equal in the enum label or it is initialized to 0 
+//       because the fake variables are static
+//     - If the enum value contains an equal then take as current enum value whatever is in the fake variable
+//     - If the enum value does not contain an equal then compute the current enum value as the previous enum value plus 1
+//   - If the currently computed enum value matches the value requested to be stringified by the user then return the string to the user
+#define MU_DEFINE_ENUM_STRINGS_WITHOUT_INVALID_COMMON_CODE(enumName, ...) \
+    { \
+        MU_FOR_EACH_1_COUNTED(MU_INTERNAL_DEFINE_ENUM_HAS_EQ_VAR, __VA_ARGS__) \
+        MU_FOR_EACH_1_KEEP_1(MU_INTERNAL_DEFINE_ENUM_VAR, enumName, __VA_ARGS__) \
+        int has_equal = 0; \
+        int current_enum_value = -1; \
+        int previous_enum_value = -1; \
+        MU_FOR_EACH_1_COUNTED(MU_INTERNAL_ASSIGN_ENUM_VALUE, __VA_ARGS__) \
+        return "UNKNOWN"; \
+    }
 
 /*MU_DEFINE_ENUM_STRINGS_WITHOUT_INVALID goes to .c*/
 #define MU_DEFINE_ENUM_STRINGS_WITHOUT_INVALID(enumName, ...) \
     const char* MU_C3(MU_, enumName, _ToString)(enumName value) \
-    { \
-        MU_FOR_EACH_1_COUNTED(MU_INTERNAL_DEFINE_ENUM_HAS_EQ_VAR, __VA_ARGS__) \
-        MU_FOR_EACH_1_KEEP_1(MU_INTERNAL_DEFINE_ENUM_VAR, enumName, __VA_ARGS__) \
-        int current_enum_value = -1; \
-        int previous_enum_value = -1; \
-        /*int id_has_equals;*/ \
-        MU_FOR_EACH_1_COUNTED(MU_INTERNAL_ASSIGN_ENUM_VALUE, __VA_ARGS__) \
-        return "UNKNOWN"; \
-    }
+    MU_DEFINE_ENUM_STRINGS_WITHOUT_INVALID_COMMON_CODE(enumName, __VA_ARGS__)
 
 // this macro is a wrapper on top of MU_DEFINE_ENUM_STRINGS_WITHOUT_INVALID, adding an _INVALID value as the first enum value in the enum
 #define MU_DEFINE_ENUM_STRINGS(enumName, ...) \
@@ -187,15 +211,8 @@ typedef enum MU_ENUM_VALUE_CONTAINS_EQUAL_TAG
 #define MU_DEFINE_LOCAL_ENUM_WITHOUT_INVALID(enumName, ...) \
     typedef enum MU_C2(enumName, _TAG) { MU_FOR_EACH_1(MU_DEFINE_ENUMERATION_CONSTANT, __VA_ARGS__)} enumName; \
     static const char* MU_C3(MU_, enumName, _ToString)(enumName value) \
-    { \
-        MU_FOR_EACH_1_COUNTED(MU_INTERNAL_DEFINE_ENUM_HAS_EQ_VAR, __VA_ARGS__) \
-        MU_FOR_EACH_1_KEEP_1(MU_INTERNAL_DEFINE_ENUM_VAR, enumName, __VA_ARGS__) \
-        int current_enum_value = -1; \
-        int previous_enum_value = -1; \
-        /*int id_has_equals;*/ \
-        MU_FOR_EACH_1_COUNTED(MU_INTERNAL_ASSIGN_ENUM_VALUE, __VA_ARGS__) \
-        return "UNKNOWN"; \
-    }
+    MU_DEFINE_ENUM_STRINGS_WITHOUT_INVALID_COMMON_CODE(enumName, __VA_ARGS__)
+
 // this macro is a wrapper on top of MU_DEFINE_LOCAL_ENUM_WITHOUT_INVALID, adding an _INVALID value as the first enum value in the enum
 #define MU_DEFINE_LOCAL_ENUM(enumName, ...) \
     MU_DEFINE_LOCAL_ENUM_WITHOUT_INVALID(enumName, MU_C2(enumName, _INVALID), __VA_ARGS__)

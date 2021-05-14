@@ -10,7 +10,7 @@
 
 #include "mu_pri_enum_test.h"
 
-/*this file consist of 2 tests - one test will verify an enum(TEST_PRI_ENUM) introduced by MU_DEFINE_ENUM, the other test will verify an enum introduced by MU_DEFINE_ENUM_2(TEST_PRI_ENUM_2)*/
+/*this file consist of 2 tests - one test will verify an enum(TEST_PRI_ENUM) introduced by MU_DEFINE_ENUM, the other test will verify an enum introduced also by MU_DEFINE_ENUM(TEST_PRI_ENUM_2) but with = in the enum values*/
 
 #define TEST_PRI_ENUM_VALUES    \
     A,                          \
@@ -50,18 +50,18 @@ static int verifyMU_ENUM_VALUE_BC_plus_1(const char* empty, const char* valueAsS
 }
 
 #define TEST_PRI_ENUM_2_VALUES    \
-    X2, 2,                        \
-    ZY2, 6
+    X2 = 2,                        \
+    ZY2 = 6
 
-MU_DEFINE_ENUM_2(TEST_PRI_ENUM_2, TEST_PRI_ENUM_2_VALUES);
-MU_DEFINE_ENUM_STRINGS_2(TEST_PRI_ENUM_2, TEST_PRI_ENUM_2_VALUES);
+MU_DEFINE_ENUM(TEST_PRI_ENUM_2, TEST_PRI_ENUM_2_VALUES);
+MU_DEFINE_ENUM_STRINGS(TEST_PRI_ENUM_2, TEST_PRI_ENUM_2_VALUES);
 
 static int verifyMU_ENUM_VALUE_X2(const char* empty, const char* valueAsString, int valueAsInt)
 {
     POOR_MANS_ASSERT(empty != NULL);
     POOR_MANS_ASSERT(memcmp(empty, "", sizeof("")) == 0);
     POOR_MANS_ASSERT(valueAsString != NULL);
-    POOR_MANS_ASSERT(memcmp(valueAsString, "X2", sizeof("X2")) == 0);
+    POOR_MANS_ASSERT(memcmp(valueAsString, "X2 = 2", sizeof("X2 = 2")) == 0);
     POOR_MANS_ASSERT(valueAsInt == X2);
     return 0;
 }
@@ -71,7 +71,7 @@ static int verifyMU_ENUM_VALUE_ZY2(const char* empty, const char* valueAsString,
     POOR_MANS_ASSERT(empty != NULL);
     POOR_MANS_ASSERT(memcmp(empty, "", sizeof("")) == 0);
     POOR_MANS_ASSERT(valueAsString != NULL);
-    POOR_MANS_ASSERT(memcmp(valueAsString, "ZY2", sizeof("ZY2")) == 0);
+    POOR_MANS_ASSERT(memcmp(valueAsString, "ZY2 = 6", sizeof("ZY2 = 6")) == 0);
     POOR_MANS_ASSERT(valueAsInt == ZY2);
     return 0;
 }

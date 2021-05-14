@@ -97,70 +97,116 @@ MU_IF(X, "true", "false") => "true"
 /*MU_DEFINE_ENUM_WITHOUT_INVALID goes to header*/
 #define MU_DEFINE_ENUM_WITHOUT_INVALID(enumName, ...) typedef enum MU_C2(enumName, _TAG) { MU_FOR_EACH_1(MU_DEFINE_ENUMERATION_CONSTANT, __VA_ARGS__)} enumName; \
     typedef enum MU_C3(enum_value_metadata_, enumName, _TAG) { MU_FOR_EACH_1(MU_DEFINE_METADATA_ENUMERATION_VALUE, __VA_ARGS__) MU_C3(enum_value_metadata_, enumName, _VALUE_COUNT) = MU_COUNT_ARG(__VA_ARGS__)} MU_C2(enum_value_metadata_, enumName); \
-    extern const char* MU_C2(enumName,Strings)(enumName value); \
-    extern int MU_C2(enumName, _FromString)(const char* enumAsString, enumName* destination);
+    MU_DECLARE_ENUM_TO_STRING(enumName, __VA_ARGS__) \
 
 // this macro is a wrapper on top of MU_DEFINE_ENUM_WITHOUT_INVALID, adding an _INVALID value as the first enum value in the enum
 #define MU_DEFINE_ENUM(enumName, ...) \
     MU_DEFINE_ENUM_WITHOUT_INVALID(enumName, MU_C2(enumName, _INVALID), __VA_ARGS__)
 
+#define MU_INTERNAL_DEFINE_ENUM_VAR(enumName, enumValue) \
+    static enumName MU_C2(my_, enumValue);
+
+#define MU_INTERNAL_ASSIGN_ENUM_VALUE(argCount, enumValue) \
+    switch (MU_C2(enum_value_has_equal_, argCount)) \
+    { \
+        default: \
+        case MU_ENUM_VALUE_CONTAINS_EQUAL_UNKNOWN: \
+            if (strchr(MU_TOSTRING(MU_C2(my_, enumValue)), '=') != NULL) \
+            { \
+                MU_C2(enum_value_has_equal_, argCount) = MU_ENUM_VALUE_CONTAINS_EQUAL_YES; \
+                has_equal = 1; \
+            } \
+            else \
+            { \
+                MU_C2(enum_value_has_equal_, argCount) = MU_ENUM_VALUE_CONTAINS_EQUAL_NO; \
+                has_equal = 0; \
+            } \
+            break; \
+        case MU_ENUM_VALUE_CONTAINS_EQUAL_YES: \
+            has_equal = 1; \
+            break; \
+        case MU_ENUM_VALUE_CONTAINS_EQUAL_NO: \
+            has_equal = 0; \
+            break; \
+    } \
+    if ((MU_C2(my_, enumValue)) == 0) \
+    { \
+        /* it is zero, either because not filled in or because it was explicit zero */ \
+        /* if it has an equal it cannot be implicit */ \
+        if (has_equal) \
+        { \
+            /* explicit zero */ \
+            current_enum_value = 0; \
+        } \
+        else \
+        { \
+            current_enum_value = previous_enum_value + 1; \
+        } \
+    } \
+    else \
+    { \
+        /* non zero value, thus it was filled in */ \
+        current_enum_value = MU_C2(my_, enumValue); \
+    } \
+    previous_enum_value = current_enum_value; \
+    if (current_enum_value == value) \
+    { \
+        return MU_TOSTRING(enumValue); \
+    } \
+
+#define MU_DECLARE_ENUM_TO_STRING(enumName, ...) \
+    const char* MU_C3(MU_, enumName, _ToString)(enumName value);
+
 #define MU_DEFINE_ENUMERATION_CONSTANT_AS_WIDESTRING(x) MU_C2(L, MU_TOSTRING(x)) , 
 #define MU_DEFINE_ENUMERATION_CONSTANT_AS_STRING(x) MU_TOSTRING(x) , 
+
+typedef enum MU_ENUM_VALUE_CONTAINS_EQUAL_TAG
+{
+    MU_ENUM_VALUE_CONTAINS_EQUAL_UNKNOWN,
+    MU_ENUM_VALUE_CONTAINS_EQUAL_YES,
+    MU_ENUM_VALUE_CONTAINS_EQUAL_NO
+} MU_ENUM_VALUE_CONTAINS_EQUAL;
+
+// variable definition indicating if an enum value label contains or not equal
+#define MU_INTERNAL_DEFINE_ENUM_HAS_EQ_VAR(argCount, enumValue) \
+    static MU_ENUM_VALUE_CONTAINS_EQUAL MU_C2(enum_value_has_equal_, argCount) = MU_ENUM_VALUE_CONTAINS_EQUAL_UNKNOWN; \
+
+// This is the bulk of the _ToString for an enum
+// The algorithm is:
+// - Go through each enum value
+//   - Determine if it contains an equal by searching '=' in the enum value string
+//     This value is cached. Threading is not taken into account, if a dirty read happens and an unknown value is obtained
+//     the code will simply take the worse case and take a performance hit in recomputing whether an equal is in the string
+//   - Determine the actual value of the enum value that we need to compare against:
+//     - Have a fake variable that is either initialized because there is an equal in the enum label or it is initialized to 0 
+//       because the fake variables are static
+//     - If the enum value contains an equal then take as current enum value whatever is in the fake variable
+//     - If the enum value does not contain an equal then compute the current enum value as the previous enum value plus 1
+//   - If the currently computed enum value matches the value requested to be stringified by the user then return the string to the user
+#define MU_DEFINE_ENUM_STRINGS_WITHOUT_INVALID_COMMON_CODE(enumName, ...) \
+    { \
+        int has_equal = 0; \
+        MU_FOR_EACH_1_KEEP_1(MU_INTERNAL_DEFINE_ENUM_VAR, enumName, __VA_ARGS__) \
+        MU_FOR_EACH_1_COUNTED(MU_INTERNAL_DEFINE_ENUM_HAS_EQ_VAR, __VA_ARGS__) \
+        int current_enum_value = -1; \
+        int previous_enum_value = -1; \
+        MU_FOR_EACH_1_COUNTED(MU_INTERNAL_ASSIGN_ENUM_VALUE, __VA_ARGS__) \
+        return "UNKNOWN"; \
+    }
+
 /*MU_DEFINE_ENUM_STRINGS_WITHOUT_INVALID goes to .c*/
-#define MU_DEFINE_ENUM_STRINGS_WITHOUT_INVALID(enumName, ...) const char* MU_C2(enumName, StringStorage)[MU_COUNT_ARG(__VA_ARGS__)] = {MU_FOR_EACH_1(MU_DEFINE_ENUMERATION_CONSTANT_AS_STRING, __VA_ARGS__)}; \
-const char* MU_C2(enumName,Strings)(enumName value)                \
-{                                                                  \
-    if((int)value<0 || (int)value>=MU_COUNT_ARG(__VA_ARGS__))      \
-    {                                                              \
-        /*this is an error case*/                                  \
-        return "UNKNOWN";                                          \
-    }                                                              \
-    else                                                           \
-    {                                                              \
-        return MU_C2(enumName, StringStorage)[value];              \
-    }                                                              \
-}                                                                  \
-int MU_C2(enumName, _FromString)(const char* enumAsString, enumName* destination)  \
-{                                                                               \
-    if(                                                                         \
-        (enumAsString==NULL) || (destination==NULL)                             \
-    )                                                                           \
-    {                                                                           \
-        return MU_FAILURE;                                                      \
-    }                                                                           \
-    else                                                                        \
-    {                                                                           \
-        size_t i;                                                               \
-        for(i=0;i<MU_COUNT_ARG(__VA_ARGS__);i++)                                \
-        {                                                                       \
-            if(strcmp(enumAsString, MU_C2(enumName, StringStorage)[i])==0)      \
-            {                                                                   \
-                *destination = (enumName)i;                                     \
-                return 0;                                                       \
-            }                                                                   \
-        }                                                                       \
-        return MU_FAILURE;                                                      \
-    }                                                                           \
-}                                                                               \
+#define MU_DEFINE_ENUM_STRINGS_WITHOUT_INVALID(enumName, ...) \
+    const char* MU_C3(MU_, enumName, _ToString)(enumName value) \
+    MU_DEFINE_ENUM_STRINGS_WITHOUT_INVALID_COMMON_CODE(enumName, __VA_ARGS__)
 
 // this macro is a wrapper on top of MU_DEFINE_ENUM_STRINGS_WITHOUT_INVALID, adding an _INVALID value as the first enum value in the enum
 #define MU_DEFINE_ENUM_STRINGS(enumName, ...) \
     MU_DEFINE_ENUM_STRINGS_WITHOUT_INVALID(enumName, MU_C2(enumName, _INVALID), __VA_ARGS__)
 
-#define MU_DEFINE_LOCAL_ENUM_WITHOUT_INVALID(enumName, ...) typedef enum MU_C2(enumName, _TAG) { MU_FOR_EACH_1(MU_DEFINE_ENUMERATION_CONSTANT, __VA_ARGS__)} enumName; \
-static const char* MU_C2(enumName, StringStorage)[MU_COUNT_ARG(__VA_ARGS__)] = {MU_FOR_EACH_1(MU_DEFINE_ENUMERATION_CONSTANT_AS_STRING, __VA_ARGS__)}; \
-static const char* MU_C2(enumName,Strings)(enumName value)         \
-{                                                                  \
-    if((int)value<0 || (int)value>=MU_COUNT_ARG(__VA_ARGS__))      \
-    {                                                              \
-        /*this is an error case*/                                  \
-        return "UNKNOWN";                                          \
-    }                                                              \
-    else                                                           \
-    {                                                              \
-        return MU_C2(enumName, StringStorage)[value];              \
-    }                                                              \
-}
+#define MU_DEFINE_LOCAL_ENUM_WITHOUT_INVALID(enumName, ...) \
+    typedef enum MU_C2(enumName, _TAG) { MU_FOR_EACH_1(MU_DEFINE_ENUMERATION_CONSTANT, __VA_ARGS__)} enumName; \
+    static const char* MU_C3(MU_, enumName, _ToString)(enumName value) \
+    MU_DEFINE_ENUM_STRINGS_WITHOUT_INVALID_COMMON_CODE(enumName, __VA_ARGS__)
 
 // this macro is a wrapper on top of MU_DEFINE_LOCAL_ENUM_WITHOUT_INVALID, adding an _INVALID value as the first enum value in the enum
 #define MU_DEFINE_LOCAL_ENUM(enumName, ...) \
@@ -168,11 +214,14 @@ static const char* MU_C2(enumName,Strings)(enumName value)         \
 
 // this macro returns the number of enum values (taking into account that an invalid value is generated)
 #define MU_ENUM_VALUE_COUNT(...) (MU_COUNT_ARG(__VA_ARGS__) + 1)
+#define MU_ENUM_VALUE_COUNT_WITHOUT_INVALID(...) (MU_COUNT_ARG(__VA_ARGS__))
 
 // this macro returns the number of enum 2 values (taking into account that an invalid value is generated)
 #define MU_ENUM_2_VALUE_COUNT(...) ((MU_COUNT_ARG(__VA_ARGS__) / 2) + 1)
 
-#define MU_ENUM_TO_STRING(enumName, enumValue) MU_C2(enumName, Strings)(enumValue)
+#define MU_ENUM_TO_STRING(enumName, value) \
+    MU_C3(MU_, enumName, _ToString)(value)
+
 #define MU_STRING_TO_ENUM(stringValue, enumName, addressOfEnumVariable) MU_C2(enumName, _FromString)(stringValue, addressOfEnumVariable)
 
 #define MU_EMPTY()
@@ -181,13 +230,6 @@ static const char* MU_C2(enumName,Strings)(enumName value)         \
 #define MU_DEFINE_ENUMERATION_CONSTANT_2(enumerationConstant, constantExpression) enumerationConstant = constantExpression,
 
 #define MU_DECLARE_ENUM_STRINGS_2(enumIdentifier, ...) extern const char* MU_C3(MU_, enumIdentifier,_ToString)(enumIdentifier enumerationConstant);
-
-#define MU_DEFINE_ENUM_2_WITHOUT_INVALID(enumIdentifier, ... ) typedef enum MU_C2(enumIdentifier, _TAG) {MU_FOR_EACH_2(MU_DEFINE_ENUMERATION_CONSTANT_2, __VA_ARGS__)} enumIdentifier; \
-    MU_DECLARE_ENUM_STRINGS_2(enumIdentifier, __VA_ARGS__)
-
-// this macro is a wrapper on top of MU_DEFINE_ENUM, adding an _INVALID value as the first enum value in the enum
-#define MU_DEFINE_ENUM_2(enumName, ...) \
-    MU_DEFINE_ENUM_2_WITHOUT_INVALID(enumName, MU_C2(enumName, _INVALID), (int)0xDDDDDDDD, __VA_ARGS__)
 
 typedef struct ENUM_VALUE_AND_STRING_TAG
 {

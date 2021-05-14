@@ -37,7 +37,8 @@ MU_DEFINE_ENUM_STRINGS(TEST5_ENUM, TEST5_ENUM_VALUES);
     test6_g = test6_f + 1, /* add one with our little hands */ \
     test6_h = (43 + 42), /* have a paranthesis */ \
     test6_i = 5 - 1, /* have a minus */ \
-    test6_j = -2 \
+    test6_j = -2, \
+    test6_k = (1 == 0) ? 88 : 89
 
 MU_DEFINE_ENUM(TEST6_ENUM, TEST6_ENUM_VALUES);
 MU_DEFINE_ENUM_STRINGS(TEST6_ENUM, TEST6_ENUM_VALUES);
@@ -54,7 +55,7 @@ MU_DEFINE_ENUM_STRINGS_WITHOUT_INVALID(TEST7_ENUM, TEST7_ENUM_VALUES);
 #define TEST8_ENUM_VALUES \
     test8_a = -1, \
     test8_b = 5, \
-    test8_c = 0
+    test8_c = (1 == 0)
 
 MU_DEFINE_ENUM_WITHOUT_INVALID(TEST8_ENUM, TEST8_ENUM_VALUES);
 MU_DEFINE_ENUM_STRINGS_WITHOUT_INVALID(TEST8_ENUM, TEST8_ENUM_VALUES);
@@ -122,6 +123,10 @@ int run_mu_define_enum_tests(void)
     POOR_MANS_ASSERT(TEST6_test6_j != NULL);
     POOR_MANS_ASSERT(strcmp("test6_j = -2", TEST6_test6_j) == 0);
 
+    const char* TEST6_test6_k = MU_ENUM_TO_STRING(TEST6_ENUM, test6_k);
+    POOR_MANS_ASSERT(TEST6_test6_k != NULL);
+    POOR_MANS_ASSERT(strcmp("test6_k = (1 == 0) ? 88 : 89", TEST6_test6_k) == 0);
+
     POOR_MANS_ASSERT(MU_ENUM_VALUE_COUNT_WITHOUT_INVALID(TEST7_ENUM_VALUES) == 2);
 
     const char* TEST7_test7_a = MU_ENUM_TO_STRING(TEST7_ENUM, 0);
@@ -144,7 +149,7 @@ int run_mu_define_enum_tests(void)
 
     const char* TEST8_test8_c = MU_ENUM_TO_STRING(TEST8_ENUM, 0);
     POOR_MANS_ASSERT(TEST8_test8_c != NULL);
-    POOR_MANS_ASSERT(strcmp("test8_c = 0", TEST8_test8_c) == 0);
+    POOR_MANS_ASSERT(strcmp("test8_c = (1 == 0)", TEST8_test8_c) == 0);
 
     return result;
 }

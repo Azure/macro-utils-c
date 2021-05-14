@@ -151,5 +151,10 @@ int run_mu_define_enum_tests(void)
     POOR_MANS_ASSERT(TEST8_test8_c != NULL);
     POOR_MANS_ASSERT(strcmp("test8_c = (1 == 0)", TEST8_test8_c) == 0);
 
+    // stringify twice, just to exercise the caching of "has an equal for the enum values"
+    TEST8_test8_c = MU_ENUM_TO_STRING(TEST8_ENUM, 0);
+    POOR_MANS_ASSERT(TEST8_test8_c != NULL);
+    POOR_MANS_ASSERT(strcmp("test8_c = (1 == 0)", TEST8_test8_c) == 0);
+
     return result;
 }

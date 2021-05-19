@@ -116,27 +116,51 @@ jobs:
       workingFolder: build
 
 
-- job: ubuntu1804
+- job: linuxubuntu
   displayName: 'Build Linux Ubuntu 18.04'
   pool:
     name: Azure-MessagingStore
     demands:
-    - linux
+      - linux
 
   steps:
-  - task: CMake@1
-    displayName: CMake
+  - bash: |
+     pushd $(Build.Repository.LocalPath)
+     git submodule update --init
+     git submodule foreach --recursive "git clean -xdff"
+     git clean -xdff
+     popd
+    workingDirectory: '$(Build.Repository.LocalPath)'
+    displayName: 'git submodule update and clean'
+
+  - task: Bash@3
+    displayName: 'Build and run tests'
     inputs:
-      cmakeArgs: '.. -Drun_int_tests:bool=ON'
+      targetType: filePath
+      filePath: './build/linux/build_linux.sh'
+      arguments: '$(Build.Repository.LocalPath)'
+      workingDirectory: '$(Build.Repository.LocalPath)'
 
-  - script: 'make -j$(nproc)'
-    workingDirectory: build
-    displayName: make
+- job: includecheck_linux
+  pool:
+    name: Azure-MessagingStore
+    demands:
+      - linux
 
-  - task: CmdLine@1
-    displayName: 'Run ctest'
+  steps:
+  - bash: |
+     pushd $(Build.Repository.LocalPath)
+     git submodule update --init
+     git submodule foreach --recursive "git clean -xdff"
+     git clean -xdff
+     popd
+    workingDirectory: '$(Build.Repository.LocalPath)'
+    displayName: 'git submodule update and clean'
+
+  - task: Bash@3
+    displayName: 'Build with iwyu'
     inputs:
-      filename: ctest
-      arguments: '-C "Debug" -V --output-on-failure -j $(nproc)'
-      workingFolder: build
-
+      targetType: filePath
+      filePath: './build/linux/build_linux_iwyu.sh'
+      arguments: '$(Build.Repository.LocalPath)'
+      workingDirectory: '$(Build.Repository.LocalPath)'

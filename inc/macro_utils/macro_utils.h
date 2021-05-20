@@ -229,14 +229,6 @@ typedef enum MU_ENUM_VALUE_CONTAINS_EQUAL_TAG
 
 #define MU_DECLARE_ENUM_STRINGS(enumIdentifier, ...) extern const char* MU_C3(MU_, enumIdentifier,_ToString)(enumIdentifier enumerationConstant);
 
-typedef struct ENUM_VALUE_AND_STRING_TAG
-{
-    int value;
-    const char* valueAsString;
-}ENUM_VALUE_AND_STRING;
-
-#define MU_DEFINE_ENUM_VALUE_AND_STRING(enumerationConstant, constantExpression) {enumerationConstant, MU_TOSTRING(enumerationConstant)},
-
 /*PRI_BOOL is the format specifier that prints a bool/_Bool*/
 #define PRI_BOOL "s (%d)"
 

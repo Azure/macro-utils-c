@@ -227,9 +227,7 @@ typedef enum MU_ENUM_VALUE_CONTAINS_EQUAL_TAG
 #define MU_EMPTY()
 #define MACRO_UTILS_DELAY(id) id MU_EMPTY MU_LPAREN )
 
-#define MU_DEFINE_ENUMERATION_CONSTANT_2(enumerationConstant, constantExpression) enumerationConstant = constantExpression,
-
-#define MU_DECLARE_ENUM_STRINGS_2(enumIdentifier, ...) extern const char* MU_C3(MU_, enumIdentifier,_ToString)(enumIdentifier enumerationConstant);
+#define MU_DECLARE_ENUM_STRINGS(enumIdentifier, ...) extern const char* MU_C3(MU_, enumIdentifier,_ToString)(enumIdentifier enumerationConstant);
 
 typedef struct ENUM_VALUE_AND_STRING_TAG
 {
@@ -238,20 +236,6 @@ typedef struct ENUM_VALUE_AND_STRING_TAG
 }ENUM_VALUE_AND_STRING;
 
 #define MU_DEFINE_ENUM_VALUE_AND_STRING(enumerationConstant, constantExpression) {enumerationConstant, MU_TOSTRING(enumerationConstant)},
-#define MU_DEFINE_ENUM_STRINGS_2(enumIdentifier, ... ) static const ENUM_VALUE_AND_STRING MU_C2(enumIdentifier, _ValuesAndStrings)[MU_DIV2(MU_COUNT_ARG(__VA_ARGS__))] ={MU_FOR_EACH_2(MU_DEFINE_ENUM_VALUE_AND_STRING, __VA_ARGS__)}; \
-const char* MU_C3(MU_, enumIdentifier,_ToString)(enumIdentifier value)                                                                                                                                                       \
-{                                                                                                                                                                                                                    \
-    for(size_t i=0;i<sizeof(MU_C2(enumIdentifier, _ValuesAndStrings))/sizeof(MU_C2(enumIdentifier, _ValuesAndStrings)[0]);i++)                                                                                             \
-    {                                                                                                                                                                                                                \
-        if(MU_C2(enumIdentifier, _ValuesAndStrings)[i].value == (int)value)                                                                                                                                             \
-        {                                                                                                                                                                                                            \
-            return MU_C2(enumIdentifier, _ValuesAndStrings)[i].valueAsString;                                                                                                                                           \
-        }                                                                                                                                                                                                            \
-    }                                                                                                                                                                                                                \
-    return "UNKNOWN";                                                                                                                                                                                                \
-}                                                                                                                                                                                                                    \
-
-#define MU_ENUM_TO_STRING_2(enumIdentifier, value) MU_C3(MU_, enumIdentifier,_ToString)(value)
 
 /*PRI_BOOL is the format specifier that prints a bool/_Bool*/
 #define PRI_BOOL "s (%d)"
@@ -267,12 +251,10 @@ const char* MU_C3(MU_, enumIdentifier,_ToString)(enumIdentifier value)          
 /*TIME_T_VALUE is the counterpar of PRI_TIME_T in a printf/LogError instruction*/
 #define TIME_T_VALUE(t) ctime(&t)
 
-/*PRI_MU_ENUM and MU_ENUM_VALUE/MU_ENUM_VALUE_2 work together as printf format specifier/argument. e.g: printf("enumValue was=%" PRI_MU_ENUM "\n", MU_ENUM_TO_STRING(enumIdentifier, enumValue));*/
+/*PRI_MU_ENUM and MU_ENUM_VALUE work together as printf format specifier/argument. e.g: printf("enumValue was=%" PRI_MU_ENUM "\n", MU_ENUM_TO_STRING(enumIdentifier, enumValue));*/
 #define PRI_MU_ENUM "s%s (%d)"
 
 #define MU_ENUM_VALUE(enumIdentifier, value) "", MU_ENUM_TO_STRING(enumIdentifier, (value)), (int)(value)
-
-#define MU_ENUM_VALUE_2(enumIdentifier, value) "", MU_ENUM_TO_STRING_2(enumIdentifier, (value)), (int)(value)
 
 #define CONVERT_ENUM_VALUE(from, to) \
     case (from): \

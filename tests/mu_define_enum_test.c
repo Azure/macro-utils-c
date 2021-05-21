@@ -78,7 +78,7 @@ int run_mu_define_enum_tests(void)
 
     const char* TEST5_test5_b = MU_ENUM_TO_STRING(TEST5_ENUM, 42);
     POOR_MANS_ASSERT(TEST5_test5_b != NULL);
-    POOR_MANS_ASSERT(strcmp("test5_b = 42", TEST5_test5_b) == 0);
+    POOR_MANS_ASSERT(strcmp("test5_b", TEST5_test5_b) == 0);
 
     const char* TEST5_unknown = MU_ENUM_TO_STRING(TEST5_ENUM, 41);
     POOR_MANS_ASSERT(TEST5_unknown != NULL);
@@ -86,7 +86,7 @@ int run_mu_define_enum_tests(void)
 
     const char* TEST6_test6_a = MU_ENUM_TO_STRING(TEST6_ENUM, test6_a);
     POOR_MANS_ASSERT(TEST6_test6_a != NULL);
-    POOR_MANS_ASSERT(strcmp("test6_a = 42", TEST6_test6_a) == 0);
+    POOR_MANS_ASSERT(strcmp("test6_a", TEST6_test6_a) == 0);
 
     // test6_b and TEST6_ENUM_INVALID are both 0
     const char* TEST6_test6_b = MU_ENUM_TO_STRING(TEST6_ENUM, test6_b);
@@ -95,7 +95,7 @@ int run_mu_define_enum_tests(void)
 
     const char* TEST6_test6_c = MU_ENUM_TO_STRING(TEST6_ENUM, test6_c);
     POOR_MANS_ASSERT(TEST6_test6_c != NULL);
-    POOR_MANS_ASSERT(strcmp("test6_c = -1", TEST6_test6_c) == 0);
+    POOR_MANS_ASSERT(strcmp("test6_c", TEST6_test6_c) == 0);
 
     // test6_d and TEST6_ENUM_INVALID are both 0
     const char* TEST6_test6_d = MU_ENUM_TO_STRING(TEST6_ENUM, test6_d);
@@ -113,19 +113,19 @@ int run_mu_define_enum_tests(void)
 
     const char* TEST6_test6_g = MU_ENUM_TO_STRING(TEST6_ENUM, test6_g);
     POOR_MANS_ASSERT(TEST6_test6_g != NULL);
-    POOR_MANS_ASSERT(strcmp("test6_g = test6_f + 1", TEST6_test6_g) == 0);
+    POOR_MANS_ASSERT(strcmp("test6_g", TEST6_test6_g) == 0);
 
     const char* TEST6_test6_i = MU_ENUM_TO_STRING(TEST6_ENUM, test6_i);
     POOR_MANS_ASSERT(TEST6_test6_i != NULL);
-    POOR_MANS_ASSERT(strcmp("test6_i = 5 - 1", TEST6_test6_i) == 0);
+    POOR_MANS_ASSERT(strcmp("test6_i", TEST6_test6_i) == 0);
 
     const char* TEST6_test6_j = MU_ENUM_TO_STRING(TEST6_ENUM, test6_j);
     POOR_MANS_ASSERT(TEST6_test6_j != NULL);
-    POOR_MANS_ASSERT(strcmp("test6_j = -2", TEST6_test6_j) == 0);
+    POOR_MANS_ASSERT(strcmp("test6_j", TEST6_test6_j) == 0);
 
     const char* TEST6_test6_k = MU_ENUM_TO_STRING(TEST6_ENUM, test6_k);
     POOR_MANS_ASSERT(TEST6_test6_k != NULL);
-    POOR_MANS_ASSERT(strcmp("test6_k = (1 == 0) ? 88 : 89", TEST6_test6_k) == 0);
+    POOR_MANS_ASSERT(strcmp("test6_k", TEST6_test6_k) == 0);
 
     POOR_MANS_ASSERT(MU_ENUM_VALUE_COUNT_WITHOUT_INVALID(TEST7_ENUM_VALUES) == 2);
 
@@ -135,26 +135,26 @@ int run_mu_define_enum_tests(void)
 
     const char* TEST7_test7_b = MU_ENUM_TO_STRING(TEST7_ENUM, 42);
     POOR_MANS_ASSERT(TEST7_test7_b != NULL);
-    POOR_MANS_ASSERT(strcmp("test7_b = 42", TEST7_test7_b) == 0);
+    POOR_MANS_ASSERT(strcmp("test7_b", TEST7_test7_b) == 0);
 
     POOR_MANS_ASSERT(MU_ENUM_VALUE_COUNT_WITHOUT_INVALID(TEST8_ENUM_VALUES) == 3);
 
     const char* TEST8_test8_a = MU_ENUM_TO_STRING(TEST8_ENUM, -1);
     POOR_MANS_ASSERT(TEST8_test8_a != NULL);
-    POOR_MANS_ASSERT(strcmp("test8_a = -1", TEST8_test8_a) == 0);
+    POOR_MANS_ASSERT(strcmp("test8_a", TEST8_test8_a) == 0);
 
     const char* TEST8_test8_b = MU_ENUM_TO_STRING(TEST8_ENUM, 5);
     POOR_MANS_ASSERT(TEST8_test8_b != NULL);
-    POOR_MANS_ASSERT(strcmp("test8_b = 5", TEST8_test8_b) == 0);
+    POOR_MANS_ASSERT(strcmp("test8_b", TEST8_test8_b) == 0);
 
     const char* TEST8_test8_c = MU_ENUM_TO_STRING(TEST8_ENUM, 0);
     POOR_MANS_ASSERT(TEST8_test8_c != NULL);
-    POOR_MANS_ASSERT(strcmp("test8_c = (1 == 0)", TEST8_test8_c) == 0);
+    POOR_MANS_ASSERT(strcmp("test8_c", TEST8_test8_c) == 0);
 
     // stringify twice, just to exercise the caching of "has an equal for the enum values"
     TEST8_test8_c = MU_ENUM_TO_STRING(TEST8_ENUM, 0);
     POOR_MANS_ASSERT(TEST8_test8_c != NULL);
-    POOR_MANS_ASSERT(strcmp("test8_c = (1 == 0)", TEST8_test8_c) == 0);
+    POOR_MANS_ASSERT(strcmp("test8_c", TEST8_test8_c) == 0);
 
     return result;
 }

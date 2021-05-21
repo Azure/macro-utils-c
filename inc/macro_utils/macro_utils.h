@@ -151,7 +151,14 @@ MU_IF(X, "true", "false") => "true"
     previous_enum_value = current_enum_value; \
     if (current_enum_value == value) \
     { \
-        return MU_TOSTRING(enumValue); \
+        static char result [] = MU_TOSTRING(enumValue); \
+        static int visited; /*initialized to 0 by "static"*/ \
+        if(visited == 0) \
+        { \
+            result[strspn(result, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_")] = '\0'; \
+            visited = 1; \
+        } \
+        return result; \
     } \
 
 #define MU_DECLARE_ENUM_TO_STRING(enumName, ...) \

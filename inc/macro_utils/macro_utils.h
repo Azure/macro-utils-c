@@ -159,7 +159,7 @@ MU_IF(X, "true", "false") => "true"
             visited = 1; \
         } \
         return result; \
-    } \
+    }
 
 #define MU_DECLARE_ENUM_TO_STRING(enumName, ...) \
     const char* MU_C3(MU_, enumName, _ToString)(enumName value);

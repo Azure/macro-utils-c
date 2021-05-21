@@ -61,7 +61,7 @@ static int verifyMU_ENUM_VALUE_X2(const char* empty, const char* valueAsString, 
     POOR_MANS_ASSERT(empty != NULL);
     POOR_MANS_ASSERT(memcmp(empty, "", sizeof("")) == 0);
     POOR_MANS_ASSERT(valueAsString != NULL);
-    POOR_MANS_ASSERT(memcmp(valueAsString, "X2 = 2", sizeof("X2 = 2")) == 0);
+    POOR_MANS_ASSERT(memcmp(valueAsString, "X2", sizeof("X2")) == 0);
     POOR_MANS_ASSERT(valueAsInt == X2);
     return 0;
 }
@@ -71,7 +71,7 @@ static int verifyMU_ENUM_VALUE_ZY2(const char* empty, const char* valueAsString,
     POOR_MANS_ASSERT(empty != NULL);
     POOR_MANS_ASSERT(memcmp(empty, "", sizeof("")) == 0);
     POOR_MANS_ASSERT(valueAsString != NULL);
-    POOR_MANS_ASSERT(memcmp(valueAsString, "ZY2 = 6", sizeof("ZY2 = 6")) == 0);
+    POOR_MANS_ASSERT(memcmp(valueAsString, "ZY2", sizeof("ZY2")) == 0);
     POOR_MANS_ASSERT(valueAsInt == ZY2);
     return 0;
 }

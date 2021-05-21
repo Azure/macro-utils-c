@@ -151,8 +151,15 @@ MU_IF(X, "true", "false") => "true"
     previous_enum_value = current_enum_value; \
     if (current_enum_value == value) \
     { \
-        return MU_TOSTRING(enumValue); \
-    } \
+        static char result [] = MU_TOSTRING(enumValue); \
+        static int visited; /*initialized to 0 by "static"*/ \
+        if(visited == 0) \
+        { \
+            result[strspn(result, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_")] = '\0'; \
+            visited = 1; \
+        } \
+        return result; \
+    }
 
 #define MU_DECLARE_ENUM_TO_STRING(enumName, ...) \
     const char* MU_C3(MU_, enumName, _ToString)(enumName value);
@@ -215,9 +222,6 @@ typedef enum MU_ENUM_VALUE_CONTAINS_EQUAL_TAG
 // this macro returns the number of enum values (taking into account that an invalid value is generated)
 #define MU_ENUM_VALUE_COUNT(...) (MU_COUNT_ARG(__VA_ARGS__) + 1)
 #define MU_ENUM_VALUE_COUNT_WITHOUT_INVALID(...) (MU_COUNT_ARG(__VA_ARGS__))
-
-// this macro returns the number of enum 2 values (taking into account that an invalid value is generated)
-#define MU_ENUM_2_VALUE_COUNT(...) ((MU_COUNT_ARG(__VA_ARGS__) / 2) + 1)
 
 #define MU_ENUM_TO_STRING(enumName, value) \
     MU_C3(MU_, enumName, _ToString)(value)

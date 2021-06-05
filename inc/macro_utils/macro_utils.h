@@ -239,7 +239,7 @@ typedef enum MU_ENUM_VALUE_CONTAINS_EQUAL_TAG
 /*MU_BOOL_VALUE is the counterpart of PRI_BOOL*/
 #define MU_FALSE_STRING "false"
 #define MU_TRUE_STRING "true"
-#define MU_BOOL_VALUE(v) MU_FALSE_STRING "\0" MU_TRUE_STRING + ((!!(v))*sizeof(MU_FALSE_STRING)), (v)
+#define MU_BOOL_VALUE(v) &(MU_FALSE_STRING "\0" MU_TRUE_STRING[((!!(v))*sizeof(MU_FALSE_STRING))]), (v)
 
 /*PRI_TIME_T is to be used with a time_t variable - it produces strings such as "Tue May  4 14:42:17 2021". As per 7.27.3.1 The asctime function of C11 it seems that limiting the output to 24 characters should be safe.*/
 #define PRI_TIME_T ".24s"

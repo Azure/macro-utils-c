@@ -6,7 +6,7 @@ jobs:
 - job: windowsx86
   displayName: 'Build Windows x86'
   pool:
-    name: Azure-MessagingStore
+    name: Azure-MessagingStore-BuildMachinePool
     demands:
     - Build
     - Cmd
@@ -62,7 +62,7 @@ jobs:
 - job: windowsx64
   displayName: 'Build Windows x64'
   pool:
-    name: Azure-MessagingStore
+    name: Azure-MessagingStore-BuildMachinePool
     demands:
     - Build
     - Cmd

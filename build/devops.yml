@@ -115,11 +115,10 @@ jobs:
       arguments: '-C "Debug" -V --output-on-failure'
       workingFolder: build
 
-
-- job: ubuntu1804
-  displayName: 'Build Linux Ubuntu 18.04'
+- job: ubuntu
+  displayName: 'Build Linux Ubuntu'
   pool:
-    name: Azure-MessagingStore
+    name: Azure-MessagingStore-LinuxBuildMachinePool
     demands:
     - linux
 

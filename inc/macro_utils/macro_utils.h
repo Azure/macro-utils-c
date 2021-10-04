@@ -283,34 +283,33 @@ typedef enum MU_ENUM_VALUE_CONTAINS_EQUAL_TAG
     MU_DEFINE_CONVERT_ENUM_WITHOUT_INVALID(ENUM_TYPE_FROM, ENUM_TYPE_TO, MU_C2(ENUM_TYPE_FROM, _INVALID), MU_C2(ENUM_TYPE_TO, _INVALID), __VA_ARGS__)
 
 #define CONSTRUCT_FROM_FAKE_ENUM(from_value, to_value) \
-    MU_C3(fake_from_, from_value, _C0FB3709_EDE8_4288_8F70_FDDB5D8D7A51),
+    MU_C5(fake_from_, from_value, _, to_value, _C0FB3709_EDE8_4288_8F70_FDDB5D8D7A51),
 
 #define CONSTRUCT_FIELD_FROM_FAKE_ENUM(from_value, to_value) \
-    int MU_C3(fake_from_, from_value, _C0FB3709_EDE8_4288_8F70_FDDB5D8D7A51)[(MU_C2(enum_value_typedef_, from_value) == MU_C2(enum_value_typedef_, from_value)) ? 1 : 0];
+    int MU_C5(fake_from_, from_value, _, to_value, _C0FB3709_EDE8_4288_8F70_FDDB5D8D7A51)[(MU_C2(enum_value_typedef_, from_value) == MU_C2(enum_value_typedef_, from_value)) ? 1 : 0];
 
-// This macro adds validation of the fact that the from values count in the list match the count of values in the
-// (as opposed to the macro MU_DEFINE_CONVERT_ENUM_WITHOUT_VALIDATION)
-// from enum type. It does that by having a special fake enum where all the "from" values are enumerated
+// This macro adds validation of the fact that the from values count in the list match the count of values in the from enum type
+// (as opposed to the macro MU_DEFINE_CONVERT_ENUM_WITHOUT_VALIDATION). It does that by having a special fake enum where all the "from" values are enumerated
 // The count check is done by having a zero sized array in a struct if the counts do not match
 #define MU_DEFINE_CONVERT_ENUM(ENUM_TYPE_FROM, ENUM_TYPE_TO, ...) \
     /* This forces matching the values in from to enum values generated with MU_DEFINE_ENUM */ \
-    typedef struct MU_C3(fake_check_enum_values_exist_, ENUM_TYPE_FROM, _C0FB3709_EDE8_4288_8F70_FDDB5D8D7A51_TAG) \
+    typedef struct MU_C5(fake_check_enum_values_exist_, ENUM_TYPE_FROM,_, ENUM_TYPE_TO, _C0FB3709_EDE8_4288_8F70_FDDB5D8D7A51_TAG) \
     { \
         MU_FOR_EACH_2(CONSTRUCT_FIELD_FROM_FAKE_ENUM, __VA_ARGS__) \
-    } MU_C3(fake_check_enum_values_exist_, ENUM_TYPE_FROM, _C0FB3709_EDE8_4288_8F70_FDDB5D8D7A51); \
+    } MU_C5(fake_check_enum_values_exist_, ENUM_TYPE_FROM, _, ENUM_TYPE_TO, _C0FB3709_EDE8_4288_8F70_FDDB5D8D7A51); \
     /* Have an enum which has all the "from" values */ \
     /* This enum will have a count */ \
-    typedef enum MU_C3(fake_, ENUM_TYPE_FROM, _C0FB3709_EDE8_4288_8F70_FDDB5D8D7A51_TAG) \
+    typedef enum MU_C5(fake_, ENUM_TYPE_FROM, _, ENUM_TYPE_TO, _C0FB3709_EDE8_4288_8F70_FDDB5D8D7A51_TAG) \
     { \
         MU_FOR_EACH_2(CONSTRUCT_FROM_FAKE_ENUM, __VA_ARGS__) \
-        MU_C3(fake_, ENUM_TYPE_FROM, _C0FB3709_EDE8_4288_8F70_FDDB5D8D7A51_count) \
-    } MU_C3(fake_, ENUM_TYPE_FROM, _C0FB3709_EDE8_4288_8F70_FDDB5D8D7A51); \
+        MU_C5(fake_, ENUM_TYPE_FROM, _, ENUM_TYPE_TO, _C0FB3709_EDE8_4288_8F70_FDDB5D8D7A51_count) \
+    } MU_C5(fake_, ENUM_TYPE_FROM, _, ENUM_TYPE_TO, _C0FB3709_EDE8_4288_8F70_FDDB5D8D7A51); \
     /* "Compare" the count of the from enum values with the count of the values in "ENUM_TYPE_FROM" */ \
-    typedef struct MU_C3(fake_, ENUM_TYPE_FROM, _C0FB3709_EDE8_4288_8F70_FDDB5D8D7A51_struct_TAG) \
+    typedef struct MU_C5(fake_, ENUM_TYPE_FROM, _, ENUM_TYPE_TO, _C0FB3709_EDE8_4288_8F70_FDDB5D8D7A51_struct_TAG) \
     { \
-        int MU_C3(fake_, ENUM_TYPE_FROM, _C0FB3709_EDE8_4288_8F70_FDDB5D8D7A51_count_test_array)[((MU_C3(fake_, ENUM_TYPE_FROM, _C0FB3709_EDE8_4288_8F70_FDDB5D8D7A51_count) + 1) == MU_C3(enum_value_metadata_, ENUM_TYPE_FROM, _VALUE_COUNT)) ? 1 : 0]; \
+        int MU_C5(fake_, ENUM_TYPE_FROM, _, ENUM_TYPE_TO, _C0FB3709_EDE8_4288_8F70_FDDB5D8D7A51_count_test_array)[((MU_C5(fake_, ENUM_TYPE_FROM, _, ENUM_TYPE_TO, _C0FB3709_EDE8_4288_8F70_FDDB5D8D7A51_count) + 1) == MU_C3(enum_value_metadata_, ENUM_TYPE_FROM, _VALUE_COUNT)) ? 1 : 0]; \
         int dummy; \
-    } MU_C3(fake_, ENUM_TYPE_FROM, _C0FB3709_EDE8_4288_8F70_FDDB5D8D7A51_struct); \
+    } MU_C5(fake_, ENUM_TYPE_FROM, _, ENUM_TYPE_TO, _C0FB3709_EDE8_4288_8F70_FDDB5D8D7A51_struct); \
     MU_DEFINE_CONVERT_ENUM_WITHOUT_VALIDATION(ENUM_TYPE_FROM, ENUM_TYPE_TO, __VA_ARGS__)
 
 #define MU_DEFINE_STRUCT_FIELD(fieldType, fieldName) fieldType fieldName;

@@ -109,3 +109,7 @@ endif()
 if(${run_int_tests})
     add_subdirectory(tests) 
 endif()
+
+if(${run_reals_check})
+    add_reals_check_target()
+endif()

@@ -29,12 +29,14 @@ set(original_run_int_tests ${run_int_tests})
 set(original_run_perf_tests ${run_perf_tests})
 set(original_run_unittests ${run_unittests})
 set(original_run_traceability ${run_traceability})
+set(original_run_reals_check ${run_reals_check})
 
 set(run_e2e_tests OFF)
 set(run_int_tests OFF)
 set(run_perf_tests OFF)
 set(run_unittests OFF)
 set(run_traceability OFF)
+set(run_reals_check OFF)
 
 if ((NOT TARGET c_build_tools) AND (EXISTS ${CMAKE_CURRENT_LIST_DIR}/deps/c-build-tools/CMakeLists.txt))
     add_subdirectory(deps/c-build-tools)
@@ -46,6 +48,7 @@ set(run_int_tests ${original_run_int_tests})
 set(run_perf_tests ${original_run_perf_tests})
 set(run_unittests ${original_run_unittests})
 set(run_traceability ${original_run_traceability})
+set(run_reals_check ${original_run_reals_check})
 
 #these are the include folders
 #the following "set" statement exports across the project a global variable called MACRO_UTILS_INC_FOLDER that expands to whatever needs to included when using macro_utils

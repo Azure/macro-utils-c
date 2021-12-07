@@ -59,7 +59,7 @@ jobs:
       arguments: '-C "RelWithDebInfo" -V --output-on-failure'
       workingFolder: build
 
-- job: windowsx64
+- job: windowsx64debug
   displayName: 'Build Windows x64'
   pool:
     name: Azure-MessagingStore-WinBuildMachinePool
@@ -97,7 +97,7 @@ jobs:
   - task: CMake@1
     displayName: CMake
     inputs:
-      cmakeArgs: '.. -Drun_reals_check:bool=ON -Drun_int_tests:bool=ON -G "Visual Studio 16 2019" -A x64'
+      cmakeArgs: '.. -Drun_reals_check:bool=ON -Drun_int_tests:bool=ON -Duse_vld:bool=ON -G "Visual Studio 16 2019" -A x64'
 
   - task: VSBuild@1
     displayName: 'Build solution build\*.sln (Debug)'

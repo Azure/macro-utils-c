@@ -41,7 +41,7 @@ jobs:
   - task: CMake@1
     displayName: CMake
     inputs:
-      cmakeArgs: '.. -Drun_reals_check:bool=ON -Drun_int_tests:bool=ON -G "Visual Studio 16 2019" -A Win32'
+      cmakeArgs: '.. -Drun_reals_check:bool=ON -Drun_int_tests:bool=ON -G "Visual Studio 17 2022" -A Win32'
 
   - task: VSBuild@1
     displayName: 'Build solution build\*.sln (RelWithDebInfo)'
@@ -97,7 +97,7 @@ jobs:
   - task: CMake@1
     displayName: CMake
     inputs:
-      cmakeArgs: '.. -Drun_reals_check:bool=ON -Drun_int_tests:bool=ON -Duse_vld:bool=ON -G "Visual Studio 16 2019" -A x64'
+      cmakeArgs: '.. -Drun_reals_check:bool=ON -Drun_int_tests:bool=ON -Duse_vld:bool=ON -G "Visual Studio 17 2022" -A x64'
 
   - task: VSBuild@1
     displayName: 'Build solution build\*.sln (Debug)'

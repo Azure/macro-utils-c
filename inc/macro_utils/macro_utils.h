@@ -357,6 +357,15 @@ __pragma(warning(pop))
 #endif
 
 
+#define MU_IS_VALUE_EQUAL_ONE_OF_VALUES(VALUE, ONE_OF_VALUES) +((VALUE)==(ONE_OF_VALUES))
+
+/*evaluates to 0 or 1*/
+#define MU_IS_NONE_OF(VALUE, ...) ( MU_FOR_EACH_1_KEEP_1(MU_IS_VALUE_EQUAL_ONE_OF_VALUES, (VALUE), __VA_ARGS__) == 0)
+
+#define MU_IS_NONE_OF_EXPRESSION_BUILDER(N, ...) MU_IS_NONE_OF(N, __VA_ARGS__) ? (N) :
+
+#define MU_DIFFERENT(...) (MU_DO(MU_COUNT_ARG(__VA_ARGS__), MU_IS_NONE_OF_EXPRESSION_BUILDER, __VA_ARGS__) - 1) /*-1 is the last ?: ternary third operator, and it is never an output of this macro*/
+
 
 #ifdef __cplusplus
 }

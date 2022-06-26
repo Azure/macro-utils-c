@@ -219,3 +219,20 @@ MU_FOR_EACH_1_PASTE(PASTE, ...)
 `MU_FOR_EACH_1_PASTE` is a macro that expands to `PASTE` concatenated to every variadic argument. Here's an example:
 
 `MU_FOR_EACH_1_PASTE(1, 1,2,3)` => 11 12 13
+
+### MU_DIFFERENT
+```c
+MU_DIFFERENT(a,b,c)
+```
+
+`MU_DIFFERENT` is a macro that expands to a value that is different from any of the arguments. Depending on the arguments, evaluation can be done by the compiler at compile time, or at runtime.
+
+Note: Not all argument types can be used ("strings" should not be used). Constant expressions are always useable. Arguments that are expressions with side-effects are unadvised.
+
+Example:
+MU_DIFFERENT(1) => 0
+MU_DIFFERENT(0,1) => 2
+
+Internally `MU_DIFFERENT` proposes numbers starting with 0..MU_COUNT_ARG as candidates for the expression result.
+
+If one of these numbers is not equal to any of the arguments then `MU_DIFFERENT` will evaluate to this number.

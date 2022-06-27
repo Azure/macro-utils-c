@@ -9,7 +9,7 @@
 #include "mu_different_test.h"
 
 /*uncomment line below to run some code with side-effects*/
-#define RUN_FUN_TESTS
+//#define RUN_FUN_TESTS
 
 #ifdef RUN_FUN_TESTS
 

@@ -12,6 +12,7 @@
 #include "mu_count_arg_test.h"
 #include "mu_count_1_or_more_arg_test.h"
 #include "mu_define_enum_test.h"
+#include "mu_different_test.h"
 #include "mu_define_local_enum_test.h"
 #include "mu_eat_empty_args_test.h"
 #include "mu_is_empty_test.h"
@@ -76,6 +77,9 @@ int main(void)
     POOR_MANS_ASSERT(result == 0);
 
     result = run_mu_pri_time_t_tests();
+    POOR_MANS_ASSERT(result == 0);
+
+    result = run_mu_different_tests();
     POOR_MANS_ASSERT(result == 0);
 
     return 0;

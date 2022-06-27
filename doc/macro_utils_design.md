@@ -233,6 +233,6 @@ Example:
 MU_DIFFERENT(1) => 0
 MU_DIFFERENT(0,1) => 2
 
-Internally `MU_DIFFERENT` proposes numbers starting with 0..MU_COUNT_ARG as candidates for the expression result.
+Internally `MU_DIFFERENT` proposes numbers starting with MU_COUNT_ARG..0 as candidates for the expression result.
 
 If one of these numbers is not equal to any of the arguments then `MU_DIFFERENT` will evaluate to this number.

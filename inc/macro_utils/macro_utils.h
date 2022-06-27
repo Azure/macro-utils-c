@@ -364,7 +364,7 @@ __pragma(warning(pop))
 
 #define MU_IS_NONE_OF_EXPRESSION_BUILDER(N, ...) MU_IS_NONE_OF(N, __VA_ARGS__) ? (N) :
 
-#define MU_DIFFERENT(...) (MU_DO(MU_COUNT_ARG(__VA_ARGS__), MU_IS_NONE_OF_EXPRESSION_BUILDER, __VA_ARGS__) - 1) /*-1 is the last ?: ternary third operator, and it is never an output of this macro*/
+#define MU_DIFFERENT(...) (MU_DO(MU_COUNT_ARG(__VA_ARGS__), MU_IS_NONE_OF_EXPRESSION_BUILDER, __VA_ARGS__)  (-1) ) /*-1 is the last ?: ternary third operator, and it is never an output of this macro*/
 
 
 #ifdef __cplusplus

@@ -8,11 +8,34 @@
 
 #include "mu_different_test.h"
 
+/*uncomment line below to run some code with side-effects*/
+#define RUN_FUN_TESTS
+
+#ifdef RUN_FUN_TESTS
+
+/*due to side effects consequences MU_DIFFERENT(f(), g()); yields -1.*/
+static int f_value = 3;
+static int f(void)
+{
+    f_value--;
+    (void)printf("f returning %d\n", f_value);
+    return f_value;
+}
+
+static int g_value = 2;
+static int g(void)
+{
+    g_value--;
+    (void)printf("g returning %d\n", g_value);
+    return g_value;
+}
+#endif
+
 int run_mu_different_tests(void)
 {
     int result = 0;
 
-    POOR_MANS_ASSERT(MU_DIFFERENT(-2) != -22);
+    POOR_MANS_ASSERT(MU_DIFFERENT(-2) != -2);
 
     POOR_MANS_ASSERT(MU_DIFFERENT(-1) != -1);
 
@@ -63,7 +86,7 @@ int run_mu_different_tests(void)
 
 #define L1 0,1,2,3
 
-    int a1[MU_DIFFERENT(L1)==0? 1: MU_DIFFERENT(L1)];
+    int a1[MU_DIFFERENT(L1)];
     (void)a1;
 
 #define L2 1,2,3
@@ -79,6 +102,11 @@ int run_mu_different_tests(void)
         (MU_DIFFERENT(a, b) != b)
     );
 
+#ifdef RUN_FUN_TESTS
+    /*"for fun"*/
+    int different = MU_DIFFERENT(f(), g());
+    (void)different;
+#endif
 
     return result;
 }

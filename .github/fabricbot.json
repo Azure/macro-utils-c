@@ -129,6 +129,12 @@
             "parameters": {
               "reviewer": "ACKPaul"
             }
+          },
+          {
+            "name": "requestReviewer",
+            "parameters": {
+              "reviewer": "haridamineni"
+            }
           }
         ],
         "taskName": "Request review from Messaging Store"

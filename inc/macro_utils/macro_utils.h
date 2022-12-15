@@ -345,7 +345,7 @@ __pragma(warning(pop))
 /*according to https://docs.microsoft.com/en-us/cpp/preprocessor/predefined-macros?view=vs-2019 this is where VS 2019 starts (1920)*/
 /*this is needed because there is NO /experimental:preprocessor or /Zc:preprocessor for VS 2017, it only exists for C++ compiler... apparently*/
 /*and there's an absolute need to compile with 2017 (read: vcredist 2019 not being available in the environment where the resulting compiled code is run)*/
-#if _MSC_VER < 1920
+#if defined(_MSC_VER) && (_MSC_VER < 1920 )
 /*for anything < VS 2019*/
 #define MU_NOEXPAND(...) __VA_ARGS__
 #define MU_EXPAND(...) __VA_ARGS__

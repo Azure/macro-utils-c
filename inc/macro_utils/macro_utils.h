@@ -164,8 +164,8 @@ MU_IF(X, "true", "false") => "true"
 #define MU_DECLARE_ENUM_TO_STRING(enumName, ...) \
     const char* MU_C3(MU_, enumName, _ToString)(enumName value);
 
-#define MU_DEFINE_ENUMERATION_CONSTANT_AS_WIDESTRING(x) MU_C2(L, MU_TOSTRING(x)) , 
-#define MU_DEFINE_ENUMERATION_CONSTANT_AS_STRING(x) MU_TOSTRING(x) , 
+#define MU_DEFINE_ENUMERATION_CONSTANT_AS_WIDESTRING(x) MU_C2(L, MU_TOSTRING(x)) ,
+#define MU_DEFINE_ENUMERATION_CONSTANT_AS_STRING(x) MU_TOSTRING(x) ,
 
 typedef enum MU_ENUM_VALUE_CONTAINS_EQUAL_TAG
 {
@@ -185,7 +185,7 @@ typedef enum MU_ENUM_VALUE_CONTAINS_EQUAL_TAG
 //     This value is cached. Threading is not taken into account, if a dirty read happens and an unknown value is obtained
 //     the code will simply take the worse case and take a performance hit in recomputing whether an equal is in the string
 //   - Determine the actual value of the enum value that we need to compare against:
-//     - Have a fake variable that is either initialized because there is an equal in the enum label or it is initialized to 0 
+//     - Have a fake variable that is either initialized because there is an equal in the enum label or it is initialized to 0
 //       because the fake variables are static
 //     - If the enum value contains an equal then take as current enum value whatever is in the fake variable
 //     - If the enum value does not contain an equal then compute the current enum value as the previous enum value plus 1
@@ -260,9 +260,15 @@ typedef enum MU_ENUM_VALUE_CONTAINS_EQUAL_TAG
 #define MU_CONVERT_ENUM(ENUM_TYPE_FROM, ENUM_TYPE_TO) \
     MU_C4(convert_enum_, ENUM_TYPE_FROM, _, ENUM_TYPE_TO)
 
+#define MU_CONVERT_ENUM_WITH_DEFAULT(ENUM_TYPE_FROM, ENUM_TYPE_TO) MU_C5(convert_enum_, ENUM_TYPE_FROM, _, ENUM_TYPE_TO, _with_default)
+
 // This macro declares an enum conversion function that translates a value from one enum to another
 #define MU_DECLARE_CONVERT_ENUM(ENUM_TYPE_FROM, ENUM_TYPE_TO) \
     int MU_CONVERT_ENUM(ENUM_TYPE_FROM, ENUM_TYPE_TO)(ENUM_TYPE_FROM enum_value_from, ENUM_TYPE_TO* enum_value_to);
+
+// This macro declares an enum conversion function that translates a value from one enum to another with a default value
+#define MU_DECLARE_CONVERT_ENUM_WITH_DEFAULT(ENUM_TYPE_FROM, ENUM_TYPE_TO) \
+    ENUM_TYPE_TO MU_CONVERT_ENUM_WITH_DEFAULT(ENUM_TYPE_FROM, ENUM_TYPE_TO)(ENUM_TYPE_FROM from);
 
 // This macro defines an enum conversion function that translates a value from one enum to another
 // It is implemented as a switch statement. This allows for catching multiple from values being in the list also
@@ -311,6 +317,36 @@ typedef enum MU_ENUM_VALUE_CONTAINS_EQUAL_TAG
         int dummy; \
     } MU_C5(fake_, ENUM_TYPE_FROM, _, ENUM_TYPE_TO, _C0FB3709_EDE8_4288_8F70_FDDB5D8D7A51_struct); \
     MU_DEFINE_CONVERT_ENUM_WITHOUT_VALIDATION(ENUM_TYPE_FROM, ENUM_TYPE_TO, __VA_ARGS__)
+
+// Internal macro which adds a wrapper around the convert enum which will handle the return code and translate to a default
+#define MU_DEFINE_CONVERT_ENUM_WITH_DEFAULT_INTERNAL(ERROR_LOGGING_FUNCTION, ENUM_TYPE_FROM, ENUM_TYPE_TO, DEFAULT, ...) \
+    ENUM_TYPE_TO MU_CONVERT_ENUM_WITH_DEFAULT(ENUM_TYPE_FROM, ENUM_TYPE_TO)(ENUM_TYPE_FROM from) \
+    { \
+        ENUM_TYPE_TO result; \
+        if (MU_CONVERT_ENUM(ENUM_TYPE_FROM, ENUM_TYPE_TO)(from, &result) != 0) \
+        { \
+            ERROR_LOGGING_FUNCTION("Encountered unknown enum value %" PRI_MU_ENUM ", treat as %" PRI_MU_ENUM, \
+                MU_ENUM_VALUE(ENUM_TYPE_FROM, from), MU_ENUM_VALUE(ENUM_TYPE_TO, DEFAULT)); \
+            result = DEFAULT; \
+        } \
+        return result; \
+    }
+
+// Defines a conversion where unknown values are converted to DEFAULT
+#define MU_DEFINE_CONVERT_ENUM_WITH_DEFAULT(ERROR_LOGGING_FUNCTION, ENUM_TYPE_FROM, ENUM_TYPE_TO, DEFAULT, ...) \
+    MU_DEFINE_CONVERT_ENUM(ENUM_TYPE_FROM, ENUM_TYPE_TO, __VA_ARGS__) \
+    MU_DEFINE_CONVERT_ENUM_WITH_DEFAULT_INTERNAL(ERROR_LOGGING_FUNCTION, ENUM_TYPE_FROM, ENUM_TYPE_TO, DEFAULT, __VA_ARGS__) \
+
+// Defines a conversion where unknown values are converted to DEFAULT
+// using the without validation version so enum values can be skipped
+#define MU_DEFINE_CONVERT_ENUM_WITH_DEFAULT_WITHOUT_VALIDATION(ERROR_LOGGING_FUNCTION, ENUM_TYPE_FROM, ENUM_TYPE_TO, DEFAULT, ...) \
+    MU_DEFINE_CONVERT_ENUM_WITHOUT_VALIDATION(ENUM_TYPE_FROM, ENUM_TYPE_TO, __VA_ARGS__) \
+    MU_DEFINE_CONVERT_ENUM_WITH_DEFAULT_INTERNAL(ERROR_LOGGING_FUNCTION, ENUM_TYPE_FROM, ENUM_TYPE_TO, DEFAULT, __VA_ARGS__) \
+
+// Defines a conversion where unknown values are converted to DEFAULT and the _INVALID value (0) is treated as DEFAULT
+#define MU_DEFINE_CONVERT_ENUM_WITH_DEFAULT_WITHOUT_INVALID(ERROR_LOGGING_FUNCTION, ENUM_TYPE_FROM, ENUM_TYPE_TO, DEFAULT, ...) \
+    MU_DEFINE_CONVERT_ENUM_WITHOUT_INVALID(ENUM_TYPE_FROM, ENUM_TYPE_TO, __VA_ARGS__) \
+    MU_DEFINE_CONVERT_ENUM_WITH_DEFAULT_INTERNAL(ERROR_LOGGING_FUNCTION, ENUM_TYPE_FROM, ENUM_TYPE_TO, DEFAULT, __VA_ARGS__) \
 
 #define MU_DEFINE_STRUCT_FIELD(fieldType, fieldName) fieldType fieldName;
 

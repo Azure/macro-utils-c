@@ -72,8 +72,9 @@ int run_mu_convert_enum_tests(void)
     convert_result = MU_CONVERT_ENUM(TEST_CONVERT_FROM_ENUM, TEST_CONVERT_TO_ENUM)(424242, &result_value);
     POOR_MANS_ASSERT(convert_result != 0);
 
-    convert_result = MU_CONVERT_ENUM(TEST_CONVERT_FROM_ENUM, TEST_CONVERT_TO_ENUM)(424242, &result_value);
-    POOR_MANS_ASSERT(convert_result != 0);
+    convert_result = MU_CONVERT_ENUM(TEST_CONVERT_FROM_ENUM, TEST_CONVERT_TO_ENUM)(TEST_CONVERT_FROM_ENUM_INVALID, &result_value);
+    POOR_MANS_ASSERT(convert_result == 0);
+    POOR_MANS_ASSERT(result_value == TEST_CONVERT_TO_ENUM_INVALID);
 
     TEST_CONVERT_TO_ANOTHER_ENUM another_result_value;
 
@@ -92,8 +93,9 @@ int run_mu_convert_enum_tests(void)
     convert_result = MU_CONVERT_ENUM(TEST_CONVERT_FROM_ENUM, TEST_CONVERT_TO_ANOTHER_ENUM)(424242, &another_result_value);
     POOR_MANS_ASSERT(convert_result != 0);
 
-    convert_result = MU_CONVERT_ENUM(TEST_CONVERT_FROM_ENUM, TEST_CONVERT_TO_ANOTHER_ENUM)(424242, &another_result_value);
-    POOR_MANS_ASSERT(convert_result != 0);
+    convert_result = MU_CONVERT_ENUM(TEST_CONVERT_FROM_ENUM, TEST_CONVERT_TO_ANOTHER_ENUM)(TEST_CONVERT_FROM_ENUM_INVALID, &another_result_value);
+    POOR_MANS_ASSERT(convert_result == 0);
+    POOR_MANS_ASSERT(another_result_value == TEST_CONVERT_TO_ANOTHER_ENUM_INVALID);
 
     return result;
 }

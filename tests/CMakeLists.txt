@@ -11,6 +11,7 @@ set(macro_utils_int_tests_c_files
     for_each_1_keep_2_test.c
     main.c
     mu_convert_enum_test.c
+    mu_convert_enum_with_default_test.c
     mu_count_arg_test.c
     mu_count_array_items_test.c
     mu_count_1_or_more_arg_test.c
@@ -32,6 +33,7 @@ set(macro_utils_int_tests_h_files
     define_struct_test.h
     for_each_1_keep_2_test.h
     mu_convert_enum_test.h
+    mu_convert_enum_with_default_test.h
     mu_count_arg_test.h
     mu_count_array_items_test.h
     mu_count_1_or_more_arg_test.h
@@ -52,7 +54,7 @@ set(macro_utils_int_tests_h_files
     ${MACRO_UTILS_INC_FOLDER}/macro_utils/macro_utils.h
     ${MACRO_UTILS_INC_FOLDER}/macro_utils/macro_utils_generated.h
 )
-    
+
 add_executable(macro_utils_int_tests ${macro_utils_int_tests_c_files} ${macro_utils_int_tests_h_files})
 
 add_test(NAME macro_utils_int_tests COMMAND macro_utils_int_tests)

@@ -87,6 +87,6 @@ int main(void)
     result = run_mu_different_tests();
     POOR_MANS_ASSERT(result == 0);
 
-    return result;
+    return 0;
 }
 

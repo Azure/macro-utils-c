@@ -30,6 +30,9 @@ extern "C" {
 #define MU_TOSTRING_(x) #x
 #define MU_TOSTRING(x) MU_TOSTRING_(x)
 
+#define MU_TOWSTRING_(x) L ## #x
+#define MU_TOWSTRING(x) MU_TOWSTRING_(x)
+
 #define MU_TRIGGER_PARENTHESIS(...) ,
 
 #if defined(_MSC_VER) && (_MSC_VER<1920)

@@ -8,7 +8,11 @@ include_directories(${MACRO_UTILS_INC_FOLDER})
 
 set(macro_utils_int_tests_c_files
     define_struct_test.c
+    for_each_1_keep_1_test.c
     for_each_1_keep_2_test.c
+    for_each_1_keep_1_counted_test.c
+    for_each_1_keep_2_counted_test.c
+    for_each_1_nesting_test.c
     main.c
     mu_convert_enum_test.c
     mu_convert_enum_with_default_test.c
@@ -32,7 +36,11 @@ set(macro_utils_int_tests_c_files
 
 set(macro_utils_int_tests_h_files
     define_struct_test.h
+    for_each_1_keep_1_test.h
     for_each_1_keep_2_test.h
+    for_each_1_keep_1_counted_test.h
+    for_each_1_keep_2_counted_test.h
+    for_each_1_nesting_test.h
     mu_convert_enum_test.h
     mu_convert_enum_with_default_test.h
     mu_count_arg_test.h

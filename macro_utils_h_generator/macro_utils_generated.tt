@@ -289,6 +289,30 @@ MU_FOR_EACH_1_COUNTED_<#=i-1#>(X, <#for(var j=2;j<=i;j++){#>P<#=j.ToString()+((j
 
 <#}#>
 
+#define MU_FOR_EACH_1_KEEP_2_COUNTED_0(...)
+
+#define MU_FOR_EACH_1_KEEP_2_COUNTED_1(X, keep1, keep2, P1) \
+    X(1, keep1, keep2, P1)
+
+<#for(var i=2;i<=nMacroParameters;i++) {#>
+#define MU_FOR_EACH_1_KEEP_2_COUNTED_<#=i#>(X, keep1, keep2, <#for(var j=1;j<=i;j++){#>P<#=j.ToString()+((j<i)?", ":"")#><#}#>) \
+X(<#=i#>, keep1, keep2, P1) \
+MU_FOR_EACH_1_KEEP_2_COUNTED_<#=i-1#>(X, keep1, keep2, <#for(var j=2;j<=i;j++){#>P<#=j.ToString()+((j<i)?", ":"")#><#}#>)
+
+<#}#>
+
+#define MU_FOR_EACH_1_KEEP_1_COUNTED_0(...)
+
+#define MU_FOR_EACH_1_KEEP_1_COUNTED_1(X, keep, P1) \
+    X(1, keep, P1)
+
+<#for(var i=2;i<=nMacroParameters;i++) {#>
+#define MU_FOR_EACH_1_KEEP_1_COUNTED_<#=i#>(X, keep, <#for(var j=1;j<=i;j++){#>P<#=j.ToString()+((j<i)?", ":"")#><#}#>) \
+X(<#=i#>, keep, P1) \
+MU_FOR_EACH_1_KEEP_1_COUNTED_<#=i-1#>(X, keep, <#for(var j=2;j<=i;j++){#>P<#=j.ToString()+((j<i)?", ":"")#><#}#>)
+
+<#}#>
+
 #define MU_FOR_EACH_2_COUNTED_0(...)
 
 #define MU_FOR_EACH_2_COUNTED_2(X, P1, P2) \
@@ -304,7 +328,7 @@ MU_FOR_EACH_2_COUNTED_<#=i-2#>(X, <#for(var j=3;j<=i;j++){#>P<#=j.ToString()+((j
 #if defined(_MSC_VER) && (_MSC_VER < 1920 )
 #define MU_FOR_EACH_2(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_2_, MU_C1(MU_COUNT_ARG(__VA_ARGS__))) MU_LPAREN MACRO_TO_INVOKE, __VA_ARGS__)
 /*the COUNTED breed of MU_FOR_EACH macro invokes a macro with 3 parameters: 1st being the count of invocation. For example.
-MU_FOR_EACH_2_COUNTER(MACRO, a,b,c,d,e,f) will result in
+MU_FOR_EACH_2_COUNTED(MACRO, a,b,c,d,e,f) will result in
 MACRO(6, a,b)
 MACRO(4, c,d)
 MACRO(2, e,f)
@@ -321,6 +345,14 @@ MU_FOR_EACH_2_REVERSE(X,a,b,c,d,e,f) => X(e,f) X(c,d) X (a, b) in this order */
 #define MU_FOR_EACH_2_COUNTED(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_2_COUNTED_, MU_C1(MU_COUNT_ARG(__VA_ARGS__))) ( MACRO_TO_INVOKE,  __VA_ARGS__)
 #define MU_FOR_EACH_1_COUNTED(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_1_COUNTED_, MU_C1(MU_COUNT_ARG(__VA_ARGS__))) ( MACRO_TO_INVOKE,  __VA_ARGS__)
 #define MU_FOR_EACH_2_REVERSE(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_2_REVERSE_, MU_C1(MU_COUNT_ARG(__VA_ARGS__))) ( MACRO_TO_INVOKE, __VA_ARGS__)
+#endif
+
+#if defined(_MSC_VER) && (_MSC_VER < 1920 )
+#define MU_FOR_EACH_1_KEEP_1_COUNTED(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_1_KEEP_1_COUNTED_, MU_C2(MU_DEC,MU_C1(MU_COUNT_ARG(__VA_ARGS__)))) MU_LPAREN MACRO_TO_INVOKE, __VA_ARGS__)
+#define MU_FOR_EACH_1_KEEP_2_COUNTED(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_1_KEEP_2_COUNTED_, MU_C2(MU_DEC,MU_C2(MU_DEC,MU_C1(MU_COUNT_ARG(__VA_ARGS__))))) MU_LPAREN MACRO_TO_INVOKE, __VA_ARGS__)
+#else
+#define MU_FOR_EACH_1_KEEP_1_COUNTED(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_1_KEEP_1_COUNTED_, MU_C2(MU_DEC,MU_C1(MU_COUNT_ARG(__VA_ARGS__)))) ( MACRO_TO_INVOKE, __VA_ARGS__)
+#define MU_FOR_EACH_1_KEEP_2_COUNTED(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_1_KEEP_2_COUNTED_, MU_C2(MU_DEC,MU_C2(MU_DEC,MU_C1(MU_COUNT_ARG(__VA_ARGS__))))) ( MACRO_TO_INVOKE, __VA_ARGS__)
 #endif
 
 #if defined(_MSC_VER) && (_MSC_VER < 1920 )

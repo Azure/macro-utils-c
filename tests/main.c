@@ -6,7 +6,11 @@
 #include "test_helper.h"
 
 #include "define_struct_test.h"
+#include "for_each_1_keep_1_test.h"
 #include "for_each_1_keep_2_test.h"
+#include "for_each_1_keep_1_counted_test.h"
+#include "for_each_1_keep_2_counted_test.h"
+#include "for_each_1_nesting_test.h"
 #include "mu_convert_enum_test.h"
 #include "mu_convert_enum_with_default_test.h"
 #include "mu_count_array_items_test.h"
@@ -51,7 +55,19 @@ int main(void)
     result = run_define_struct_tests();
     POOR_MANS_ASSERT(result == 0);
 
+    result = run_for_each_1_keep_1_tests();
+    POOR_MANS_ASSERT(result == 0);
+
     result = run_for_each_1_keep_2_tests();
+    POOR_MANS_ASSERT(result == 0);
+
+    result = run_for_each_1_keep_1_counted_tests();
+    POOR_MANS_ASSERT(result == 0);
+
+    result = run_for_each_1_keep_2_counted_tests();
+    POOR_MANS_ASSERT(result == 0);
+
+    result = run_for_each_1_nesting_tests();
     POOR_MANS_ASSERT(result == 0);
 
     result = run_mu_count_array_items_tests();

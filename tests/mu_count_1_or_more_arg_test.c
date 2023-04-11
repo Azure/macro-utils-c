@@ -9,7 +9,7 @@
 
 #define EMPTY
 
-/*in this case, "N" is 124, hardcoded in macro_utils_generated.h */
+/*in this case, "N" is 140, hardcoded in macro_utils_generated.h */
 int run_mu_count_1_or_more_arg_tests(void)
 {
     POOR_MANS_ASSERT(MU_COUNT_1_OR_MORE_ARG(X) == 1);
@@ -144,7 +144,25 @@ int run_mu_count_1_or_more_arg_tests(void)
         120,
         121,
         122,
-        123) == 123);  
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140
+        ) == 140);
 
     return 0;
 }

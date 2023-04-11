@@ -18,7 +18,7 @@ namespace macro_utils_h_generator
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+    #line 1 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "17.0.0.0")]
     public partial class macro_utils_generated : macro_utils_generatedBase
     {
@@ -37,20 +37,23 @@ namespace macro_utils_h_generator
 
 ");
             
-            #line 14 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 14 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 /*CHANGE BELOW 2 VARIABLES TO GET MORE / LESS */ 
             
             #line default
             #line hidden
             
-            #line 15 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 15 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 int nArithmetic=2048;
             
             #line default
             #line hidden
             
-            #line 16 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
-int nMacroParameters=124;/*127 parameters in one macro definition in C99 in chapter 5.2.4.1 Translation limits*/
+            #line 16 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+int nMacroParameters=140;
+    /*127 parameters in one macro definition in C99 in chapter 5.2.4.1 Translation limits*/
+    /* 11 Apr 2023: VS 17.5.3 doesn't have a limit of 127 (compiler version is 19.35.32216.1), updating to 150 to allow upstream projects to use more parameters. Note: use sensible increments, compilation time suffers!*/
+
             
             #line default
             #line hidden
@@ -59,27 +62,27 @@ int nMacroParameters=124;/*127 parameters in one macro definition in C99 in chap
                     " MU_IFCOMMA(N) MU_C2(MU_IFCOMMA_, N)\r\n#define MU_IFCOMMA_0\r\n#define MU_IFCOMMA_2" +
                     "\r\n");
             
-            #line 27 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 30 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=4;i<=nMacroParameters;i+=2)
             
             #line default
             #line hidden
             
-            #line 28 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 31 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define MU_IFCOMMA_");
             
-            #line 29 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 32 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(" ,\r\n");
             
-            #line 30 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 33 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
@@ -87,27 +90,27 @@ for(var i=4;i<=nMacroParameters;i+=2)
             this.Write("\r\n#define MU_IFCOMMALOGIC(N) MU_C2(MU_IFCOMMALOGIC_, N)\r\n#define MU_IFCOMMALOGIC_" +
                     "0\r\n");
             
-            #line 34 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 37 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=1;i<=nMacroParameters;i+=1)
             
             #line default
             #line hidden
             
-            #line 35 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 38 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define MU_IFCOMMALOGIC_");
             
-            #line 36 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 39 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(" ,\r\n");
             
-            #line 37 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 40 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
@@ -115,204 +118,204 @@ for(var i=1;i<=nMacroParameters;i+=1)
             this.Write("\r\n#define MU_IFCOMMA_NOFIRST(N) MU_C2(MU_IFCOMMA_NOFIRST, N)\r\n#define MU_IFCOMMA_" +
                     "NOFIRST1\r\n");
             
-            #line 41 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 44 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=2;i<=nMacroParameters;i++)
             
             #line default
             #line hidden
             
-            #line 42 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 45 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define MU_IFCOMMA_NOFIRST");
             
-            #line 43 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 46 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(" ,\r\n");
             
-            #line 44 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 47 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write("\r\n#define MU_DEC(x) MU_C2(MU_DEC,x)\r\n");
             
-            #line 47 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 50 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=nArithmetic;i>=1;i--)
             
             #line default
             #line hidden
             
-            #line 48 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 51 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define MU_DEC");
             
-            #line 49 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 52 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 49 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 52 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-1));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 50 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 53 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write("\r\n#define MU_INC(x) MU_C2(MU_INC,x)\r\n");
             
-            #line 53 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 56 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=nArithmetic;i>=0;i--)
             
             #line default
             #line hidden
             
-            #line 54 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 57 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define MU_INC");
             
-            #line 55 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 58 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 55 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 58 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i+1));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 56 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 59 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write("\r\n#define MU_DIV2(x) MU_C2(MU_DIV2_,x)\r\n\r\n");
             
-            #line 60 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 63 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=nArithmetic;i>=0;i--)
             
             #line default
             #line hidden
             
-            #line 61 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 64 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define MU_DIV2_");
             
-            #line 62 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 65 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 62 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 65 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i/2));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 63 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 66 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 65 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 68 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 /*the below produces MOD2 for numbers*/
             
             #line default
             #line hidden
             this.Write("#define MU_MOD2(x) MU_C2(MU_MOD2_,x)\r\n");
             
-            #line 67 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 70 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=nArithmetic;i>=0;i--)
             
             #line default
             #line hidden
             
-            #line 68 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 71 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define MU_MOD2_");
             
-            #line 69 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 72 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 69 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 72 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i%2));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 70 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 73 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write("\r\n#define MU_THE_NTH_ARG(");
             
-            #line 72 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 75 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=1;i<=nMacroParameters;i++)
             
             #line default
             #line hidden
             
-            #line 73 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 76 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 {
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 73 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 76 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(", ");
             
-            #line 73 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 76 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(" ... ) P");
             
-            #line 73 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 76 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(nMacroParameters));
             
             #line default
@@ -320,78 +323,78 @@ for(var i=1;i<=nMacroParameters;i++)
             this.Write("\r\n\r\n#if defined(_MSC_VER) && (_MSC_VER < 1920 )\r\n#define MU_COUNT_1_OR_MORE_ARG(." +
                     "..) MU_THE_NTH_ARG MU_LPAREN __VA_ARGS__, \\\r\n");
             
-            #line 77 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 80 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=nMacroParameters-1;i>=1;i--){
             
             #line default
             #line hidden
             
-            #line 77 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 80 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i.ToString()+((i>1)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 77 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 80 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n#define MU_HAS_COMMA(...) MU_THE_NTH_ARG MU_LPAREN __VA_ARGS__, ");
             
-            #line 78 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 81 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=nMacroParameters-2;i>=1;i--){
             
             #line default
             #line hidden
             
-            #line 78 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 81 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(1));
             
             #line default
             #line hidden
             this.Write(",");
             
-            #line 78 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 81 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write("0)\r\n#else\r\n#define MU_COUNT_1_OR_MORE_ARG(...) MU_THE_NTH_ARG (__VA_ARGS__, \\\r\n");
             
-            #line 81 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 84 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=nMacroParameters-1;i>=1;i--){
             
             #line default
             #line hidden
             
-            #line 81 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 84 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i.ToString()+((i>1)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 81 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 84 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n#define MU_HAS_COMMA(...) MU_THE_NTH_ARG(__VA_ARGS__, ");
             
-            #line 82 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 85 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=nMacroParameters-2;i>=1;i--){
             
             #line default
             #line hidden
             
-            #line 82 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 85 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(1));
             
             #line default
             #line hidden
             this.Write(",");
             
-            #line 82 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 85 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
@@ -429,74 +432,74 @@ for(var i=nMacroParameters-2;i>=1;i--){
 
 ");
             
-            #line 113 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 116 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=nMacroParameters;i>=2;i--)
             
             #line default
             #line hidden
             
-            #line 114 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 117 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define MU_FOR_EACH_1_");
             
-            #line 115 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 118 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("(X, ");
             
-            #line 115 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 118 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=1;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 115 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 118 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 115 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 118 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(") \\\r\nX(P1) \\\r\nMU_FOR_EACH_1_");
             
-            #line 117 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 120 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-1));
             
             #line default
             #line hidden
             this.Write("(X, ");
             
-            #line 117 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 120 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=2;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 117 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 120 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 117 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 120 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n\r\n");
             
-            #line 119 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 122 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
@@ -504,148 +507,148 @@ for(var j=2;j<=i;j++){
             this.Write("#define MU_FOR_EACH_1_1(X, P1) \\\r\nX(P1)\r\n\r\n#if !defined(_MSC_VER) || (_MSC_VER >=" +
                     " 1920 )\r\n");
             
-            #line 124 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 127 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=nMacroParameters;i>=2;i--)
             
             #line default
             #line hidden
             
-            #line 125 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 128 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define MU_FOR_EACH_1A_");
             
-            #line 126 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 129 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("(X, ");
             
-            #line 126 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 129 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=1;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 126 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 129 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 126 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 129 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(") \\\r\nX(P1) \\\r\nMU_FOR_EACH_1A_");
             
-            #line 128 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 131 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-1));
             
             #line default
             #line hidden
             this.Write("(X, ");
             
-            #line 128 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 131 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=2;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 128 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 131 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 128 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 131 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n\r\n");
             
-            #line 130 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 133 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write("#define MU_FOR_EACH_1A_1(X, P1) \\\r\nX(P1)\r\n\r\n");
             
-            #line 134 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 137 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=nMacroParameters;i>=2;i--)
             
             #line default
             #line hidden
             
-            #line 135 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 138 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define MU_FOR_EACH_1B_");
             
-            #line 136 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 139 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("(X, ");
             
-            #line 136 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 139 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=1;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 136 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 139 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 136 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 139 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(") \\\r\nX(P1) \\\r\nMU_FOR_EACH_1B_");
             
-            #line 138 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 141 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-1));
             
             #line default
             #line hidden
             this.Write("(X, ");
             
-            #line 138 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 141 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=2;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 138 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 141 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 138 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 141 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n\r\n");
             
-            #line 140 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 143 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
@@ -666,74 +669,74 @@ X(P1)
 
 ");
             
-            #line 155 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 158 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=nMacroParameters;i>=2;i--)
             
             #line default
             #line hidden
             
-            #line 156 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 159 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define MU_FOR_EACH_1_PASTE_");
             
-            #line 157 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 160 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("(PASTE, ");
             
-            #line 157 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 160 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=1;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 157 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 160 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 157 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 160 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(") \\\r\nMU_C2INTERNAL(PASTE,P1) \\\r\nMU_FOR_EACH_1_PASTE_");
             
-            #line 159 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 162 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-1));
             
             #line default
             #line hidden
             this.Write("(PASTE, ");
             
-            #line 159 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 162 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=2;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 159 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 162 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 159 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 162 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n\r\n");
             
-            #line 161 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 164 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
@@ -750,74 +753,74 @@ MU_C2INTERNAL(PASTE,P1)
 
 ");
             
-            #line 172 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 175 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=nMacroParameters;i>=2;i--)
             
             #line default
             #line hidden
             
-            #line 173 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 176 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define MU_FOR_EACH_1_KEEP_1_");
             
-            #line 174 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 177 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("(X, keep, ");
             
-            #line 174 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 177 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=1;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 174 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 177 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+(j<i?", ":"")));
             
             #line default
             #line hidden
             
-            #line 174 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 177 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(") \\\r\nX(keep, P1) \\\r\nMU_FOR_EACH_1_KEEP_1_");
             
-            #line 176 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 179 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-1));
             
             #line default
             #line hidden
             this.Write("(X, keep, ");
             
-            #line 176 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 179 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=2;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 176 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 179 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture((j).ToString()+(j<i?", ":"")));
             
             #line default
             #line hidden
             
-            #line 176 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 179 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n\r\n\r\n");
             
-            #line 179 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 182 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
@@ -834,74 +837,74 @@ X(keep, P1)
 
 ");
             
-            #line 190 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 193 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=nMacroParameters;i>=2;i--)
             
             #line default
             #line hidden
             
-            #line 191 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 194 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define MU_FOR_EACH_1_KEEP_2_");
             
-            #line 192 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 195 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("(X, keep1, keep2, ");
             
-            #line 192 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 195 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=1;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 192 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 195 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+(j<i?", ":"")));
             
             #line default
             #line hidden
             
-            #line 192 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 195 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(") \\\r\nX(keep1, keep2, P1) \\\r\nMU_FOR_EACH_1_KEEP_2_");
             
-            #line 194 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 197 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-1));
             
             #line default
             #line hidden
             this.Write("(X, keep1, keep2, ");
             
-            #line 194 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 197 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=2;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 194 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 197 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture((j).ToString()+(j<i?", ":"")));
             
             #line default
             #line hidden
             
-            #line 194 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 197 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n\r\n\r\n");
             
-            #line 197 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 200 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
@@ -920,74 +923,74 @@ X(keep1, keep2, P1)
 
 ");
             
-            #line 210 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 213 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=nMacroParameters;i>=4;i-=2)
             
             #line default
             #line hidden
             
-            #line 211 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 214 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define MU_FOR_EACH_2_KEEP_1_");
             
-            #line 212 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 215 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("(X, keep, ");
             
-            #line 212 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 215 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=1;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 212 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 215 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+(j<i?", ":"")));
             
             #line default
             #line hidden
             
-            #line 212 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 215 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(") \\\r\nX(keep, P1, P2) \\\r\nMU_FOR_EACH_2_KEEP_1_");
             
-            #line 214 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 217 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-2));
             
             #line default
             #line hidden
             this.Write("(X, keep, ");
             
-            #line 214 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 217 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=3;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 214 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 217 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture((j).ToString()+(j<i?", ":"")));
             
             #line default
             #line hidden
             
-            #line 214 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 217 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n\r\n\r\n");
             
-            #line 217 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 220 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
@@ -1009,74 +1012,74 @@ for(var j=3;j<=i;j++){
 
 ");
             
-            #line 233 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 236 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=nMacroParameters;i>=4;i-=2)
             
             #line default
             #line hidden
             
-            #line 234 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 237 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 {
             
             #line default
             #line hidden
             this.Write("#define MU_FOR_EACH_2_KEEP_2_");
             
-            #line 235 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 238 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("(X, keep1, keep2, ");
             
-            #line 235 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 238 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=1;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 235 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 238 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+(j<i?", ":"")));
             
             #line default
             #line hidden
             
-            #line 235 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 238 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(") \\\r\nX(keep1, keep2, P1, P2) \\\r\nMU_FOR_EACH_2_KEEP_2_");
             
-            #line 237 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 240 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-2));
             
             #line default
             #line hidden
             this.Write("(X, keep1, keep2, ");
             
-            #line 237 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 240 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=3;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 237 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 240 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture((j).ToString()+(j<i?", ":"")));
             
             #line default
             #line hidden
             
-            #line 237 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 240 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n\r\n\r\n");
             
-            #line 240 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 243 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
@@ -1103,68 +1106,68 @@ X(P1, P2)
 
 ");
             
-            #line 261 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 264 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=4;i<=nMacroParameters;i+=2) {
             
             #line default
             #line hidden
             this.Write("#define MU_FOR_EACH_2_");
             
-            #line 262 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 265 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("(X, ");
             
-            #line 262 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 265 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=1;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 262 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 265 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 262 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 265 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(") \\\r\nX(P1, P2) \\\r\nMU_FOR_EACH_2_");
             
-            #line 264 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 267 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-2));
             
             #line default
             #line hidden
             this.Write("(X, ");
             
-            #line 264 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 267 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=3;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 264 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 267 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 264 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 267 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n\r\n");
             
-            #line 266 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 269 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
@@ -1172,82 +1175,82 @@ for(var j=3;j<=i;j++){
             this.Write("\r\n#define MU_FOR_EACH_2_REVERSE_0(...)\r\n\r\n#define MU_FOR_EACH_2_REVERSE_2(X, P1, " +
                     "P2) \\\r\nX(P1, P2)\r\n\r\n");
             
-            #line 273 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 276 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=4;i<=nMacroParameters;i+=2) {
             
             #line default
             #line hidden
             this.Write("#define MU_FOR_EACH_2_REVERSE_");
             
-            #line 274 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 277 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("(X, ");
             
-            #line 274 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 277 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=1;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 274 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 277 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 274 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 277 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(") \\\r\nX(P");
             
-            #line 275 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 278 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-1));
             
             #line default
             #line hidden
             this.Write(", P");
             
-            #line 275 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 278 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(") \\\r\nMU_FOR_EACH_2_REVERSE_");
             
-            #line 276 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 279 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-2));
             
             #line default
             #line hidden
             this.Write("(X, ");
             
-            #line 276 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 279 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=1;j<=i-2;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 276 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 279 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i-2)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 276 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 279 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n\r\n");
             
-            #line 278 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 281 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
@@ -1255,75 +1258,75 @@ for(var j=1;j<=i-2;j++){
             this.Write("\r\n#define MU_FOR_EACH_1_COUNTED_0(...)\r\n\r\n#define MU_FOR_EACH_1_COUNTED_1(X, P1) " +
                     "\\\r\n    X(1, P1)\r\n\r\n");
             
-            #line 285 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 288 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=2;i<=nMacroParameters;i++) {
             
             #line default
             #line hidden
             this.Write("#define MU_FOR_EACH_1_COUNTED_");
             
-            #line 286 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 289 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("(X, ");
             
-            #line 286 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 289 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=1;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 286 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 289 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 286 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 289 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(") \\\r\nX(");
             
-            #line 287 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 290 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(", P1) \\\r\nMU_FOR_EACH_1_COUNTED_");
             
-            #line 288 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 291 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-1));
             
             #line default
             #line hidden
             this.Write("(X, ");
             
-            #line 288 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 291 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=2;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 288 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 291 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 288 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 291 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n\r\n");
             
-            #line 290 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 293 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
@@ -1331,75 +1334,75 @@ for(var j=2;j<=i;j++){
             this.Write("\r\n#define MU_FOR_EACH_1_KEEP_2_COUNTED_0(...)\r\n\r\n#define MU_FOR_EACH_1_KEEP_2_COU" +
                     "NTED_1(X, keep1, keep2, P1) \\\r\n    X(1, keep1, keep2, P1)\r\n\r\n");
             
-            #line 297 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 300 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=2;i<=nMacroParameters;i++) {
             
             #line default
             #line hidden
             this.Write("#define MU_FOR_EACH_1_KEEP_2_COUNTED_");
             
-            #line 298 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 301 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("(X, keep1, keep2, ");
             
-            #line 298 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 301 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=1;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 298 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 301 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 298 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 301 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(") \\\r\nX(");
             
-            #line 299 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 302 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(", keep1, keep2, P1) \\\r\nMU_FOR_EACH_1_KEEP_2_COUNTED_");
             
-            #line 300 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 303 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-1));
             
             #line default
             #line hidden
             this.Write("(X, keep1, keep2, ");
             
-            #line 300 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 303 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=2;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 300 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 303 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 300 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 303 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n\r\n");
             
-            #line 302 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 305 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
@@ -1407,75 +1410,75 @@ for(var j=2;j<=i;j++){
             this.Write("\r\n#define MU_FOR_EACH_1_KEEP_1_COUNTED_0(...)\r\n\r\n#define MU_FOR_EACH_1_KEEP_1_COU" +
                     "NTED_1(X, keep, P1) \\\r\n    X(1, keep, P1)\r\n\r\n");
             
-            #line 309 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 312 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=2;i<=nMacroParameters;i++) {
             
             #line default
             #line hidden
             this.Write("#define MU_FOR_EACH_1_KEEP_1_COUNTED_");
             
-            #line 310 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 313 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("(X, keep, ");
             
-            #line 310 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 313 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=1;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 310 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 313 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 310 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 313 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(") \\\r\nX(");
             
-            #line 311 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 314 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(", keep, P1) \\\r\nMU_FOR_EACH_1_KEEP_1_COUNTED_");
             
-            #line 312 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 315 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-1));
             
             #line default
             #line hidden
             this.Write("(X, keep, ");
             
-            #line 312 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 315 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=2;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 312 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 315 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 312 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 315 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n\r\n");
             
-            #line 314 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 317 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
@@ -1483,75 +1486,75 @@ for(var j=2;j<=i;j++){
             this.Write("\r\n#define MU_FOR_EACH_2_COUNTED_0(...)\r\n\r\n#define MU_FOR_EACH_2_COUNTED_2(X, P1, " +
                     "P2) \\\r\n    X(2, P1, P2)\r\n\r\n");
             
-            #line 321 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 324 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=4;i<=nMacroParameters;i+=2) {
             
             #line default
             #line hidden
             this.Write("#define MU_FOR_EACH_2_COUNTED_");
             
-            #line 322 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 325 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("(X, ");
             
-            #line 322 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 325 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=1;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 322 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 325 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 322 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 325 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(") \\\r\nX(");
             
-            #line 323 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 326 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(", P1, P2) \\\r\nMU_FOR_EACH_2_COUNTED_");
             
-            #line 324 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 327 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-2));
             
             #line default
             #line hidden
             this.Write("(X, ");
             
-            #line 324 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 327 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=3;j<=i;j++){
             
             #line default
             #line hidden
             this.Write("P");
             
-            #line 324 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 327 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j.ToString()+((j<i)?", ":"")));
             
             #line default
             #line hidden
             
-            #line 324 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 327 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write(")\r\n\r\n");
             
-            #line 326 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 329 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
@@ -1594,35 +1597,35 @@ for(var j=3;j<=i;j++){
                     "ine MU_EXPAND_ARGS(...) __VA_ARGS__\r\n#define MU_EXPAND_TWICE(...) MU_EXPAND_ARGS" +
                     "(__VA_ARGS__)\r\n\r\n#define MU_DO_0(MACRO, ...) \\\r\nMACRO(0, __VA_ARGS__)\r\n\r\n");
             
-            #line 370 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 373 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=1;i<=nArithmetic;i++){
             
             #line default
             #line hidden
             this.Write("#define MU_DO_");
             
-            #line 371 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 374 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("(MACRO, ...) \\\r\nMACRO(");
             
-            #line 372 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 375 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write(", __VA_ARGS__) \\\r\nMU_DO_");
             
-            #line 373 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 376 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i-1));
             
             #line default
             #line hidden
             this.Write("(MACRO, __VA_ARGS__)\r\n\r\n\r\n");
             
-            #line 376 "C:\src\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 379 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default

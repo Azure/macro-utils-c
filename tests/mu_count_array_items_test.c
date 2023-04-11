@@ -13,6 +13,9 @@ static const double test_array_4_items[] = { 0x42, 0x43, 0x44, 0x45 };
 
 int run_mu_count_array_items_tests(void)
 {
+    (void)test_array_1_item;
+    (void)test_array_3_items;
+    (void)test_array_4_items;
     // check that counting works appropriately
     POOR_MANS_ASSERT(MU_COUNT_ARRAY_ITEMS(test_array_1_item) == 1);
     POOR_MANS_ASSERT(MU_COUNT_ARRAY_ITEMS(test_array_3_items) == 3);

@@ -10,7 +10,7 @@
 /*this is both a "does it compile"? and a "does it produce the right values?" test*/
 /*this file wants to test just the MU_EAT_EMPTY_ARGS feature*/
 
-#define EMPTY_MACRO 
+#define EMPTY_MACRO
 
 /*the below line is expected to stop the compiler if it expands to anything... sort of*/
 MU_EAT_EMPTY_ARGS()
@@ -64,7 +64,7 @@ int run_mu_eat_empty_args_test(void)
 
     tester = MU_EAT_EMPTY_ARGS(1); /*there's nothing to eat from "1", so it expands to "1"*/
     POOR_MANS_ASSERT(tester == 1);
-    
+
     /*see that it eats / doesn't eat from 2 arguments*/
 
     { /*scope because of repetitive naure of tests and copy&paste*/
@@ -80,7 +80,7 @@ int run_mu_eat_empty_args_test(void)
         POOR_MANS_ASSERT(1 == (sizeof(testerArray) / sizeof(testerArray[0])));
         POOR_MANS_ASSERT(42 + 2 == testerArray[0]);
     }
-    
+
     {
         int testerArray[] = { MU_EAT_EMPTY_ARGS(42 + 3 ,42 + 4) }; /*doesn't eat anything*/
 

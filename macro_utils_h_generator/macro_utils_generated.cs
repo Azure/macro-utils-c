@@ -52,7 +52,7 @@ int nArithmetic=2048;
             #line 16 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 int nMacroParameters=140;
     /*127 parameters in one macro definition in C99 in chapter 5.2.4.1 Translation limits*/
-    /* 11 Apr 2023: VS 17.5.3 doesn't have a limit of 127 (compiler version is 19.35.32216.1), updating to 150 to allow upstream projects to use more parameters. Note: use sensible increments, compilation time suffers!*/
+    /* 11 Apr 2023: VS 17.5.3 doesn't have a limit of 127 (compiler version is 19.35.32216.1), updating to 140 to allow upstream projects to use more parameters. Note: use sensible increments, compilation time suffers!*/
 
             
             #line default

@@ -14,10 +14,10 @@ static void f(void) /*this function is used as f <<here macro expansion>>(); whi
 
 #define EMPTY
 
-/*in this case, "N" is 124, hardcoded in macro_utils_generated.h */
+/*in this case, "N" is 140, hardcoded in macro_utils_generated.h */
 int run_mu_the_nth_arg_tests(void)
 {
-    /*pass in 124 arguments*/
+    /*pass in 140 arguments*/
     POOR_MANS_ASSERT(MU_THE_NTH_ARG(
         1,
         2,
@@ -160,7 +160,7 @@ int run_mu_the_nth_arg_tests(void)
         139,
         12412) == 12412
         );
-    /*pass in 125 arguments*/
+    /*pass in 141 arguments*/
     POOR_MANS_ASSERT(MU_THE_NTH_ARG(
         1,
         2,
@@ -447,7 +447,7 @@ int run_mu_the_nth_arg_tests(void)
         138,
         139,
 
-        ) (); /*note on this line that the 124th argument is nothing. If MU_THE_NTH_ARG would expand to "something" we suppose the compilation would fail*/
+        ) (); /*note on this line that the 140th argument is nothing. If MU_THE_NTH_ARG would expand to "something" we suppose the compilation would fail*/
 
          /*see that an empty preprocessor token can be generated from MU_THE_NTH_ARG*/
     f MU_THE_NTH_ARG( /*this whole macro expands to nothing, so f() can be called. () are way down after the macro closing paranthesis*/
@@ -590,6 +590,6 @@ int run_mu_the_nth_arg_tests(void)
         137,
         138,
         139,
-        EMPTY) (); /*note on this line that the 124th argument is nothing. If MU_THE_NTH_ARG would expand to "something" we suppose the compilation would fail*/
+        EMPTY) (); /*note on this line that the 140th argument is nothing. If MU_THE_NTH_ARG would expand to "something" we suppose the compilation would fail*/
     return 0;
 }

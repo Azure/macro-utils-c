@@ -58,8 +58,8 @@ So what happens if the macro is called with 0 arguments?
 MU_COUNT_1_OR_MORE_ARG() => MU_THE_NTH_ARG( , 3, 2, 1) => 1
                                                     ^
                                                     |----- this is 4th argument
-                                                
-Here we see how the macro does not produce 0, and that is precisely why the macro is called MU_COUNT_**1**_OR_MORE_ARG. 
+
+Here we see how the macro does not produce 0, and that is precisely why the macro is called MU_COUNT_**1**_OR_MORE_ARG.
 
 Next question is : how to produce 0 as a count result? Not easy or immediately straight forward. More macros are needed for that.
 
@@ -84,7 +84,7 @@ MU_HAS_COMMA() => MU_THE_NTH_ARG( , 1, 1, 0) => 0
 MU_HAS_COMMA(A) => MU_THE_NTH_ARG( A, 1, 1, 0) => 0
                                             ^
                                             |----- this is 4th argument.
-                                    
+
 MU_HAS_COMMA(A, B) => MU_THE_NTH_ARG( A, B, 1, 1, 0) => 1
                                                ^
                                                |----- this is 4th argument.
@@ -130,7 +130,7 @@ if __VA_ARGS__ is an empty token
     a) `MU_TRIGGER_PARENTHESIS __VA_ARGS__ ()` => `MU_TRIGGER_PARENTHESIS ()` => `,` (2 tokens, both empty). Passed to MU_HAS_COMMA => 1
     b) other reason why `MU_TRIGGER_PARENTHESIS __VA_ARGS__ ()` could expand to have a comma is because either
         1) `__VA_ARGS__ ()` expanded to have a comma or
-        2) `MU_TRIGGER_PARENTHESIS __VA_ARGS__` expanded to have a comma. 
+        2) `MU_TRIGGER_PARENTHESIS __VA_ARGS__` expanded to have a comma.
     In both cases "1" and "2" the macro is not empty. (these are not the droids we're looking for).
 
 The combination of `MU_HAS_COMMA` + `MU_HAS_COMMA(MU_TRIGGER_PARENTHESIS __VA_ARGS__ ())` + `MU_HAS_COMMA(__VA_ARGS__ ())` + `MU_HAS_COMMA(MU_TRIGGER_PARENTHESIS __VA_ARGS__)` are all set in a dispath table from which the final result of `MU_ISEMPTY` is deduced.
@@ -172,7 +172,7 @@ MU_C5 just pastes together its 5 arguments resulting in one of the below definit
 #define MU_DISPATCH_EMPTY_1111 0
 
 #define MU_DISPATCH_EMPTY_0100 1 /*empty because MU_TRIGGER_PARENTHESIS expanded to , (2 empty tokens) and __VA_ARGS__() did not have a comma and MU_TRIGGER_PARENTHESIS __VA_ARGS__ did not have a comma either*/
-#define MU_DISPATCH_EMPTY_0101 0 
+#define MU_DISPATCH_EMPTY_0101 0
 #define MU_DISPATCH_EMPTY_0110 0
 #define MU_DISPATCH_EMPTY_0111 0
 #define MU_DISPATCH_EMPTY_0000 0
@@ -189,7 +189,7 @@ Here's how it works. `MU_COUNT_ARG` will build sort of an "if" statement like be
 
 `#define MU_COUNT_ARG(...) MU_C2(MU_COUNT_ARG_, MU_ISEMPTY(__VA_ARGS__))(__VA_ARGS__)`
 
-It is based on `MU_ISEMPTY`: 
+It is based on `MU_ISEMPTY`:
     a) if `MU_ISEMPTY` expands to "1" then `MU_COUNT_ARG` will expand to `MU_COUNT_ARG_1(__VA_ARGS__)`. `MU_COUNT_ARG_1` always expands to 0.
     b) if `MU_ISEMPTY` expands to "0" then `MU_COUNT_ARG` will expand to `MU_COUNT_ARG_0(__VA_ARGS__)`. `MU_COUNT_ARG_0(__VA_ARGS__)` further expands to `MU_COUNT_1_OR_MORE_ARG(__VA_ARGS__)` which will return the number of arguments.
 
@@ -236,3 +236,10 @@ MU_DIFFERENT(0,1) => 2
 Internally `MU_DIFFERENT` proposes numbers starting with MU_COUNT_ARG..0 as candidates for the expression result.
 
 If one of these numbers is not equal to any of the arguments then `MU_DIFFERENT` will evaluate to this number.
+
+### STATIC_ASSERT
+```c
+STATIC_ASSERT(CONDITION)
+```
+
+`STATIC_ASSERT` expands to a declaration of a static array. If the condition is false, it shall expand to an array with -1 elements which would result an error at compile time. Otherwise, it shall expand to an array with 1 elements.

@@ -416,6 +416,12 @@ __pragma(warning(pop))
 
 #define MU_STATIC_ASSERT(CONDITION) MU_STATIC_ASSERT_EX(CONDITION, __LINE__)
 
+#if defined _MSC_VER
+#define MU_FUNCDNAME __FUNCDNAME__
+#else
+#define MU_FUNCDNAME __func__
+#endif
+
 #ifdef __cplusplus
 }
 #endif

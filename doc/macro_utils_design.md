@@ -237,9 +237,9 @@ Internally `MU_DIFFERENT` proposes numbers starting with MU_COUNT_ARG..0 as cand
 
 If one of these numbers is not equal to any of the arguments then `MU_DIFFERENT` will evaluate to this number.
 
-### STATIC_ASSERT
+### MU_STATIC_ASSERT
 ```c
-STATIC_ASSERT(CONDITION)
+MU_STATIC_ASSERT(CONDITION)
 ```
 
-`STATIC_ASSERT` expands to a declaration of a static array. If the condition is false, it shall expand to an array with -1 elements which would result an error at compile time. Otherwise, it shall expand to an array with 1 elements.
+`MU_STATIC_ASSERT` evaluates the condition CONDITION and produces a compiler error if the condition is false.

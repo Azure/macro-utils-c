@@ -412,9 +412,9 @@ __pragma(warning(pop))
 
 #define MU_DIFFERENT(...) (MU_DO(MU_COUNT_ARG(__VA_ARGS__), MU_IS_NONE_OF_EXPRESSION_BUILDER, __VA_ARGS__)  (-1) ) /*-1 is the last ?: ternary third operator, and it is never an output of this macro*/
 
-#define STATIC_ASSERT_EX(CONDITION, LINE) static int MU_C3(assertion_line_, LINE, _failed)[(CONDITION) ? 1 : -1];
+#define MU_STATIC_ASSERT_EX(CONDITION, LINE) typedef int MU_C3(assertion_line_, LINE, _failed)[(CONDITION) ? 1 : -1];
 
-#define STATIC_ASSERT(CONDITION) STATIC_ASSERT_EX(CONDITION, __LINE__)
+#define MU_STATIC_ASSERT(CONDITION) MU_STATIC_ASSERT_EX(CONDITION, __LINE__)
 
 #ifdef __cplusplus
 }

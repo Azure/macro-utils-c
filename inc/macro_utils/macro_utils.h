@@ -17,6 +17,11 @@ extern "C" {
 #include <time.h>
 #endif
 
+// For gcc build that causes a false negative
+#ifndef _MSC_VER
+#pragma GCC diagnostic ignored "-Wunused-local-typedefs"
+#endif
+
 #if (defined OPTIMIZE_RETURN_CODES)
     #define MU_FAILURE 1
 #else

@@ -9,6 +9,11 @@
 
 #include "mu_expand_no_expand_test.h"
 
+// For gcc build that causes a false negative
+#ifndef _MSC_VER
+#pragma GCC diagnostic ignored "-Wunused-value"
+#endif
+
 #define TRUEB 1,2,3 /*clearly something that contains a COMMA - even more than 1*/
 #define FALSEB 4 /*clearly something that does NOT contains a comma*/
 

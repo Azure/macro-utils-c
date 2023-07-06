@@ -17,16 +17,19 @@ int run_define_struct_tests(void)
 
     TEST_STRUCT_WITH_1_FIELD test_struct_with_1_field;
     test_struct_with_1_field.a = 42;
+    (void)test_struct_with_1_field;
 
     TEST_STRUCT_WITH_2_FIELDS test_struct_with_2_fields;
     test_struct_with_2_fields.a = 42;
     test_struct_with_2_fields.x = NULL;
+    (void)test_struct_with_2_fields;
 
     TEST_NESTED_STRUCT test_nested_struct;
     test_nested_struct.a = 43;
     test_nested_struct.x = "a";
     test_nested_struct.z.a = 42;
     test_nested_struct.z.x = NULL;
+    (void)test_nested_struct;
 
     return result;
 }

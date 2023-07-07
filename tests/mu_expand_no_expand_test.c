@@ -10,7 +10,7 @@
 #include "mu_expand_no_expand_test.h"
 
 // For gcc build that causes a false negative
-#ifndef _MSC_VER
+#ifdef __GNUC__
 #pragma GCC diagnostic ignored "-Wunused-value"
 #endif
 

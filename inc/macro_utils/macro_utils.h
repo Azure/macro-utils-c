@@ -18,7 +18,7 @@ extern "C" {
 #endif
 
 // For gcc build that causes a false negative
-#ifndef _MSC_VER
+#ifdef __GNUC__
 #pragma GCC diagnostic ignored "-Wunused-local-typedefs"
 #endif
 

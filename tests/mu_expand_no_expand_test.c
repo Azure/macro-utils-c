@@ -9,11 +9,6 @@
 
 #include "mu_expand_no_expand_test.h"
 
-// For gcc build that causes a false negative
-#ifdef __GNUC__
-#pragma GCC diagnostic ignored "-Wunused-value"
-#endif
-
 #define TRUEB 1,2,3 /*clearly something that contains a COMMA - even more than 1*/
 #define FALSEB 4 /*clearly something that does NOT contains a comma*/
 
@@ -31,12 +26,22 @@ static int a_FALSEBRANCH[] = { MU_EXPAND(MU_IF(0, MU_NOEXPAND(TRUEB), MU_NOEXPAN
 #endif
 int run_mu_expand_no_expand_tests(void)
 {
-
     int a = MU_EXPAND(MU_NOEXPAND(1));
     POOR_MANS_ASSERT(a == 1);
 
-    int a2 = (MU_EXPAND(MU_NOEXPAND(1, 3))); /*a2 = (1,3)*/
+// needed to supress "-Werror=unused-value: left-hand operand of comma expression has no effect" on following line
+#ifdef __GNUC__
+    #pragma GCC diagnostic push
+    #pragma GCC diagnostic ignored "-Wunused-value"
+#endif
+
+    int MU_UNUSED_VAR a2 = (MU_EXPAND(MU_NOEXPAND(1, 3))); /*a2 = (1,3)*/
     POOR_MANS_ASSERT(a2 == 3);
+
+// To  re-enable the unused value
+#ifdef __GNUC__
+    #pragma GCC diagnostic pop
+#endif
 
 #if !defined(_MSC_VER) || (_MSC_VER >= 1920 )
     /*MU_EXPAND/MU_NOEXPAND pair*/

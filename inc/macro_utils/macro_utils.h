@@ -23,6 +23,14 @@ extern "C" {
     #define MU_FAILURE __LINE__
 #endif
 
+#ifdef _MSC_VER
+    #define MU_UNUSED_VAR __pragma(warning(suppress:4189))
+#elif __GNUC__
+    #define MU_UNUSED_VAR __attribute__((unused))
+#else
+// Unknown compiler
+#endif
+
 /*"pointer or NULL" macro - because when printf-ing arguments NULL is not valid for %s (section 7.1.4 of C11 standard) */
 #define MU_P_OR_NULL(p) (((p)!=NULL)?(p):"NULL")
 #define MU_WP_OR_NULL(p) (((p)!=NULL)?(p):L"NULL")
@@ -412,6 +420,15 @@ __pragma(warning(pop))
 
 #define MU_DIFFERENT(...) (MU_DO(MU_COUNT_ARG(__VA_ARGS__), MU_IS_NONE_OF_EXPRESSION_BUILDER, __VA_ARGS__)  (-1) ) /*-1 is the last ?: ternary third operator, and it is never an output of this macro*/
 
+#define MU_STATIC_ASSERT_EX(CONDITION, LINE) typedef int MU_UNUSED_VAR MU_C3(assertion_line_, LINE, _failed)[(CONDITION) ? 1 : -1];
+
+#define MU_STATIC_ASSERT(CONDITION) MU_STATIC_ASSERT_EX(CONDITION, __LINE__)
+
+#if defined _MSC_VER
+#define MU_FUNCDNAME __FUNCDNAME__
+#else
+#define MU_FUNCDNAME __func__
+#endif
 
 #ifdef __cplusplus
 }

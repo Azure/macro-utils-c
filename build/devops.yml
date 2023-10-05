@@ -115,27 +115,29 @@ jobs:
       arguments: '-C "Debug" -V --output-on-failure'
       workingFolder: build
 
-- job: ubuntu
+- job: linuxubuntu
   displayName: 'Build Linux Ubuntu'
   pool:
     name: Azure-MsgStore-Linux2204BuildMachinePool
     demands:
-    - linux
+      - linux
 
   steps:
-  - task: CMake@1
-    displayName: CMake
-    inputs:
-      cmakeArgs: '.. -Drun_int_tests:bool=ON'
 
-  - script: 'make -j$(nproc)'
-    workingDirectory: build
-    displayName: make
+  - bash: |
+     pushd $(Build.Repository.LocalPath)
+     git submodule update --init
+     git submodule foreach --recursive "git clean -xdff"
+     git clean -xdff
+     popd
+    workingDirectory: '$(Build.Repository.LocalPath)'
+    displayName: 'git submodule update and clean'
 
-  - task: CmdLine@1
-    displayName: 'Run ctest'
+  - task: Bash@3
+    displayName: 'Build and run tests'
     inputs:
-      filename: ctest
-      arguments: '-C "Debug" -V --output-on-failure -j $(nproc)'
-      workingFolder: build
+      targetType: filePath
+      filePath: './build/linux/build_linux.sh'
+      arguments: '$(Build.Repository.LocalPath)'
+      workingDirectory: '$(Build.Repository.LocalPath)'
 

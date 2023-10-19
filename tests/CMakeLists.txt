@@ -33,6 +33,7 @@ set(macro_utils_int_tests_c_files
     mu_for_each_1_paste_test.c
     mu_tostring_test.c
     static_assert_test.c
+    pri_kb_test.c
 )
 
 set(macro_utils_int_tests_h_files
@@ -61,6 +62,7 @@ set(macro_utils_int_tests_h_files
     mu_for_each_1_paste_test.h
     mu_tostring_test.h
     static_assert_test.h
+    pri_kb_test.h
 
     test_helper.h
     ${MACRO_UTILS_INC_FOLDER}/macro_utils/macro_utils.h

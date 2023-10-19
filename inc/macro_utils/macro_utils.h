@@ -50,46 +50,53 @@ extern "C" {
 #define PRI_1GB (PRI_1MB*PRI_1KB)
 
 /*below macro produces the integer part of the value (x) in KB, MB or GB*/
-#define KB_VALUE_INT(x) (                       \
-    (x)<PRI_1KB?                                \
-        (x)                                     \
-    :                                           \
-        (x)<PRI_1MB?                            \
-            ((x)/PRI_1KB)                       \
-        :                                       \
-            (x)<PRI_1GB?                        \
-                ((x)/PRI_1MB)                   \
-            :                                   \
-                ((x)/PRI_1GB)                   \
+#define KB_VALUE_INT(x) (          \
+    (x)>=PRI_1GB?                  \
+        ((x)/PRI_1GB)              \
+    :                              \
+        (x)>=PRI_1MB?              \
+            ((x)/PRI_1MB)          \
+        :                          \
+            (x)>=PRI_1KB?          \
+                ((x)/PRI_1KB)      \
+            :                      \
+                (x)                \
 )
 
-/*below macro produces the remainder of the value (x) when expressed at KB, MB, GB*/
-#define KB_REMAIN(x) (                          \
-    (x)<PRI_1KB?                                \
-        0                                       \
+
+/*below macro produces the first digit of the fractional part of the value (x) in KB, MB or GB*/
+#define KB_FIRST_FRACTIONAL_DIGIT(x) (                          \
+    (x)>=PRI_1GB?                               \
+        ((((x)*10)/PRI_1GB)%10)                 \
     :                                           \
-        (x)<PRI_1MB?                            \
-            ((((x)*10)/PRI_1KB)%10)             \
+        (x)>=PRI_1MB?                           \
+            ((((x)*10)/PRI_1MB)%10)             \
         :                                       \
-            (x)<PRI_1GB?                        \
-                ((((x)*10)/PRI_1MB)%10)         \
+            (x)>=PRI_1KB?                       \
+                ((((x)*10)/PRI_1KB)%10)         \
             :                                   \
-                ((((x)*10)/PRI_1GB)%10)         \
+                0                               \
 )
 
-#define KB_REMAIN_TO_DOT(x) ((KB_REMAIN(x)>0)?".":"")
-#define KB_REMAIN_TO_DIGIT(x) (KB_REMAIN(x))
+/*this macro produces the fractional dot IF the first fractional digit is not 0*/
+#define KB_FRACTIONAL_DOT(x) ((KB_FIRST_FRACTIONAL_DIGIT(x)>0)?".":"")
 
 /*below macro produces the unit for measurement for (x)*/
 #define KB_UNIT(x) (                            \
-    (x)<PRI_1KB?"B":                            \
-    (x)<PRI_1MB?"KB":                           \
-    (x)<PRI_1GB?"MB":                           \
-    "GB"                                        \
-    )
+    (x)>=PRI_1GB?                               \
+        "GB"                                    \
+    :                                           \
+        (x)>=PRI_1MB?                           \
+            "MB"                                \
+        :                                       \
+            (x)>=PRI_1KB?                       \
+                "KB"                            \
+            :                                   \
+                "B"                             \
+)
 
 /*KB_VALUE is the counterpart of PRI_KB.*/
-#define KB_VALUE(x) KB_VALUE_INT(x), KB_REMAIN_TO_DOT(x), KB_REMAIN_TO_DIGIT(x), KB_UNIT(x)
+#define KB_VALUE(x) KB_VALUE_INT(x), KB_FRACTIONAL_DOT(x), KB_FIRST_FRACTIONAL_DIGIT(x), KB_UNIT(x)
 
 #define MU_TRIGGER_PARENTHESIS(...) ,
 

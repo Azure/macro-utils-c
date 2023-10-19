@@ -10,7 +10,6 @@
 
 #include "pri_kb_test.h"
 
-/*test will test that time_t, as captured at the time of the test, can be printed*/
 int run_pri_kb_tests(void)
 {
     struct

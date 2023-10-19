@@ -139,7 +139,9 @@ int run_pri_kb_tests(void)
     {
         for(uint32_t i=0;i<sizeof(data)/sizeof(data[0]);i++)
         {
-            sprintf(temp, "%" PRI_KB "", KB_VALUE(data[i].value));
+            (void)memset(temp, 0, sizeof(temp));
+            int written = snprintf(temp, sizeof(temp), "%" PRI_KB "", KB_VALUE(data[i].value));
+            POOR_MANS_ASSERT((written > 0) && (written < sizeof(temp)));
             POOR_MANS_ASSERT(strcmp(temp, data[i].value_as_string) == 0);
         }
     }

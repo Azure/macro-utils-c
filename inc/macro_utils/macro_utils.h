@@ -65,7 +65,7 @@ extern "C" {
 
 
 /*below macro produces the first digit of the fractional part of the value (x) in KB, MB or GB*/
-#define KB_FIRST_FRACTIONAL_DIGIT(x) (                          \
+#define KB_FIRST_FRACTIONAL_DIGIT(x) (          \
     (x)>=PRI_1GB?                               \
         ((((x)*10)/PRI_1GB)%10)                 \
     :                                           \

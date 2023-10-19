@@ -256,3 +256,15 @@ The number 1048576 (this is precisley 1 MB) would be printed as 1 MB.
 The number 1048575 (this is 1 MB - 1 byte) would be printed as 1023.9 KB.
 
 `PRI_KB` used with numbers greater than 1024 GB will produce GB resolution. (`PRI_KB` can be easily expanded to handle TB resolution as well).
+
+Here's some more examples of such formatting:
+
+```c
+    1023 => "1023 B"
+    2048 => "2 KB"
+    1048576 => "1 MB"
+    2199023255551 => "2047.9 GB"
+    10995116277760 => "10240 GB"
+```
+
+Note: due to computations done in the macro, the maximum value that can be formatted is ~ `UINT64_MAX` / 10.

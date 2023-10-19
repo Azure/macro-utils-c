@@ -3,11 +3,11 @@ macro utils design
 
 Macro utils is a set of C useful macros.
 
-This document explains how it was build and what every macro does. In supporting understandability rather than code accuracy, some macros will be chopped to deal with a reasonable number of arguments rather than their implementation that usually supports above 120 arguments.
+This document explains how it was build and what every macro does. In supporting understandability rather than code accuracy, some macros will be chopped to deal with a reasonable number of arguments rather than their implementation that usually supports above 140 arguments.
 
 ### MU_THE_NTH_ARG(...)
 
-`MU_THE_NTH_ARG` produces the nth argument that is passed to the macro. In the implementation case, "n" is 124 and that was determined empirically to be a safe limit with all preprocessors.
+`MU_THE_NTH_ARG` produces the nth argument that is passed to the macro. In the implementation case, "n" is 140 and that was determined empirically to be a safe limit with all preprocessors.
 
 Assuming "n" is 4, here's some examples of what the output of the macro is
 
@@ -243,3 +243,28 @@ MU_STATIC_ASSERT(CONDITION)
 ```
 
 `MU_STATIC_ASSERT` evaluates the condition CONDITION and produces a compiler error if the condition is false.
+
+
+### PRI_KB / KB_VALUE
+
+`PRI_KB` is a printf format specifier that produces "nice" formatting of values (uint64_t) in KB or MB or GB. If the value would contain a fractional part, and that fractional part would start with 0, then the fractional part is not printed. Otherwiuse the first decimal of the fractional part is printed. Values less than 1KB are printed with all digits. For example:
+
+The number 1025 (which is barely above 1KB) would be printed as 1 KB, not 1.0 KB.
+
+The number 1048576 (this is precisley 1 MB) would be printed as 1 MB.
+
+The number 1048575 (this is 1 MB - 1 byte) would be printed as 1023.9 KB.
+
+`PRI_KB` used with numbers greater than 1024 GB will produce GB resolution. (`PRI_KB` can be easily expanded to handle TB resolution as well).
+
+Here's some more examples of such formatting:
+
+```c
+    1023 => "1023 B"
+    2048 => "2 KB"
+    1048576 => "1 MB"
+    2199023255551 => "2047.9 GB"
+    10995116277760 => "10240 GB"
+```
+
+Note: due to computations done in the macro, the maximum value that can be formatted is ~ `UINT64_MAX` / 10.

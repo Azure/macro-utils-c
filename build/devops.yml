@@ -115,6 +115,8 @@ jobs:
       arguments: '-C "Debug" -V --output-on-failure'
       workingFolder: build
 
+- template: /pipeline_templates/codeql3000_default.yml
+
 - job: linuxubuntu
   displayName: 'Build Linux Ubuntu'
   pool:
@@ -123,7 +125,6 @@ jobs:
       - linux
 
   steps:
-
   - bash: |
      pushd $(Build.Repository.LocalPath)
      git submodule update --init

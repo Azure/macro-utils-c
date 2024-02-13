@@ -1,7 +1,14 @@
 name: $(BuildID)_$(BuildDefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)
 resources:
-- repo: self
-  clean: true
+  repositories:
+  - repository: self
+    clean: true
+  - repository: c_build_tools
+    type: github
+    name: azure/c-build-tools
+    endpoint: github.com_azure
+    ref: refs/heads/master
+    
 jobs:
 - job: windowsx86
   displayName: 'Build Windows x86'
@@ -115,6 +122,8 @@ jobs:
       arguments: '-C "Debug" -V --output-on-failure'
       workingFolder: build
 
+- template: /pipeline_templates/codeql3000_default.yml@c_build_tools
+
 - job: linuxubuntu
   displayName: 'Build Linux Ubuntu'
   pool:
@@ -123,7 +132,6 @@ jobs:
       - linux
 
   steps:
-
   - bash: |
      pushd $(Build.Repository.LocalPath)
      git submodule update --init

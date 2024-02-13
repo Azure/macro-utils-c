@@ -1,12 +1,14 @@
 name: $(BuildID)_$(BuildDefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)
 resources:
-- repo: self
-  clean: true
-- repository: c_build_tools
-  type: github
-  name: azure/c-build-tools
-  endpoint: github.com_azure
-  ref: refs/heads/master
+  repositories:
+  - repository: self
+    clean: true
+  - repository: c_build_tools
+    type: github
+    name: azure/c-build-tools
+    endpoint: github.com_azure
+    ref: refs/heads/master
+    
 jobs:
 - job: windowsx86
   displayName: 'Build Windows x86'

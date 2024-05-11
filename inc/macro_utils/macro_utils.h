@@ -227,7 +227,7 @@ MU_IF(X, "true", "false") => "true"
         current_enum_value = MU_C2(my_, enumValue); \
     } \
     previous_enum_value = current_enum_value; \
-    if (current_enum_value == value) \
+    if (current_enum_value == (int)value) \
     { \
         static char result [] = MU_TOSTRING(enumValue); \
         static int visited; /*initialized to 0 by "static"*/ \

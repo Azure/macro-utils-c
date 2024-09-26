@@ -2,10 +2,9 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 #include <stdio.h>
-#include <stdlib.h>
 
 #ifdef USE_VLD
-#error USE_VLD is defined
+#include "vld.h"
 #endif
 
 #include "test_helper.h"
@@ -118,8 +117,6 @@ int main(void)
 
     result = run_pri_kb_tests();
     POOR_MANS_ASSERT(result == 0);
-
-    (void)malloc(3);
 
     return 0;
 }

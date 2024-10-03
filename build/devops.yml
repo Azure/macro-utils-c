@@ -7,7 +7,7 @@ resources:
     type: github
     name: azure/c-build-tools
     endpoint: github.com_azure
-    ref: refs/heads/master
+    ref: refs/heads/anporumb/check_submodules_master
     
 jobs:
 - template: /pipeline_templates/run_master_check.yml@c_build_tools

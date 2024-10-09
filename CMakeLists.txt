@@ -10,12 +10,12 @@ endif()
 #if ((NOT TARGET macro_utils_c) AND (EXISTS ${CMAKE_CURRENT_LIST_DIR}/deps/macro-utils-c/CMakeLists.txt))
 #    add_subdirectory(deps/macro-utils-c)
 #    include_directories(${MACRO_UTILS_INC_FOLDER})
-#endif() 
+#endif()
 
 if(TARGET macro_utils_c)
     return()
 endif()
-    
+
 project(macro_utils_c)
 
 set(MACRO_UTILS_C_VERSION 1.1.0)
@@ -41,7 +41,7 @@ set(run_reals_check OFF)
 if ((NOT TARGET c_build_tools) AND (EXISTS ${CMAKE_CURRENT_LIST_DIR}/deps/c-build-tools/CMakeLists.txt))
     add_subdirectory(deps/c-build-tools)
     set_default_build_options()
-endif() 
+endif()
 
 set(run_e2e_tests ${original_run_e2e_tests})
 set(run_int_tests ${original_run_int_tests})
@@ -110,7 +110,7 @@ else()
 endif()
 
 if(${run_int_tests})
-    add_subdirectory(tests) 
+    add_subdirectory(tests)
 endif()
 
 if(${run_reals_check})

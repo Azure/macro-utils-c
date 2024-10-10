@@ -9,7 +9,6 @@ endif()
 
 #if ((NOT TARGET macro_utils_c) AND (EXISTS ${CMAKE_CURRENT_LIST_DIR}/deps/macro-utils-c/CMakeLists.txt))
 #    add_subdirectory(deps/macro-utils-c)
-#    include_directories(${MACRO_UTILS_INC_FOLDER})
 #endif()
 
 if(TARGET macro_utils_c)
@@ -50,10 +49,6 @@ set(run_unittests ${original_run_unittests})
 set(run_traceability ${original_run_traceability})
 set(run_reals_check ${original_run_reals_check})
 
-#these are the include folders
-#the following "set" statement exports across the project a global variable called MACRO_UTILS_INC_FOLDER that expands to whatever needs to included when using macro_utils
-set(MACRO_UTILS_INC_FOLDER ${CMAKE_CURRENT_LIST_DIR}/inc CACHE INTERNAL "this is what needs to be included if using macro utils" FORCE)
-
 include(CTest)
 include(GNUInstallDirs)
 
@@ -65,7 +60,7 @@ set(macro_utils_files
 install(FILES ${macro_utils_files} DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/macro_utils")
 
 if("${CMAKE_VERSION}" VERSION_GREATER 3.0.0)
-    add_library(macro_utils_c INTERFACE)
+    add_library(macro_utils_c INTERFACE ${macro_utils_files})
     target_include_directories(macro_utils_c
         INTERFACE
             $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/inc>
@@ -106,7 +101,7 @@ if("${CMAKE_VERSION}" VERSION_GREATER 3.0.0)
             ${package_location}
     )
 else()
-    message(STATUS "This version of CMake does not support interface targets. Only the Azure Macro Utils header file will be installed. To use Azure Macro Utils, simply add \"MACRO_UTILS_INC_FOLDER\" to your include directories as specified in the instructions on the GitHub README.")
+    message(STATUS "This version of CMake does not support interface targets. Update CMake.")
 endif()
 
 if(${run_int_tests})

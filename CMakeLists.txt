@@ -53,8 +53,8 @@ include(CTest)
 include(GNUInstallDirs)
 
 set(macro_utils_files
-    inc/macro_utils/macro_utils.h
-    inc/macro_utils/macro_utils_generated.h
+    macro_utils/macro_utils.h
+    macro_utils/macro_utils_generated.h
 )
 
 install(FILES ${macro_utils_files} DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/macro_utils")

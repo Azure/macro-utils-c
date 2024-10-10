@@ -65,10 +65,9 @@ set(macro_utils_int_tests_h_files
     pri_kb_test.h
 
     test_helper.h
-    ${MACRO_UTILS_INC_FOLDER}/macro_utils/macro_utils.h
-    ${MACRO_UTILS_INC_FOLDER}/macro_utils/macro_utils_generated.h
 )
 
 add_executable(macro_utils_int_tests ${macro_utils_int_tests_c_files} ${macro_utils_int_tests_h_files})
+target_link_libraries(macro_utils_int_tests macro_utils_c)
 
 add_test(NAME macro_utils_int_tests COMMAND macro_utils_int_tests)

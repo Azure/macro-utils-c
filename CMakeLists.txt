@@ -58,15 +58,21 @@ set(macro_utils_files
 )
 
 set(macro_utils_files_with_inc_prefix)
-    foreach(file ${pal_ll_interfaces_h_files})
+    foreach(file ${macro_utils_files})
         list(APPEND macro_utils_files_with_inc_prefix "inc/${file}")
     endforeach()
+
+add_library(macro_utils_c INTERFACE ${macro_utils_files_with_inc_prefix})
+target_include_directories(macro_utils_c
+        INTERFACE
+            $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/inc>
+            $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+    )
 
 install(FILES ${macro_utils_files} DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/macro_utils")
 
 if("${CMAKE_VERSION}" VERSION_GREATER 3.0.0)
-    add_library(macro_utils_c INTERFACE ${macro_utils_files_with_inc_prefix})
-    target_include_directories(macro_utils_c INTERFACE "${CMAKE_SOURCE_DIR}/inc")
+
     install(TARGETS macro_utils_c EXPORT macro_utils_cTargets
         INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
     )

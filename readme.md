@@ -29,7 +29,3 @@ In your project, simply:
 ## Supported compilers
 
 The following compilers are supported: gcc 4.4 (and onwards), Visual Studio 2015 and others.
-
-## CMake integration
-
-The project will export a global variable MACRO_UTILS_INC_FOLDER that points to the folder needed to be included so that `#include "macro_utils/macro_utils.h"` resolves properly.

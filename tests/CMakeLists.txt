@@ -4,8 +4,6 @@
 #since every single other project (testrunnerswitcher, ctest, umock_c etc) uses macro_utils
 #it means that macro_utils has its own test infrastructure (cannot call into build_c_test_artifacts)
 
-include_directories(${MACRO_UTILS_INC_FOLDER})
-
 set(macro_utils_int_tests_c_files
     define_struct_test.c
     for_each_1_keep_1_test.c

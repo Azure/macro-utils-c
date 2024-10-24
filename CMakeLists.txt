@@ -62,7 +62,7 @@ foreach(file ${macro_utils_files})
     list(APPEND macro_utils_files_with_inc_prefix "inc/${file}")
 endforeach()
 
-install(FILES ${macro_utils_files} DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/macro_utils")
+install(FILES ${macro_utils_files_with_inc_prefix} DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/macro_utils")
 
 if("${CMAKE_VERSION}" VERSION_GREATER 3.0.0)
 

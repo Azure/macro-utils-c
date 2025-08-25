@@ -75,6 +75,15 @@ const char* status_str = MU_ENUM_TO_STRING(STATUS, SUCCESS);
 ## External Dependencies
 For build/test/pipeline conventions, refer to `deps/c-build-tools/.github/copilot-instructions.md`. This project inherits all build infrastructure from c-build-tools.
 
+**IMPORTANT**: All code changes must follow the comprehensive coding standards defined in `deps/c-build-tools/.github/general_coding_instructions.md`, including:
+- Function naming conventions (snake_case, module prefixes, internal function patterns)
+- Parameter validation rules and error handling patterns  
+- Variable naming and result variable conventions
+- Header inclusion order and memory management requirements
+- Requirements traceability system (SRS/Codes_SRS/Tests_SRS patterns)
+- Async callback patterns and goto usage rules
+- Indentation, formatting, and code structure guidelines
+
 ## Critical Files
 - `inc/macro_utils/macro_utils.h`: Core macro definitions
 - `macro_utils_h_generator/macro_utils_generated.tt`: T4 template for code generation

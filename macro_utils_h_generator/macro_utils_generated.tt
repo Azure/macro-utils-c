@@ -75,42 +75,21 @@
 #define MU_THE_NTH_ARG(<#for(var i=1;i<=nMacroParameters;i++)#>
 <#{#>P<#=i#>, <#}#> ... ) P<#=nMacroParameters#>
 
-#if defined(_MSC_VER) && (_MSC_VER < 1920 )
-#define MU_COUNT_1_OR_MORE_ARG(...) MU_THE_NTH_ARG MU_LPAREN __VA_ARGS__, \
-<#for(var i=nMacroParameters-1;i>=1;i--){#><#=i.ToString()+((i>1)?", ":"")#><#}#>)
-#define MU_HAS_COMMA(...) MU_THE_NTH_ARG MU_LPAREN __VA_ARGS__, <#for(var i=nMacroParameters-2;i>=1;i--){#><#=1#>,<#}#>0)
-#else
 #define MU_COUNT_1_OR_MORE_ARG(...) MU_THE_NTH_ARG (__VA_ARGS__, \
 <#for(var i=nMacroParameters-1;i>=1;i--){#><#=i.ToString()+((i>1)?", ":"")#><#}#>)
 #define MU_HAS_COMMA(...) MU_THE_NTH_ARG(__VA_ARGS__, <#for(var i=nMacroParameters-2;i>=1;i--){#><#=1#>,<#}#> 0)
-#endif
 
 #define MU_COUNT_ARG(...) MU_C2(MU_COUNT_ARG_, MU_ISEMPTY(__VA_ARGS__))(__VA_ARGS__)
 #define MU_COUNT_ARG_1(...) 0
 #define MU_COUNT_ARG_0(...) MU_C1(MU_COUNT_1_OR_MORE_ARG(__VA_ARGS__))
 
 
-#define MU_ISEMPTY(...) MU_C5(MU_DISPATCH_EMPTY_, MU_HAS_COMMA(__VA_ARGS__), MU_HAS_COMMA(MU_TRIGGER_PARENTHESIS __VA_ARGS__ ()), MU_HAS_COMMA(__VA_ARGS__ ()), MU_HAS_COMMA(MU_TRIGGER_PARENTHESIS __VA_ARGS__))
-
-/*in the below cases __VA_ARGS__ already has a comma in its expansion, so it is not empty*/
-#define MU_DISPATCH_EMPTY_1000 0 /*not empty because MU_HAS_COMMA says there's a comma somewhere*/
-#define MU_DISPATCH_EMPTY_1001 0
-#define MU_DISPATCH_EMPTY_1010 0
-#define MU_DISPATCH_EMPTY_1011 0
-#define MU_DISPATCH_EMPTY_1100 0
-#define MU_DISPATCH_EMPTY_1101 0
-#define MU_DISPATCH_EMPTY_1110 0
-#define MU_DISPATCH_EMPTY_1111 0
-
-/*note: not all cases are possible from the table below. Or have not been discovered yet*/
-#define MU_DISPATCH_EMPTY_0100 1 /*empty because MU_TRIGGER_PARENTHESIS expanded to , (2 empty tokens) and __VA_ARGS__() did not have a comma and MU_TRIGGER_PARENTHESIS __VA_ARGS__ did not have a comma either*/
-#define MU_DISPATCH_EMPTY_0101 0
-#define MU_DISPATCH_EMPTY_0110 0
-#define MU_DISPATCH_EMPTY_0111 0
-#define MU_DISPATCH_EMPTY_0000 0
-#define MU_DISPATCH_EMPTY_0001 0
-#define MU_DISPATCH_EMPTY_0010 0
-#define MU_DISPATCH_EMPTY_0011 0
+/*note: 1A0D532B_BC7E_4F89_9F1F_831A9C6AF51F is a GUID that is unique for the purpose of avoiding clashes with other tokens*/
+/*__VA_OPT__(1A0D532B_BC7E_4F89_9F1F_831A9C6AF51F) expands to exactly the token 1A0D532B_BC7E_4F89_9F1F_831A9C6AF51F if the __VA_ARGS__ is non-empty*/
+#define MU_ISEMPTY(...) MU_IS_EMPTY_IMPL(__VA_OPT__(1A0D532B_BC7E_4F89_9F1F_831A9C6AF51F))
+#define MU_IS_EMPTY_IMPL(x) MU_IS_EMPTY_PICK_##x
+#define MU_IS_EMPTY_PICK_ 1                                         /*for the case when __VA_ARGS__ is empty. */
+#define MU_IS_EMPTY_PICK_1A0D532B_BC7E_4F89_9F1F_831A9C6AF51F 0     /*for the case when __VA_ARGS__ is non-empty*/
 
 
 <#for(var i=nMacroParameters;i>=2;i--)#>

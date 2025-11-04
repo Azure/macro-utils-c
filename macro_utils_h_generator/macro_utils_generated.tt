@@ -95,55 +95,46 @@
 #define MU_FOR_EACH_1_<#=i#>(X, <#for(var j=1;j<=i;j++){#>P<#=j.ToString()+((j<i)?", ":"")#><#}#>) \
 <#for(var j=1;j<=i;j++){#>X(P<#=j#>) <#}#>
 
+
 <#}#>
 
-<#for(var i=nMacroParameters;i>=2;i--)#>
+<#for(var i=nMacroParameters;i>=1;i--)#>
 <#{#>
 #define MU_FOR_EACH_1A_<#=i#>(X, <#for(var j=1;j<=i;j++){#>P<#=j.ToString()+((j<i)?", ":"")#><#}#>) \
-X(P1) \
-MU_FOR_EACH_1A_<#=i-1#>(X, <#for(var j=2;j<=i;j++){#>P<#=j.ToString()+((j<i)?", ":"")#><#}#>)
+<#for(var j=1;j<=i;j++){#>X(P<#=j#>) <#}#>
+
 
 <#}#>
-#define MU_FOR_EACH_1A_1(X, P1) \
-X(P1)
 
-<#for(var i=nMacroParameters;i>=2;i--)#>
+<#for(var i=nMacroParameters;i>=1;i--)#>
 <#{#>
 #define MU_FOR_EACH_1B_<#=i#>(X, <#for(var j=1;j<=i;j++){#>P<#=j.ToString()+((j<i)?", ":"")#><#}#>) \
-X(P1) \
-MU_FOR_EACH_1B_<#=i-1#>(X, <#for(var j=2;j<=i;j++){#>P<#=j.ToString()+((j<i)?", ":"")#><#}#>)
+<#for(var j=1;j<=i;j++){#>X(P<#=j#>) <#}#>
+
 
 <#}#>
-#define MU_FOR_EACH_1B_1(X, P1) \
-X(P1)
 
-#define MU_FOR_EACH_1(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_1_,MU_C1(MU_COUNT_ARG(__VA_ARGS__))) ( MACRO_TO_INVOKE, __VA_ARGS__)
-#define MU_FOR_EACH_1A(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_1A_,MU_C1(MU_COUNT_ARG(__VA_ARGS__))) ( MACRO_TO_INVOKE, __VA_ARGS__)
-#define MU_FOR_EACH_1B(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_1B_,MU_C1(MU_COUNT_ARG(__VA_ARGS__))) ( MACRO_TO_INVOKE, __VA_ARGS__)
+#define MU_FOR_EACH_1(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_1_,MU_COUNT_ARG(__VA_ARGS__)) ( MACRO_TO_INVOKE, __VA_ARGS__)
+#define MU_FOR_EACH_1A(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_1A_,MU_COUNT_ARG(__VA_ARGS__)) ( MACRO_TO_INVOKE, __VA_ARGS__)
+#define MU_FOR_EACH_1B(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_1B_,MU_COUNT_ARG(__VA_ARGS__)) ( MACRO_TO_INVOKE, __VA_ARGS__)
 
-<#for(var i=nMacroParameters;i>=2;i--)#>
+<#for(var i=nMacroParameters;i>=1;i--)#>
 <#{#>
 #define MU_FOR_EACH_1_PASTE_<#=i#>(PASTE, <#for(var j=1;j<=i;j++){#>P<#=j.ToString()+((j<i)?", ":"")#><#}#>) \
-MU_C2INTERNAL(PASTE,P1) \
-MU_FOR_EACH_1_PASTE_<#=i-1#>(PASTE, <#for(var j=2;j<=i;j++){#>P<#=j.ToString()+((j<i)?", ":"")#><#}#>)
+<#for(var j=1;j<=i;j++){#>MU_C2INTERNAL(PASTE, P<#=j#>) <#}#>
+
 
 <#}#>
-#define MU_FOR_EACH_1_PASTE_1(PASTE, P1) \
-MU_C2INTERNAL(PASTE,P1)
 
-#define MU_FOR_EACH_1_PASTE(PASTE, ...) MU_C2(MU_FOR_EACH_1_PASTE_,MU_C1(MU_COUNT_ARG(__VA_ARGS__))) ( PASTE, __VA_ARGS__)
+#define MU_FOR_EACH_1_PASTE(PASTE, ...) MU_C2(MU_FOR_EACH_1_PASTE_,MU_COUNT_ARG(__VA_ARGS__)) ( PASTE, __VA_ARGS__)
 
-<#for(var i=nMacroParameters;i>=2;i--)#>
+<#for(var i=nMacroParameters;i>=1;i--)#>
 <#{#>
 #define MU_FOR_EACH_1_KEEP_1_<#=i#>(X, keep, <#for(var j=1;j<=i;j++){#>P<#=j.ToString()+(j<i?", ":"")#><#}#>) \
-X(keep, P1) \
-MU_FOR_EACH_1_KEEP_1_<#=i-1#>(X, keep, <#for(var j=2;j<=i;j++){#>P<#=(j).ToString()+(j<i?", ":"")#><#}#>)
+<#for(var j=1;j<=i;j++){#>X(keep, P<#=j#>) <#}#>
 
 
 <#}#>
-
-#define MU_FOR_EACH_1_KEEP_1_1(X, keep, P1) \
-X(keep, P1)
 
 #define MU_FOR_EACH_1_KEEP_1(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_1_KEEP_1_, MU_C2(MU_DEC,MU_C1(MU_COUNT_ARG(__VA_ARGS__)))) ( MACRO_TO_INVOKE, __VA_ARGS__)
 

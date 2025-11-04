@@ -25,6 +25,8 @@ MU_FOR_EACH_1_KEEP_1(MY_MACRO_X, 5, LIST_3_ELEMENTS)
 
 MU_FOR_EACH_1_KEEP_1(MY_MACRO_Y, 5, LIST_1_ELEMENT)
 
+MU_FOR_EACH_1_KEEP_1(MY_MACRO, 3) /*note: this macro does not have a list of "each"es - so it expands to nothing*/
+
 int run_for_each_1_keep_1_tests(void)
 {
     // check that the appropriate value has been placed in each variable

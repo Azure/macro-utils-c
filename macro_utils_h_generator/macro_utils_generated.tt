@@ -77,7 +77,6 @@
 
 #define MU_COUNT_1_OR_MORE_ARG(...) MU_THE_NTH_ARG (__VA_ARGS__, \
 <#for(var i=nMacroParameters-1;i>=1;i--){#><#=i.ToString()+((i>1)?", ":"")#><#}#>)
-#define MU_HAS_COMMA(...) MU_THE_NTH_ARG(__VA_ARGS__, <#for(var i=nMacroParameters-2;i>=1;i--){#><#=1#>,<#}#> 0)
 
 #define MU_COUNT_ARG(...) MU_C2(MU_COUNT_ARG_, MU_ISEMPTY(__VA_ARGS__))(__VA_ARGS__)
 #define MU_COUNT_ARG_1(...) 0

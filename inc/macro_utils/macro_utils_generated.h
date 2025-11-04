@@ -8581,7 +8581,7 @@
 
 #define MU_COUNT_ARG(...) MU_C2(MU_COUNT_ARG_, MU_ISEMPTY(__VA_ARGS__))(__VA_ARGS__)
 #define MU_COUNT_ARG_1(...) 0
-#define MU_COUNT_ARG_0(...) MU_C1(MU_COUNT_1_OR_MORE_ARG(__VA_ARGS__))
+#define MU_COUNT_ARG_0(...) MU_COUNT_1_OR_MORE_ARG(__VA_ARGS__)
 
 
 /*note: 1A0D532B_BC7E_4F89_9F1F_831A9C6AF51F is a GUID that is unique for the purpose of avoiding clashes with other tokens*/

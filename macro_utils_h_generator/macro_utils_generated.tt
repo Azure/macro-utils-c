@@ -78,17 +78,16 @@
 #define MU_COUNT_1_OR_MORE_ARG(...) MU_THE_NTH_ARG (__VA_ARGS__, \
 <#for(var i=nMacroParameters-1;i>=1;i--){#><#=i.ToString()+((i>1)?", ":"")#><#}#>)
 
-#define MU_COUNT_ARG(...) MU_C2(MU_COUNT_ARG_, MU_ISEMPTY(__VA_ARGS__))(__VA_ARGS__)
-#define MU_COUNT_ARG_1(...) 0
-#define MU_COUNT_ARG_0(...) MU_COUNT_1_OR_MORE_ARG(__VA_ARGS__)
+/*note: F533AD67_7A90_4DC2_A30A_75306900ACE6 is a guid only used here for the purpose of avoiding clashes with other tokens*/
+/*the trick here is to insert an EXTRA token (F533AD67_7A90_4DC2_A30A_75306900ACE6), count the __VA_ARGS__ AND this extra token, and then return the number -1*/
+#define MU_COUNT_ARG(...) MU_DEC(MU_COUNT_1_OR_MORE_ARG(F533AD67_7A90_4DC2_A30A_75306900ACE6 __VA_OPT__(,) __VA_ARGS__))
 
-
-/*note: 1A0D532B_BC7E_4F89_9F1F_831A9C6AF51F is a GUID that is unique for the purpose of avoiding clashes with other tokens*/
-/*__VA_OPT__(1A0D532B_BC7E_4F89_9F1F_831A9C6AF51F) expands to exactly the token 1A0D532B_BC7E_4F89_9F1F_831A9C6AF51F if the __VA_ARGS__ is non-empty*/
-#define MU_ISEMPTY(...) MU_IS_EMPTY_IMPL(__VA_OPT__(1A0D532B_BC7E_4F89_9F1F_831A9C6AF51F))
+/*note: C5942A16_89D5_4732_8BA4_DCD1B9661DB0 is a GUID that is unique for the purpose of avoiding clashes with other tokens*/
+/*__VA_OPT__(1A0D532B_BC7E_4F89_9F1F_831A9C6AF51F) expands to exactly the token C5942A16_89D5_4732_8BA4_DCD1B9661DB0 if the __VA_ARGS__ is non-empty*/
+#define MU_ISEMPTY(...) MU_IS_EMPTY_IMPL(__VA_OPT__(C5942A16_89D5_4732_8BA4_DCD1B9661DB0))
 #define MU_IS_EMPTY_IMPL(x) MU_IS_EMPTY_PICK_##x
 #define MU_IS_EMPTY_PICK_ 1                                         /*for the case when __VA_ARGS__ is empty. */
-#define MU_IS_EMPTY_PICK_1A0D532B_BC7E_4F89_9F1F_831A9C6AF51F 0     /*for the case when __VA_ARGS__ is non-empty*/
+#define MU_IS_EMPTY_PICK_C5942A16_89D5_4732_8BA4_DCD1B9661DB0 0     /*for the case when __VA_ARGS__ is non-empty*/
 
 
 <#for(var i=nMacroParameters;i>=2;i--)#>

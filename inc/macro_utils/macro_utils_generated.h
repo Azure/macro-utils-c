@@ -8579,17 +8579,16 @@
 #define MU_COUNT_1_OR_MORE_ARG(...) MU_THE_NTH_ARG (__VA_ARGS__, \
 139, 138, 137, 136, 135, 134, 133, 132, 131, 130, 129, 128, 127, 126, 125, 124, 123, 122, 121, 120, 119, 118, 117, 116, 115, 114, 113, 112, 111, 110, 109, 108, 107, 106, 105, 104, 103, 102, 101, 100, 99, 98, 97, 96, 95, 94, 93, 92, 91, 90, 89, 88, 87, 86, 85, 84, 83, 82, 81, 80, 79, 78, 77, 76, 75, 74, 73, 72, 71, 70, 69, 68, 67, 66, 65, 64, 63, 62, 61, 60, 59, 58, 57, 56, 55, 54, 53, 52, 51, 50, 49, 48, 47, 46, 45, 44, 43, 42, 41, 40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1)
 
-#define MU_COUNT_ARG(...) MU_C2(MU_COUNT_ARG_, MU_ISEMPTY(__VA_ARGS__))(__VA_ARGS__)
-#define MU_COUNT_ARG_1(...) 0
-#define MU_COUNT_ARG_0(...) MU_COUNT_1_OR_MORE_ARG(__VA_ARGS__)
+/*note: F533AD67_7A90_4DC2_A30A_75306900ACE6 is a guid only used here for the purpose of avoiding clashes with other tokens*/
+/*the trick here is to insert an EXTRA token (F533AD67_7A90_4DC2_A30A_75306900ACE6), count the __VA_ARGS__ AND this extra token, and then return the number -1*/
+#define MU_COUNT_ARG(...) MU_DEC(MU_COUNT_1_OR_MORE_ARG(F533AD67_7A90_4DC2_A30A_75306900ACE6 __VA_OPT__(,) __VA_ARGS__))
 
-
-/*note: 1A0D532B_BC7E_4F89_9F1F_831A9C6AF51F is a GUID that is unique for the purpose of avoiding clashes with other tokens*/
-/*__VA_OPT__(1A0D532B_BC7E_4F89_9F1F_831A9C6AF51F) expands to exactly the token 1A0D532B_BC7E_4F89_9F1F_831A9C6AF51F if the __VA_ARGS__ is non-empty*/
-#define MU_ISEMPTY(...) MU_IS_EMPTY_IMPL(__VA_OPT__(1A0D532B_BC7E_4F89_9F1F_831A9C6AF51F))
+/*note: C5942A16_89D5_4732_8BA4_DCD1B9661DB0 is a GUID that is unique for the purpose of avoiding clashes with other tokens*/
+/*__VA_OPT__(1A0D532B_BC7E_4F89_9F1F_831A9C6AF51F) expands to exactly the token C5942A16_89D5_4732_8BA4_DCD1B9661DB0 if the __VA_ARGS__ is non-empty*/
+#define MU_ISEMPTY(...) MU_IS_EMPTY_IMPL(__VA_OPT__(C5942A16_89D5_4732_8BA4_DCD1B9661DB0))
 #define MU_IS_EMPTY_IMPL(x) MU_IS_EMPTY_PICK_##x
 #define MU_IS_EMPTY_PICK_ 1                                         /*for the case when __VA_ARGS__ is empty. */
-#define MU_IS_EMPTY_PICK_1A0D532B_BC7E_4F89_9F1F_831A9C6AF51F 0     /*for the case when __VA_ARGS__ is non-empty*/
+#define MU_IS_EMPTY_PICK_C5942A16_89D5_4732_8BA4_DCD1B9661DB0 0     /*for the case when __VA_ARGS__ is non-empty*/
 
 
 #define MU_FOR_EACH_1_140(X, P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, P12, P13, P14, P15, P16, P17, P18, P19, P20, P21, P22, P23, P24, P25, P26, P27, P28, P29, P30, P31, P32, P33, P34, P35, P36, P37, P38, P39, P40, P41, P42, P43, P44, P45, P46, P47, P48, P49, P50, P51, P52, P53, P54, P55, P56, P57, P58, P59, P60, P61, P62, P63, P64, P65, P66, P67, P68, P69, P70, P71, P72, P73, P74, P75, P76, P77, P78, P79, P80, P81, P82, P83, P84, P85, P86, P87, P88, P89, P90, P91, P92, P93, P94, P95, P96, P97, P98, P99, P100, P101, P102, P103, P104, P105, P106, P107, P108, P109, P110, P111, P112, P113, P114, P115, P116, P117, P118, P119, P120, P121, P122, P123, P124, P125, P126, P127, P128, P129, P130, P131, P132, P133, P134, P135, P136, P137, P138, P139, P140) \

@@ -25,7 +25,6 @@
 #include "mu_define_local_enum_test.h"
 #include "mu_eat_empty_args_test.h"
 #include "mu_is_empty_test.h"
-#include "mu_has_comma_test.h"
 #include "mu_pri_enum_test.h"
 #include "mu_the_nth_arg_test.h"
 #include "mu_expand_no_expand_test.h"
@@ -44,9 +43,6 @@ int main(void)
     POOR_MANS_ASSERT(result == 0);
 
     result = run_mu_count_1_or_more_arg_tests();
-    POOR_MANS_ASSERT(result == 0);
-
-    result = run_mu_has_comma_tests();
     POOR_MANS_ASSERT(result == 0);
 
     result = run_mu_is_empty_tests();

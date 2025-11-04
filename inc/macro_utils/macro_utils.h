@@ -98,8 +98,6 @@ extern "C" {
 /*KB_VALUE is the counterpart of PRI_KB.*/
 #define KB_VALUE(x) KB_VALUE_INT(x), KB_FRACTIONAL_DOT(x), KB_FIRST_FRACTIONAL_DIGIT(x), KB_UNIT(x)
 
-#define MU_TRIGGER_PARENTHESIS(...) ,
-
 #if defined(_MSC_VER) && (_MSC_VER<1920)
 #define MU_LPAREN (
 #endif

@@ -90,17 +90,13 @@
 #define MU_IS_EMPTY_PICK_C5942A16_89D5_4732_8BA4_DCD1B9661DB0 0     /*for the case when __VA_ARGS__ is non-empty*/
 
 
-<#for(var i=nMacroParameters;i>=2;i--)#>
+<#for(var i=nMacroParameters;i>=1;i--)#>
 <#{#>
 #define MU_FOR_EACH_1_<#=i#>(X, <#for(var j=1;j<=i;j++){#>P<#=j.ToString()+((j<i)?", ":"")#><#}#>) \
-X(P1) \
-MU_FOR_EACH_1_<#=i-1#>(X, <#for(var j=2;j<=i;j++){#>P<#=j.ToString()+((j<i)?", ":"")#><#}#>)
+<#for(var j=1;j<=i;j++){#>X(P<#=j#>) <#}#>
 
 <#}#>
-#define MU_FOR_EACH_1_1(X, P1) \
-X(P1)
 
-#if !defined(_MSC_VER) || (_MSC_VER >= 1920 )
 <#for(var i=nMacroParameters;i>=2;i--)#>
 <#{#>
 #define MU_FOR_EACH_1A_<#=i#>(X, <#for(var j=1;j<=i;j++){#>P<#=j.ToString()+((j<i)?", ":"")#><#}#>) \
@@ -120,17 +116,10 @@ MU_FOR_EACH_1B_<#=i-1#>(X, <#for(var j=2;j<=i;j++){#>P<#=j.ToString()+((j<i)?", 
 <#}#>
 #define MU_FOR_EACH_1B_1(X, P1) \
 X(P1)
-#endif
 
-#if defined(_MSC_VER) && (_MSC_VER < 1920 )
-#define MU_FOR_EACH_1(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_1_,MU_C1(MU_COUNT_ARG(__VA_ARGS__))) MU_LPAREN MACRO_TO_INVOKE, __VA_ARGS__)
-#else
 #define MU_FOR_EACH_1(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_1_,MU_C1(MU_COUNT_ARG(__VA_ARGS__))) ( MACRO_TO_INVOKE, __VA_ARGS__)
 #define MU_FOR_EACH_1A(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_1A_,MU_C1(MU_COUNT_ARG(__VA_ARGS__))) ( MACRO_TO_INVOKE, __VA_ARGS__)
 #define MU_FOR_EACH_1B(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_1B_,MU_C1(MU_COUNT_ARG(__VA_ARGS__))) ( MACRO_TO_INVOKE, __VA_ARGS__)
-#endif
-
-
 
 <#for(var i=nMacroParameters;i>=2;i--)#>
 <#{#>
@@ -142,12 +131,7 @@ MU_FOR_EACH_1_PASTE_<#=i-1#>(PASTE, <#for(var j=2;j<=i;j++){#>P<#=j.ToString()+(
 #define MU_FOR_EACH_1_PASTE_1(PASTE, P1) \
 MU_C2INTERNAL(PASTE,P1)
 
-#if defined(_MSC_VER) && (_MSC_VER < 1920 )
-#define MU_FOR_EACH_1_PASTE(PASTE, ...) MU_C2(MU_FOR_EACH_1_PASTE_,MU_C1(MU_COUNT_ARG(__VA_ARGS__))) MU_LPAREN PASTE, __VA_ARGS__)
-#else
 #define MU_FOR_EACH_1_PASTE(PASTE, ...) MU_C2(MU_FOR_EACH_1_PASTE_,MU_C1(MU_COUNT_ARG(__VA_ARGS__))) ( PASTE, __VA_ARGS__)
-#endif
-
 
 <#for(var i=nMacroParameters;i>=2;i--)#>
 <#{#>
@@ -161,11 +145,7 @@ MU_FOR_EACH_1_KEEP_1_<#=i-1#>(X, keep, <#for(var j=2;j<=i;j++){#>P<#=(j).ToStrin
 #define MU_FOR_EACH_1_KEEP_1_1(X, keep, P1) \
 X(keep, P1)
 
-#if defined(_MSC_VER) && (_MSC_VER < 1920 )
-#define MU_FOR_EACH_1_KEEP_1(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_1_KEEP_1_, MU_C2(MU_DEC,MU_C1(MU_COUNT_ARG(__VA_ARGS__)))) MU_LPAREN MACRO_TO_INVOKE, __VA_ARGS__)
-#else
 #define MU_FOR_EACH_1_KEEP_1(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_1_KEEP_1_, MU_C2(MU_DEC,MU_C1(MU_COUNT_ARG(__VA_ARGS__)))) ( MACRO_TO_INVOKE, __VA_ARGS__)
-#endif
 
 <#for(var i=nMacroParameters;i>=2;i--)#>
 <#{#>
@@ -181,11 +161,7 @@ X(keep1, keep2, P1)
 
 #define MU_FOR_EACH_1_KEEP_2_0(...)
 
-#if defined(_MSC_VER) && (_MSC_VER < 1920 )
-#define MU_FOR_EACH_1_KEEP_2(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_1_KEEP_2_, MU_C2(MU_DEC,MU_C2(MU_DEC,MU_C1(MU_COUNT_ARG(__VA_ARGS__))))) MU_LPAREN MACRO_TO_INVOKE, __VA_ARGS__)
-#else
 #define MU_FOR_EACH_1_KEEP_2(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_1_KEEP_2_, MU_C2(MU_DEC,MU_C2(MU_DEC,MU_C1(MU_COUNT_ARG(__VA_ARGS__))))) ( MACRO_TO_INVOKE, __VA_ARGS__)
-#endif
 
 <#for(var i=nMacroParameters;i>=4;i-=2)#>
 <#{#>
@@ -203,11 +179,7 @@ MU_FOR_EACH_2_KEEP_1_<#=i-2#>(X, keep, <#for(var j=3;j<=i;j++){#>P<#=(j).ToStrin
 #define MU_FOR_EACH_2_KEEP_1_2(X, keep, P1, P2) \
     X(keep, P1, P2) \
 
-#if defined(_MSC_VER) && (_MSC_VER < 1920 )
-#define MU_FOR_EACH_2_KEEP_1(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_2_KEEP_1_, MU_C2(MU_DEC,MU_C1(MU_COUNT_ARG(__VA_ARGS__)))) MU_LPAREN MACRO_TO_INVOKE, __VA_ARGS__)
-#else
 #define MU_FOR_EACH_2_KEEP_1(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_2_KEEP_1_, MU_C2(MU_DEC,MU_C1(MU_COUNT_ARG(__VA_ARGS__)))) ( MACRO_TO_INVOKE, __VA_ARGS__)
-#endif
 
 
 <#for(var i=nMacroParameters;i>=4;i-=2)#>
@@ -226,12 +198,7 @@ MU_FOR_EACH_2_KEEP_2_<#=i-2#>(X, keep1, keep2, <#for(var j=3;j<=i;j++){#>P<#=(j)
 #define MU_FOR_EACH_2_KEEP_2_2(X, keep1, keep2, P1, P2) \
     X(keep1, keep2, P1, P2) \
 
-#if defined(_MSC_VER) && (_MSC_VER < 1920 )
-#define MU_FOR_EACH_2_KEEP_2(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_2_KEEP_2_, MU_C2(MU_DEC,MU_C2(MU_DEC,MU_C1(MU_COUNT_ARG(__VA_ARGS__))))) MU_LPAREN MACRO_TO_INVOKE, __VA_ARGS__)
-#else
 #define MU_FOR_EACH_2_KEEP_2(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_2_KEEP_2_, MU_C2(MU_DEC, MU_C2(MU_DEC,MU_C1(MU_COUNT_ARG(__VA_ARGS__))))) ( MACRO_TO_INVOKE, __VA_ARGS__)
-#endif
-
 
 #define MU_FOR_EACH_2_0(...)
 
@@ -305,8 +272,7 @@ MU_FOR_EACH_2_COUNTED_<#=i-2#>(X, <#for(var j=3;j<=i;j++){#>P<#=j.ToString()+((j
 
 <#}#>
 
-#if defined(_MSC_VER) && (_MSC_VER < 1920 )
-#define MU_FOR_EACH_2(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_2_, MU_C1(MU_COUNT_ARG(__VA_ARGS__))) MU_LPAREN MACRO_TO_INVOKE, __VA_ARGS__)
+
 /*the COUNTED breed of MU_FOR_EACH macro invokes a macro with 3 parameters: 1st being the count of invocation. For example.
 MU_FOR_EACH_2_COUNTED(MACRO, a,b,c,d,e,f) will result in
 MACRO(6, a,b)
@@ -314,32 +280,18 @@ MACRO(4, c,d)
 MACRO(2, e,f)
 This macro exists because we need a "stop condition" in outputting COMMA... when calling a function f(a,b,c,d) cannot be f(a,b,c,d,) <=doesn't compile (as opposed to enum definition)
 */
-#define MU_FOR_EACH_2_COUNTED(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_2_COUNTED_, MU_C1(MU_COUNT_ARG(__VA_ARGS__))) MU_LPAREN MACRO_TO_INVOKE, __VA_ARGS__)
-#define MU_FOR_EACH_1_COUNTED(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_1_COUNTED_, MU_C1(MU_COUNT_ARG(__VA_ARGS__))) MU_LPAREN MACRO_TO_INVOKE, __VA_ARGS__)
-
 /*MU_FOR_EACH_2_REVERSE acts just like MU_FOR_EACH_2, but in reverse order. Example:
 MU_FOR_EACH_2_REVERSE(X,a,b,c,d,e,f) => X(e,f) X(c,d) X (a, b) in this order */
-#define MU_FOR_EACH_2_REVERSE(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_2_REVERSE_, MU_C1(MU_COUNT_ARG(__VA_ARGS__))) MU_LPAREN MACRO_TO_INVOKE, __VA_ARGS__)
-#else
+
 #define MU_FOR_EACH_2(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_2_, MU_C1(MU_COUNT_ARG(__VA_ARGS__))) ( MACRO_TO_INVOKE, __VA_ARGS__)
 #define MU_FOR_EACH_2_COUNTED(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_2_COUNTED_, MU_C1(MU_COUNT_ARG(__VA_ARGS__))) ( MACRO_TO_INVOKE,  __VA_ARGS__)
 #define MU_FOR_EACH_1_COUNTED(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_1_COUNTED_, MU_C1(MU_COUNT_ARG(__VA_ARGS__))) ( MACRO_TO_INVOKE,  __VA_ARGS__)
 #define MU_FOR_EACH_2_REVERSE(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_2_REVERSE_, MU_C1(MU_COUNT_ARG(__VA_ARGS__))) ( MACRO_TO_INVOKE, __VA_ARGS__)
-#endif
 
-#if defined(_MSC_VER) && (_MSC_VER < 1920 )
-#define MU_FOR_EACH_1_KEEP_1_COUNTED(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_1_KEEP_1_COUNTED_, MU_C2(MU_DEC,MU_C1(MU_COUNT_ARG(__VA_ARGS__)))) MU_LPAREN MACRO_TO_INVOKE, __VA_ARGS__)
-#define MU_FOR_EACH_1_KEEP_2_COUNTED(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_1_KEEP_2_COUNTED_, MU_C2(MU_DEC,MU_C2(MU_DEC,MU_C1(MU_COUNT_ARG(__VA_ARGS__))))) MU_LPAREN MACRO_TO_INVOKE, __VA_ARGS__)
-#else
 #define MU_FOR_EACH_1_KEEP_1_COUNTED(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_1_KEEP_1_COUNTED_, MU_C2(MU_DEC,MU_C1(MU_COUNT_ARG(__VA_ARGS__)))) ( MACRO_TO_INVOKE, __VA_ARGS__)
 #define MU_FOR_EACH_1_KEEP_2_COUNTED(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_1_KEEP_2_COUNTED_, MU_C2(MU_DEC,MU_C2(MU_DEC,MU_C1(MU_COUNT_ARG(__VA_ARGS__))))) ( MACRO_TO_INVOKE, __VA_ARGS__)
-#endif
 
-#if defined(_MSC_VER) && (_MSC_VER < 1920 )
-#define MU_EXPAND_OR_MU_C1(x) x
-#else
 #define MU_EXPAND_OR_MU_C1(...) __VA_ARGS__
-#endif
 
 #define MU_EXPAND_ARGS(...) __VA_ARGS__
 #define MU_EXPAND_TWICE(...) MU_EXPAND_ARGS(__VA_ARGS__)

@@ -222,17 +222,19 @@
 
 #define MU_FOR_EACH_1_COUNTED(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_1_COUNTED_, MU_COUNT_ARG(__VA_ARGS__)) ( MACRO_TO_INVOKE,  __VA_ARGS__)
 
-#define MU_FOR_EACH_1_KEEP_2_COUNTED_0(...)
 
-#define MU_FOR_EACH_1_KEEP_2_COUNTED_1(X, keep1, keep2, P1) \
-    X(1, keep1, keep2, P1)
 
-<#for(var i=2;i<=nMacroParameters;i++) {#>
-#define MU_FOR_EACH_1_KEEP_2_COUNTED_<#=i#>(X, keep1, keep2, <#for(var j=1;j<=i;j++){#>P<#=j.ToString()+((j<i)?", ":"")#><#}#>) \
-X(<#=i#>, keep1, keep2, P1) \
-MU_FOR_EACH_1_KEEP_2_COUNTED_<#=i-1#>(X, keep1, keep2, <#for(var j=2;j<=i;j++){#>P<#=j.ToString()+((j<i)?", ":"")#><#}#>)
+<#for(var i=nMacroParameters;i>=1;i--)#>
+<#{#>
+#define MU_FOR_EACH_1_KEEP_2_COUNTED_<#=i#>(X, KEEP1, KEEP2, <#for(var j=1;j<=i;j++){#>P<#=j.ToString()+((j<i)?", ":"")#><#}#>) \
+<#for(var j=i;j>=1;j--){#>X(<#=j#>, KEEP1, KEEP2, P<#=i-j+1#>) <#}#>
+
 
 <#}#>
+
+#define MU_FOR_EACH_1_KEEP_2_COUNTED_0(...)
+
+#define MU_FOR_EACH_1_KEEP_2_COUNTED(MACRO_TO_INVOKE, KEEP1, KEEP2, ...) MU_C2(MU_FOR_EACH_1_KEEP_2_COUNTED_, MU_COUNT_ARG(__VA_ARGS__)) ( MACRO_TO_INVOKE, KEEP1, KEEP2, __VA_ARGS__)
 
 #define MU_FOR_EACH_1_KEEP_1_COUNTED_0(...)
 
@@ -275,7 +277,7 @@ MU_FOR_EACH_2_REVERSE(X,a,b,c,d,e,f) => X(e,f) X(c,d) X (a, b) in this order */
 
 
 #define MU_FOR_EACH_1_KEEP_1_COUNTED(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_1_KEEP_1_COUNTED_, MU_C2(MU_DEC,MU_C1(MU_COUNT_ARG(__VA_ARGS__)))) ( MACRO_TO_INVOKE, __VA_ARGS__)
-#define MU_FOR_EACH_1_KEEP_2_COUNTED(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_1_KEEP_2_COUNTED_, MU_C2(MU_DEC,MU_C2(MU_DEC,MU_C1(MU_COUNT_ARG(__VA_ARGS__))))) ( MACRO_TO_INVOKE, __VA_ARGS__)
+
 
 #define MU_EXPAND_OR_MU_C1(...) __VA_ARGS__
 

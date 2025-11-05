@@ -847,9 +847,8 @@ for(var j=i;j>=2;j-=2){
             #line default
             #line hidden
             this.Write("\r\n#define MU_FOR_EACH_2_KEEP_1_1(...)\r\n\r\n#define MU_FOR_EACH_2_KEEP_1_0(...)\r\n\r\n#" +
-                    "define MU_FOR_EACH_2_KEEP_1(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_2_KEEP_1_, M" +
-                    "U_C2(MU_DEC,MU_C1(MU_COUNT_ARG(__VA_ARGS__)))) ( MACRO_TO_INVOKE, __VA_ARGS__)\r\n" +
-                    "\r\n\r\n");
+                    "define MU_FOR_EACH_2_KEEP_1(MACRO_TO_INVOKE, KEEP, ...) MU_C2(MU_FOR_EACH_2_KEEP" +
+                    "_1_, MU_COUNT_ARG(__VA_ARGS__)) ( MACRO_TO_INVOKE, KEEP, __VA_ARGS__)\r\n\r\n\r\n");
             
             #line 170 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=nMacroParameters;i>=4;i-=2)

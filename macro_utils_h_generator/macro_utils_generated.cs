@@ -1123,7 +1123,7 @@ for(var j=1;j<=i;j++){
             this.Write(") \\\r\n");
             
             #line 216 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
-for(var j=i;j>=2;j--){
+for(var j=i;j>=1;j--){
             
             #line default
             #line hidden
@@ -1137,7 +1137,7 @@ for(var j=i;j>=2;j--){
             this.Write(", P");
             
             #line 216 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(j));
+            this.Write(this.ToStringHelper.ToStringWithCulture(i-j+1));
             
             #line default
             #line hidden

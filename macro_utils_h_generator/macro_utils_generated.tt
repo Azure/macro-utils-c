@@ -213,7 +213,7 @@
 <#for(var i=nMacroParameters;i>=1;i--)#>
 <#{#>
 #define MU_FOR_EACH_1_COUNTED_<#=i#>(X, <#for(var j=1;j<=i;j++){#>P<#=j.ToString()+((j<i)?", ":"")#><#}#>) \
-<#for(var j=i;j>=2;j--){#>X(<#=j#>, P<#=j#>) <#}#>
+<#for(var j=i;j>=1;j--){#>X(<#=j#>, P<#=i-j+1#>) <#}#>
 
 
 <#}#>

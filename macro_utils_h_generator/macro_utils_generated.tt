@@ -181,17 +181,19 @@
 
 #define MU_FOR_EACH_2_KEEP_2(MACRO_TO_INVOKE, KEEP1, KEEP2, ...) MU_C2(MU_FOR_EACH_2_KEEP_2_, MU_COUNT_ARG(__VA_ARGS__)) ( MACRO_TO_INVOKE, KEEP1, KEEP2, __VA_ARGS__)
 
-#define MU_FOR_EACH_2_0(...)
 
-#define MU_FOR_EACH_2_2(X, P1, P2) \
-X(P1, P2)
-
-<#for(var i=4;i<=nMacroParameters;i+=2) {#>
+<#for(var i=nMacroParameters;i>=2;i-=2)#>
+<#{#>
 #define MU_FOR_EACH_2_<#=i#>(X, <#for(var j=1;j<=i;j++){#>P<#=j.ToString()+((j<i)?", ":"")#><#}#>) \
-X(P1, P2) \
-MU_FOR_EACH_2_<#=i-2#>(X, <#for(var j=3;j<=i;j++){#>P<#=j.ToString()+((j<i)?", ":"")#><#}#>)
+<#for(var j=i;j>=2;j-=2){#>X(P<#=i-j+1#>, P<#=i-j+2#>) <#}#>
+
 
 <#}#>
+
+#define MU_FOR_EACH_2_0(...)
+
+#define MU_FOR_EACH_2(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_2_, MU_COUNT_ARG(__VA_ARGS__)) ( MACRO_TO_INVOKE, __VA_ARGS__)
+
 
 #define MU_FOR_EACH_2_REVERSE_0(...)
 
@@ -264,7 +266,7 @@ This macro exists because we need a "stop condition" in outputting COMMA... when
 /*MU_FOR_EACH_2_REVERSE acts just like MU_FOR_EACH_2, but in reverse order. Example:
 MU_FOR_EACH_2_REVERSE(X,a,b,c,d,e,f) => X(e,f) X(c,d) X (a, b) in this order */
 
-#define MU_FOR_EACH_2(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_2_, MU_C1(MU_COUNT_ARG(__VA_ARGS__))) ( MACRO_TO_INVOKE, __VA_ARGS__)
+
 #define MU_FOR_EACH_2_COUNTED(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_2_COUNTED_, MU_C1(MU_COUNT_ARG(__VA_ARGS__))) ( MACRO_TO_INVOKE,  __VA_ARGS__)
 #define MU_FOR_EACH_1_COUNTED(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_1_COUNTED_, MU_C1(MU_COUNT_ARG(__VA_ARGS__))) ( MACRO_TO_INVOKE,  __VA_ARGS__)
 #define MU_FOR_EACH_2_REVERSE(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_2_REVERSE_, MU_C1(MU_COUNT_ARG(__VA_ARGS__))) ( MACRO_TO_INVOKE, __VA_ARGS__)

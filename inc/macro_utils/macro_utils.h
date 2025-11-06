@@ -4,6 +4,11 @@
 #ifndef MACRO_UTILS_H
 #define MACRO_UTILS_H
 
+#if defined(_MSC_VER) && (_MSC_VER < 1920 )
+/*according to https://docs.microsoft.com/en-us/cpp/preprocessor/predefined-macros?view=vs-2019 this is where VS 2019 starts (1920)*/
+#error "no longer supported compiler"
+#endif
+
 #include "macro_utils/macro_utils_generated.h"
 
 #ifdef __cplusplus
@@ -97,10 +102,6 @@ extern "C" {
 
 /*KB_VALUE is the counterpart of PRI_KB.*/
 #define KB_VALUE(x) KB_VALUE_INT(x), KB_FRACTIONAL_DOT(x), KB_FIRST_FRACTIONAL_DIGIT(x), KB_UNIT(x)
-
-#if defined(_MSC_VER) && (_MSC_VER<1920)
-#define MU_LPAREN (
-#endif
 
 #define MU_C2_(x,y) x##y
 #define MU_C2(x,y) MU_C2_(x,y)
@@ -302,7 +303,6 @@ typedef enum MU_ENUM_VALUE_CONTAINS_EQUAL_TAG
 #define MU_STRING_TO_ENUM(stringValue, enumName, addressOfEnumVariable) MU_C2(enumName, _FromString)(stringValue, addressOfEnumVariable)
 
 #define MU_EMPTY()
-#define MACRO_UTILS_DELAY(id) id MU_EMPTY MU_LPAREN )
 
 #define MU_DECLARE_ENUM_STRINGS(enumIdentifier, ...) extern const char* MU_C3(MU_, enumIdentifier,_ToString)(enumIdentifier enumerationConstant);
 
@@ -451,19 +451,11 @@ __pragma(warning(pop))
 /*MU_EXPAND actually concatenates with its argument: MU_EXPAND(x)=> MU_EXPAND_x. it so happens that there*/
 /*is a macro called MU_EXPAND_MU_NOEXPAND(...) that expands to __VA_ARGS__, thus stealing TRUE/FALSE branch from under MU_IF*/
 
-/*according to https://docs.microsoft.com/en-us/cpp/preprocessor/predefined-macros?view=vs-2019 this is where VS 2019 starts (1920)*/
-/*this is needed because there is NO /experimental:preprocessor or /Zc:preprocessor for VS 2017, it only exists for C++ compiler... apparently*/
-/*and there's an absolute need to compile with 2017 (read: vcredist 2019 not being available in the environment where the resulting compiled code is run)*/
-#if defined(_MSC_VER) && (_MSC_VER < 1920 )
-/*for anything < VS 2019*/
-#define MU_NOEXPAND(...) __VA_ARGS__
-#define MU_EXPAND(...) __VA_ARGS__
-#else
 #define MU_C2_MU_EXPAND_(x,y) x##y
 #define MU_C2_MU_EXPAND(x,y) MU_C2_MU_EXPAND_(x,y)
 #define MU_EXPAND_MU_NOEXPAND(...) __VA_ARGS__
 #define MU_EXPAND(x) MU_C2_MU_EXPAND(MU_EXPAND_,x)
-#endif
+
 
 
 #define MU_IS_VALUE_EQUAL_ONE_OF_VALUES(VALUE, ONE_OF_VALUES) +((VALUE)==(ONE_OF_VALUES))

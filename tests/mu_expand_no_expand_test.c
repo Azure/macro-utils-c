@@ -19,11 +19,10 @@
 /*MU_EXPAND, MU_NOEXPAND to the rescue!*/
 /*static int a[] = { MU_EXPAND(MU_IF(0, MU_NOEXPAND(TRUEB), MU_NOEXPAND(FALSEB))) };*/
 
-#if !defined(_MSC_VER) || (_MSC_VER >= 1920 )
 /*MU_EXPAND/MU_NOEXPAND pair*/
 static int a_TRUEBRANCH[] = { MU_EXPAND(MU_IF(1, MU_NOEXPAND(TRUEB), MU_NOEXPAND(FALSEB))) };
 static int a_FALSEBRANCH[] = { MU_EXPAND(MU_IF(0, MU_NOEXPAND(TRUEB), MU_NOEXPAND(FALSEB))) };
-#endif
+
 int run_mu_expand_no_expand_tests(void)
 {
     int a = MU_EXPAND(MU_NOEXPAND(1));
@@ -43,7 +42,6 @@ int run_mu_expand_no_expand_tests(void)
     #pragma GCC diagnostic pop
 #endif
 
-#if !defined(_MSC_VER) || (_MSC_VER >= 1920 )
     /*MU_EXPAND/MU_NOEXPAND pair*/
     POOR_MANS_ASSERT(sizeof(a_TRUEBRANCH) / sizeof(a_TRUEBRANCH[0]) == 3);
     POOR_MANS_ASSERT(a_TRUEBRANCH[0] == 1);
@@ -54,6 +52,6 @@ int run_mu_expand_no_expand_tests(void)
     POOR_MANS_ASSERT(a_FALSEBRANCH[0] == 4);
 
     POOR_MANS_ASSERT(MU_ISEMPTY(MU_EXPAND(MU_NOEXPAND()))==1);
-#endif
+
     return 0;
 }

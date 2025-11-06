@@ -4,6 +4,8 @@
 #ifndef MACRO_UTILS_H
 #define MACRO_UTILS_H
 
+
+
 #if defined(_MSC_VER) && (_MSC_VER < 1920 )
 /*according to https://docs.microsoft.com/en-us/cpp/preprocessor/predefined-macros?view=vs-2019 this is where VS 2019 starts (1920)*/
 #error "no longer supported compiler"
@@ -16,12 +18,14 @@
 #include <cstddef>
 #include <ctime>
 #include <cinttypes>
+#include <cassert>
 extern "C" {
 #else
 #include <string.h>
 #include <stddef.h>
 #include <time.h>
 #include <inttypes.h>
+#include <assert.h>
 #endif
 
 #if (defined OPTIMIZE_RETURN_CODES)
@@ -467,9 +471,12 @@ __pragma(warning(pop))
 
 #define MU_DIFFERENT(...) (MU_DO(MU_COUNT_ARG(__VA_ARGS__), MU_IS_NONE_OF_EXPRESSION_BUILDER, __VA_ARGS__)  (-1) ) /*-1 is the last ?: ternary third operator, and it is never an output of this macro*/
 
-#define MU_STATIC_ASSERT_EX(CONDITION, LINE) typedef int MU_UNUSED_VAR MU_C3(assertion_line_, LINE, _failed)[(CONDITION) ? 1 : -1];
+/*MU_STATIC_ASSERT(1==2) produces strings such as:
+1>D:\r\macro-utils-c\tests\define_struct_test.c(11,1): error C2338: static assertion failed: '1==2'
+*/
+#define MU_STATIC_ASSERT_EX(CONDITION) static_assert(CONDITION, MU_TOSTRING(CONDITION));
 
-#define MU_STATIC_ASSERT(CONDITION) MU_STATIC_ASSERT_EX(CONDITION, __LINE__)
+#define MU_STATIC_ASSERT(CONDITION) MU_STATIC_ASSERT_EX(CONDITION)
 
 #if defined _MSC_VER
 #define MU_FUNCDNAME __FUNCDNAME__

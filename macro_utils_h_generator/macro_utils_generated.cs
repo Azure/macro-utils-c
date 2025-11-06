@@ -1412,7 +1412,7 @@ MU_FOR_EACH_2_REVERSE(X,a,b,c,d,e,f) => X(e,f) X(c,d) X (a, b) in this order */
 ");
             
             #line 279 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
-for(var i=nArithmetic;i>=0;i--){
+for(var i=nMacroParameters;i>=0;i--){
             
             #line default
             #line hidden

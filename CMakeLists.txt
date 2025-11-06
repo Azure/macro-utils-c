@@ -66,7 +66,9 @@ install(FILES ${macro_utils_files_with_inc_prefix} DESTINATION "${CMAKE_INSTALL_
 
 if("${CMAKE_VERSION}" VERSION_GREATER 3.0.0)
 
-    add_library(macro_utils_c INTERFACE ${macro_utils_files_with_inc_prefix})
+    add_library(macro_utils_c OBJECT ${macro_utils_files_with_inc_prefix})
+    target_precompile_headers(macro_utils_c PRIVATE ${macro_utils_files_with_inc_prefix})
+
     target_include_directories(macro_utils_c
         INTERFACE
             $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/inc>

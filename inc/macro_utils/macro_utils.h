@@ -4,8 +4,6 @@
 #ifndef MACRO_UTILS_H
 #define MACRO_UTILS_H
 
-
-
 #if defined(_MSC_VER) && (_MSC_VER < 1920 )
 /*according to https://docs.microsoft.com/en-us/cpp/preprocessor/predefined-macros?view=vs-2019 this is where VS 2019 starts (1920)*/
 #error "no longer supported compiler"

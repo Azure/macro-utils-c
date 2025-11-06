@@ -70,7 +70,7 @@ install(FILES ${macro_utils_files_with_inc_prefix} DESTINATION "${CMAKE_INSTALL_
 
 if("${CMAKE_VERSION}" VERSION_GREATER 3.0.0)
 
-    add_library(macro_utils_c LIBRARY ${macro_utils_files_with_inc_prefix} ${macro_utils_c_files})
+    add_library(macro_utils_c STATIC  ${macro_utils_files_with_inc_prefix} ${macro_utils_c_files})
     target_precompile_headers(macro_utils_c PRIVATE ${macro_utils_files_with_inc_prefix})
 
     target_include_directories(macro_utils_c

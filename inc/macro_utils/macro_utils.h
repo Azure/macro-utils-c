@@ -6,7 +6,7 @@
 
 #if defined(_MSC_VER) && (_MSC_VER < 1920 )
 /*according to https://docs.microsoft.com/en-us/cpp/preprocessor/predefined-macros?view=vs-2019 this is where VS 2019 starts (1920)*/
-#error "no longer supported compiler"
+#error "no longer supported compiler. You are using some version of Visual Studio older than VS 2019. Please upgrade to VS 2019 or later."
 #endif
 
 #include "macro_utils/macro_utils_generated.h"

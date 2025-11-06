@@ -8,9 +8,11 @@
 #include "macro_utils/macro_utils.h"
 #include "static_assert_test.h"
 
+MU_STATIC_ASSERT(1 + 1 == 2);
+
 int run_static_assert_tests(void)
 {
-    MU_STATIC_ASSERT(1 + 1 == 2);
+
     MU_STATIC_ASSERT(sizeof(uint32_t) == sizeof(int32_t));
     MU_STATIC_ASSERT('a' == 'a');
 

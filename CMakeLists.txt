@@ -69,7 +69,7 @@ if("${CMAKE_VERSION}" VERSION_GREATER 3.0.0)
     add_library(macro_utils_c INTERFACE ${macro_utils_files_with_inc_prefix})
 
     target_include_directories(macro_utils_c
-        PUBLIC
+        INTERFACE
             $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/inc>
             $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
     )

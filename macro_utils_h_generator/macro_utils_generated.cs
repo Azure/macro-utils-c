@@ -1310,8 +1310,8 @@ for(var j=i;j>=1;j--){
             #line default
             #line hidden
             this.Write("\r\n#define MU_FOR_EACH_1_KEEP_1_COUNTED_0(...)\r\n\r\n#define MU_FOR_EACH_1_KEEP_1_COU" +
-                    "NTED(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_1_KEEP_1_COUNTED_, MU_C2(MU_DEC,MU_" +
-                    "C1(MU_COUNT_ARG(__VA_ARGS__)))) ( MACRO_TO_INVOKE, __VA_ARGS__)\r\n\r\n\r\n\r\n\r\n");
+                    "NTED(MACRO_TO_INVOKE, KEEP, ...) MU_C2(MU_FOR_EACH_1_KEEP_1_COUNTED_, MU_COUNT_A" +
+                    "RG(__VA_ARGS__)) ( MACRO_TO_INVOKE, KEEP, __VA_ARGS__)\r\n\r\n\r\n\r\n\r\n");
             
             #line 256 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=nMacroParameters;i>=2;i-=2)

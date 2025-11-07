@@ -13,7 +13,12 @@
 int run_mu_count_1_or_more_arg_tests(void)
 {
     POOR_MANS_ASSERT(MU_COUNT_1_OR_MORE_ARG(X) == 1);
+
     POOR_MANS_ASSERT(MU_COUNT_1_OR_MORE_ARG(X, Y) == 2);
+    POOR_MANS_ASSERT(MU_COUNT_1_OR_MORE_ARG(X, ) == 2);
+    POOR_MANS_ASSERT(MU_COUNT_1_OR_MORE_ARG(, Y) == 2);
+    POOR_MANS_ASSERT(MU_COUNT_1_OR_MORE_ARG(, ) == 2); /*note: clang-cl (aka Visual Studio with Clang toolset) fails this test without -fno-ms-compatibility flag*/
+
     POOR_MANS_ASSERT(MU_COUNT_1_OR_MORE_ARG("1", 2, '3') == 3);
     POOR_MANS_ASSERT(MU_COUNT_1_OR_MORE_ARG("1", 2, '3') == 3);
 

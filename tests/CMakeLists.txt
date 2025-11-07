@@ -22,7 +22,6 @@ set(macro_utils_int_tests_c_files
     mu_different_test.c
     mu_eat_empty_args_test.c
     mu_is_empty_test.c
-    mu_has_comma_test.c
     mu_pri_bool_test.c
     mu_pri_enum_test.c
     mu_pri_time_t_test.c
@@ -51,7 +50,6 @@ set(macro_utils_int_tests_h_files
     mu_different_test.h
     mu_eat_empty_args_test.h
     mu_is_empty_test.h
-    mu_has_comma_test.h
     mu_pri_bool_test.h
     mu_pri_enum_test.h
     mu_pri_time_t_test.h

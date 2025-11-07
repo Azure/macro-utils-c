@@ -80,7 +80,6 @@ int run_mu_different_tests(void)
         (MU_DIFFERENT(0.5, 0) != 0.5) &&
         (MU_DIFFERENT(0.5, 0) != 0)
     );
-    
 
     /*Is MU_DIFFERENT a constant-expression? (arrays in C con only have constant-expression sizes... until Microsoft will implement int a[b]*/
 
@@ -95,7 +94,7 @@ int run_mu_different_tests(void)
     (void)a2;
 
     /*works with variables too, but evaluated at runtime, obviously*/
-    int a = 2; 
+    int a = 2;
     int b = 22;
     POOR_MANS_ASSERT(
         (MU_DIFFERENT(a, b) != a) &&

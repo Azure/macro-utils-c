@@ -31,7 +31,6 @@ int run_mu_count_arg_tests(void)
     POOR_MANS_ASSERT(MU_COUNT_ARG(A(), B) == 2);
     POOR_MANS_ASSERT(MU_COUNT_ARG(A, ()B) == 2);
     POOR_MANS_ASSERT(MU_COUNT_ARG(A, B()) == 2);
-    
 
     return 0;
 }

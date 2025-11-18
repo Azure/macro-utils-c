@@ -4,7 +4,6 @@
 #include <stdio.h>
 
 #ifdef USE_VLD
-#include "vld.h"
 #endif
 
 #include "test_helper.h"

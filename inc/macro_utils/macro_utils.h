@@ -125,10 +125,6 @@ extern "C" {
 
 #define MU_C5(x,y,z,u, v) MU_C2(MU_C4(x,y, z, u), v)
 
-#define MU_C1_(x) x
-
-#define MU_C1(x) MU_C1_(x)
-
 #define MU_C2STRING(x,y) x y
 
 #define MU_C3STRING(x,y,z) x y z

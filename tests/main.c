@@ -3,9 +3,6 @@
 
 #include <stdio.h>
 
-#ifdef USE_VLD
-#endif
-
 #include "test_helper.h"
 
 #include "define_struct_test.h"

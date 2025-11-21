@@ -73,9 +73,9 @@ const char* status_str = MU_ENUM_TO_STRING(STATUS, SUCCESS);
 - **Self-contained testing**: No external test framework dependencies - all assertions are custom-built for macro validation
 
 ## External Dependencies
-For build/test/pipeline conventions, refer to `deps/c-build-tools/.github/copilot-instructions.md`. This project inherits all build infrastructure from c-build-tools.
+For build/test/pipeline conventions, refer to #file:../deps/c-build-tools/.github/copilot-instructions.md. This project inherits all build infrastructure from c-build-tools.
 
-**IMPORTANT**: All code changes must follow the comprehensive coding standards defined in `deps/c-build-tools/.github/general_coding_instructions.md`, including:
+**IMPORTANT**: All code changes must follow the comprehensive coding standards defined in #file:../deps/c-build-tools/.github/general_coding_instructions.md, including:
 - Function naming conventions (snake_case, module prefixes, internal function patterns)
 - Parameter validation rules and error handling patterns  
 - Variable naming and result variable conventions

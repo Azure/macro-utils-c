@@ -1,16 +1,20 @@
-# Default behavior: if Git thinks a file is text (as opposed to binary), it
-# will normalize line endings to LF in the repository, but convert to your
-# platform's native line endings on checkout (e.g., CRLF for Windows).
+# Set the default behavior, in case people don't have core.autocrlf set.
 * text=auto
 
-# Explicitly declare text files you want to always be normalized and converted
-# to native line endings on checkout. E.g.,
-#*.c text
+# default for crlf for all source, text, md, and yml
+*.c text eol=crlf
+*.h text eol=crlf
+*.cs text eol=crlf
+*.txt text eol=crlf
+*.md text eol=crlf
+*.yml text eol=crlf
 
-# Declare files that will always have CRLF line endings on checkout. E.g.,
-#*.sln text eol=crlf
+# crlf for windows scripts
+*.ps1 text eol=crlf
+*.cmd text eol=crlf
+*.bat text eol=crlf
 
-# Declare files that will always have LF line endings on checkout. E.g.,
+# crlf will mess up back scripts, so default these to lf
 *.sh text eol=lf
 
 # Denote all files that should not have line endings normalized, should not be

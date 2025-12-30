@@ -3,15 +3,14 @@
 
 #include "test_helper.h"
 
+#define MU_ARRAY_MAX_COUNT 5 /*can be overridden before including macro_utils.h*/
 #include "macro_utils/macro_utils.h"
 
 #include "mu_array_test.h"
 
 MU_STATIC_ASSERT(MU_ARRAY_MAX_COUNT >= 3); /*this test needs at least 3 elements printing capability*/
 
-
-#define INVENT_NAME(index, ... ) MU_TOSTRING(index) "escu" , /*this results in "zeroescu", "unuescu", "doiescu" etc... Joking: 2escu, 1escu, 0escu*/
-
+#define INVENT_NAME(index, ... ) MU_TOSTRING(index) "escu" , /*this results in "zeroescu", "unuescu", "doiescu" etc... Joking: 0escu, 1escu, 2escu*/
 
 static const char* names_1[] = { "Ionescu" };
 static const char* names_2[] = { "Popescu", "Ionescu" };
@@ -111,6 +110,51 @@ int run_mu_array_tests(void)
     result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY_ELEMENT("s") "", ARRAY_ELEMENT_VALUE(names_more_than_MU_ARRAY_MAX_COUNT, array_size, MU_ARRAY_MAX_COUNT+1));
     POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
     POOR_MANS_ASSERT(strcmp(temp, "") == 0);
+
+    /*tests for PRI_ARRAY/ARRAY_VALUES*/
+
+    /*array of size 0*/
+    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY("s") "", ARRAY_VALUES(names_1, 0)); /*array size is harcoded 0*/
+    POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
+    POOR_MANS_ASSERT(strcmp(temp, "{  }") == 0);
+
+    /*array of size 0*/
+    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY("s") "", ARRAY_VALUES(names_1, sizeof(names_1) / sizeof(names_1[0])));
+    POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
+    POOR_MANS_ASSERT(strcmp(temp, "{ [0]=Ionescu }") == 0);
+
+    /*array of size 2*/
+    /*printing all the array*/
+    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY("s") "", ARRAY_VALUES(names_2, sizeof(names_2) / sizeof(names_2[0])));
+    POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
+    POOR_MANS_ASSERT(strcmp(temp, "{ [0]=Popescu, [1]=Ionescu }") == 0);
+
+    /*printing just the first name*/
+    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY("s") "", ARRAY_VALUES(names_2, 1));
+    POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
+    POOR_MANS_ASSERT(strcmp(temp, "{ [0]=Popescu }") == 0);
+
+    /*array of size 3*/
+    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY("s") "", ARRAY_VALUES(names_3, sizeof(names_3) / sizeof(names_3[0])));
+    POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
+    POOR_MANS_ASSERT(strcmp(temp, "{ [0]=Georgescu, [1]=Popescu, [2]=Ionescu }") == 0);
+
+    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY("s") "", ARRAY_VALUES(names_more_than_MU_ARRAY_MAX_COUNT, sizeof(names_more_than_MU_ARRAY_MAX_COUNT) / sizeof(names_more_than_MU_ARRAY_MAX_COUNT[0])));
+    POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
+
+    char expected_result[1000] = "{ ";
+    for (int i = 0; i < MU_ARRAY_MAX_COUNT; i++)
+    {
+        if (i > 0)
+        {
+            (void)strcat(expected_result, ", ");
+        }
+        char compound[20];
+        (void)snprintf(compound, sizeof(compound), "[%d]=%descu", i, i);
+        (void)strcat(expected_result, compound);
+    }
+    (void)strcat(expected_result, ", ... }");
+    POOR_MANS_ASSERT(strcmp(temp, expected_result) == 0);
 
     return 0;
 }

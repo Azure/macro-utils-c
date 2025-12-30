@@ -516,14 +516,19 @@ array_size > 0 and array_size <= MU_ARRAY_MAX_COUNT =>
     output is { [0]=<value of element 0>, [1]=<value of element 1>, ..., [MU_ARRAY_MAX_COUNT-1]=<value of element MU_ARRAY_MAX_COUNT-1>, ... }
     */
 
+
+/*MU_ARRAY_MAX_COUNT can be #define'd before the inclusion of macro_utils.h to have more/less parameters printed*/
+#ifndef MU_ARRAY_MAX_COUNT
 #define MU_ARRAY_MAX_COUNT 100 /*we print a maximum of MU_ARRAY_MAX_COUNT items explicitly. */
+#endif
+
 MU_STATIC_ASSERT(MU_ARRAY_MAX_COUNT >= 1);
 
 #define MU_ARRAY_INDEX_AS_STRING_BUILDER(index, ...) \
     MU_IF(index, ", [", "[") MU_TOSTRING(index) "]=" ,
 
-/*particularly evil method of "don't use a C file"... to store strings*/
-#define MU_ARRAY_INDEX_AS_STRING(index) ((const char*[]){MU_DO_ASC(MU_DEC(MU_ARRAY_MAX_COUNT), MU_ARRAY_INDEX_AS_STRING_BUILDER) })[index]
+/*particularly evil method of "don't use a C file"... to store strings. Using compound literal.*/
+#define MU_ARRAY_INDEX_AS_STRING(index) ((const char*[]){MU_DO(MU_DEC(MU_ARRAY_MAX_COUNT), MU_ARRAY_INDEX_AS_STRING_BUILDER) })[MU_DEC(MU_ARRAY_MAX_COUNT) - index]
 
 #define PRI_ARRAY_ELEMENT(PRI_ELEMENT) "s%s%" PRI_ELEMENT ""
 
@@ -536,6 +541,20 @@ MU_STATIC_ASSERT(MU_ARRAY_MAX_COUNT >= 1);
     (array_index >= array_size) ? "" : \
         (array_index < MU_ARRAY_MAX_COUNT) ? (array)[array_index] : "" \
     MU_UNSUPPRESS_WARNING(4189)
+
+#define MU_DO_MAKE_ARRAY_ELEMENT(count, PRI_ELEMENT) \
+    "%" PRI_ARRAY_ELEMENT(PRI_ELEMENT)
+#define PRI_ARRAY(PRI_ELEMENT) \
+   "s{ " MU_DO_ASC(MU_ARRAY_MAX_COUNT, MU_DO_MAKE_ARRAY_ELEMENT, PRI_ELEMENT ) " }"
+
+
+#define MAKE_ARRAY_ELEMENT_VALUE(index, array, array_size) \
+    MU_IFCOMMALOGIC(index) ARRAY_ELEMENT_VALUE(array, array_size, index)
+
+#define ARRAY_VALUES(array, array_size) \
+    "", \
+    MU_DO_ASC(MU_ARRAY_MAX_COUNT, MAKE_ARRAY_ELEMENT_VALUE, array, array_size)
+
 
 #ifdef __cplusplus
 }

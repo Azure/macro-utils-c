@@ -31,6 +31,7 @@ set(macro_utils_int_tests_c_files
     mu_tostring_test.c
     static_assert_test.c
     pri_kb_test.c
+    mu_array_test.c
 )
 
 set(macro_utils_int_tests_h_files
@@ -59,6 +60,7 @@ set(macro_utils_int_tests_h_files
     mu_tostring_test.h
     static_assert_test.h
     pri_kb_test.h
+    mu_array_test.h
 
     test_helper.h
 )

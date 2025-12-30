@@ -478,6 +478,64 @@ __pragma(warning(pop))
 #define MU_FUNCDNAME __func__
 #endif
 
+/*the following section of this file helps with a PRI_... macro for arrays.*/
+/*general specs:
+- the array's content should be printed as a C11's designated initializer. For example, this can be used to initialize an array of strings like this: const char* names[]  = { [0]="Frank", [1]="Grace", [2]="Heidi", [3]="Ivan" }
+- the output should contain the opening { and the closing } of the designated initializer
+- if array is empty (0 elements) then the output should be just
+    { }
+- if the array has N>0 elements, then the output should be:
+    { [0]=<value of element 0>, [1]=<value of element 1>, ..., [N-1]=<value of element N-1> }
+- if the array has more elements than the configured printing limit, then the output should be (note the ... at the end):
+    { [0]=<value of element 0>, [1]=<value of element 1>, ..., [LIMIT-1]=<value of element LIMIT-1>, ... }
+- the format specifier is called PRI_ARRAY(PRI_ELEMENT). PRI_ELEMENT should be a valid printf format specifier for a single element of the array.
+- the argument passed to printf-like function is called ARRAY_VALUE(array_variable, array_size).
+
+Implementation ideas:
+- since the printf formatiing specifier needs to be a const char* then PRI_ARRAY shall build a string at preprocessing time that contains the format specifier.
+  This formatting specifier will contain the opening {, then for each element it will contain [i]=PRI_ELEMENT, separated by commas, and finally the closing }.
+  The number of such [i]=PRI_ELEMENT will be limited to the configured printing limit (MU_ARRAY_PRINTING_LIMIT).
+  Depending on the chosen MU_ARRAY_PRINTING_LIMIT the amount of individual formatting specifiers can get rather large...
+- each element is printed using the following formatting specifier: {,}[i]=%PRI_ELEMENT where the leading comma is present only if i>0. That is, the first index does not have a leading comma.
+*/
+
+/*following three quantities are relevant:
+1. MU_ARRAY_MAX_COUNT (that is the precompile max number of elements printed explicitly)
+2. array_size (this is the "at runtime" size of the array)
+3. array_index a quantity that is always less than array_size and is used to index into the array.
+*/
+
+/*
+array_size == 0  => output is { }
+array_size > 0 and array_size <= MU_ARRAY_MAX_COUNT =>
+    output is { [0]=<value of element 0>, [1]=<value of element 1>, ..., [array_size-1]=<value of element array_size-1> }
+    array_size > MU_ARRAY_MAX_COUNT =>
+    output is { [0]=<value of element 0>, [1]=<value of element 1>, ..., [MU_ARRAY_MAX_COUNT-1]=<value of element MU_ARRAY_MAX_COUNT-1>, ... }
+    */
+
+
+
+#define MU_ARRAY_MAX_COUNT 3 /*we print a maximum of MU_ARRAY_MAX_COUNT items explicitly. */
+MU_STATIC_ASSERT(MU_ARRAY_MAX_COUNT >= 1);
+
+
+
+#define MU_ARRAY_INDEX_AS_STRING_BUILDER(index, ...) \
+    MU_IF(index, ", [", "[") MU_TOSTRING(index) "]=" ,
+
+/*particularly evil method of "don't use a C file"... to store strings*/
+#define MU_ARRAY_INDEX_AS_STRING(index) ((const char*[]){MU_DO(MU_DEC(MU_ARRAY_MAX_COUNT), MU_ARRAY_INDEX_AS_STRING_BUILDER) })[MU_ARRAY_MAX_COUNT - 1 - index]
+
+#define PRI_ARRAY_ELEMENT(PRI_ELEMENT) "s%s%" PRI_ELEMENT ""
+
+#define ARRAY_ELEMENT_VALUE(array, array_size, array_index) \
+"", \
+(array_index >= array_size) ? "" : \
+    (array_index < MU_ARRAY_MAX_COUNT) ? MU_ARRAY_INDEX_AS_STRING(array_index) : \
+        (array_index == MU_ARRAY_MAX_COUNT) ? ", ..." : "", \
+(array_index >= array_size) ? "" : \
+    (array_index < MU_ARRAY_MAX_COUNT) ? (array)[array_index] : ""
+
 
 #ifdef __cplusplus
 }

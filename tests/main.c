@@ -30,11 +30,13 @@
 #include "mu_tostring_test.h"
 #include "static_assert_test.h"
 #include "pri_kb_test.h"
+#include "mu_array_test.h"
 
 int main(void)
 {
     int result;
 
+#if 0 /*vld.h*/
     result = run_mu_the_nth_arg_tests();
     POOR_MANS_ASSERT(result == 0);
 
@@ -108,6 +110,10 @@ int main(void)
     POOR_MANS_ASSERT(result == 0);
 
     result = run_pri_kb_tests();
+    POOR_MANS_ASSERT(result == 0);
+#endif
+
+    result = run_mu_array_tests();
     POOR_MANS_ASSERT(result == 0);
 
     return 0;

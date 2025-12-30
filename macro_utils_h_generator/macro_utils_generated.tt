@@ -276,6 +276,9 @@ MU_FOR_EACH_2_REVERSE(X,a,b,c,d,e,f) => X(e,f) X(c,d) X (a, b) in this order */
 
 #define MU_FOR_EACH_2_COUNTED(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_2_COUNTED_, MU_COUNT_ARG(__VA_ARGS__)) ( MACRO_TO_INVOKE,  __VA_ARGS__)
 
+
+/*MU_DO and MU_DO_ASC macros serve the same purpose: call MACRO with an index from 0 to MAX_RANGE_ARG (MU_DO_ASC) or from MAX_RANGE_ARG to 0 (MU_DO).*/
+
 <#for(var i=nMacroParameters;i>=0;i--){#>
 #define MU_DO_<#=i#>(MACRO, ...) \
 <#for(var j=i;j>=0;j--){#>MACRO(<#=j#>, __VA_ARGS__) <#}#>
@@ -283,6 +286,15 @@ MU_FOR_EACH_2_REVERSE(X,a,b,c,d,e,f) => X(e,f) X(c,d) X (a, b) in this order */
 
 <#}#>
 
-#define MU_DO(TIMES, MACRO, ...) MU_C2(MU_DO_, TIMES)(MACRO, __VA_ARGS__)
+#define MU_DO(MAX_RANGE_ARG, MACRO, ...) MU_C2(MU_DO_, MAX_RANGE_ARG)(MACRO, __VA_ARGS__)
+
+<#for(var i=nMacroParameters;i>=0;i--){#>
+#define MU_DO_ASC_<#=i#>(MACRO, ...) \
+<#for(var j=0;j<=i;j++){#>MACRO(<#=j#>, __VA_ARGS__) <#}#>
+
+
+<#}#>
+
+#define MU_DO_ASC(MAX_RANGE_ARG, MACRO, ...) MU_C2(MU_DO_ASC_, MAX_RANGE_ARG)(MACRO, __VA_ARGS__)
 
 #endif /*MACRO_UTILS_GENERATED_H*/

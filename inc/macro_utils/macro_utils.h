@@ -9,21 +9,24 @@
 #error "no longer supported compiler. You are using some version of Visual Studio older than VS 2019. Please upgrade to VS 2019 or later."
 #endif
 
-#include "macro_utils/macro_utils_generated.h"
-
 #ifdef __cplusplus
 #include <cstring>
 #include <cstddef>
 #include <ctime>
 #include <cinttypes>
 #include <cassert>
-extern "C" {
 #else
 #include <string.h>
 #include <stddef.h>
 #include <time.h>
 #include <inttypes.h>
 #include <assert.h>
+#endif
+
+#include "macro_utils/macro_utils_generated.h"
+
+#ifdef __cplusplus
+extern "C" {
 #endif
 
 #if (defined OPTIMIZE_RETURN_CODES)
@@ -513,29 +516,26 @@ array_size > 0 and array_size <= MU_ARRAY_MAX_COUNT =>
     output is { [0]=<value of element 0>, [1]=<value of element 1>, ..., [MU_ARRAY_MAX_COUNT-1]=<value of element MU_ARRAY_MAX_COUNT-1>, ... }
     */
 
-
-
-#define MU_ARRAY_MAX_COUNT 3 /*we print a maximum of MU_ARRAY_MAX_COUNT items explicitly. */
+#define MU_ARRAY_MAX_COUNT 100 /*we print a maximum of MU_ARRAY_MAX_COUNT items explicitly. */
 MU_STATIC_ASSERT(MU_ARRAY_MAX_COUNT >= 1);
-
-
 
 #define MU_ARRAY_INDEX_AS_STRING_BUILDER(index, ...) \
     MU_IF(index, ", [", "[") MU_TOSTRING(index) "]=" ,
 
 /*particularly evil method of "don't use a C file"... to store strings*/
-#define MU_ARRAY_INDEX_AS_STRING(index) ((const char*[]){MU_DO(MU_DEC(MU_ARRAY_MAX_COUNT), MU_ARRAY_INDEX_AS_STRING_BUILDER) })[MU_ARRAY_MAX_COUNT - 1 - index]
+#define MU_ARRAY_INDEX_AS_STRING(index) ((const char*[]){MU_DO_ASC(MU_DEC(MU_ARRAY_MAX_COUNT), MU_ARRAY_INDEX_AS_STRING_BUILDER) })[index]
 
 #define PRI_ARRAY_ELEMENT(PRI_ELEMENT) "s%s%" PRI_ELEMENT ""
 
 #define ARRAY_ELEMENT_VALUE(array, array_size, array_index) \
-"", \
-(array_index >= array_size) ? "" : \
-    (array_index < MU_ARRAY_MAX_COUNT) ? MU_ARRAY_INDEX_AS_STRING(array_index) : \
-        (array_index == MU_ARRAY_MAX_COUNT) ? ", ..." : "", \
-(array_index >= array_size) ? "" : \
-    (array_index < MU_ARRAY_MAX_COUNT) ? (array)[array_index] : ""
-
+    "", \
+    MU_SUPPRESS_WARNING(4189) /*warning C4189: '$S1': local variable is initialized but not referenced*/ /*This happens because the compiler would like in certain cases to optimize away MU_ARRAY_INDEX_AS_STRING completely*/ \
+    (array_index >= array_size) ? "" : \
+        (array_index < MU_ARRAY_MAX_COUNT) ? MU_ARRAY_INDEX_AS_STRING(array_index) : \
+            (array_index == MU_ARRAY_MAX_COUNT) ? ", ..." : "", \
+    (array_index >= array_size) ? "" : \
+        (array_index < MU_ARRAY_MAX_COUNT) ? (array)[array_index] : "" \
+    MU_UNSUPPRESS_WARNING(4189)
 
 #ifdef __cplusplus
 }

@@ -1409,50 +1409,96 @@ MU_FOR_EACH_2_REVERSE(X,a,b,c,d,e,f) => X(e,f) X(c,d) X (a, b) in this order */
 
 #define MU_FOR_EACH_2_COUNTED(MACRO_TO_INVOKE, ...) MU_C2(MU_FOR_EACH_2_COUNTED_, MU_COUNT_ARG(__VA_ARGS__)) ( MACRO_TO_INVOKE,  __VA_ARGS__)
 
+
+/*MU_DO and MU_DO_ASC macros serve the same purpose: call MACRO with an index from 0 to MAX_RANGE_ARG (MU_DO_ASC) or from MAX_RANGE_ARG to 0 (MU_DO).*/
+
 ");
             
-            #line 279 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 282 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var i=nMacroParameters;i>=0;i--){
             
             #line default
             #line hidden
             this.Write("#define MU_DO_");
             
-            #line 280 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 283 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i));
             
             #line default
             #line hidden
             this.Write("(MACRO, ...) \\\r\n");
             
-            #line 281 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 284 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 for(var j=i;j>=0;j--){
             
             #line default
             #line hidden
             this.Write("MACRO(");
             
-            #line 281 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 284 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(j));
             
             #line default
             #line hidden
             this.Write(", __VA_ARGS__) ");
             
-            #line 281 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 284 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
             this.Write("\r\n\r\n");
             
-            #line 284 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            #line 287 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
 }
             
             #line default
             #line hidden
-            this.Write("\r\n#define MU_DO(TIMES, MACRO, ...) MU_C2(MU_DO_, TIMES)(MACRO, __VA_ARGS__)\r\n\r\n#e" +
-                    "ndif /*MACRO_UTILS_GENERATED_H*/\r\n");
+            this.Write("\r\n#define MU_DO(MAX_RANGE_ARG, MACRO, ...) MU_C2(MU_DO_, MAX_RANGE_ARG)(MACRO, __" +
+                    "VA_ARGS__)\r\n\r\n");
+            
+            #line 291 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+for(var i=nMacroParameters;i>=0;i--){
+            
+            #line default
+            #line hidden
+            this.Write("#define MU_DO_ASC_");
+            
+            #line 292 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(i));
+            
+            #line default
+            #line hidden
+            this.Write("(MACRO, ...) \\\r\n");
+            
+            #line 293 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+for(var j=0;j<=i;j++){
+            
+            #line default
+            #line hidden
+            this.Write("MACRO(");
+            
+            #line 293 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(j));
+            
+            #line default
+            #line hidden
+            this.Write(", __VA_ARGS__) ");
+            
+            #line 293 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+}
+            
+            #line default
+            #line hidden
+            this.Write("\r\n\r\n");
+            
+            #line 296 "D:\r\macro-utils-c\macro_utils_h_generator\macro_utils_generated.tt"
+}
+            
+            #line default
+            #line hidden
+            this.Write("\r\n#define MU_DO_ASC(MAX_RANGE_ARG, MACRO, ...) MU_C2(MU_DO_ASC_, MAX_RANGE_ARG)(M" +
+                    "ACRO, __VA_ARGS__)\r\n\r\n#endif /*MACRO_UTILS_GENERATED_H*/\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }

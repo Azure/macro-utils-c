@@ -7,21 +7,33 @@
 
 #include "mu_array_test.h"
 
+MU_STATIC_ASSERT(MU_ARRAY_MAX_COUNT >= 3); /*this test needs at least 3 elements printing capability*/
+
+
 #define INVENT_NAME(index, ... ) MU_TOSTRING(index) "escu" , /*this results in "zeroescu", "unuescu", "doiescu" etc... Joking: 2escu, 1escu, 0escu*/
+
 
 static const char* names_1[] = { "Ionescu" };
 static const char* names_2[] = { "Popescu", "Ionescu" };
 static const char* names_3[] = { "Georgescu", "Popescu", "Ionescu" };
-static const char* names_more_than_MU_ARRAY_INDEX_AS_STRING_MAX[] = { MU_DO(MU_DEC(MU_ARRAY_MAX_COUNT), INVENT_NAME) "Ixulescu"}; /*Ixulescu exceeds the printing limit for ARRAY_ELEMENT_VALUE*/
-
-#pragma warning(disable: 4189)
+static const char* names_more_than_MU_ARRAY_MAX_COUNT[] = { MU_DO_ASC(MU_DEC(MU_ARRAY_MAX_COUNT), INVENT_NAME) "Ixulescu", "Igreculescu"}; /*Ixulescu, Igreculescu exceeds the printing limit for ARRAY_ELEMENT_VALUE*/
 
 int run_mu_array_tests(void)
 {
     char temp[1000]; /*sufficient to hold all the names representations*/
-    int result = (int)(intptr_t)(void*)&names_more_than_MU_ARRAY_INDEX_AS_STRING_MAX;
+    int result;
 
     /*checking that PRI_ARRAY_ELEMENT and ARRAY_ELEMENT_VALUE work for a very regular element(s)*/
+
+    /*array of 0 element*/
+    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY_ELEMENT("s") "", ARRAY_ELEMENT_VALUE(names_1, 0 /*hard coded array size of 0*/, 0));
+    POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
+    POOR_MANS_ASSERT(strcmp(temp, "") == 0);
+
+    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY_ELEMENT("s") "", ARRAY_ELEMENT_VALUE(names_1, 0 /*hard coded array size of 0*/, 1));
+    POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
+    POOR_MANS_ASSERT(strcmp(temp, "") == 0);
+
     /*array of 1 element*/
     result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY_ELEMENT("s") "", ARRAY_ELEMENT_VALUE(names_1, sizeof(names_1)/sizeof(names_1[0]), 0));
     POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
@@ -76,27 +88,27 @@ int run_mu_array_tests(void)
 
     /*when the [i]= part is not available (because MU_ARRAY_INDEX_AS_STRING is not build that much), this should expand to "..." to explain that some printing limit was exceeded*/
 
-    /*array of 4 elements... which exceeds #define MU_ARRAY_MAX_COUNT 3*/
-    int array_size = sizeof(names_more_than_MU_ARRAY_INDEX_AS_STRING_MAX) / sizeof(names_more_than_MU_ARRAY_INDEX_AS_STRING_MAX[0]);
-    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY_ELEMENT("s") "", ARRAY_ELEMENT_VALUE(names_more_than_MU_ARRAY_INDEX_AS_STRING_MAX, array_size, 0));
+    /*array of MU_ARRAY_MAX_COUNT+2 elements... which exceeds #define MU_ARRAY_MAX_COUNT*/
+    int array_size = sizeof(names_more_than_MU_ARRAY_MAX_COUNT) / sizeof(names_more_than_MU_ARRAY_MAX_COUNT[0]);
+    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY_ELEMENT("s") "", ARRAY_ELEMENT_VALUE(names_more_than_MU_ARRAY_MAX_COUNT, array_size, 0));
     POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
-    POOR_MANS_ASSERT(strcmp(temp, "[0]=2escu") == 0);
+    POOR_MANS_ASSERT(strcmp(temp, "[0]=0escu") == 0);
 
-    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY_ELEMENT("s") "", ARRAY_ELEMENT_VALUE(names_more_than_MU_ARRAY_INDEX_AS_STRING_MAX, array_size, 1));
+    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY_ELEMENT("s") "", ARRAY_ELEMENT_VALUE(names_more_than_MU_ARRAY_MAX_COUNT, array_size, 1));
     POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
     POOR_MANS_ASSERT(strcmp(temp, ", [1]=1escu") == 0);
 
-    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY_ELEMENT("s") "", ARRAY_ELEMENT_VALUE(names_more_than_MU_ARRAY_INDEX_AS_STRING_MAX, array_size, 2));
+    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY_ELEMENT("s") "", ARRAY_ELEMENT_VALUE(names_more_than_MU_ARRAY_MAX_COUNT, array_size, 2));
     POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
-    POOR_MANS_ASSERT(strcmp(temp, ", [2]=0escu") == 0);
+    POOR_MANS_ASSERT(strcmp(temp, ", [2]=2escu") == 0);
 
-    /*the third index here cannot be printed because we don't have the "[3]=" string, so ", ..." is used instead*/
-    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY_ELEMENT("s") "", ARRAY_ELEMENT_VALUE(names_more_than_MU_ARRAY_INDEX_AS_STRING_MAX, array_size, 3));
+    /*the MU_ARRAY_MAX_COUNT index here cannot be printed because we don't have the "[3]=" string, so ", ..." is used instead*/
+    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY_ELEMENT("s") "", ARRAY_ELEMENT_VALUE(names_more_than_MU_ARRAY_MAX_COUNT, array_size, MU_ARRAY_MAX_COUNT));
     POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
     POOR_MANS_ASSERT(strcmp(temp, ", ...") == 0);
 
     /*the 4th index cannot be printed because it is past the configured size (3)*/
-    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY_ELEMENT("s") "", ARRAY_ELEMENT_VALUE(names_more_than_MU_ARRAY_INDEX_AS_STRING_MAX, array_size, 4));
+    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY_ELEMENT("s") "", ARRAY_ELEMENT_VALUE(names_more_than_MU_ARRAY_MAX_COUNT, array_size, MU_ARRAY_MAX_COUNT+1));
     POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
     POOR_MANS_ASSERT(strcmp(temp, "") == 0);
 

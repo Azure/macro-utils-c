@@ -3,5 +3,5 @@
 
 #include "macro_utils/macro_utils.h"
 
-MU_PRINT_ARRAY_FUNCTION_DEFINE(char_ptr_t, "s");
-MU_PRINT_ARRAY_FUNCTION_DEFINE(wchar_ptr_t, "ls");
+MU_PRINT_ARRAY_FUNCTION_DEFINE(char_ptr_t, "s", MU_P_OR_NULL);
+MU_PRINT_ARRAY_FUNCTION_DEFINE(wchar_ptr_t, "ls", MU_WP_OR_NULL);

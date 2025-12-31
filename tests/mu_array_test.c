@@ -182,7 +182,9 @@ static int run_mu_array_ARRAY_OF_ARRAY_OF_STRINGS_tests(void)
     char temp[2000]; /*sufficient*/
     int result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY_OF_ARRAY_OF_STRINGS "", ARRAY_OF_ARRAY_OF_STRINGS_VALUE(array_of_arrays));
     POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
-
+    POOR_MANS_ASSERT(strcmp(
+        "{ .n=3, .arrays={ [0]={ .n=1, .strings={ [0]=Single } }, [1]={ .n=2, .strings={ [0]=Husband, [1]=Wife } }, [2]={ .n=3, .strings={ [0]=Father, [1]=Mother, [2]=Child } } } }",
+        temp) == 0);
     return 0;
 }
 

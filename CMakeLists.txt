@@ -73,11 +73,9 @@ if("${CMAKE_VERSION}" VERSION_GREATER 3.0.0)
     add_library(macro_utils_c ${macro_utils_files_with_inc_prefix} ${macro_utils_c_files})
 
     target_include_directories(macro_utils_c
-        INTERFACE
+        PUBLIC
             $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/inc>
             $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
-        PUBLIC
-            ${PROJECT_SOURCE_DIR}/inc
     )
 
     install(TARGETS macro_utils_c EXPORT macro_utils_cTargets

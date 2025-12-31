@@ -557,7 +557,7 @@ MU_STATIC_ASSERT(MU_ARRAY_MAX_COUNT >= 1);
 #define MAKE_ARRAY_ELEMENT_VALUE(index, array, array_size, ARRAY_ELEMENT_NO_VALUE) \
     MU_IFCOMMALOGIC(index) ARRAY_ELEMENT_VALUE(array, array_size, ARRAY_ELEMENT_NO_VALUE, index)
 
-/*all array can have their printf arguments expanded by the below macro. ARRAY_ELEMENT_NO_VALUE is a value that when used with PRI_ARRAY_ELEMENT_FORMAT_SPECIFIER results in 0 characters written on the screen. for example %s and "", or %ls and L"" */
+/*all arrays can have their printf arguments expanded by the below macro. ARRAY_ELEMENT_NO_VALUE is a value that when used with PRI_ARRAY_ELEMENT_FORMAT_SPECIFIER results in 0 characters written on the screen. for example %s and "", or %ls and L"" */
 #define ARRAY_VALUES(array, array_size, ARRAY_ELEMENT_NO_VALUE) \
     "", \
     MU_DO_ASC(MU_ARRAY_MAX_COUNT, MAKE_ARRAY_ELEMENT_VALUE, array, array_size, ARRAY_ELEMENT_NO_VALUE)

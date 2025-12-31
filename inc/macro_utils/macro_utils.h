@@ -528,33 +528,46 @@ MU_STATIC_ASSERT(MU_ARRAY_MAX_COUNT >= 1);
     MU_IF(index, ", [", "[") MU_TOSTRING(index) "]=" ,
 
 /*particularly evil method of "don't use a C file"... to store strings. Using compound literal.*/
+/*the anonymous variable below contains strings like [0]=, ", [1]=", ", [2]=" ... These are used for the designator part of the braced initializer*/
 #define MU_ARRAY_INDEX_AS_STRING(index) ((const char*[]){MU_DO(MU_DEC(MU_ARRAY_MAX_COUNT), MU_ARRAY_INDEX_AS_STRING_BUILDER) })[MU_DEC(MU_ARRAY_MAX_COUNT) - index]
 
-#define PRI_ARRAY_ELEMENT(PRI_ELEMENT) "s%s%" PRI_ELEMENT ""
+/*PRI_ARRAY_ELEMENT_INITIALIZER + ARRAY_ELEMENT_VALUE expand to "[0]=Ionescu"*/
+#define PRI_ARRAY_ELEMENT_INITIALIZER(PRI_ARRAY_ELEMENT_FORMAT_SPECIFIER) "s%s%" PRI_ARRAY_ELEMENT_FORMAT_SPECIFIER ""
 
-#define ARRAY_ELEMENT_VALUE(array, array_size, array_index) \
+#define PRI_ARRAY_ELEMENT_FORMAT_SPECIFIER_NO_VALUE(PRI_ARRAY_ELEMENT_FORMAT_SPECIFIER) \
+    MU_C3(PRI_ARRAY_ELEMENT_FORMAT_SPECIFIER_, PRI_ARRAY_ELEMENT_FORMAT_SPECIFIER, _NO_VALUE)
+
+#define ARRAY_ELEMENT_VALUE(array, array_size, ARRAY_ELEMENT_NO_VALUE, array_index) \
     "", \
     MU_SUPPRESS_WARNING(4189) /*warning C4189: '$S1': local variable is initialized but not referenced*/ /*This happens because the compiler would like in certain cases to optimize away MU_ARRAY_INDEX_AS_STRING completely*/ \
     (array_index >= array_size) ? "" : \
         (array_index < MU_ARRAY_MAX_COUNT) ? MU_ARRAY_INDEX_AS_STRING(array_index) : \
             (array_index == MU_ARRAY_MAX_COUNT) ? ", ..." : "", \
-    (array_index >= array_size) ? "" : \
-        (array_index < MU_ARRAY_MAX_COUNT) ? (array)[array_index] : "" \
+    (array_index >= array_size) ? ARRAY_ELEMENT_NO_VALUE : \
+        (array_index < MU_ARRAY_MAX_COUNT) ? (array)[array_index] : ARRAY_ELEMENT_NO_VALUE \
     MU_UNSUPPRESS_WARNING(4189)
 
-#define MU_DO_MAKE_ARRAY_ELEMENT(count, PRI_ELEMENT) \
-    "%" PRI_ARRAY_ELEMENT(PRI_ELEMENT)
-#define PRI_ARRAY(PRI_ELEMENT) \
-   "s{ " MU_DO_ASC(MU_ARRAY_MAX_COUNT, MU_DO_MAKE_ARRAY_ELEMENT, PRI_ELEMENT ) " }"
+#define MU_DO_MAKE_ARRAY_ELEMENT(count, PRI_ARRAY_ELEMENT_FORMAT_SPECIFIER) \
+    "%" PRI_ARRAY_ELEMENT_INITIALIZER(PRI_ARRAY_ELEMENT_FORMAT_SPECIFIER)
 
+/*all arrays can be in theory printed with PRI_ARRAY. For example, arrays that contain strings can use as format specifier "s"*/
+#define PRI_ARRAY(PRI_ARRAY_ELEMENT_FORMAT_SPECIFIER) \
+   "s{ " MU_DO_ASC(MU_ARRAY_MAX_COUNT, MU_DO_MAKE_ARRAY_ELEMENT, PRI_ARRAY_ELEMENT_FORMAT_SPECIFIER ) " }"
 
-#define MAKE_ARRAY_ELEMENT_VALUE(index, array, array_size) \
-    MU_IFCOMMALOGIC(index) ARRAY_ELEMENT_VALUE(array, array_size, index)
+#define MAKE_ARRAY_ELEMENT_VALUE(index, array, array_size, ARRAY_ELEMENT_NO_VALUE) \
+    MU_IFCOMMALOGIC(index) ARRAY_ELEMENT_VALUE(array, array_size, ARRAY_ELEMENT_NO_VALUE, index)
 
-#define ARRAY_VALUES(array, array_size) \
+/*all array can have their printf arguments expanded by the below macro. ARRAY_ELEMENT_NO_VALUE is a value that when used with PRI_ARRAY_ELEMENT_FORMAT_SPECIFIER results in 0 characters written on the screen. for example %s and "", or %ls and L"" */
+#define ARRAY_VALUES(array, array_size, ARRAY_ELEMENT_NO_VALUE) \
     "", \
-    MU_DO_ASC(MU_ARRAY_MAX_COUNT, MAKE_ARRAY_ELEMENT_VALUE, array, array_size)
+    MU_DO_ASC(MU_ARRAY_MAX_COUNT, MAKE_ARRAY_ELEMENT_VALUE, array, array_size, ARRAY_ELEMENT_NO_VALUE)
 
+/*2 canned solutions for arrays of strings and wstrings. In theory %.d and int types could also work for all array element values except "0". */
+#define PRI_ARRAY_S PRI_ARRAY("s")
+#define ARRAY_S_VALUES(array, array_size) ARRAY_VALUES(array, array_size, "")
+
+#define PRI_ARRAY_WS PRI_ARRAY("ls")
+#define ARRAY_WS_VALUES(array, array_size) ARRAY_VALUES(array, array_size, L"")
 
 #ifdef __cplusplus
 }

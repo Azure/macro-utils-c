@@ -9,21 +9,24 @@
 #error "no longer supported compiler. You are using some version of Visual Studio older than VS 2019. Please upgrade to VS 2019 or later."
 #endif
 
-#include "macro_utils/macro_utils_generated.h"
-
 #ifdef __cplusplus
 #include <cstring>
 #include <cstddef>
 #include <ctime>
 #include <cinttypes>
 #include <cassert>
-extern "C" {
 #else
 #include <string.h>
 #include <stddef.h>
 #include <time.h>
 #include <inttypes.h>
 #include <assert.h>
+#endif
+
+#include "macro_utils/macro_utils_generated.h"
+
+#ifdef __cplusplus
+extern "C" {
 #endif
 
 #if (defined OPTIMIZE_RETURN_CODES)
@@ -478,6 +481,93 @@ __pragma(warning(pop))
 #define MU_FUNCDNAME __func__
 #endif
 
+/*the following section of this file helps with a PRI_... macro for arrays.*/
+/*general specs:
+- the array's content should be printed as a C11's designated initializer. For example, this can be used to initialize an array of strings like this: const char* names[]  = { [0]="Frank", [1]="Grace", [2]="Heidi", [3]="Ivan" }
+- the output should contain the opening { and the closing } of the designated initializer
+- if array is empty (0 elements) then the output should be just
+    { }
+- if the array has N>0 elements, then the output should be:
+    { [0]=<value of element 0>, [1]=<value of element 1>, ..., [N-1]=<value of element N-1> }
+- if the array has more elements than the configured printing limit, then the output should be (note the ... at the end):
+    { [0]=<value of element 0>, [1]=<value of element 1>, ..., [LIMIT-1]=<value of element LIMIT-1>, ... }
+- the format specifier is called PRI_ARRAY(PRI_ELEMENT). PRI_ELEMENT should be a valid printf format specifier for a single element of the array.
+- the argument passed to printf-like function is called ARRAY_VALUE(array_variable, array_size).
+
+Implementation ideas:
+- since the printf formatiing specifier needs to be a const char* then PRI_ARRAY shall build a string at preprocessing time that contains the format specifier.
+  This formatting specifier will contain the opening {, then for each element it will contain [i]=PRI_ELEMENT, separated by commas, and finally the closing }.
+  The number of such [i]=PRI_ELEMENT will be limited to the configured printing limit (MU_ARRAY_PRINTING_LIMIT).
+  Depending on the chosen MU_ARRAY_PRINTING_LIMIT the amount of individual formatting specifiers can get rather large...
+- each element is printed using the following formatting specifier: {,}[i]=%PRI_ELEMENT where the leading comma is present only if i>0. That is, the first index does not have a leading comma.
+*/
+
+/*following three quantities are relevant:
+1. MU_ARRAY_MAX_COUNT (that is the precompile max number of elements printed explicitly)
+2. array_size (this is the "at runtime" size of the array)
+3. array_index a quantity that is always less than array_size and is used to index into the array.
+*/
+
+/*
+array_size == 0  => output is { }
+array_size > 0 and array_size <= MU_ARRAY_MAX_COUNT =>
+    output is { [0]=<value of element 0>, [1]=<value of element 1>, ..., [array_size-1]=<value of element array_size-1> }
+    array_size > MU_ARRAY_MAX_COUNT =>
+    output is { [0]=<value of element 0>, [1]=<value of element 1>, ..., [MU_ARRAY_MAX_COUNT-1]=<value of element MU_ARRAY_MAX_COUNT-1>, ... }
+    */
+
+
+/*MU_ARRAY_MAX_COUNT can be #define'd before the inclusion of macro_utils.h to have more/less parameters printed*/
+#ifndef MU_ARRAY_MAX_COUNT
+#define MU_ARRAY_MAX_COUNT 100 /*we print a maximum of MU_ARRAY_MAX_COUNT items explicitly. */
+#endif
+
+MU_STATIC_ASSERT(MU_ARRAY_MAX_COUNT >= 1);
+
+#define MU_ARRAY_INDEX_AS_STRING_BUILDER(index, ...) \
+    MU_IF(index, ", [", "[") MU_TOSTRING(index) "]=" ,
+
+/*particularly evil method of "don't use a C file"... to store strings. Using compound literal.*/
+/*the anonymous variable below contains strings like [0]=, ", [1]=", ", [2]=" ... These are used for the designator part of the braced initializer*/
+#define MU_ARRAY_INDEX_AS_STRING(index) ((const char*[]){MU_DO(MU_DEC(MU_ARRAY_MAX_COUNT), MU_ARRAY_INDEX_AS_STRING_BUILDER) })[MU_DEC(MU_ARRAY_MAX_COUNT) - index]
+
+/*PRI_ARRAY_ELEMENT_INITIALIZER + ARRAY_ELEMENT_VALUE expand to "[0]=Ionescu"*/
+#define PRI_ARRAY_ELEMENT_INITIALIZER(PRI_ARRAY_ELEMENT_FORMAT_SPECIFIER) "s%s%" PRI_ARRAY_ELEMENT_FORMAT_SPECIFIER ""
+
+#define PRI_ARRAY_ELEMENT_FORMAT_SPECIFIER_NO_VALUE(PRI_ARRAY_ELEMENT_FORMAT_SPECIFIER) \
+    MU_C3(PRI_ARRAY_ELEMENT_FORMAT_SPECIFIER_, PRI_ARRAY_ELEMENT_FORMAT_SPECIFIER, _NO_VALUE)
+
+#define ARRAY_ELEMENT_VALUE(array, array_size, ARRAY_ELEMENT_NO_VALUE, array_index) \
+    "", \
+    MU_SUPPRESS_WARNING(4189) /*warning C4189: '$S1': local variable is initialized but not referenced*/ /*This happens because the compiler would like in certain cases to optimize away MU_ARRAY_INDEX_AS_STRING completely*/ \
+    (array_index >= array_size) ? "" : \
+        (array_index < MU_ARRAY_MAX_COUNT) ? MU_ARRAY_INDEX_AS_STRING(array_index) : \
+            (array_index == MU_ARRAY_MAX_COUNT) ? ", ..." : "", \
+    (array_index >= array_size) ? ARRAY_ELEMENT_NO_VALUE : \
+        (array_index < MU_ARRAY_MAX_COUNT) ? (array)[array_index] : ARRAY_ELEMENT_NO_VALUE \
+    MU_UNSUPPRESS_WARNING(4189)
+
+#define MU_DO_MAKE_ARRAY_ELEMENT(count, PRI_ARRAY_ELEMENT_FORMAT_SPECIFIER) \
+    "%" PRI_ARRAY_ELEMENT_INITIALIZER(PRI_ARRAY_ELEMENT_FORMAT_SPECIFIER)
+
+/*all arrays can be in theory printed with PRI_ARRAY. For example, arrays that contain strings can use as format specifier "s"*/
+#define PRI_ARRAY(PRI_ARRAY_ELEMENT_FORMAT_SPECIFIER) \
+   "s{ " MU_DO_ASC(MU_ARRAY_MAX_COUNT, MU_DO_MAKE_ARRAY_ELEMENT, PRI_ARRAY_ELEMENT_FORMAT_SPECIFIER ) " }"
+
+#define MAKE_ARRAY_ELEMENT_VALUE(index, array, array_size, ARRAY_ELEMENT_NO_VALUE) \
+    MU_IFCOMMALOGIC(index) ARRAY_ELEMENT_VALUE(array, array_size, ARRAY_ELEMENT_NO_VALUE, index)
+
+/*all arrays can have their printf arguments expanded by the below macro. ARRAY_ELEMENT_NO_VALUE is a value that when used with PRI_ARRAY_ELEMENT_FORMAT_SPECIFIER results in 0 characters written on the screen. for example %s and "", or %ls and L"" */
+#define ARRAY_VALUES(array, array_size, ARRAY_ELEMENT_NO_VALUE) \
+    "", \
+    MU_DO_ASC(MU_ARRAY_MAX_COUNT, MAKE_ARRAY_ELEMENT_VALUE, array, array_size, ARRAY_ELEMENT_NO_VALUE)
+
+/*2 canned solutions for arrays of strings and wstrings. In theory %.d and int types could also work for all array element values except "0". */
+#define PRI_ARRAY_S PRI_ARRAY("s")
+#define ARRAY_S_VALUES(array, array_size) ARRAY_VALUES(array, array_size, "")
+
+#define PRI_ARRAY_WS PRI_ARRAY("ls")
+#define ARRAY_WS_VALUES(array, array_size) ARRAY_VALUES(array, array_size, L"")
 
 #ifdef __cplusplus
 }

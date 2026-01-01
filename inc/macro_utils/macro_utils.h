@@ -515,7 +515,7 @@ __pragma(warning(pop))
 #define MU_ENCODING_ERROR_STR    " ENCODING_ERROR"
 
 #define MU_ARRAY_PRINT_CAPACITY_RESERVED            \
-    sizeof(MU_OPENNING_BRACE_STR) - 1               \
+    sizeof(MU_OPENNING_BRACE_STR) - 1 +             \
     MU_MAX(                                         \
         sizeof(MU_NOT_ENOUGH_BUFFER_STR) - 1,       \
         sizeof(MU_ENCODING_ERROR_STR) - 1           \

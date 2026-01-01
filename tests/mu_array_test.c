@@ -5,29 +5,17 @@
 
 #include "test_helper.h"
 
-/*focus of this file is on very granular (PRI_ARRAY_ELEMENT_INITIALIZER/ARRAY_ELEMENT_VALUE) macros and arrays that contain strings*/
-/*mu_array_not_string_test.c deals with more complicated data structures*/
-
-#define MU_ARRAY_MAX_COUNT 3 /*can be overridden before including macro_utils.h*/
 #include "macro_utils/macro_utils.h"
 
 #include "mu_array_test.h"
 
-MU_STATIC_ASSERT(MU_ARRAY_MAX_COUNT >= 3); /*this test needs at least 3 elements printing capability*/
-
-#define INVENT_NAME(index, ... ) MU_TOSTRING(index) "escu" , /*this results in "zeroescu", "unuescu", "doiescu" etc... Joking: 0escu, 1escu, 2escu*/
-
 static const char* names_1[] = { "Ionescu" };
 static const char* names_2[] = { "Popescu", "Ionescu" };
 static const char* names_3[] = { "Georgescu", "Popescu", "Ionescu" };
-static const char* names_more_than_MU_ARRAY_MAX_COUNT[] = { MU_DO_ASC(MU_DEC(MU_ARRAY_MAX_COUNT), INVENT_NAME) "Ixulescu", "Igreculescu"}; /*Ixulescu, Igreculescu exceeds the printing limit for ARRAY_ELEMENT_VALUE*/
-
-#define INVENT_WNAME(index, ... ) MU_TOWSTRING(index) L"escu" , /*this results in "zeroescu", "unuescu", "doiescu" etc... Joking: 0escu, 1escu, 2escu*/
 
 static const wchar_t* wnames_1[] = { L"Ionescu" };
 static const wchar_t* wnames_2[] = { L"Popescu", L"Ionescu" };
 static const wchar_t* wnames_3[] = { L"Georgescu", L"Popescu", L"Ionescu" };
-static const wchar_t* wnames_more_than_MU_ARRAY_MAX_COUNT[] = { MU_DO_ASC(MU_DEC(MU_ARRAY_MAX_COUNT), INVENT_WNAME) L"Ixulescu", L"Igreculescu" }; /*Ixulescu, Igreculescu exceeds the printing limit for ARRAY_ELEMENT_VALUE*/
 
 static int run_mu_array_wstring_tests(void)
 {
@@ -37,47 +25,30 @@ static int run_mu_array_wstring_tests(void)
     /*tests for PRI_ARRAY/ARRAY_VALUES*/
 
     /*array of size 0*/
-    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY_WS "", ARRAY_WS_VALUES(wnames_1, 0)); /*array size is harcoded 0*/
+    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY "", ARRAY_VALUES(wchar_ptr_t, wnames_1, 0)); /*array size is harcoded 0*/
     POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
     POOR_MANS_ASSERT(strcmp(temp, "{  }") == 0);
 
     /*array of size 1*/
-    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY_WS "", ARRAY_WS_VALUES(wnames_1, sizeof(wnames_1) / sizeof(wnames_1[0])));
+    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY "", ARRAY_VALUES(wchar_ptr_t, wnames_1, sizeof(wnames_1) / sizeof(wnames_1[0])));
     POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
     POOR_MANS_ASSERT(strcmp(temp, "{ [0]=Ionescu }") == 0);
 
     /*array of size 2*/
     /*printing all the array*/
-    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY_WS "", ARRAY_WS_VALUES(wnames_2, sizeof(wnames_2) / sizeof(wnames_2[0])));
+    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY "", ARRAY_VALUES(wchar_ptr_t, wnames_2, sizeof(wnames_2) / sizeof(wnames_2[0])));
     POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
     POOR_MANS_ASSERT(strcmp(temp, "{ [0]=Popescu, [1]=Ionescu }") == 0);
 
     /*printing just the first name*/
-    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY_WS "", ARRAY_WS_VALUES(wnames_2, 1));
+    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY "", ARRAY_VALUES(wchar_ptr_t, wnames_2, 1));
     POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
     POOR_MANS_ASSERT(strcmp(temp, "{ [0]=Popescu }") == 0);
 
     /*array of size 3*/
-    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY_WS "", ARRAY_WS_VALUES(wnames_3, sizeof(wnames_3) / sizeof(wnames_3[0])));
+    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY "", ARRAY_VALUES(wchar_ptr_t, wnames_3, sizeof(wnames_3) / sizeof(wnames_3[0])));
     POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
     POOR_MANS_ASSERT(strcmp(temp, "{ [0]=Georgescu, [1]=Popescu, [2]=Ionescu }") == 0);
-
-    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY_WS "", ARRAY_WS_VALUES(wnames_more_than_MU_ARRAY_MAX_COUNT, sizeof(wnames_more_than_MU_ARRAY_MAX_COUNT) / sizeof(wnames_more_than_MU_ARRAY_MAX_COUNT[0])));
-    POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
-
-    char expected_result[1000] = "{ ";
-    for (int i = 0; i < MU_ARRAY_MAX_COUNT; i++)
-    {
-        if (i > 0)
-        {
-            (void)strcat(expected_result, ", ");
-        }
-        char compound[20];
-        (void)snprintf(compound, sizeof(compound), "[%d]=%descu", i, i);
-        (void)strcat(expected_result, compound);
-    }
-    (void)strcat(expected_result, ", ... }");
-    POOR_MANS_ASSERT(strcmp(temp, expected_result) == 0);
 
     return 0;
 }
@@ -92,139 +63,154 @@ static int run_mu_array_string_tests(void)
 
     char temp[1000]; /*sufficient to hold all the names representations*/
 
-    /*checking that PRI_ARRAY_ELEMENT_INITIALIZER and ARRAY_ELEMENT_VALUE work for a very regular element(s)*/
-
-    /*array of 0 element*/
-    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY_ELEMENT_INITIALIZER("s") "", ARRAY_ELEMENT_VALUE(names_1, 0 /*hard coded array size of 0*/, "", 0));
-    POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
-    POOR_MANS_ASSERT(strcmp(temp, "") == 0);
-
-    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY_ELEMENT_INITIALIZER("s") "", ARRAY_ELEMENT_VALUE(names_1, 0 /*hard coded array size of 0*/, "", 1));
-    POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
-    POOR_MANS_ASSERT(strcmp(temp, "") == 0);
-
-    /*array of 1 element*/
-    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY_ELEMENT_INITIALIZER("s") "", ARRAY_ELEMENT_VALUE(names_1, sizeof(names_1)/sizeof(names_1[0]), "", 0));
-    POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
-    POOR_MANS_ASSERT(strcmp(temp, "[0]=Ionescu") == 0);
-
-    /*index "1" is out of bounds for an array with 1 elements - no printing with , ...*/
-    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY_ELEMENT_INITIALIZER("s") "", ARRAY_ELEMENT_VALUE(names_1, sizeof(names_1) / sizeof(names_1[0]), "", 1));
-    POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
-    POOR_MANS_ASSERT(strcmp(temp, "") == 0);
-
-    /*index "2" is out of bounds for an array with 1 elements - no printing with , ...*/
-    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY_ELEMENT_INITIALIZER("s") "", ARRAY_ELEMENT_VALUE(names_1, sizeof(names_1) / sizeof(names_1[0]), "", 2));
-    POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
-    POOR_MANS_ASSERT(strcmp(temp, "") == 0);
-
-    /*array of 2 element*/
-    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY_ELEMENT_INITIALIZER("s") "", ARRAY_ELEMENT_VALUE(names_2, sizeof(names_2) / sizeof(names_2[0]), "", 0));
-    POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
-    POOR_MANS_ASSERT(strcmp(temp, "[0]=Popescu") == 0);
-
-    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY_ELEMENT_INITIALIZER("s") "", ARRAY_ELEMENT_VALUE(names_2, sizeof(names_2) / sizeof(names_2[0]), "", 1));
-    POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
-    POOR_MANS_ASSERT(strcmp(temp, ", [1]=Ionescu") == 0);
-
-    /*index "2" is out of bounds for an array with 2 elements - no printing with , ...*/
-    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY_ELEMENT_INITIALIZER("s") "", ARRAY_ELEMENT_VALUE(names_2, sizeof(names_2) / sizeof(names_2[0]), "", 2));
-    POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
-    POOR_MANS_ASSERT(strcmp(temp, "") == 0);
-
-    /*index "3 is out of bounds for an array with 2 elements - no printing with , ...*/
-    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY_ELEMENT_INITIALIZER("s") "", ARRAY_ELEMENT_VALUE(names_2, sizeof(names_2) / sizeof(names_2[0]), "", 3));
-    POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
-    POOR_MANS_ASSERT(strcmp(temp, "") == 0);
-
-    /*array of 3 element*/
-    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY_ELEMENT_INITIALIZER("s") "", ARRAY_ELEMENT_VALUE(names_3, sizeof(names_3) / sizeof(names_3[0]), "", 0));
-    POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
-    POOR_MANS_ASSERT(strcmp(temp, "[0]=Georgescu") == 0);
-
-    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY_ELEMENT_INITIALIZER("s") "", ARRAY_ELEMENT_VALUE(names_3, sizeof(names_3) / sizeof(names_3[0]), "", 1));
-    POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
-    POOR_MANS_ASSERT(strcmp(temp, ", [1]=Popescu") == 0);
-
-    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY_ELEMENT_INITIALIZER("s") "", ARRAY_ELEMENT_VALUE(names_3, sizeof(names_3) / sizeof(names_3[0]), "", 2));
-    POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
-    POOR_MANS_ASSERT(strcmp(temp, ", [2]=Ionescu") == 0);
-
-    /*index "3 is out of bounds for an array with 3elements - no printing with ,...*/
-    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY_ELEMENT_INITIALIZER("s") "", ARRAY_ELEMENT_VALUE(names_3, sizeof(names_3) / sizeof(names_3[0]), "", 3));
-    POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
-    POOR_MANS_ASSERT(strcmp(temp, "") == 0);
-
-    /*when the [i]= part is not available (because MU_ARRAY_INDEX_AS_STRING is not build that much), this should expand to "..." to explain that some printing limit was exceeded*/
-
-    /*array of MU_ARRAY_MAX_COUNT+2 elements... which exceeds #define MU_ARRAY_MAX_COUNT*/
-    int array_size = sizeof(names_more_than_MU_ARRAY_MAX_COUNT) / sizeof(names_more_than_MU_ARRAY_MAX_COUNT[0]);
-    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY_ELEMENT_INITIALIZER("s") "", ARRAY_ELEMENT_VALUE(names_more_than_MU_ARRAY_MAX_COUNT, array_size, "", 0));
-    POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
-    POOR_MANS_ASSERT(strcmp(temp, "[0]=0escu") == 0);
-
-    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY_ELEMENT_INITIALIZER("s") "", ARRAY_ELEMENT_VALUE(names_more_than_MU_ARRAY_MAX_COUNT, array_size, "", 1));
-    POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
-    POOR_MANS_ASSERT(strcmp(temp, ", [1]=1escu") == 0);
-
-    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY_ELEMENT_INITIALIZER("s") "", ARRAY_ELEMENT_VALUE(names_more_than_MU_ARRAY_MAX_COUNT, array_size, "", 2));
-    POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
-    POOR_MANS_ASSERT(strcmp(temp, ", [2]=2escu") == 0);
-
-    /*the MU_ARRAY_MAX_COUNT index here cannot be printed because we don't have the "[3]=" string, so ", ..." is used instead*/
-    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY_ELEMENT_INITIALIZER("s") "", ARRAY_ELEMENT_VALUE(names_more_than_MU_ARRAY_MAX_COUNT, array_size, "", MU_ARRAY_MAX_COUNT));
-    POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
-    POOR_MANS_ASSERT(strcmp(temp, ", ...") == 0);
-
-    /*the 4th index cannot be printed because it is past the configured size (3)*/
-    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY_ELEMENT_INITIALIZER("s") "", ARRAY_ELEMENT_VALUE(names_more_than_MU_ARRAY_MAX_COUNT, array_size, "", MU_ARRAY_MAX_COUNT+1));
-    POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
-    POOR_MANS_ASSERT(strcmp(temp, "") == 0);
-
-    /*tests for PRI_ARRAY/ARRAY_VALUES*/
-
     /*array of size 0*/
-    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY_S "", ARRAY_S_VALUES(names_1, 0)); /*array size is harcoded 0*/
+    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY "", ARRAY_VALUES(char_ptr_t, names_1, 0)); /*array size is harcoded 0*/
     POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
     POOR_MANS_ASSERT(strcmp(temp, "{  }") == 0);
 
     /*array of size 0*/
-    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY_S "", ARRAY_S_VALUES(names_1, sizeof(names_1) / sizeof(names_1[0])));
+    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY "", ARRAY_VALUES(char_ptr_t, names_1, sizeof(names_1) / sizeof(names_1[0])));
     POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
     POOR_MANS_ASSERT(strcmp(temp, "{ [0]=Ionescu }") == 0);
 
     /*array of size 2*/
     /*printing all the array*/
-    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY_S "", ARRAY_S_VALUES(names_2, sizeof(names_2) / sizeof(names_2[0])));
+    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY "", ARRAY_VALUES(char_ptr_t, names_2, sizeof(names_2) / sizeof(names_2[0])));
     POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
     POOR_MANS_ASSERT(strcmp(temp, "{ [0]=Popescu, [1]=Ionescu }") == 0);
 
     /*printing just the first name*/
-    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY_S "", ARRAY_S_VALUES(names_2, 1));
+    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY "", ARRAY_VALUES(char_ptr_t, names_2, 1));
     POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
     POOR_MANS_ASSERT(strcmp(temp, "{ [0]=Popescu }") == 0);
 
     /*array of size 3*/
-    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY_S "", ARRAY_S_VALUES(names_3, sizeof(names_3) / sizeof(names_3[0])));
+    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY "", ARRAY_VALUES(char_ptr_t, names_3, sizeof(names_3) / sizeof(names_3[0])));
     POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
     POOR_MANS_ASSERT(strcmp(temp, "{ [0]=Georgescu, [1]=Popescu, [2]=Ionescu }") == 0);
 
-    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY_S "", ARRAY_S_VALUES(names_more_than_MU_ARRAY_MAX_COUNT, sizeof(names_more_than_MU_ARRAY_MAX_COUNT) / sizeof(names_more_than_MU_ARRAY_MAX_COUNT[0])));
+    return 0;
+}
+
+/*arrays of structs can be printed*/
+
+typedef struct POINT_TAG
+{
+    int x;
+    int y;
+} POINT;
+
+static POINT points[] = { {1,2}, {30,40}, {50,60} };
+
+#define PRI_POINT "s(POINT){ .x=%d, .y=%d }"
+#define POINT_VALUE(p) "", (p).x, (p).y
+
+MU_PRINT_ARRAY_FUNCTION_DECLARE(POINT);
+MU_PRINT_ARRAY_FUNCTION_DEFINE(POINT, PRI_POINT, POINT_VALUE);
+
+
+static int run_mu_array_POINT_tests(void)
+{
+    char temp[1000]; /*sufficient to hold all the points representations*/
+    int result;
+    /*array of size 0*/
+    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY "", ARRAY_VALUES(POINT, points, 0)); /*array size is harcoded 0*/
+    POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
+    POOR_MANS_ASSERT(strcmp(temp, "{  }") == 0);
+
+    /*array of size 1*/
+    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY "", ARRAY_VALUES(POINT, points, 1));
+    POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
+    POOR_MANS_ASSERT(strcmp(temp, "{ [0]=(POINT){ .x=1, .y=2 } }") == 0);
+
+    /*array of size 2*/
+    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY "", ARRAY_VALUES(POINT, points, 2));
+    POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
+    POOR_MANS_ASSERT(strcmp(temp, "{ [0]=(POINT){ .x=1, .y=2 }, [1]=(POINT){ .x=30, .y=40 } }") == 0);
+
+    /*array of size 3*/
+    result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY "", ARRAY_VALUES(POINT, points, 3));
+    POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
+    POOR_MANS_ASSERT(strcmp(temp, "{ [0]=(POINT){ .x=1, .y=2 }, [1]=(POINT){ .x=30, .y=40 }, [2]=(POINT){ .x=50, .y=60 } }") == 0);
+
+    return 0;
+}
+
+/*arrays of arrays of strings can also be printed???*/
+typedef struct ARRAY_OF_STRINGS_TAG
+{
+    int n;
+    const char** strings;
+}ARRAY_OF_STRINGS;
+
+#define PRI_ARRAY_OF_STRINGS "s{ .n=%d, .strings=%" PRI_ARRAY " }"
+#define ARRAY_OF_STRINGS_VALUE(aos) "", (aos).n, ARRAY_VALUES(char_ptr_t, (aos).strings, (aos).n)
+
+MU_PRINT_ARRAY_FUNCTION_DECLARE(ARRAY_OF_STRINGS);
+MU_PRINT_ARRAY_FUNCTION_DEFINE(ARRAY_OF_STRINGS, PRI_ARRAY_OF_STRINGS, ARRAY_OF_STRINGS_VALUE);
+
+typedef struct ARRAY_OF_ARRAY_OF_STRINGS_TAG
+{
+    int n;
+    /*cannot be ARRAY_OF_STRINGS arrays[]; because error C2233: 'arrays': arrays of objects containing zero-size arrays are illegal*/
+    ARRAY_OF_STRINGS* arrays;
+}ARRAY_OF_ARRAY_OF_STRINGS;
+
+#define PRI_ARRAY_OF_ARRAY_OF_STRINGS "s{ .n=%d, .arrays=%" PRI_ARRAY " }"
+#define ARRAY_OF_ARRAY_OF_STRINGS_VALUE(aoas) "", (aoas).n, ARRAY_VALUES(ARRAY_OF_STRINGS, (aoas).arrays, (aoas).n)
+
+MU_PRINT_ARRAY_FUNCTION_DECLARE(ARRAY_OF_ARRAY_OF_STRINGS);
+MU_PRINT_ARRAY_FUNCTION_DEFINE(ARRAY_OF_ARRAY_OF_STRINGS, PRI_ARRAY_OF_ARRAY_OF_STRINGS, ARRAY_OF_ARRAY_OF_STRINGS_VALUE);
+
+static int run_mu_array_ARRAY_OF_ARRAY_OF_STRINGS_tests(void)
+{
+    const char* one[] = {"Single"};
+    const char* two[] = {"Husband", "Wife"};
+    const char* three[] = {"Father", "Mother", "Child"};
+
+    ARRAY_OF_STRINGS arrays[] = {
+        { sizeof(one)/sizeof(one[0]), one},
+        { sizeof(two) / sizeof(two[0]), two },
+        { sizeof(three) / sizeof(three[0]), three }
+    };
+
+    ARRAY_OF_ARRAY_OF_STRINGS array_of_arrays = {
+        sizeof(arrays)/sizeof(arrays[0]),
+        arrays
+    };
+
+    char temp[2000]; /*sufficient*/
+    int result = snprintf(temp, sizeof(temp), "%" PRI_ARRAY_OF_ARRAY_OF_STRINGS "", ARRAY_OF_ARRAY_OF_STRINGS_VALUE(array_of_arrays));
+    POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
+    POOR_MANS_ASSERT(strcmp(
+        "{ .n=3, .arrays={ [0]={ .n=1, .strings={ [0]=Single } }, [1]={ .n=2, .strings={ [0]=Husband, [1]=Wife } }, [2]={ .n=3, .strings={ [0]=Father, [1]=Mother, [2]=Child } } } }",
+        temp) == 0);
+    return 0;
+}
+
+#define PRI_JUST_CHAR "c"
+#define JUST_CHAR_VALUE(c) (c)
+
+MU_PRINT_ARRAY_FUNCTION_DECLARE(char);
+MU_PRINT_ARRAY_FUNCTION_DEFINE(char, PRI_JUST_CHAR, JUST_CHAR_VALUE);
+
+static int run_mu_array_around_max_buffer_tests(void)
+{
+    char temp[MU_ARRAY_PRINT_CAPACITY]; /*printing this array FOR SURE it would exceed the printing buffer*/
+    (void)memset(temp, '3', sizeof(temp));
+
+    char buffer[MU_ARRAY_PRINT_CAPACITY * 20]; /*ample space to store any possible result*/
+
+    int result = snprintf(buffer, sizeof(buffer), "%" PRI_ARRAY "", ARRAY_VALUES(char, temp, sizeof(temp) / sizeof(temp[0])));
     POOR_MANS_ASSERT(result >= 0 && result < sizeof(temp));
 
-    char expected_result[1000] = "{ ";
-    for (int i = 0; i < MU_ARRAY_MAX_COUNT; i++)
-    {
-        if (i > 0)
-        {
-            (void)strcat(expected_result, ", ");
-        }
-        char compound[20];
-        (void)snprintf(compound, sizeof(compound), "[%d]=%descu", i, i);
-        (void)strcat(expected_result, compound);
-    }
-    (void)strcat(expected_result, ", ... }");
-    POOR_MANS_ASSERT(strcmp(temp, expected_result) == 0);
+    size_t size = strlen(buffer);
+    POOR_MANS_ASSERT(size < MU_ARRAY_PRINT_CAPACITY);
+
+    /*because we are forcing a buffer overflow here, we expect that the output will end in MU_NOT_ENOUGH_BUFFER_STR }*/
+    POOR_MANS_ASSERT(strcmp(buffer + size - (sizeof(MU_NOT_ENOUGH_BUFFER_STR MU_CLOSING_BRACE_STR) - 1), MU_NOT_ENOUGH_BUFFER_STR MU_CLOSING_BRACE_STR) == 0);
+
+    /*at this point, buffer contains { [0]=3, [1]=3, ... , [462]=3, [463]=3 NOT_ENOUGH_BUFFER } when MU_ARRAY_PRINT_CAPACITY is 4096*/
 
     return 0;
 }
@@ -237,6 +223,14 @@ int run_mu_array_tests(void)
 
     result = run_mu_array_wstring_tests();
     POOR_MANS_ASSERT(result == 0);
+
+    result = run_mu_array_POINT_tests();
+    POOR_MANS_ASSERT(result == 0);
+
+    result = run_mu_array_ARRAY_OF_ARRAY_OF_STRINGS_tests();
+    POOR_MANS_ASSERT(result == 0);
+
+    result = run_mu_array_around_max_buffer_tests();
 
     return 0;
 }

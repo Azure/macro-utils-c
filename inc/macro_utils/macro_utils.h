@@ -15,12 +15,15 @@
 #include <ctime>
 #include <cinttypes>
 #include <cassert>
+#include <cstdio>
 #else
 #include <string.h>
 #include <stddef.h>
 #include <time.h>
 #include <inttypes.h>
 #include <assert.h>
+#include <stdio.h>
+#include <stdbool.h>
 #endif
 
 #include "macro_utils/macro_utils_generated.h"
@@ -481,93 +484,114 @@ __pragma(warning(pop))
 #define MU_FUNCDNAME __func__
 #endif
 
+/*the following macro produces the max of its 2 arguments. Note: dangerous to use if evaluating arguments has side effects.*/
+#define MU_MAX(a, b) ((a) > (b) ? (a) : (b))
+
 /*the following section of this file helps with a PRI_... macro for arrays.*/
 /*general specs:
 - the array's content should be printed as a C11's designated initializer. For example, this can be used to initialize an array of strings like this: const char* names[]  = { [0]="Frank", [1]="Grace", [2]="Heidi", [3]="Ivan" }
 - the output should contain the opening { and the closing } of the designated initializer
 - if array is empty (0 elements) then the output should be just
-    { }
+    {  }
 - if the array has N>0 elements, then the output should be:
     { [0]=<value of element 0>, [1]=<value of element 1>, ..., [N-1]=<value of element N-1> }
-- if the array has more elements than the configured printing limit, then the output should be (note the ... at the end):
-    { [0]=<value of element 0>, [1]=<value of element 1>, ..., [LIMIT-1]=<value of element LIMIT-1>, ... }
-- the format specifier is called PRI_ARRAY(PRI_ELEMENT). PRI_ELEMENT should be a valid printf format specifier for a single element of the array.
-- the argument passed to printf-like function is called ARRAY_VALUE(array_variable, array_size).
+- if printing the array exceeds the available printing space, then a best effort should be made to print as much as possible followed by some meaningful string indicating what went wrong (note: NOT_ENOUGH_BUFFER)
+    { [0]=<value of element 0>, [1]=<value of element 1>, ..., [LAST]=<value of element LAST> NOT_ENOUGH_BUFFER }
+- the format specifier is called PRI_ARRAY.
+- the argument passed to printf-like function is called ARRAY_VALUE(type, array, array_size). type is the array type, array is the array that needs to be printed and array_size is the number of elements to print
 
-Implementation ideas:
-- since the printf formatiing specifier needs to be a const char* then PRI_ARRAY shall build a string at preprocessing time that contains the format specifier.
-  This formatting specifier will contain the opening {, then for each element it will contain [i]=PRI_ELEMENT, separated by commas, and finally the closing }.
-  The number of such [i]=PRI_ELEMENT will be limited to the configured printing limit (MU_ARRAY_PRINTING_LIMIT).
-  Depending on the chosen MU_ARRAY_PRINTING_LIMIT the amount of individual formatting specifiers can get rather large...
-- each element is printed using the following formatting specifier: {,}[i]=%PRI_ELEMENT where the leading comma is present only if i>0. That is, the first index does not have a leading comma.
 */
 
-/*following three quantities are relevant:
-1. MU_ARRAY_MAX_COUNT (that is the precompile max number of elements printed explicitly)
-2. array_size (this is the "at runtime" size of the array)
-3. array_index a quantity that is always less than array_size and is used to index into the array.
-*/
-
-/*
-array_size == 0  => output is { }
-array_size > 0 and array_size <= MU_ARRAY_MAX_COUNT =>
-    output is { [0]=<value of element 0>, [1]=<value of element 1>, ..., [array_size-1]=<value of element array_size-1> }
-    array_size > MU_ARRAY_MAX_COUNT =>
-    output is { [0]=<value of element 0>, [1]=<value of element 1>, ..., [MU_ARRAY_MAX_COUNT-1]=<value of element MU_ARRAY_MAX_COUNT-1>, ... }
-    */
-
-
-/*MU_ARRAY_MAX_COUNT can be #define'd before the inclusion of macro_utils.h to have more/less parameters printed*/
-#ifndef MU_ARRAY_MAX_COUNT
-#define MU_ARRAY_MAX_COUNT 100 /*we print a maximum of MU_ARRAY_MAX_COUNT items explicitly. */
+/*MU_ARRAY_PRINT_CAPACITY is the maximum number of characters that an array will print into. Note: this value is important for stack because it will eat MU_ARRAY_PRINT_CAPACITY bytes from stack. Stack is decreased at block scope end.*/
+#ifndef MU_ARRAY_PRINT_CAPACITY
+#define MU_ARRAY_PRINT_CAPACITY 4096 /*we use a maximum of MU_ARRAY_PRINT_CAPACITY characters for printing arrays*/
 #endif
 
-MU_STATIC_ASSERT(MU_ARRAY_MAX_COUNT >= 1);
+/*we set up some reserved capacity in case errors happen. Errors are mainly due to snprintf failing somehow*/
 
-#define MU_ARRAY_INDEX_AS_STRING_BUILDER(index, ...) \
-    MU_IF(index, ", [", "[") MU_TOSTRING(index) "]=" ,
+#define MU_OPENNING_BRACE_STR    "{ "
+#define MU_CLOSING_BRACE_STR     " }"
+#define MU_NOT_ENOUGH_BUFFER_STR " NOT_ENOUGH_BUFFER"
+#define MU_ENCODING_ERROR_STR    " ENCODING_ERROR"
 
-/*particularly evil method of "don't use a C file"... to store strings. Using compound literal.*/
-/*the anonymous variable below contains strings like [0]=, ", [1]=", ", [2]=" ... These are used for the designator part of the braced initializer*/
-#define MU_ARRAY_INDEX_AS_STRING(index) ((const char*[]){MU_DO(MU_DEC(MU_ARRAY_MAX_COUNT), MU_ARRAY_INDEX_AS_STRING_BUILDER) })[MU_DEC(MU_ARRAY_MAX_COUNT) - index]
+#define MU_ARRAY_PRINT_CAPACITY_RESERVED            \
+    sizeof(MU_OPENNING_BRACE_STR) - 1 +             \
+    MU_MAX(                                         \
+        sizeof(MU_NOT_ENOUGH_BUFFER_STR) - 1,       \
+        sizeof(MU_ENCODING_ERROR_STR) - 1           \
+    ) +                                             \
+    sizeof(MU_CLOSING_BRACE_STR) - 1 +              \
+    1 /*nul terminator*/
 
-/*PRI_ARRAY_ELEMENT_INITIALIZER + ARRAY_ELEMENT_VALUE expand to "[0]=Ionescu"*/
-#define PRI_ARRAY_ELEMENT_INITIALIZER(PRI_ARRAY_ELEMENT_FORMAT_SPECIFIER) "s%s%" PRI_ARRAY_ELEMENT_FORMAT_SPECIFIER ""
+/*make sure we can in any case output some minimal errors at least*/
+MU_STATIC_ASSERT(MU_ARRAY_PRINT_CAPACITY >= MU_ARRAY_PRINT_CAPACITY_RESERVED);
 
-#define PRI_ARRAY_ELEMENT_FORMAT_SPECIFIER_NO_VALUE(PRI_ARRAY_ELEMENT_FORMAT_SPECIFIER) \
-    MU_C3(PRI_ARRAY_ELEMENT_FORMAT_SPECIFIER_, PRI_ARRAY_ELEMENT_FORMAT_SPECIFIER, _NO_VALUE)
+/*the following macro introduces a new name for a function that produces a string representation of an array's content.*/
+/*the function's prototype should be char* MU_PRINT_ARRAY_FUNCTION(type)(const type* array, uint32_t array_size, char* output_buffer, uint32_t output_buffer_capacity);*/
+#define MU_PRINT_ARRAY_FUNCTION(type) MU_C2(MU_PRINT_ARRAY_, type)
 
-#define ARRAY_ELEMENT_VALUE(array, array_size, ARRAY_ELEMENT_NO_VALUE, array_index) \
-    "", \
-    MU_SUPPRESS_WARNING(4189) /*warning C4189: '$S1': local variable is initialized but not referenced*/ /*This happens because the compiler would like in certain cases to optimize away MU_ARRAY_INDEX_AS_STRING completely*/ \
-    (array_index >= array_size) ? "" : \
-        (array_index < MU_ARRAY_MAX_COUNT) ? MU_ARRAY_INDEX_AS_STRING(array_index) : \
-            (array_index == MU_ARRAY_MAX_COUNT) ? ", ..." : "", \
-    (array_index >= array_size) ? ARRAY_ELEMENT_NO_VALUE : \
-        (array_index < MU_ARRAY_MAX_COUNT) ? (array)[array_index] : ARRAY_ELEMENT_NO_VALUE \
-    MU_UNSUPPRESS_WARNING(4189)
+#define PRI_ARRAY "s" /*all array are printed with a string format*/
 
-#define MU_DO_MAKE_ARRAY_ELEMENT(count, PRI_ARRAY_ELEMENT_FORMAT_SPECIFIER) \
-    "%" PRI_ARRAY_ELEMENT_INITIALIZER(PRI_ARRAY_ELEMENT_FORMAT_SPECIFIER)
+#define ARRAY_VALUES(array_type, array, array_size) MU_PRINT_ARRAY_FUNCTION(array_type)(array, array_size, (char[MU_ARRAY_PRINT_CAPACITY]){}, MU_ARRAY_PRINT_CAPACITY)
 
-/*all arrays can be in theory printed with PRI_ARRAY. For example, arrays that contain strings can use as format specifier "s"*/
-#define PRI_ARRAY(PRI_ARRAY_ELEMENT_FORMAT_SPECIFIER) \
-   "s{ " MU_DO_ASC(MU_ARRAY_MAX_COUNT, MU_DO_MAKE_ARRAY_ELEMENT, PRI_ARRAY_ELEMENT_FORMAT_SPECIFIER ) " }"
+/*a array_printing function is declared in a header file*/
+/*type is a string, like char_ptr_t or POINT (see mu_array_test.c)*/
+#define MU_PRINT_ARRAY_FUNCTION_DECLARE(type) \
+    char* MU_PRINT_ARRAY_FUNCTION(type)(const type* array, uint32_t array_size, char* output_buffer, uint32_t output_buffer_capacity); \
 
-#define MAKE_ARRAY_ELEMENT_VALUE(index, array, array_size, ARRAY_ELEMENT_NO_VALUE) \
-    MU_IFCOMMALOGIC(index) ARRAY_ELEMENT_VALUE(array, array_size, ARRAY_ELEMENT_NO_VALUE, index)
+/*type is a string, like char_ptr_t or POINT (see mu_array_test.c)*/
+/*PRI_TYPE_FORMAT is a format specifier for type. For example, "ls" is the specifier for wchar_t*. PRI_POINT would be the specifier for a POINT type*/
+/*TYPE_FORMAT_VALUE is a macro that takes 1 argument (which is assumed of type "type") and expands to whatever PRI_TYPE_FORMAT needs.
+    for example, "%s" will use MU_P_OR_NULL
+    assuming PRI_POINT "s(POINT){ .x=%d, .y=%d }" then POINT_VALUE(p) would expands to "", (p).x, (p).y*/
+#define MU_PRINT_ARRAY_FUNCTION_DEFINE(type, PRI_TYPE_FORMAT, TYPE_FORMAT_VALUE) \
+char* MU_PRINT_ARRAY_FUNCTION(type)(const type* array, uint32_t array_size, char* output_buffer, uint32_t output_buffer_capacity)                                    \
+{                                                                                                                                                                    \
+    output_buffer_capacity -= MU_ARRAY_PRINT_CAPACITY_RESERVED; /*reserve some capacity for error strings*/                                                          \
+                                                                                                                                                                     \
+    uint32_t used = 0;                                                                                                                                               \
+                                                                                                                                                                     \
+    (void)memcpy(output_buffer+used, MU_OPENNING_BRACE_STR, sizeof(MU_OPENNING_BRACE_STR));                                                                          \
+    used += sizeof(MU_OPENNING_BRACE_STR);                                                                                                                           \
+                                                                                                                                                                     \
+    /*the function will print all the elements in array in output_buffer*/                                                                                           \
+    bool failed = false;                                                                                                                                             \
+    for (uint32_t i = 0; !failed && (i < array_size); i++)                                                                                                           \
+    {                                                                                                                                                                \
+        int r = snprintf(output_buffer + used - 1, output_buffer_capacity - used, "%s[%" PRIu32 "]=%" PRI_TYPE_FORMAT "", (i > 0) ? ", " : "", i, TYPE_FORMAT_VALUE(array[i])); \
+        if (r < 0)                                                                                                                                                   \
+        {                                                                                                                                                            \
+            /*encoding error, note it in the output buffer*/                                                                                                         \
+            (void)memcpy(output_buffer + used - 1, MU_ENCODING_ERROR_STR, sizeof(MU_ENCODING_ERROR_STR));                                                            \
+            used += (sizeof(MU_ENCODING_ERROR_STR) -1);                                                                                                              \
+            failed = true;                                                                                                                                           \
+        }                                                                                                                                                            \
+        else if (r >= (int)(output_buffer_capacity - used))                                                                                                          \
+        {                                                                                                                                                            \
+            /*not enough buffer, close the string and exit*/                                                                                                         \
+            (void)memcpy(output_buffer + used - 1, MU_NOT_ENOUGH_BUFFER_STR, sizeof(MU_NOT_ENOUGH_BUFFER_STR));                                                      \
+            used += (sizeof(MU_NOT_ENOUGH_BUFFER_STR) - 1);                                                                                                          \
+            failed = true;                                                                                                                                           \
+        }                                                                                                                                                            \
+        else                                                                                                                                                         \
+        {                                                                                                                                                            \
+            /*all good, move forward*/                                                                                                                               \
+            used += (uint32_t)r;                                                                                                                                     \
+        }                                                                                                                                                            \
+    }                                                                                                                                                                \
+                                                                                                                                                                     \
+    (void)memcpy(output_buffer + used - 1, MU_CLOSING_BRACE_STR, sizeof(MU_CLOSING_BRACE_STR));                                                                      \
+                                                                                                                                                                     \
+    return output_buffer;                                                                                                                                            \
+}
 
-/*all arrays can have their printf arguments expanded by the below macro. ARRAY_ELEMENT_NO_VALUE is a value that when used with PRI_ARRAY_ELEMENT_FORMAT_SPECIFIER results in 0 characters written on the screen. for example %s and "", or %ls and L"" */
-#define ARRAY_VALUES(array, array_size, ARRAY_ELEMENT_NO_VALUE) \
-    "", \
-    MU_DO_ASC(MU_ARRAY_MAX_COUNT, MAKE_ARRAY_ELEMENT_VALUE, array, array_size, ARRAY_ELEMENT_NO_VALUE)
 
-/*2 canned solutions for arrays of strings and wstrings. In theory %.d and int types could also work for all array element values except "0". */
-#define PRI_ARRAY_S PRI_ARRAY("s")
-#define ARRAY_S_VALUES(array, array_size) ARRAY_VALUES(array, array_size, "")
+/*out of the box canned solutions to print arrays of strings:*/
+typedef const char* char_ptr_t;
+typedef const wchar_t* wchar_ptr_t;
 
-#define PRI_ARRAY_WS PRI_ARRAY("ls")
-#define ARRAY_WS_VALUES(array, array_size) ARRAY_VALUES(array, array_size, L"")
+MU_PRINT_ARRAY_FUNCTION_DECLARE(char_ptr_t);
+MU_PRINT_ARRAY_FUNCTION_DECLARE(wchar_ptr_t);
 
 #ifdef __cplusplus
 }

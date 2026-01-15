@@ -7,8 +7,8 @@ resources:
     type: github
     name: azure/c-build-tools
     endpoint: github.com_azure
-    ref: refs/heads/master
-    
+    ref: refs/heads/paaggarwal/add-use-cppunittest-param
+
 jobs:
 - template: /pipeline_templates/build_all_flavors.yml@c_build_tools
   parameters:

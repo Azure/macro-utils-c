@@ -12,7 +12,7 @@ resources:
 jobs:
 - template: /pipeline_templates/build_all_flavors.yml@c_build_tools
   parameters:
-    use_cppunittest: false
+    failOnMinTestsNotRun: false
 
 - template: /pipeline_templates/run_master_check.yml@c_build_tools
 

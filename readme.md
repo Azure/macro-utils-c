@@ -29,3 +29,4 @@ In your project, simply:
 ## Supported compilers
 
 The following compilers are supported: gcc 4.4 (and onwards), Visual Studio 2015 and others.
+<!-- test change for auto-approve verification -->

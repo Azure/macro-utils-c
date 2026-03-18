@@ -1,0 +1,6 @@
+# c-build-tools ref variable template
+# Automatically updated by propagate_updates.ps1
+# See: https://github.com/Azure/c-build-tools/tree/master/policy_templates
+
+variables:
+  c_build_tools_ref: 'a479dd2fd437d3a0adf2010b22d2c944ea8e6047'

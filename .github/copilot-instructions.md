@@ -75,7 +75,7 @@ const char* status_str = MU_ENUM_TO_STRING(STATUS, SUCCESS);
 ## External Dependencies
 For build/test/pipeline conventions, refer to #file:../deps/c-build-tools/.github/copilot-instructions.md. This project inherits all build infrastructure from c-build-tools.
 
-**IMPORTANT**: All code changes must follow the comprehensive coding standards defined in #file:../deps/c-build-tools/.github/general_coding_instructions.md, including:
+**IMPORTANT**: All code changes must follow the comprehensive coding standards defined in #file:../deps/azure-messaging-ai-context/.github/general_coding_instructions.md, including:
 - Function naming conventions (snake_case, module prefixes, internal function patterns)
 - Parameter validation rules and error handling patterns  
 - Variable naming and result variable conventions

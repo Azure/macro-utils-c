@@ -215,6 +215,38 @@ static int run_mu_array_around_max_buffer_tests(void)
     return 0;
 }
 
+static int run_mu_array_small_capacity_tests(void)
+{
+    char temp[] = "hello";
+
+    /*test with output_buffer_capacity = 0, buffer should not be modified*/
+    {
+        char buffer[1] = { 'x' };
+        char* result = MU_PRINT_ARRAY_FUNCTION(char)(temp, sizeof(temp) / sizeof(temp[0]), buffer, 0);
+        POOR_MANS_ASSERT(result == buffer);
+        POOR_MANS_ASSERT(buffer[0] == 'x');
+    }
+
+    /*test with output_buffer_capacity = 1 (less than MU_ARRAY_PRINT_CAPACITY_RESERVED), buffer should be empty string*/
+    {
+        char buffer[2] = { 'x', 'y' };
+        char* result = MU_PRINT_ARRAY_FUNCTION(char)(temp, sizeof(temp) / sizeof(temp[0]), buffer, 1);
+        POOR_MANS_ASSERT(result == buffer);
+        POOR_MANS_ASSERT(buffer[0] == '\0');
+    }
+
+    /*test with output_buffer_capacity = MU_ARRAY_PRINT_CAPACITY_RESERVED - 1, buffer should be empty string*/
+    {
+        char buffer[MU_ARRAY_PRINT_CAPACITY_RESERVED];
+        (void)memset(buffer, 'x', sizeof(buffer));
+        char* result = MU_PRINT_ARRAY_FUNCTION(char)(temp, sizeof(temp) / sizeof(temp[0]), buffer, MU_ARRAY_PRINT_CAPACITY_RESERVED - 1);
+        POOR_MANS_ASSERT(result == buffer);
+        POOR_MANS_ASSERT(buffer[0] == '\0');
+    }
+
+    return 0;
+}
+
 int run_mu_array_tests(void)
 {
     int result;
@@ -231,6 +263,10 @@ int run_mu_array_tests(void)
     POOR_MANS_ASSERT(result == 0);
 
     result = run_mu_array_around_max_buffer_tests();
+    POOR_MANS_ASSERT(result == 0);
+
+    result = run_mu_array_small_capacity_tests();
+    POOR_MANS_ASSERT(result == 0);
 
     return 0;
 }

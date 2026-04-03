@@ -547,40 +547,50 @@ MU_STATIC_ASSERT(MU_ARRAY_PRINT_CAPACITY >= MU_ARRAY_PRINT_CAPACITY_RESERVED);
 #define MU_PRINT_ARRAY_FUNCTION_DEFINE(type, PRI_TYPE_FORMAT, TYPE_FORMAT_VALUE) \
 char* MU_PRINT_ARRAY_FUNCTION(type)(const type* array, uint32_t array_size, char* output_buffer, uint32_t output_buffer_capacity)                                    \
 {                                                                                                                                                                    \
-    output_buffer_capacity -= MU_ARRAY_PRINT_CAPACITY_RESERVED; /*reserve some capacity for error strings*/                                                          \
-                                                                                                                                                                     \
-    uint32_t used = 0;                                                                                                                                               \
-                                                                                                                                                                     \
-    (void)memcpy(output_buffer+used, MU_OPENNING_BRACE_STR, sizeof(MU_OPENNING_BRACE_STR));                                                                          \
-    used += sizeof(MU_OPENNING_BRACE_STR);                                                                                                                           \
-                                                                                                                                                                     \
-    /*the function will print all the elements in array in output_buffer*/                                                                                           \
-    bool failed = false;                                                                                                                                             \
-    for (uint32_t i = 0; !failed && (i < array_size); i++)                                                                                                           \
+    if (output_buffer_capacity < MU_ARRAY_PRINT_CAPACITY_RESERVED)                                                                                                   \
     {                                                                                                                                                                \
-        int r = snprintf(output_buffer + used - 1, output_buffer_capacity - used, "%s[%" PRIu32 "]=%" PRI_TYPE_FORMAT "", (i > 0) ? ", " : "", i, TYPE_FORMAT_VALUE(array[i])); \
-        if (r < 0)                                                                                                                                                   \
+        if (output_buffer_capacity > 0)                                                                                                                              \
         {                                                                                                                                                            \
-            /*encoding error, note it in the output buffer*/                                                                                                         \
-            (void)memcpy(output_buffer + used - 1, MU_ENCODING_ERROR_STR, sizeof(MU_ENCODING_ERROR_STR));                                                            \
-            used += (sizeof(MU_ENCODING_ERROR_STR) -1);                                                                                                              \
-            failed = true;                                                                                                                                           \
-        }                                                                                                                                                            \
-        else if (r >= (int)(output_buffer_capacity - used))                                                                                                          \
-        {                                                                                                                                                            \
-            /*not enough buffer, close the string and exit*/                                                                                                         \
-            (void)memcpy(output_buffer + used - 1, MU_NOT_ENOUGH_BUFFER_STR, sizeof(MU_NOT_ENOUGH_BUFFER_STR));                                                      \
-            used += (sizeof(MU_NOT_ENOUGH_BUFFER_STR) - 1);                                                                                                          \
-            failed = true;                                                                                                                                           \
-        }                                                                                                                                                            \
-        else                                                                                                                                                         \
-        {                                                                                                                                                            \
-            /*all good, move forward*/                                                                                                                               \
-            used += (uint32_t)r;                                                                                                                                     \
+            output_buffer[0] = '\0';                                                                                                                                 \
         }                                                                                                                                                            \
     }                                                                                                                                                                \
+    else                                                                                                                                                             \
+    {                                                                                                                                                                \
+        output_buffer_capacity -= MU_ARRAY_PRINT_CAPACITY_RESERVED; /*reserve some capacity for error strings*/                                                      \
                                                                                                                                                                      \
-    (void)memcpy(output_buffer + used - 1, MU_CLOSING_BRACE_STR, sizeof(MU_CLOSING_BRACE_STR));                                                                      \
+        uint32_t used = 0;                                                                                                                                           \
+                                                                                                                                                                     \
+        (void)memcpy(output_buffer+used, MU_OPENNING_BRACE_STR, sizeof(MU_OPENNING_BRACE_STR));                                                                      \
+        used += sizeof(MU_OPENNING_BRACE_STR);                                                                                                                       \
+                                                                                                                                                                     \
+        /*the function will print all the elements in array in output_buffer*/                                                                                       \
+        bool failed = false;                                                                                                                                         \
+        for (uint32_t i = 0; !failed && (i < array_size); i++)                                                                                                       \
+        {                                                                                                                                                            \
+            int r = snprintf(output_buffer + used - 1, output_buffer_capacity - used, "%s[%" PRIu32 "]=%" PRI_TYPE_FORMAT "", (i > 0) ? ", " : "", i, TYPE_FORMAT_VALUE(array[i])); \
+            if (r < 0)                                                                                                                                               \
+            {                                                                                                                                                        \
+                /*encoding error, note it in the output buffer*/                                                                                                     \
+                (void)memcpy(output_buffer + used - 1, MU_ENCODING_ERROR_STR, sizeof(MU_ENCODING_ERROR_STR));                                                        \
+                used += (sizeof(MU_ENCODING_ERROR_STR) -1);                                                                                                          \
+                failed = true;                                                                                                                                       \
+            }                                                                                                                                                        \
+            else if (r >= (int)(output_buffer_capacity - used))                                                                                                      \
+            {                                                                                                                                                        \
+                /*not enough buffer, close the string and exit*/                                                                                                     \
+                (void)memcpy(output_buffer + used - 1, MU_NOT_ENOUGH_BUFFER_STR, sizeof(MU_NOT_ENOUGH_BUFFER_STR));                                                  \
+                used += (sizeof(MU_NOT_ENOUGH_BUFFER_STR) - 1);                                                                                                      \
+                failed = true;                                                                                                                                       \
+            }                                                                                                                                                        \
+            else                                                                                                                                                     \
+            {                                                                                                                                                        \
+                /*all good, move forward*/                                                                                                                           \
+                used += (uint32_t)r;                                                                                                                                 \
+            }                                                                                                                                                        \
+        }                                                                                                                                                            \
+                                                                                                                                                                     \
+        (void)memcpy(output_buffer + used - 1, MU_CLOSING_BRACE_STR, sizeof(MU_CLOSING_BRACE_STR));                                                                  \
+    }                                                                                                                                                                \
                                                                                                                                                                      \
     return output_buffer;                                                                                                                                            \
 }

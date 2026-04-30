@@ -230,7 +230,7 @@ MU_IF(X, "true", "false") => "true"
         current_enum_value = MU_C2(my_, enumValue); \
     } \
     previous_enum_value = current_enum_value; \
-    if (current_enum_value == value) \
+    if (current_enum_value == (int)(value)) \
     { \
         static char result [] = MU_TOSTRING(enumValue); \
         static int visited; /*initialized to 0 by "static"*/ \
@@ -474,7 +474,12 @@ __pragma(warning(pop))
 /*MU_STATIC_ASSERT(1==2) produces strings such as:
 1>D:\r\macro-utils-c\tests\define_struct_test.c(11,1): error C2338: static assertion failed: '1==2'
 */
+#if defined(__cplusplus) || defined(_MSC_VER) || (defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 201112L))
 #define MU_STATIC_ASSERT_EX(CONDITION) static_assert(CONDITION, MU_TOSTRING(CONDITION));
+#else
+/*C99 fallback: use negative-array-size trick*/
+#define MU_STATIC_ASSERT_EX(CONDITION) typedef char MU_C2INTERNAL(MU_static_assert_failed_, __LINE__)[(CONDITION)?1:-1];
+#endif
 
 #define MU_STATIC_ASSERT(CONDITION) MU_STATIC_ASSERT_EX(CONDITION)
 

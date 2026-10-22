@@ -125,5 +125,10 @@ if(${run_reals_check})
 endif()
 
 #Insert vld in all executables if so required
-add_vld_if_defined(${CMAKE_CURRENT_SOURCE_DIR})
-add_repo_validation(macro_utils_c)
+if(COMMAND add_vld_if_defined)
+    add_vld_if_defined(${CMAKE_CURRENT_SOURCE_DIR})
+endif()
+
+if(COMMAND add_repo_validation)
+    add_repo_validation(macro_utils_c)
+endif()

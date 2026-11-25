@@ -12,6 +12,7 @@ This repository provides advanced C macro utilities for Azure IoT SDKs and other
 
 ### Key Macro Patterns
 - **Enum Macros**: `MU_DEFINE_ENUM(NAME, values...)` creates enum + string conversion functions
+- **C++ Enum Strings**: `MU_DEFINE_ENUM_CLASS_STRINGS(ALIAS, bare_values...)` (C++ only) adds `MU_ENUM_TO_STRING` support for an existing C++ enum, such as an SDK `enum class`
 - **Struct Macros**: `MU_DEFINE_STRUCT(NAME, type1, field1, type2, field2...)` creates typedef structs
 - **FOR_EACH Macros**: `MU_FOR_EACH_1_KEEP_1(MACRO, keepValue, list...)` applies macro to each list item
 - **Arithmetic**: `MU_INC(x)`, `MU_DEC(x)`, `MU_COUNT_ARG(...)` for compile-time calculations

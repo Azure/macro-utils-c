@@ -159,24 +159,20 @@ Note: due to computations done in the macro, the maximum value that can be forma
 MU_DEFINE_ENUM_CLASS_STRINGS(enumName, ...)
 ```
 
-`MU_DEFINE_ENUM_CLASS_STRINGS` (C++ only) adds `MU_ENUM_TO_STRING` support for an enum that already exists, typically an `enum class` from an external SDK. `MU_DEFINE_ENUM_STRINGS` cannot be used for these because it needs plain C enumerators, while `enum class` values must be written as `Type::value`.
+`MU_DEFINE_ENUM_CLASS_STRINGS` (C++ only) adds `MU_ENUM_TO_STRING` support for a C++ enum. `MU_DEFINE_ENUM_STRINGS` cannot be used for an `enum class` because it needs plain C enumerators, while `enum class` values must be written as `Type::value`.
 
-- `enumName` is a single identifier naming the enum type. For a type inside a namespace or a class, declare an alias first (for example `using SDK_RESULT = sdk::Result;`).
-- The other arguments are at least one bare enumerator name (`kSuccess`, not `SDK_RESULT::kSuccess`), without `= n` and without a trailing comma.
-- The generated `MU_<enumName>_ToString` returns the name of the first listed enumerator equal to the value, or `"UNKNOWN"` if none matches.
-- Place it in one .cpp file; other files can declare it with `MU_DECLARE_ENUM_STRINGS`.
-- `MU_ENUM_VALUE` prints the number as `int`, so with `PRI_MU_ENUM` the number is only exact for values that fit in an `int`.
+`enumName` is a single identifier naming the enum type; for a type inside a namespace or a class declare an alias first (for example `using COLOR = shapes::Color;`). The remaining arguments are at least one bare enumerator name (`kRed`, not `COLOR::kRed`).
+
+The generated `MU_<enumName>_ToString` returns the name of the first listed enumerator equal to the value, or "UNKNOWN" if none matches.
+
+Note: `MU_ENUM_VALUE` prints the number as `int`, so with `PRI_MU_ENUM` the number is only exact for values that fit in an `int`.
 
 Example:
 
 ```cpp
-using SDK_RESULT = sdk::Result; /*enum class Result { kSuccess, kFailure };*/
+using COLOR = shapes::Color; /*enum class Color { kRed, kGreen };*/
 
-#define SDK_RESULT_VALUES \
-    kSuccess, \
-    kFailure
+MU_DEFINE_ENUM_CLASS_STRINGS(COLOR, kRed, kGreen)
 
-MU_DEFINE_ENUM_CLASS_STRINGS(SDK_RESULT, SDK_RESULT_VALUES)
-
-MU_ENUM_TO_STRING(SDK_RESULT, SDK_RESULT::kFailure) => "kFailure"
+MU_ENUM_TO_STRING(COLOR, COLOR::kGreen) => "kGreen"
 ```

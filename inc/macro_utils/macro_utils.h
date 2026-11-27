@@ -337,7 +337,7 @@ typedef enum MU_ENUM_VALUE_CONTAINS_EQUAL_TAG
         return MU_TOSTRING(enumValue); \
     }
 
-/*MU_DEFINE_ENUM_CLASS_STRINGS generates MU_ENUM_TO_STRING support for a C++ enum*/
+/*MU_DEFINE_ENUM_CLASS_STRINGS goes to one .cpp and generates MU_ENUM_TO_STRING support for a C++ enum*/
 #define MU_DEFINE_ENUM_CLASS_STRINGS(enumName, ...) \
     const char* MU_C3(MU_, enumName, _ToString)(enumName value) \
     { \

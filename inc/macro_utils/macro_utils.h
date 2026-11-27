@@ -329,6 +329,24 @@ typedef enum MU_ENUM_VALUE_CONTAINS_EQUAL_TAG
 
 #define MU_ENUM_VALUE(enumIdentifier, value) "", MU_ENUM_TO_STRING(enumIdentifier, (value)), (int)(value)
 
+#ifdef __cplusplus
+
+#define MU_INTERNAL_ENUM_CLASS_VALUE_TO_STRING(enumName, enumValue) \
+    if (value == enumName::enumValue) \
+    { \
+        return MU_TOSTRING(enumValue); \
+    }
+
+/*MU_DEFINE_ENUM_CLASS_STRINGS goes to one .cpp and generates MU_ENUM_TO_STRING support for a C++ enum*/
+#define MU_DEFINE_ENUM_CLASS_STRINGS(enumName, ...) \
+    const char* MU_C3(MU_, enumName, _ToString)(enumName value) \
+    { \
+        MU_FOR_EACH_1_KEEP_1(MU_INTERNAL_ENUM_CLASS_VALUE_TO_STRING, enumName, __VA_ARGS__) \
+        return "UNKNOWN"; \
+    }
+
+#endif /*__cplusplus*/
+
 #define CONVERT_ENUM_VALUE(from, to) \
     case (from): \
         *enum_value_to = (to); \

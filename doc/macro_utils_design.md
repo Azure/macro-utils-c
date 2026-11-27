@@ -153,3 +153,26 @@ Here's some more examples of such formatting:
 ```
 
 Note: due to computations done in the macro, the maximum value that can be formatted is ~ `UINT64_MAX` / 10.
+
+### MU_DEFINE_ENUM_CLASS_STRINGS
+```cpp
+MU_DEFINE_ENUM_CLASS_STRINGS(enumName, ...)
+```
+
+`MU_DEFINE_ENUM_CLASS_STRINGS` (C++ only) adds `MU_ENUM_TO_STRING` support for a C++ enum. `MU_DEFINE_ENUM_STRINGS` cannot be used for an `enum class` because it needs plain C enumerators, while `enum class` values must be written as `Type::value`.
+
+`enumName` is a single identifier naming the enum type; for a type inside a namespace or a class declare an alias first (for example `using COLOR = shapes::Color;`). The remaining arguments are at least one bare enumerator name (`kRed`, not `COLOR::kRed`).
+
+The generated `MU_<enumName>_ToString` returns the name of the first listed enumerator equal to the value, or "UNKNOWN" if none matches.
+
+Note: `MU_ENUM_VALUE` prints the number as `int`, so with `PRI_MU_ENUM` the number is only exact for values that fit in an `int`.
+
+Example:
+
+```cpp
+using COLOR = shapes::Color; /*enum class Color { kRed, kGreen };*/
+
+MU_DEFINE_ENUM_CLASS_STRINGS(COLOR, kRed, kGreen)
+
+MU_ENUM_TO_STRING(COLOR, COLOR::kGreen) => "kGreen"
+```

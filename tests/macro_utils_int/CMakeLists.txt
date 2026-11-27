@@ -22,6 +22,7 @@ set(${theseTestsName}_test_files
     mu_count_array_items_test.c
     mu_count_1_or_more_arg_test.c
     mu_define_enum_test.c
+    mu_define_enum_class_strings_test.cpp
     mu_define_local_enum_test.c
     mu_different_test.c
     mu_eat_empty_args_test.c
@@ -54,6 +55,7 @@ set(${theseTestsName}_h_files
     mu_count_array_items_test.h
     mu_count_1_or_more_arg_test.h
     mu_define_enum_test.h
+    mu_define_enum_class_strings_test.h
     mu_define_local_enum_test.h
     mu_different_test.h
     mu_eat_empty_args_test.h

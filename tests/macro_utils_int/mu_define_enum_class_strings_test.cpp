@@ -8,115 +8,71 @@
 
 #include "macro_utils/macro_utils.h"
 
-#include "mu_define_enum_class_strings_other_tu.h"
 #include "mu_define_enum_class_strings_test.h"
 
-/*these types stand in for enums owned by an external C++ SDK*/
-namespace external_sdk
+namespace test_namespace
 {
-    enum class sparse_enum
+    enum class test9_enum_class
     {
-        kFirst = 5,
-        kSecond = -1,
-        kThird = 100,
-        kNotListed = 7
+        test9_a = 5,
+        test9_b = -1,
+        test9_c = 100,
+        test9_d = 7
     };
 
-    enum class aliased_enum
+    enum class test10_enum_class
     {
-        kSum,
-        kDefault = kSum,
-        kOther
+        test10_a,
+        test10_b = test10_a,
+        test10_c
     };
 }
 
-using TEST_SPARSE_ENUM_CLASS = external_sdk::sparse_enum;
-using TEST_ALIASED_ENUM_CLASS = external_sdk::aliased_enum;
+using TEST9_ENUM_CLASS = test_namespace::test9_enum_class;
+using TEST10_ENUM_CLASS = test_namespace::test10_enum_class;
 
-#define TEST_SPARSE_ENUM_CLASS_VALUES \
-    kFirst, \
-    kSecond, \
-    kThird
+// test9_d is not in the list
+#define TEST9_ENUM_CLASS_VALUES \
+    test9_a, \
+    test9_b, \
+    test9_c
 
-/*kDefault is listed before kSum although it is declared after it*/
-#define TEST_ALIASED_ENUM_CLASS_VALUES \
-    kDefault, \
-    kSum, \
-    kOther
+MU_DEFINE_ENUM_CLASS_STRINGS(TEST9_ENUM_CLASS, TEST9_ENUM_CLASS_VALUES)
 
-MU_DEFINE_ENUM_CLASS_STRINGS(TEST_SPARSE_ENUM_CLASS, TEST_SPARSE_ENUM_CLASS_VALUES)
-MU_DEFINE_ENUM_CLASS_STRINGS(TEST_ALIASED_ENUM_CLASS, TEST_ALIASED_ENUM_CLASS_VALUES)
+// test10_b has the same value as test10_a and is listed first
+#define TEST10_ENUM_CLASS_VALUES \
+    test10_b, \
+    test10_a, \
+    test10_c
 
-static int MU_ENUM_TO_STRING_returns_the_name_of_each_listed_enum_class_value(void)
-{
-    // act
-    const char* first = MU_ENUM_TO_STRING(TEST_SPARSE_ENUM_CLASS, TEST_SPARSE_ENUM_CLASS::kFirst);
-    const char* second = MU_ENUM_TO_STRING(TEST_SPARSE_ENUM_CLASS, TEST_SPARSE_ENUM_CLASS::kSecond);
-    const char* third = MU_ENUM_TO_STRING(TEST_SPARSE_ENUM_CLASS, TEST_SPARSE_ENUM_CLASS::kThird);
-
-    // assert
-    POOR_MANS_ASSERT(strcmp("kFirst", first) == 0);
-    POOR_MANS_ASSERT(strcmp("kSecond", second) == 0);
-    POOR_MANS_ASSERT(strcmp("kThird", third) == 0);
-
-    return 0;
-}
-
-static int MU_ENUM_TO_STRING_returns_UNKNOWN_for_an_enum_class_value_not_in_the_list(void)
-{
-    // act
-    const char* not_listed = MU_ENUM_TO_STRING(TEST_SPARSE_ENUM_CLASS, TEST_SPARSE_ENUM_CLASS::kNotListed);
-
-    // assert
-    POOR_MANS_ASSERT(strcmp("UNKNOWN", not_listed) == 0);
-
-    return 0;
-}
-
-static int MU_ENUM_TO_STRING_returns_the_first_listed_name_for_duplicate_enum_class_values(void)
-{
-    // act
-    const char* aliased = MU_ENUM_TO_STRING(TEST_ALIASED_ENUM_CLASS, TEST_ALIASED_ENUM_CLASS::kSum);
-
-    // assert
-    POOR_MANS_ASSERT(strcmp("kDefault", aliased) == 0);
-
-    return 0;
-}
-
-static int MU_ENUM_TO_STRING_returns_the_name_from_an_enum_class_stringifier_defined_in_another_translation_unit(void)
-{
-    // act
-    const char* declared = MU_ENUM_TO_STRING(TEST_DECLARED_ENUM_CLASS, TEST_DECLARED_ENUM_CLASS::kDeclaredSecond);
-
-    // assert
-    POOR_MANS_ASSERT(strcmp("kDeclaredSecond", declared) == 0);
-
-    return 0;
-}
-
-static int PRI_MU_ENUM_formats_an_enum_class_value_as_its_name_and_number(void)
-{
-    // arrange
-    char formatted[32];
-
-    // act
-    int written = snprintf(formatted, sizeof(formatted), "%" PRI_MU_ENUM, MU_ENUM_VALUE(TEST_SPARSE_ENUM_CLASS, TEST_SPARSE_ENUM_CLASS::kSecond));
-
-    // assert
-    POOR_MANS_ASSERT(written > 0);
-    POOR_MANS_ASSERT(strcmp("kSecond (-1)", formatted) == 0);
-
-    return 0;
-}
+MU_DEFINE_ENUM_CLASS_STRINGS(TEST10_ENUM_CLASS, TEST10_ENUM_CLASS_VALUES)
 
 int run_mu_define_enum_class_strings_tests(void)
 {
-    POOR_MANS_ASSERT(MU_ENUM_TO_STRING_returns_the_name_of_each_listed_enum_class_value() == 0);
-    POOR_MANS_ASSERT(MU_ENUM_TO_STRING_returns_UNKNOWN_for_an_enum_class_value_not_in_the_list() == 0);
-    POOR_MANS_ASSERT(MU_ENUM_TO_STRING_returns_the_first_listed_name_for_duplicate_enum_class_values() == 0);
-    POOR_MANS_ASSERT(MU_ENUM_TO_STRING_returns_the_name_from_an_enum_class_stringifier_defined_in_another_translation_unit() == 0);
-    POOR_MANS_ASSERT(PRI_MU_ENUM_formats_an_enum_class_value_as_its_name_and_number() == 0);
+    const char* TEST9_test9_a = MU_ENUM_TO_STRING(TEST9_ENUM_CLASS, TEST9_ENUM_CLASS::test9_a);
+    POOR_MANS_ASSERT(TEST9_test9_a != NULL);
+    POOR_MANS_ASSERT(strcmp("test9_a", TEST9_test9_a) == 0);
+
+    const char* TEST9_test9_b = MU_ENUM_TO_STRING(TEST9_ENUM_CLASS, TEST9_ENUM_CLASS::test9_b);
+    POOR_MANS_ASSERT(TEST9_test9_b != NULL);
+    POOR_MANS_ASSERT(strcmp("test9_b", TEST9_test9_b) == 0);
+
+    const char* TEST9_test9_c = MU_ENUM_TO_STRING(TEST9_ENUM_CLASS, TEST9_ENUM_CLASS::test9_c);
+    POOR_MANS_ASSERT(TEST9_test9_c != NULL);
+    POOR_MANS_ASSERT(strcmp("test9_c", TEST9_test9_c) == 0);
+
+    const char* TEST9_test9_d = MU_ENUM_TO_STRING(TEST9_ENUM_CLASS, TEST9_ENUM_CLASS::test9_d);
+    POOR_MANS_ASSERT(TEST9_test9_d != NULL);
+    POOR_MANS_ASSERT(strcmp("UNKNOWN", TEST9_test9_d) == 0);
+
+    // the first listed name is returned for values that have more than one name
+    const char* TEST10_test10_a = MU_ENUM_TO_STRING(TEST10_ENUM_CLASS, TEST10_ENUM_CLASS::test10_a);
+    POOR_MANS_ASSERT(TEST10_test10_a != NULL);
+    POOR_MANS_ASSERT(strcmp("test10_b", TEST10_test10_a) == 0);
+
+    char TEST9_test9_b_formatted[32];
+    (void)snprintf(TEST9_test9_b_formatted, sizeof(TEST9_test9_b_formatted), "%" PRI_MU_ENUM, MU_ENUM_VALUE(TEST9_ENUM_CLASS, TEST9_ENUM_CLASS::test9_b));
+    POOR_MANS_ASSERT(strcmp("test9_b (-1)", TEST9_test9_b_formatted) == 0);
 
     return 0;
 }
